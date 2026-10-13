@@ -1,4 +1,5 @@
 experiment,mode,blocks,n_blocks,n_methods,methods,chi2,p_value
 lodo,transductive,targets,7,17,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",29.84940182969739,0.018798934815768373
+lodo,inductive,targets,7,14,"catboost, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-standard, xgboost",12.941573033707911,0.4523348291485456
 pairwise,transductive,pairs,42,17,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",24.19704894083264,0.08528820132478412
-pairwise,inductive,pairs,13,14,"catboost, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, xgboost, rift-poolInit, rift-robust, rift-standard",18.123204531660996,0.1528972432998962
+pairwise,inductive,pairs,42,14,"catboost, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-standard, xgboost",21.36396483198829,0.06603478431195582

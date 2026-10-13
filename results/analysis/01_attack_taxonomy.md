@@ -37,8 +37,8 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | password | bruteforce |  | toniot | 14618 | True |
 | SSH-Bruteforce | bruteforce |  | cicids2018 | 1955 | True |
 | SSH-Patator | bruteforce |  | cicids2017 | 142 | True |
-| ddos | ddos |  | toniot | 11578 | True |
 | DDoS | ddos |  | cicids2017, insdn, iot23 | 6990 | True |
+| ddos | ddos |  | toniot | 11578 | True |
 | DDOS attack-HOIC | ddos |  | cicids2018 | 4210 | True |
 | DDOS attack-LOIC-UDP | ddos |  | cicids2018 | 42 | True |
 | DoS | dos |  | insdn, unswnb15 | 32224 | True |
