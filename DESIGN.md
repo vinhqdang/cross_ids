@@ -25,7 +25,7 @@ Settings:
 CIC-IDS2017 and CSE-CIC-IDS2018 come from the same lab (UNB CIC), the same
 testbed design and the same extractor, so transfer between them says little
 about real cross-network generalisation. The benchmark therefore spans
-**four producers and three flow extractors**, and every result is also
+**six producers and three flow-extractor families**, and every result is also
 reported by *transfer type*: same lab, same extractor / different lab, or
 different extractor.
 
@@ -37,13 +37,15 @@ different extractor.
 | `unswnb15` | UNSW Canberra (Australia) | Argus + Bro | HF `Mouwiya/UNSW-NB15` | `UNSW_NB15_training-set.csv` |
 | `toniot` | UNSW Canberra (Australia) | Zeek conn.log | HF `codymlewis/TON_IoT_network` | `train_test_network.csv` |
 | `iot23` | Stratosphere Lab, CTU (Czechia) | Zeek conn.log | HF `19kmunz/iot-23-preprocessed-allcolumns` | `data/train-*.parquet` |
+| `ctu13` | Stratosphere Lab, CTU (Czechia) | Argus bi-flows | `https://mcfp.felk.cvut.cz/publicDatasets/CTU-Malware-Capture-Botnet-{42..54}/detailed-bidirectional-flow-labels/*.binetflow` | 13 scenarios, saved as `data/raw/ctu13/scenario{N}-{file}.binetflow` |
+| `insdn` | University College Dublin (Ireland) | CICFlowMeter | `https://aseados.ucd.ie/datasets/SDN/InSDN_DatasetCSV.zip` | zip with Normal / OVS / metasploitable-2 CSVs, saved as `data/raw/insdn/InSDN_DatasetCSV.zip` |
 
 Note: USB-IDS-1 does contain benign flows (45 708 of ~722 000 rows in the
 TEST file, ~6%), so it is a high-attack-prior target, which stresses label-shift
 handling.
 
 `family` metadata: `cicids2017`, `cicids2018` → `cic`; `usbids1` → `sannio`;
-`unswnb15`, `toniot` → `unsw`; `iot23` → `ctu`. `extractor` metadata:
+`unswnb15`, `toniot` → `unsw`; `iot23`, `ctu13` → `ctu`; `insdn` → `ucd`. `extractor` metadata:
 `cicflowmeter`, `argus`, `zeek`. A pair is `same-family`, `same-extractor`
 (different family, same extractor) or `cross-extractor`.
 
@@ -66,7 +68,10 @@ Loading rules:
   features, drop exact duplicate rows of (features, label).
 - Labels → binary: CIC / USB-IDS-1 `Label` not equal to `BENIGN`
   (case-insensitive) → 1; UNSW-NB15 `label`; ToN-IoT `label`; IoT-23 `label`
-  string starting with `Benign` (case-insensitive) → 0, otherwise 1. The raw
+  string starting with `Benign` (case-insensitive) → 0, otherwise 1;
+  InSDN `Label` equal to `Normal` → 0, otherwise 1; CTU-13 `Label` containing
+  `Botnet` → 1, containing `Normal` → 0, and **Background flows are dropped**
+  (they are unlabelled mixed traffic, the standard CTU-13 practice). The raw
   label / `attack_cat` / `type` / `detailed-label` string is kept as
   `attack_type` for per-attack recall.
 - Sampling: cap each dataset at `max_rows` (default 100 000), stratified by
@@ -76,9 +81,16 @@ Loading rules:
 
 The extractors export different features. Cross-dataset learning is only
 meaningful on features with the **same physical meaning and units**. CFS has
-two tiers.
+three tiers.
 
-**Core tier (all six datasets).** Five base features:
+**Minimal tier (all eight datasets).** Base features `duration`,
+`total_pkts`, `fwd_bytes`, `bwd_bytes`, with derived `total_bytes`,
+`bytes_per_s`, `pkts_per_s`, `bytes_per_pkt = total_bytes / max(total_pkts, 1)`
+and `fwd_bwd_byte_ratio`. CTU-13 (Argus binetflow) only supports this tier:
+`duration = Dur`, `total_pkts = TotPkts`, `fwd_bytes = SrcBytes`,
+`bwd_bytes = TotBytes - SrcBytes` (clipped at 0).
+
+**Core tier (all datasets except CTU-13).** Five base features:
 
 | CFS feature | Unit | CICFlowMeter | Argus (UNSW-NB15) | Zeek (ToN-IoT, IoT-23) |
 |---|---|---|---|---|
@@ -99,7 +111,7 @@ construction:
 - `fwd_bwd_pkt_ratio = fwd_pkts / (bwd_pkts + 1)`
 - `fwd_bwd_byte_ratio = fwd_bytes / (bwd_bytes + 1)`
 
-**Extended tier (CICFlowMeter datasets + UNSW-NB15).** Core plus:
+**Extended tier (CICFlowMeter datasets incl. InSDN + UNSW-NB15).** Core plus:
 
 | CFS feature | Unit | CICFlowMeter | Argus (UNSW-NB15) |
 |---|---|---|---|
@@ -119,8 +131,9 @@ Every feature then receives `log1p(max(x, 0))`. The schema module exposes
 `DATASET_TIERS` (which tiers a dataset supports) and
 `harmonise(df, dataset_key) -> DataFrame` returning all features the dataset
 supports plus `label`, `attack_type`, `dataset`. An experiment uses
-`schema: core` (default, all datasets) or `schema: extended` (only datasets
-supporting it).
+`schema: minimal` (all 8 datasets), `schema: core` (default, 7 datasets) or
+`schema: extended` (5 datasets); datasets not supporting the chosen tier are
+skipped with a log message. `MINIMAL_FEATURES` is exposed as well.
 
 ## 4. Proposed method: RIFT (Rank-Invariant Flow Transfer)
 
@@ -190,7 +203,17 @@ Transductive only. Saerens–Latinne–Decaestecker EM:
   to `[0.001, 0.999]`.
 - Final decision: `p'_i >= 0.5`.
 
-### 4.5 Ablations
+### 4.5 Reference setting: few-shot target fine-tuning
+
+Not part of the label-free benchmark, reported separately as an upper
+reference. An unsupervised shift score (Isolation Forest fitted on source
+features, mean anomaly score of the target pool) quantifies how far the target
+is from the source; a CatBoost model trained on the sources is then continued
+(`init_model`) on a labelled budget of `k%` of the target train split
+(k ∈ {0.1, 1, 5}). This quantifies how many target labels the label-free
+methods are worth.
+
+### 4.6 Ablations
 
 `RIFT = DN(rank, benign-anchor) + IFS + HGB + calibration + LSC`. Ablations
 switch off one component at a time: `-DN` (global scaler), `-anchor`,
@@ -233,7 +256,7 @@ decision rule (never tuned on target labels).
   unlabelled pool is the target `train` split **features only** (disjoint from
   the evaluated rows).
 - Experiments: in-domain (one per dataset), pairwise (all ordered pairs,
-  30 for six datasets), LODO (one per dataset). Each pair carries its
+  42 for the seven core-tier datasets), LODO (one per dataset). Each pair carries its
   `transfer_type` (`same-family`, `same-extractor`, `cross-extractor`) and
   the summary aggregates by it.
 - Seeds: 0, 1, 2. Report mean ± std.
