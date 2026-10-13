@@ -12653,3 +12653,179 @@ config_hash,schema,mode,method,experiment,scenario,seed,attack_type,n,detected,r
 012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
 012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
 012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,Bot,850,845,0.9941176470588236
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1019,0.8311582381729201
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,256,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,137,0.18340026773761714
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,11,0.2972972972972973
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,Infilteration,700,582,0.8314285714285714
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,Bot,850,849,0.9988235294117647
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,255,0.99609375
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,Infilteration,700,458,0.6542857142857142
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,234,0.9140625
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,744,0.9959839357429718
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,Infilteration,700,490,0.7
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,Bot,850,849,0.9988235294117647
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,256,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,Infilteration,700,460,0.6571428571428571
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,9,0.014308426073131956
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,221,0.86328125
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,Infilteration,700,451,0.6442857142857142
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,167,0.2655007949125596
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,Bot,850,849,0.9988235294117647
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,256,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,Infilteration,700,683,0.9757142857142858
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-standard,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,Brute Force -Web,2,2,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,251,0.98046875
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DoS attacks-Hulk,747,747,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,Infilteration,700,512,0.7314285714285714
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,BFA,224,190,0.8482142857142857
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,BOTNET,22,22,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,DDoS,267,220,0.8239700374531835
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,DoS,8886,6684,0.7521944632005402
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,Probe,9756,9741,0.9984624846248462
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,U2R,4,4,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->insdn,0,Web-Attack,29,16,0.5517241379310345
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,BFA,224,224,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,BOTNET,22,22,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,DDoS,267,266,0.9962546816479401
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,DoS,8886,8857,0.9967364393427864
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,Probe,9756,9738,0.9981549815498155
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,U2R,4,4,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->insdn,0,Web-Attack,29,29,1.0

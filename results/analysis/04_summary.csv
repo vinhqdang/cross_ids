@@ -1,0 +1,142 @@
+experiment,mode,transfer_type,method,n_scenarios,roc_auc,pr_auc,balanced_accuracy,f1,mcc,fpr,prior_abs_error
+indomain,inductive,in-domain,catboost,7,0.985 ± 0.020,0.979 ± 0.029,0.958 ± 0.041,0.946 ± 0.058,0.914 ± 0.083,0.033 ± 0.043,–
+indomain,inductive,in-domain,hgb,7,0.985 ± 0.020,0.979 ± 0.028,0.958 ± 0.041,0.947 ± 0.058,0.914 ± 0.082,0.033 ± 0.042,–
+indomain,inductive,in-domain,lr,7,0.923 ± 0.054,0.852 ± 0.165,0.891 ± 0.065,0.846 ± 0.136,0.749 ± 0.146,0.113 ± 0.108,–
+indomain,inductive,in-domain,mlp,7,0.982 ± 0.022,0.976 ± 0.030,0.951 ± 0.043,0.948 ± 0.052,0.913 ± 0.080,0.039 ± 0.053,–
+indomain,inductive,in-domain,rf,7,0.981 ± 0.022,0.972 ± 0.037,0.944 ± 0.059,0.936 ± 0.069,0.891 ± 0.116,0.048 ± 0.059,–
+indomain,inductive,in-domain,rift,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-noAnchor,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-noDN,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-noIFS,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-noLSC,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-poolInit,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-robust,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,rift-standard,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,inductive,in-domain,xgboost,7,0.985 ± 0.020,0.979 ± 0.028,0.958 ± 0.041,0.946 ± 0.059,0.913 ± 0.083,0.033 ± 0.043,–
+indomain,transductive,in-domain,catboost,7,0.985 ± 0.020,0.979 ± 0.029,0.958 ± 0.041,0.946 ± 0.058,0.914 ± 0.083,0.033 ± 0.043,–
+indomain,transductive,in-domain,coral,7,0.985 ± 0.020,0.979 ± 0.028,0.958 ± 0.041,0.947 ± 0.058,0.914 ± 0.082,0.033 ± 0.042,–
+indomain,transductive,in-domain,dann,7,0.980 ± 0.023,0.973 ± 0.032,0.948 ± 0.046,0.931 ± 0.067,0.888 ± 0.091,0.040 ± 0.048,–
+indomain,transductive,in-domain,hgb,7,0.985 ± 0.020,0.979 ± 0.028,0.958 ± 0.041,0.947 ± 0.058,0.914 ± 0.082,0.033 ± 0.042,–
+indomain,transductive,in-domain,lr,7,0.923 ± 0.054,0.852 ± 0.165,0.891 ± 0.065,0.846 ± 0.136,0.749 ± 0.146,0.113 ± 0.108,–
+indomain,transductive,in-domain,mlp,7,0.982 ± 0.022,0.976 ± 0.030,0.951 ± 0.043,0.948 ± 0.052,0.913 ± 0.080,0.039 ± 0.053,–
+indomain,transductive,in-domain,rf,7,0.981 ± 0.022,0.972 ± 0.037,0.944 ± 0.059,0.936 ± 0.069,0.891 ± 0.116,0.048 ± 0.059,–
+indomain,transductive,in-domain,rift,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-noAnchor,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-noDN,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-noIFS,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-noLSC,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-poolInit,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-robust,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-st,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,rift-standard,7,0.985 ± 0.020,0.979 ± 0.029,0.955 ± 0.042,0.952 ± 0.050,0.921 ± 0.077,0.029 ± 0.039,–
+indomain,transductive,in-domain,xgboost,7,0.985 ± 0.020,0.979 ± 0.028,0.958 ± 0.041,0.946 ± 0.059,0.913 ± 0.083,0.033 ± 0.043,–
+lodo,transductive,lodo,catboost,7,0.631 ± 0.208,0.596 ± 0.283,0.617 ± 0.120,0.443 ± 0.244,0.191 ± 0.160,0.190 ± 0.249,–
+lodo,transductive,lodo,coral,7,0.637 ± 0.178,0.612 ± 0.201,0.536 ± 0.106,0.288 ± 0.142,0.046 ± 0.180,0.213 ± 0.161,–
+lodo,transductive,lodo,dann,7,0.685 ± 0.178,0.633 ± 0.299,0.573 ± 0.120,0.474 ± 0.196,0.129 ± 0.198,0.395 ± 0.234,–
+lodo,transductive,lodo,hgb,7,0.645 ± 0.205,0.586 ± 0.296,0.633 ± 0.148,0.459 ± 0.302,0.238 ± 0.207,0.195 ± 0.251,–
+lodo,transductive,lodo,lr,7,0.480 ± 0.146,0.522 ± 0.298,0.508 ± 0.099,0.363 ± 0.176,0.027 ± 0.173,0.331 ± 0.224,–
+lodo,transductive,lodo,mlp,7,0.491 ± 0.197,0.507 ± 0.319,0.456 ± 0.106,0.283 ± 0.170,-0.097 ± 0.187,0.331 ± 0.271,–
+lodo,transductive,lodo,rf,7,0.577 ± 0.228,0.536 ± 0.304,0.566 ± 0.084,0.342 ± 0.244,0.113 ± 0.118,0.179 ± 0.246,–
+lodo,transductive,lodo,rift,7,0.516 ± 0.113,0.518 ± 0.260,0.500 ± 0.000,0.002 ± 0.006,-0.001 ± 0.002,0.001 ± 0.003,0.506 ± 0.288
+lodo,transductive,lodo,rift-noAnchor,7,0.518 ± 0.122,0.526 ± 0.315,0.487 ± 0.083,0.237 ± 0.147,-0.017 ± 0.179,0.241 ± 0.209,0.373 ± 0.269
+lodo,transductive,lodo,rift-noDN,7,0.634 ± 0.227,0.591 ± 0.272,0.623 ± 0.165,0.389 ± 0.387,0.267 ± 0.328,0.151 ± 0.295,0.279 ± 0.248
+lodo,transductive,lodo,rift-noIFS,7,0.516 ± 0.113,0.518 ± 0.260,0.500 ± 0.000,0.002 ± 0.006,-0.001 ± 0.002,0.001 ± 0.003,0.506 ± 0.288
+lodo,transductive,lodo,rift-noLSC,7,0.516 ± 0.113,0.518 ± 0.260,0.500 ± 0.046,0.090 ± 0.118,-0.023 ± 0.154,0.060 ± 0.055,–
+lodo,transductive,lodo,rift-poolInit,7,0.514 ± 0.098,0.512 ± 0.268,0.500 ± 0.000,0.000 ± 0.000,0.000 ± 0.000,0.000 ± 0.000,0.508 ± 0.291
+lodo,transductive,lodo,rift-robust,7,0.501 ± 0.144,0.507 ± 0.289,0.511 ± 0.044,0.062 ± 0.137,0.000 ± 0.075,0.016 ± 0.037,0.461 ± 0.245
+lodo,transductive,lodo,rift-st,7,0.490 ± 0.142,0.511 ± 0.272,0.500 ± 0.000,0.000 ± 0.000,-0.006 ± 0.018,0.000 ± 0.001,0.508 ± 0.291
+lodo,transductive,lodo,rift-standard,7,0.494 ± 0.085,0.509 ± 0.299,0.492 ± 0.018,0.021 ± 0.029,-0.025 ± 0.075,0.027 ± 0.047,0.479 ± 0.269
+lodo,transductive,lodo,xgboost,7,0.613 ± 0.215,0.576 ± 0.281,0.571 ± 0.155,0.381 ± 0.215,0.106 ± 0.258,0.187 ± 0.252,–
+pairwise,inductive,cross-extractor,catboost,6,0.484 ± 0.168,0.573 ± 0.179,0.480 ± 0.106,0.225 ± 0.218,-0.026 ± 0.235,0.251 ± 0.283,–
+pairwise,inductive,cross-extractor,hgb,6,0.522 ± 0.203,0.631 ± 0.148,0.490 ± 0.104,0.228 ± 0.219,-0.002 ± 0.224,0.231 ± 0.285,–
+pairwise,inductive,cross-extractor,lr,6,0.512 ± 0.274,0.629 ± 0.162,0.500 ± 0.195,0.474 ± 0.283,0.019 ± 0.403,0.490 ± 0.355,–
+pairwise,inductive,cross-extractor,mlp,6,0.527 ± 0.210,0.587 ± 0.224,0.442 ± 0.107,0.093 ± 0.087,-0.112 ± 0.253,0.180 ± 0.255,–
+pairwise,inductive,cross-extractor,rf,6,0.418 ± 0.175,0.560 ± 0.176,0.447 ± 0.093,0.090 ± 0.087,-0.113 ± 0.220,0.172 ± 0.248,–
+pairwise,inductive,cross-extractor,rift,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-noAnchor,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-noDN,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-noIFS,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-noLSC,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-poolInit,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-robust,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,rift-standard,6,0.442 ± 0.129,0.560 ± 0.095,0.481 ± 0.104,0.183 ± 0.231,-0.026 ± 0.228,0.216 ± 0.289,–
+pairwise,inductive,cross-extractor,xgboost,6,0.479 ± 0.155,0.578 ± 0.165,0.440 ± 0.112,0.129 ± 0.075,-0.110 ± 0.247,0.214 ± 0.285,–
+pairwise,inductive,same-extractor,catboost,6,0.624 ± 0.139,0.636 ± 0.325,0.571 ± 0.099,0.322 ± 0.235,0.075 ± 0.117,0.283 ± 0.313,–
+pairwise,inductive,same-extractor,hgb,6,0.704 ± 0.184,0.640 ± 0.346,0.610 ± 0.103,0.335 ± 0.245,0.168 ± 0.093,0.232 ± 0.315,–
+pairwise,inductive,same-extractor,lr,6,0.397 ± 0.224,0.565 ± 0.343,0.454 ± 0.142,0.425 ± 0.259,-0.041 ± 0.261,0.648 ± 0.336,–
+pairwise,inductive,same-extractor,mlp,6,0.638 ± 0.172,0.624 ± 0.393,0.516 ± 0.068,0.189 ± 0.153,0.024 ± 0.174,0.330 ± 0.498,–
+pairwise,inductive,same-extractor,rf,6,0.551 ± 0.199,0.591 ± 0.344,0.505 ± 0.026,0.099 ± 0.127,0.001 ± 0.057,0.274 ± 0.407,–
+pairwise,inductive,same-extractor,rift,6,0.699 ± 0.133,0.671 ± 0.316,0.578 ± 0.117,0.240 ± 0.288,0.095 ± 0.138,0.254 ± 0.376,–
+pairwise,inductive,same-extractor,rift-noAnchor,6,0.699 ± 0.133,0.671 ± 0.316,0.578 ± 0.117,0.240 ± 0.288,0.095 ± 0.138,0.254 ± 0.376,–
+pairwise,inductive,same-extractor,rift-noDN,6,0.699 ± 0.133,0.671 ± 0.316,0.578 ± 0.117,0.240 ± 0.288,0.095 ± 0.138,0.254 ± 0.376,–
+pairwise,inductive,same-extractor,rift-noIFS,6,0.699 ± 0.133,0.671 ± 0.316,0.578 ± 0.117,0.240 ± 0.288,0.095 ± 0.138,0.254 ± 0.376,–
+pairwise,inductive,same-extractor,rift-noLSC,6,0.699 ± 0.133,0.671 ± 0.316,0.578 ± 0.117,0.240 ± 0.288,0.095 ± 0.138,0.254 ± 0.376,–
+pairwise,inductive,same-extractor,rift-poolInit,5,0.686 ± 0.144,0.729 ± 0.315,0.573 ± 0.130,0.227 ± 0.320,0.079 ± 0.149,0.156 ± 0.323,–
+pairwise,inductive,same-extractor,rift-robust,5,0.686 ± 0.144,0.729 ± 0.315,0.573 ± 0.130,0.227 ± 0.320,0.079 ± 0.149,0.156 ± 0.323,–
+pairwise,inductive,same-extractor,rift-standard,5,0.686 ± 0.144,0.729 ± 0.315,0.573 ± 0.130,0.227 ± 0.320,0.079 ± 0.149,0.156 ± 0.323,–
+pairwise,inductive,same-extractor,xgboost,6,0.677 ± 0.173,0.624 ± 0.360,0.590 ± 0.095,0.300 ± 0.216,0.125 ± 0.083,0.214 ± 0.285,–
+pairwise,inductive,same-family,catboost,2,0.539 ± 0.225,0.189 ± 0.091,0.488 ± 0.001,0.047 ± 0.002,-0.037 ± 0.002,0.055 ± 0.003,–
+pairwise,inductive,same-family,hgb,2,0.515 ± 0.238,0.186 ± 0.099,0.486 ± 0.003,0.048 ± 0.010,-0.042 ± 0.005,0.061 ± 0.015,–
+pairwise,inductive,same-family,lr,2,0.353 ± 0.108,0.122 ± 0.021,0.439 ± 0.042,0.069 ± 0.054,-0.111 ± 0.039,0.216 ± 0.185,–
+pairwise,inductive,same-family,mlp,2,0.423 ± 0.243,0.147 ± 0.069,0.485 ± 0.000,0.021 ± 0.006,-0.055 ± 0.003,0.043 ± 0.004,–
+pairwise,inductive,same-family,rf,2,0.602 ± 0.007,0.192 ± 0.017,0.496 ± 0.005,0.030 ± 0.006,-0.018 ± 0.020,0.026 ± 0.016,–
+pairwise,inductive,same-family,rift,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-noAnchor,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-noDN,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-noIFS,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-noLSC,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-poolInit,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-robust,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,rift-standard,2,0.546 ± 0.186,0.192 ± 0.091,0.492 ± 0.010,0.025 ± 0.001,-0.028 ± 0.035,0.030 ± 0.022,–
+pairwise,inductive,same-family,xgboost,2,0.430 ± 0.296,0.165 ± 0.088,0.483 ± 0.007,0.043 ± 0.004,-0.051 ± 0.016,0.064 ± 0.020,–
+pairwise,transductive,cross-extractor,catboost,26,0.543 ± 0.200,0.558 ± 0.274,0.512 ± 0.135,0.343 ± 0.280,0.021 ± 0.247,0.374 ± 0.347,–
+pairwise,transductive,cross-extractor,coral,26,0.557 ± 0.195,0.579 ± 0.274,0.510 ± 0.117,0.298 ± 0.299,0.019 ± 0.228,0.346 ± 0.346,–
+pairwise,transductive,cross-extractor,dann,26,0.509 ± 0.206,0.523 ± 0.280,0.491 ± 0.140,0.376 ± 0.291,-0.009 ± 0.280,0.432 ± 0.298,–
+pairwise,transductive,cross-extractor,hgb,26,0.552 ± 0.175,0.574 ± 0.277,0.515 ± 0.119,0.354 ± 0.265,0.035 ± 0.225,0.365 ± 0.304,–
+pairwise,transductive,cross-extractor,lr,26,0.502 ± 0.217,0.554 ± 0.260,0.498 ± 0.145,0.439 ± 0.290,0.002 ± 0.312,0.512 ± 0.294,–
+pairwise,transductive,cross-extractor,mlp,26,0.533 ± 0.227,0.560 ± 0.283,0.512 ± 0.143,0.360 ± 0.295,0.038 ± 0.278,0.382 ± 0.367,–
+pairwise,transductive,cross-extractor,rf,26,0.528 ± 0.207,0.550 ± 0.274,0.513 ± 0.145,0.311 ± 0.298,0.022 ± 0.275,0.358 ± 0.364,–
+pairwise,transductive,cross-extractor,rift,26,0.501 ± 0.134,0.541 ± 0.255,0.513 ± 0.041,0.159 ± 0.185,0.020 ± 0.106,0.133 ± 0.202,0.442 ± 0.212
+pairwise,transductive,cross-extractor,rift-noAnchor,26,0.557 ± 0.158,0.569 ± 0.267,0.521 ± 0.094,0.460 ± 0.275,0.037 ± 0.176,0.554 ± 0.340,0.354 ± 0.213
+pairwise,transductive,cross-extractor,rift-noDN,26,0.551 ± 0.201,0.568 ± 0.279,0.516 ± 0.142,0.320 ± 0.343,0.031 ± 0.273,0.388 ± 0.377,0.372 ± 0.247
+pairwise,transductive,cross-extractor,rift-noIFS,26,0.502 ± 0.141,0.534 ± 0.246,0.504 ± 0.054,0.157 ± 0.221,-0.004 ± 0.127,0.164 ± 0.241,0.450 ± 0.204
+pairwise,transductive,cross-extractor,rift-noLSC,26,0.501 ± 0.134,0.541 ± 0.255,0.522 ± 0.053,0.245 ± 0.211,0.038 ± 0.112,0.204 ± 0.208,–
+pairwise,transductive,cross-extractor,rift-poolInit,26,0.507 ± 0.140,0.549 ± 0.245,0.513 ± 0.060,0.176 ± 0.229,0.014 ± 0.127,0.190 ± 0.271,0.443 ± 0.237
+pairwise,transductive,cross-extractor,rift-robust,26,0.495 ± 0.122,0.526 ± 0.241,0.503 ± 0.065,0.195 ± 0.230,-0.011 ± 0.143,0.231 ± 0.290,0.442 ± 0.192
+pairwise,transductive,cross-extractor,rift-st,26,0.482 ± 0.138,0.529 ± 0.261,0.513 ± 0.064,0.168 ± 0.205,0.019 ± 0.118,0.163 ± 0.264,0.456 ± 0.212
+pairwise,transductive,cross-extractor,rift-standard,26,0.468 ± 0.142,0.515 ± 0.241,0.480 ± 0.079,0.203 ± 0.242,-0.050 ± 0.136,0.308 ± 0.362,0.442 ± 0.231
+pairwise,transductive,cross-extractor,xgboost,26,0.543 ± 0.182,0.560 ± 0.278,0.518 ± 0.114,0.342 ± 0.268,0.034 ± 0.218,0.369 ± 0.342,–
+pairwise,transductive,same-extractor,catboost,12,0.639 ± 0.181,0.603 ± 0.306,0.565 ± 0.090,0.386 ± 0.237,0.113 ± 0.175,0.326 ± 0.312,–
+pairwise,transductive,same-extractor,coral,12,0.471 ± 0.170,0.549 ± 0.325,0.475 ± 0.069,0.266 ± 0.255,-0.038 ± 0.149,0.403 ± 0.374,–
+pairwise,transductive,same-extractor,dann,12,0.670 ± 0.192,0.628 ± 0.313,0.598 ± 0.153,0.458 ± 0.248,0.141 ± 0.229,0.373 ± 0.382,–
+pairwise,transductive,same-extractor,hgb,12,0.645 ± 0.179,0.595 ± 0.326,0.568 ± 0.103,0.359 ± 0.261,0.123 ± 0.171,0.300 ± 0.329,–
+pairwise,transductive,same-extractor,lr,12,0.468 ± 0.220,0.558 ± 0.296,0.475 ± 0.135,0.398 ± 0.246,-0.028 ± 0.251,0.521 ± 0.361,–
+pairwise,transductive,same-extractor,mlp,12,0.663 ± 0.189,0.615 ± 0.323,0.538 ± 0.114,0.341 ± 0.251,0.070 ± 0.219,0.393 ± 0.431,–
+pairwise,transductive,same-extractor,rf,12,0.602 ± 0.194,0.590 ± 0.298,0.518 ± 0.064,0.264 ± 0.254,0.052 ± 0.158,0.333 ± 0.395,–
+pairwise,transductive,same-extractor,rift,12,0.473 ± 0.139,0.527 ± 0.307,0.493 ± 0.062,0.071 ± 0.155,-0.045 ± 0.112,0.061 ± 0.091,0.462 ± 0.285
+pairwise,transductive,same-extractor,rift-noAnchor,12,0.477 ± 0.155,0.536 ± 0.316,0.496 ± 0.128,0.341 ± 0.278,-0.053 ± 0.216,0.531 ± 0.405,0.536 ± 0.246
+pairwise,transductive,same-extractor,rift-noDN,12,0.620 ± 0.146,0.599 ± 0.309,0.531 ± 0.114,0.295 ± 0.301,0.034 ± 0.207,0.306 ± 0.344,0.467 ± 0.262
+pairwise,transductive,same-extractor,rift-noIFS,12,0.497 ± 0.149,0.552 ± 0.327,0.489 ± 0.073,0.124 ± 0.193,-0.045 ± 0.151,0.110 ± 0.206,0.442 ± 0.313
+pairwise,transductive,same-extractor,rift-noLSC,12,0.473 ± 0.139,0.527 ± 0.307,0.475 ± 0.087,0.163 ± 0.200,-0.082 ± 0.154,0.181 ± 0.212,–
+pairwise,transductive,same-extractor,rift-poolInit,12,0.495 ± 0.129,0.544 ± 0.304,0.451 ± 0.070,0.083 ± 0.108,-0.118 ± 0.144,0.159 ± 0.216,0.443 ± 0.325
+pairwise,transductive,same-extractor,rift-robust,12,0.502 ± 0.165,0.539 ± 0.321,0.511 ± 0.081,0.136 ± 0.232,0.007 ± 0.174,0.098 ± 0.204,0.458 ± 0.304
+pairwise,transductive,same-extractor,rift-st,12,0.430 ± 0.162,0.507 ± 0.321,0.459 ± 0.105,0.139 ± 0.188,-0.108 ± 0.178,0.183 ± 0.250,0.397 ± 0.289
+pairwise,transductive,same-extractor,rift-standard,12,0.553 ± 0.197,0.573 ± 0.328,0.496 ± 0.068,0.135 ± 0.192,-0.014 ± 0.127,0.108 ± 0.260,0.443 ± 0.322
+pairwise,transductive,same-extractor,xgboost,12,0.662 ± 0.174,0.608 ± 0.318,0.580 ± 0.105,0.370 ± 0.248,0.148 ± 0.201,0.265 ± 0.290,–
+pairwise,transductive,same-family,catboost,4,0.473 ± 0.151,0.373 ± 0.248,0.450 ± 0.046,0.320 ± 0.323,-0.110 ± 0.086,0.445 ± 0.452,–
+pairwise,transductive,same-family,coral,4,0.463 ± 0.081,0.377 ± 0.302,0.479 ± 0.033,0.361 ± 0.373,-0.043 ± 0.076,0.492 ± 0.515,–
+pairwise,transductive,same-family,dann,4,0.531 ± 0.213,0.396 ± 0.339,0.540 ± 0.087,0.322 ± 0.325,0.064 ± 0.170,0.217 ± 0.182,–
+pairwise,transductive,same-family,hgb,4,0.456 ± 0.158,0.362 ± 0.252,0.481 ± 0.034,0.292 ± 0.282,-0.054 ± 0.079,0.340 ± 0.376,–
+pairwise,transductive,same-family,lr,4,0.339 ± 0.090,0.311 ± 0.240,0.417 ± 0.077,0.294 ± 0.272,-0.167 ± 0.113,0.532 ± 0.395,–
+pairwise,transductive,same-family,mlp,4,0.423 ± 0.226,0.344 ± 0.296,0.476 ± 0.102,0.284 ± 0.324,-0.071 ± 0.201,0.328 ± 0.367,–
+pairwise,transductive,same-family,rf,4,0.479 ± 0.143,0.361 ± 0.239,0.437 ± 0.093,0.291 ± 0.302,-0.135 ± 0.158,0.464 ± 0.507,–
+pairwise,transductive,same-family,rift,4,0.525 ± 0.098,0.410 ± 0.332,0.542 ± 0.071,0.262 ± 0.313,0.078 ± 0.153,0.171 ± 0.217,0.215 ± 0.193
+pairwise,transductive,same-family,rift-noAnchor,4,0.534 ± 0.068,0.400 ± 0.318,0.526 ± 0.055,0.333 ± 0.365,0.048 ± 0.130,0.318 ± 0.339,0.191 ± 0.126
+pairwise,transductive,same-family,rift-noDN,4,0.459 ± 0.193,0.368 ± 0.273,0.511 ± 0.053,0.302 ± 0.342,0.022 ± 0.109,0.303 ± 0.404,0.214 ± 0.088
+pairwise,transductive,same-family,rift-noIFS,4,0.471 ± 0.074,0.377 ± 0.326,0.527 ± 0.054,0.293 ± 0.340,0.042 ± 0.098,0.236 ± 0.310,0.174 ± 0.100
+pairwise,transductive,same-family,rift-noLSC,4,0.525 ± 0.098,0.410 ± 0.332,0.543 ± 0.073,0.311 ± 0.336,0.073 ± 0.161,0.216 ± 0.220,–
+pairwise,transductive,same-family,rift-poolInit,4,0.484 ± 0.054,0.381 ± 0.328,0.508 ± 0.046,0.273 ± 0.305,0.003 ± 0.092,0.252 ± 0.324,0.206 ± 0.121
+pairwise,transductive,same-family,rift-robust,4,0.517 ± 0.066,0.408 ± 0.321,0.526 ± 0.058,0.223 ± 0.251,0.069 ± 0.147,0.106 ± 0.137,0.227 ± 0.148
+pairwise,transductive,same-family,rift-st,4,0.553 ± 0.105,0.443 ± 0.338,0.555 ± 0.050,0.303 ± 0.274,0.118 ± 0.111,0.208 ± 0.264,0.241 ± 0.241
+pairwise,transductive,same-family,rift-standard,4,0.512 ± 0.072,0.381 ± 0.310,0.538 ± 0.052,0.294 ± 0.332,0.067 ± 0.110,0.190 ± 0.209,0.158 ± 0.140
+pairwise,transductive,same-family,xgboost,4,0.418 ± 0.173,0.357 ± 0.264,0.459 ± 0.047,0.272 ± 0.268,-0.092 ± 0.095,0.344 ± 0.345,–

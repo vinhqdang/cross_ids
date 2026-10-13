@@ -1,4 +1,4 @@
-"""Command line interface: crossids download | prepare | run | report | synth."""
+"""Command line interface: crossids download | prepare | run | report | synth | analyze."""
 
 from __future__ import annotations
 
@@ -44,6 +44,12 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("report", help="write summary.csv and summary.md from runs.csv")
     p.add_argument("--results", default="results")
 
+    p = sub.add_parser("analyze", help="paper tables and figures from runs.csv and per_attack.csv (read-only)")
+    p.add_argument("--results", default="results", help="directory holding runs.csv and per_attack.csv")
+    p.add_argument("--data-dir", default="data", help="root holding processed/*.parquet (default: data)")
+    p.add_argument("--out", default="results/analysis", help="output directory (default: results/analysis)")
+    p.add_argument("--methods", nargs="+", default=None, help="methods for matrices and heatmaps (max 8)")
+
     p = sub.add_parser("synth", help="write synthetic domains as parquet")
     p.add_argument("--out", default="data/synthetic")
     p.add_argument("--n-domains", type=int, default=3)
@@ -79,6 +85,11 @@ def main(argv: list[str] | None = None) -> int:
     elif args.command == "report":
         csv_path, md_path = write_report(Path(args.results))
         logging.getLogger("crossids").info("wrote %s and %s", csv_path, md_path)
+    elif args.command == "analyze":
+        from .analysis import DEFAULT_METHODS, run_analysis
+
+        methods = tuple(args.methods) if args.methods else DEFAULT_METHODS
+        run_analysis(args.results, args.data_dir, args.out, methods)
     elif args.command == "synth":
         from .datasets import synthetic_tables
 
