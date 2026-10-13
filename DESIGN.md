@@ -74,8 +74,22 @@ Loading rules:
   (they are unlabelled mixed traffic, the standard CTU-13 practice). The raw
   label / `attack_cat` / `type` / `detailed-label` string is kept as
   `attack_type` for per-attack recall.
-- Sampling: cap each dataset at `max_rows` (default 100 000), stratified by
-  label, fixed seed.
+- Deduplication and sampling (one streaming pass, memory bounded): each
+  cleaned row gets a 64-bit hash of its rounded harmonised base features plus
+  its binary label, mapped to `u in [0, 1)` (seeded). Per label, keep the
+  `max_rows` rows with the smallest `u` (bottom-k / KMV sketch). Because
+  duplicates share one hash they occupy one slot, so this is a uniform sample
+  of **distinct** rows, and the KMV estimate `(k - 1) / u_(k)` gives the number
+  of distinct rows per label over the full file. The *natural prior* is defined
+  on distinct rows: `pi = D_attack / (D_attack + D_benign)`. The cached table
+  has `n = min(max_rows, D_benign + D_attack)` rows with `round(n * pi)` attack
+  rows taken from the attack sketch; if a class is short, `n` shrinks so the
+  prior is preserved instead of back-filling the other class. Rows with the
+  same features but different labels are kept (inherent label noise). The
+  prepare metadata records raw, valid, dropped (NaN) and distinct counts per
+  label.
+- CTU-13 `attack_type` is normalised to `normal` or `botnet-s{scenario}`
+  (each scenario is one malware family), not the raw flow label.
 
 ## 3. Common Flow Schema (CFS)
 
@@ -111,14 +125,23 @@ construction:
 - `fwd_bwd_pkt_ratio = fwd_pkts / (bwd_pkts + 1)`
 - `fwd_bwd_byte_ratio = fwd_bytes / (bwd_bytes + 1)`
 
-**Extended tier (CICFlowMeter datasets incl. InSDN + UNSW-NB15).** Core plus:
+**Extended tier (CICFlowMeter datasets incl. InSDN + UNSW-NB15).** Core plus
+`fwd_iat_mean`, `bwd_iat_mean`.
+
+**CICFlow tier (the four CICFlowMeter datasets only).** Extended plus
+`fwd_init_win`, `bwd_init_win`. Argus `swin`/`dwin` are not byte counts like
+CICFlowMeter's initial window bytes (mostly 0 or 255), so window features are
+only comparable within CICFlowMeter. They are also the top CatBoost features in
+the CIC-family quick experiment, i.e. a likely testbed artefact.
+
+Source columns:
 
 | CFS feature | Unit | CICFlowMeter | Argus (UNSW-NB15) |
 |---|---|---|---|
 | `fwd_iat_mean` | s | `Fwd IAT Mean` / 1e6 | `sinpkt` / 1e3 |
 | `bwd_iat_mean` | s | `Bwd IAT Mean` / 1e6 | `dinpkt` / 1e3 |
-| `fwd_init_win` | bytes | `Init_Win_bytes_forward` | `swin` |
-| `bwd_init_win` | bytes | `Init_Win_bytes_backward` | `dwin` |
+| `fwd_init_win` | bytes | `Init_Win_bytes_forward` | (not used) |
+| `bwd_init_win` | bytes | `Init_Win_bytes_backward` | (not used) |
 
 Ports and protocol are excluded: the UNSW-NB15 train/test CSVs have no port
 columns and the CIC-IDS2017 ML CSVs have no protocol column. Negative values
@@ -131,8 +154,8 @@ Every feature then receives `log1p(max(x, 0))`. The schema module exposes
 `DATASET_TIERS` (which tiers a dataset supports) and
 `harmonise(df, dataset_key) -> DataFrame` returning all features the dataset
 supports plus `label`, `attack_type`, `dataset`. An experiment uses
-`schema: minimal` (all 8 datasets), `schema: core` (default, 7 datasets) or
-`schema: extended` (5 datasets); datasets not supporting the chosen tier are
+`schema: minimal` (all 8 datasets), `schema: core` (default, 7 datasets),
+`schema: extended` (5 datasets) or `schema: cicflow` (4 datasets); datasets not supporting the chosen tier are
 skipped with a log message. `MINIMAL_FEATURES` is exposed as well.
 
 ## 4. Proposed method: RIFT (Rank-Invariant Flow Transfer)
@@ -161,11 +184,15 @@ no labels:
 
 Benign-anchored variant (`anchor="benign"`): on **source** domains the
 normaliser is fitted on benign rows only, because benign traffic is the stable
-"background" of a network. On the target, where labels are unknown, the
-anchor set is the rows whose current RIFT score is below the median
-(pseudo-benign), refined for `n_anchor_iter` (default 2) iterations: fit on all
-target rows → score → refit on pseudo-benign rows → rescore. This reduces the
-dependence of the normaliser on the target attack fraction.
+"background" of a network. On the target, where labels are unknown, the anchor
+set is chosen with the estimated target prior: fit the normaliser on all pool
+rows → score → estimate `pi_t` by EM (§4.4) → the anchor set is the
+`gamma * (1 - pi_t)` fraction of pool rows with the lowest score
+(`gamma = 0.8`, a purity margin; at least 5% of the pool) → refit → rescore,
+for `n_anchor_iter` (default 2) iterations. A median split would anchor on
+attacks whenever the target attack prior exceeds 0.5 (e.g. USB-IDS-1, ~94%).
+`anchor_purity` (fraction of anchor rows that are truly benign) is logged as a
+diagnostic only and never used by the method.
 
 Inductive mode (no target pool): target is normalised with the pooled source
 statistics; transductive mode: with its own statistics as above.
@@ -177,7 +204,9 @@ For each source domain *d* and feature *j*, compute the univariate ROC-AUC
 `s_dj = a_dj - 0.5`.
 
 - **Multi-source (≥2 sources):** keep *j* iff `sign(s_dj)` is identical for all
-  sources and `min_d |s_dj| >= tau` (default `tau = 0.05`). Weight
+  sources and `min_d |s_dj| >= tau` (default `tau = 0.05`). If fewer than
+  `min_features` pass, top up with the strongest **sign-consistent**
+  features only; sign-inconsistent features are never re-admitted. Weight
   `w_j = min_d |s_dj| / max_d |s_dj|` (agreement ratio) is stored for analysis.
 - **Single source, transductive:** compute the Kolmogorov–Smirnov statistic
   between the source and target (normalised) marginals for each feature;
@@ -202,6 +231,22 @@ Transductive only. Saerens–Latinne–Decaestecker EM:
   `pi_t = mean(p'_i)`, until `|Δpi_t| < 1e-6` or 100 iterations. Clip `pi_t`
   to `[0.001, 0.999]`.
 - Final decision: `p'_i >= 0.5`.
+- EM assumes pure label shift; under residual covariate shift its estimate is
+  biased. Every run stores `est_prior` and `true_prior`, and the report gives
+  the mean absolute prior error per method. Threshold-free metrics (ROC-AUC,
+  PR-AUC) are computed on `p + 1e-6 * raw_score` to break the ties that
+  isotonic calibration introduces.
+
+### 4.4b Uncertainty-gated self-training (`rift-st`)
+
+Transductive extension. After RIFT predicts the target pool, pseudo-label the
+most confident rows: per class, the rows whose adjusted posterior is most
+extreme, keeping class proportions equal to `pi_t` and at most
+`st_frac = 0.2` of the pool; rows are only accepted if
+`max(p', 1 - p') >= 0.9`. Retrain the HGB on source rows plus pseudo-labelled
+target rows (target rows weighted `st_weight = 1.0`), recalibrate on the source
+calibration split, re-run EM, repeat `st_rounds = 2` times. Target labels are
+never used.
 
 ### 4.5 Reference setting: few-shot target fine-tuning
 
@@ -238,8 +283,9 @@ sources, threshold 0.5:
   config key `device: cpu|cuda` (default cpu); CatBoost uses
   `task_type="GPU"` when `device: cuda`.
 - `mlp`: sklearn MLPClassifier (128, 64), early stopping.
-- `coral`: CORAL (Sun et al., 2016) — whiten source covariance, re-colour with
-  target covariance (transductive), then HGB.
+- `coral`: CORAL (Sun et al., 2016) — `C_s + I`, `C_t + I` (the paper's
+  regulariser), whiten source covariance, re-colour with target covariance,
+  no mean shift (transductive), then HGB.
 - `dann`: Domain-adversarial network (Ganin et al., 2016) in PyTorch, CPU:
   feature extractor 2×128 ReLU, label head, domain head with gradient-reversal
   (λ ramp `2/(1+exp(-10p)) - 1`), Adam 1e-3, 20 epochs, batch 512.
@@ -265,6 +311,11 @@ decision rule (never tuned on target labels).
   `transfer_type` (`same-family`, `same-extractor`, `cross-extractor`) and
   the summary aggregates by it.
 - Seeds: 0, 1, 2. Report mean ± std.
+- `modes: [transductive, inductive]` runs both in one pass; inductive methods
+  get no pool, transductive-only methods are skipped in inductive mode.
+- The resume key is `(schema, mode, method, experiment, scenario, seed)`; a
+  config hash is stored per row and the header is validated on resume.
+- Few-shot reference (§4.5) is the experiment `fewshot` (pairwise only).
 - Results: `results/runs.csv` (one row per method × experiment × seed),
   `results/summary.csv`, `results/summary.md` (markdown tables), per-attack
   recall in `results/per_attack.csv`.
