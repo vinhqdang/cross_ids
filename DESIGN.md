@@ -389,3 +389,43 @@ one domain only. Tests check that RIFT beats the `hgb` baseline on
 synthetic cross-domain ROC-AUC/balanced accuracy, that EM recovers a known
 prior within 0.05, and that rank normalisation is invariant to monotone
 transforms.
+
+## 10. Evidence that the negative results are not implementation failures
+
+Cross-dataset failure is only a finding if competing explanations are ruled out.
+Each control below answers one objection.
+
+1. **Positive controls.** The same pipeline reaches 0.97-0.9999 ROC-AUC
+   in-domain, and target-only CatBoost with 0.1% target labels reaches ~0.93,
+   so the features carry the signal and the code can learn it.
+2. **Oracle upper bound (`oracle` experiment).** For each pairwise transfer,
+   search a grid over model family (HGB, CatBoost, XGBoost, RF, LR), main
+   hyperparameters (depth / leaves, learning rate, trees, class weighting),
+   normalisation (none, global, per-domain rank) and feature subsets (all core
+   features; every subset obtained by dropping one feature group: volume, rate,
+   size-per-packet, direction ratio, duration), all trained on the source only,
+   and report the configuration with the best **target-test** ROC-AUC. This uses
+   target labels for selection, so it bounds every label-free method from
+   above. If the oracle stays near chance, tuning is not the explanation.
+3. **Concept-shift test (`concept_shift` analysis).** Standardise source and
+   target with the pooled source statistics; for each target test row find its
+   k = 10 nearest source rows. In the *overlap region* (target rows whose mean
+   neighbour distance is below the 90th percentile of source-to-source
+   neighbour distances) compute (a) agreement between the source neighbours'
+   majority label and the true target label and (b) Cohen's kappa. Kappa near or
+   below 0 inside the overlap means the same flow statistics carry different
+   labels across datasets: P(y | x) changes, which no covariate-shift or
+   domain-adaptation method (which assume P(y | x) fixed) can correct without
+   target labels. Report per pair, plus the overlap fraction.
+4. **Dataset separability.** A CatBoost domain classifier (dataset identity
+   from core features, benign rows only and all rows) with 5-fold CV; accuracy
+   near 1 quantifies how distinct the testbeds are.
+5. **Published-result comparison.** Table of independently published
+   cross-dataset results on the same datasets (verified citations), set against
+   ours for the same pairs.
+6. **Fair few-shot comparison.** Continued CatBoost with 100, 300 and 500
+   additional trees, and target-only CatBoost with 100, 300 and 500 trees, at
+   the same labelled budgets, so the source-pretraining effect is not a capacity
+   artefact.
+7. **Reproducibility.** Three seeds, Friedman / Wilcoxon tests, released code,
+   configs, sampled-row hashes and the raw per-run table.
