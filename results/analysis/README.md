@@ -37,8 +37,12 @@ Processed datasets: cicids2017, cicids2018, ctu13, insdn, iot23, toniot, unswnb1
 | `fig06_usbids1_defence_inductive.png / fig06_usbids1_defence_inductive.pdf` | recall per USB-IDS-1 defence variant for inductive mode (pairwise) |
 | `08_prior_estimation.csv / 08_prior_estimation.md` | RIFT prior estimate vs true prior: bias, error and correlation per method |
 | `fig08_prior_estimation.png / fig08_prior_estimation.pdf` | estimated vs true target prior for RIFT variants |
-| `07_fewshot_curve.csv / 07_fewshot_curve.md` | few-shot ROC-AUC and balanced accuracy per method, mode and k |
-| `fig07_fewshot_curve_fewshot.png / fig07_fewshot_curve_fewshot.pdf` | few-shot curves with zero-shot reference lines (fewshot) |
+| `07_fewshot_curve.csv / 07_fewshot_curve.md` | few-shot ROC-AUC and balanced accuracy per series (fewshot-catboost continued on k% target rows; fewshot-targetonly trained on the same rows alone) and budget k |
+| `fig07_fewshot_curve.png / fig07_fewshot_curve.pdf` | few-shot curves for both series with zero-shot reference lines (transductive pairwise) |
+| `07_shift_spearman_transductive.csv / 07_shift_spearman_transductive.md` | Spearman rho between the IsolationForest shift score and zero-shot pairwise ROC-AUC per (scenario, seed) (transductive) |
+| `fig07b_shift_vs_zeroshot_transductive.png / fig07b_shift_vs_zeroshot_transductive.pdf` | shift score vs zero-shot ROC-AUC scatter with Spearman rho (transductive) |
+| `07_shift_spearman_inductive.csv / 07_shift_spearman_inductive.md` | Spearman rho between the IsolationForest shift score and zero-shot pairwise ROC-AUC per (scenario, seed) (inductive) |
+| `fig07b_shift_vs_zeroshot_inductive.png / fig07b_shift_vs_zeroshot_inductive.pdf` | shift score vs zero-shot ROC-AUC scatter with Spearman rho (inductive) |
 | `05_family_seen_unseen.csv / 05_family_seen_unseen.md` | secondary, unpaired: family informedness and recall on pairs whose source does / does not contain it |
 | `05_family_paired_cells.csv / 05_family_paired_cells.md` | within-target paired differences of informedness per (method, mode, target, family) |
 | `05_family_paired_stats.csv / 05_family_paired_stats.md` | per family: mean paired difference, 95% CI, number of cells, Wilcoxon signed-rank p-value |
@@ -51,8 +55,7 @@ Processed datasets: cicids2017, cicids2018, ctu13, insdn, iot23, toniot, unswnb1
 
 ## Sections not produced
 
-- **shift score vs zero-shot (transductive)**: no shift_score values
-- **shift score vs zero-shot (inductive)**: no shift_score values
+- none
 
 ## Conventions
 

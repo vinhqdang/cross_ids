@@ -142,11 +142,35 @@ def test_fewshot_rows_carry_k_and_shift_score(tmp_path):
                synthetic={"n_domains": 2, "n": 300, "seed": 0}, fewshot_k=[1, 5])
     runs_path = run_experiments(cfg, data_dir=tmp_path)
     runs = pd.read_csv(runs_path)
-    assert len(runs) == 2 * 2
+    assert len(runs) == 2 * 2 * 2
     assert set(runs["mode"]) == {"fewshot"}
     assert set(runs["fewshot_k"]) == {1.0, 5.0}
     assert runs["shift_score"].notna().all()
-    assert runs["method"].str.startswith("fewshot-catboost@").all()
+    assert set(runs["method"]) == {f"fewshot-{kind}@{k}" for kind in ("catboost", "targetonly") for k in (1, 5)}
+    assert runs["n_test"].gt(0).all()
+
+
+def test_fewshot_resume_computes_only_the_missing_targetonly_rows(tmp_path):
+    cfg = _cfg(tmp_path, methods=[], experiments=["fewshot"], modes=["transductive"],
+               synthetic={"n_domains": 2, "n": 300, "seed": 0}, fewshot_k=[0.1, 5])
+    runs_path = run_experiments(cfg, data_dir=tmp_path)
+    full = pd.read_csv(runs_path)
+    # simulate results written before the control existed: keep only the catboost rows
+    legacy = full[full["method"].str.startswith("fewshot-catboost@")]
+    legacy.to_csv(runs_path, index=False)
+    run_experiments(cfg, data_dir=tmp_path)
+    resumed = pd.read_csv(runs_path)
+    assert len(resumed) == len(full)
+    kept = resumed[resumed["method"].str.startswith("fewshot-catboost@")].reset_index(drop=True)
+    old = legacy.reset_index(drop=True)
+    assert kept["roc_auc"].equals(old["roc_auc"])
+    assert kept["fit_seconds"].equals(old["fit_seconds"])
+    added = resumed[resumed["method"].str.startswith("fewshot-targetonly@")]
+    assert len(added) == len(old)
+    assert added["shift_score"].notna().all()
+    # a second run with everything present computes nothing
+    run_experiments(cfg, data_dir=tmp_path)
+    assert len(pd.read_csv(runs_path)) == len(full)
 
 
 def test_device_and_mode_values_are_validated(tmp_path):

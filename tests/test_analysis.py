@@ -6,6 +6,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
+import matplotlib.pyplot as plt
+
 from crossids import analysis
 from crossids.analysis import ATTACK_FAMILY_ORDER, attack_family, defence_variant, run_analysis
 from crossids.cli import build_parser
@@ -119,10 +121,12 @@ def _synthetic(tmp_path: Path, with_fewshot: bool) -> tuple[Path, Path]:
     if with_fewshot:
         for k in (1, 5):
             for scen in ("cicids2017->usbids1", "usbids1->cicids2017"):
-                rows.append({"method": "fewshot-catboost@" + str(k), "mode": "transductive",
-                             "experiment": "fewshot", "scenario": scen, "seed": 0, "transfer_type": "cross-extractor",
-                             "roc_auc": 0.8 + 0.01 * k, "balanced_accuracy": 0.7, "fewshot_k": float(k),
-                             "shift_score": float(rng.uniform(0, 1))})
+                shift = float(rng.uniform(0, 1))
+                for kind, bump in (("catboost", 0.0), ("targetonly", -0.1)):
+                    rows.append({"method": f"fewshot-{kind}@" + str(k), "mode": "fewshot",
+                                 "experiment": "fewshot", "scenario": scen, "seed": 0,
+                                 "transfer_type": "cross-extractor", "roc_auc": 0.8 + 0.01 * k + bump,
+                                 "balanced_accuracy": 0.7, "fewshot_k": float(k), "shift_score": shift})
     pd.DataFrame(rows).to_csv(results / "runs.csv", index=False)
     pd.DataFrame(pa_rows).to_csv(results / "per_attack.csv", index=False)
     return results, tmp_path / "data"
@@ -149,9 +153,31 @@ def test_run_analysis_with_fewshot_and_shift(tmp_path):
     results, data = _synthetic(tmp_path, with_fewshot=True)
     out = tmp_path / "analysis"
     result = run_analysis(results, data, out, methods=("hgb", "rift", "dann"))
-    assert (out / "fig07_fewshot_curve_transductive.png").exists()
+    assert (out / "fig07_fewshot_curve.png").exists()
     assert (out / "07_fewshot_curve.csv").exists()
+    assert (out / "fig07b_shift_vs_zeroshot_transductive.png").exists()
+    assert (out / "07_shift_spearman_transductive.csv").exists()
     assert not any("few-shot curve" == sec for sec, _ in result["skipped"])
+    assert not any("shift score" in sec for sec, _ in result["skipped"])
+
+
+def test_fewshot_curve_has_one_point_per_budget_and_both_series(tmp_path):
+    results, _ = _synthetic(tmp_path, with_fewshot=True)
+    curve = analysis.fewshot_curve(pd.read_csv(results / "runs.csv"))
+    assert set(curve["method"]) == {"fewshot-catboost", "fewshot-targetonly"}
+    assert sorted(curve["fewshot_k"].unique()) == [1.0, 5.0]
+    assert curve.groupby("method").size().eq(2).all()
+
+
+def test_shift_scores_join_on_scenario_and_seed(tmp_path):
+    results, _ = _synthetic(tmp_path, with_fewshot=True)
+    runs = pd.read_csv(results / "runs.csv")
+    points, rho = analysis.shift_scores(runs, "transductive")
+    assert {"method", "scenario", "seed", "roc_auc", "shift_score"} <= set(points.columns)
+    assert points["shift_score"].notna().all()
+    # only the two scenarios with few-shot rows are joined
+    assert set(points["scenario"]) == {"cicids2017->usbids1", "usbids1->cicids2017"}
+    assert "all methods" in set(rho["method"])
 
 
 def test_spearman_handles_constant_input():
@@ -187,3 +213,11 @@ def test_sign_rule_requires_two_datasets():
     assert bool(summary.loc["duration", "consistent_sign_across_datasets"]) is True
     assert summary.loc["bytes_per_pkt", "sign"] == "single dataset"
     assert bool(summary.loc["bytes_per_pkt", "consistent_sign_across_datasets"]) is False
+
+
+def test_shift_title_does_not_claim_a_trend_for_near_zero_rho():
+    points = pd.DataFrame({"method": ["hgb"] * 4, "shift_score": [0.1, 0.2, 0.3, 0.4], "roc_auc": [0.5, 0.6, 0.4, 0.5]})
+    rho = pd.DataFrame({"method": ["all methods"], "mode": ["transductive"], "n_points": [4], "spearman_rho": [0.02]})
+    fig = analysis._plot_shift(points, rho, "transductive", ["hgb"])
+    assert "No clear relation" in fig.axes[0].get_title(loc="left")
+    plt.close(fig)

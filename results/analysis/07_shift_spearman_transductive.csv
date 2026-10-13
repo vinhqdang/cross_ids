@@ -1,0 +1,19 @@
+method,mode,n_points,spearman_rho
+all methods,transductive,714,-0.047708017762429895
+catboost,transductive,42,0.00559111903411393
+coral,transductive,42,-0.03589660481322421
+dann,transductive,42,-0.35677821894498013
+hgb,transductive,42,0.004780811927720606
+lr,transductive,42,0.19585122761526622
+mlp,transductive,42,-0.2026578073089701
+rf,transductive,42,0.020176646949193744
+rift,transductive,42,0.13021635199740703
+rift-noAnchor,transductive,42,-0.050320071307025364
+rift-noDN,transductive,42,-0.0850012154606596
+rift-noIFS,transductive,42,-0.0368689733408962
+rift-noLSC,transductive,42,0.13021635199740703
+rift-poolInit,transductive,42,-0.1266510007292764
+rift-robust,transductive,42,-0.28498500931853177
+rift-st,transductive,42,0.1088242443886233
+rift-standard,transductive,42,-0.15436350376792807
+xgboost,transductive,42,0.005104934770277935

@@ -1,4 +1,9 @@
-"""Few-shot reference: CatBoost trained on sources, continued on a labelled target budget."""
+"""Few-shot reference: CatBoost trained on sources, continued on a labelled target budget.
+
+Two rows are produced per budget k from the same labelled rows:
+``catboost`` (sources first, then continued with ``init_model`` on the k% target rows) and
+``targetonly`` (a control trained only on those target rows, with the same hyperparameters).
+"""
 
 from __future__ import annotations
 
@@ -10,6 +15,10 @@ from .methods.base import Domain
 from .methods.baselines import CatBoostBaseline
 
 MAX_SHIFT_FIT_ROWS = 50_000
+SMALL_BUDGET_ROWS = 20
+CONTINUATION_ITERATIONS = 100
+SMALL_BUDGET_ITERATIONS = 300
+FEWSHOT_KINDS = ("catboost", "targetonly")
 
 
 def shift_score(source_X: np.ndarray, target_pool: np.ndarray, seed: int) -> float:
@@ -56,6 +65,28 @@ def labelled_budget(y: np.ndarray, k_percent: float, seed: int) -> np.ndarray:
     return np.sort(chosen)
 
 
+def _catboost_params(seed: int, threads: int | None, device: str, iterations: int) -> dict:
+    params = dict(
+        iterations=iterations,
+        depth=6,
+        learning_rate=0.05,
+        auto_class_weights="Balanced",
+        verbose=0,
+        random_seed=seed,
+        allow_writing_files=False,
+    )
+    if device == "cuda":
+        params["task_type"] = "GPU"
+    else:
+        params["thread_count"] = threads or -1
+    return params
+
+
+def targetonly_iterations(n_rows: int) -> int:
+    """Fixed iteration count for the target-only control; tiny budgets get more trees, no early stopping."""
+    return SMALL_BUDGET_ITERATIONS if n_rows < SMALL_BUDGET_ROWS else CONTINUATION_ITERATIONS
+
+
 def fewshot_scores(
     sources: list[Domain],
     target_train: tuple[np.ndarray, np.ndarray],
@@ -74,20 +105,36 @@ def fewshot_scores(
     for k in ks:
         idx = labelled_budget(y_lab, k, seed)
         Z = base.scaler.transform(X_lab[idx])
-        params = dict(
-            iterations=100,
-            depth=6,
-            learning_rate=0.05,
-            auto_class_weights="Balanced",
-            verbose=0,
-            random_seed=seed,
-            allow_writing_files=False,
-        )
-        if device == "cuda":
-            params["task_type"] = "GPU"
-        else:
-            params["thread_count"] = threads or -1
-        model = CatBoostClassifier(**params)
+        model = CatBoostClassifier(**_catboost_params(seed, threads, device, CONTINUATION_ITERATIONS))
         model.fit(Z, y_lab[idx].astype(int), init_model=base.model)
         out[k] = model.predict_proba(base.scaler.transform(np.asarray(test_X, dtype=np.float64)))[:, 1]
+    return out
+
+
+def targetonly_scores(
+    target_train: tuple[np.ndarray, np.ndarray],
+    test_X: np.ndarray,
+    ks: list[float],
+    seed: int,
+    threads: int | None,
+    device: str,
+) -> dict[float, np.ndarray]:
+    """Control: CatBoost trained only on the same labelled target rows as ``fewshot_scores``.
+
+    Uses the same row selection (``labelled_budget``, same seed) and hyperparameters, without source
+    data or ``init_model``. Tree splits are invariant to per-feature affine rescaling, so the raw
+    features are used directly.
+    """
+    from catboost import CatBoostClassifier
+
+    X_lab, y_lab = target_train
+    X_lab = np.asarray(X_lab, dtype=np.float64)
+    test = np.asarray(test_X, dtype=np.float64)
+    out: dict[float, np.ndarray] = {}
+    for k in ks:
+        idx = labelled_budget(y_lab, k, seed)
+        y_sub = np.asarray(y_lab[idx]).astype(int)
+        model = CatBoostClassifier(**_catboost_params(seed, threads, device, targetonly_iterations(len(idx))))
+        model.fit(X_lab[idx], y_sub)
+        out[k] = model.predict_proba(test)[:, 1]
     return out

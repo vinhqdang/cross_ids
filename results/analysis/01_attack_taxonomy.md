@@ -4,10 +4,10 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 
 | attack_type | family | defence | datasets | rows | in_per_attack |
 |---|---|---|---|---|---|
-| Benign | benign |  | cicids2018, iot23 | 105346 | False |
 | BENIGN | benign |  | cicids2017, usbids1 | 91727 | False |
-| Normal | benign |  | insdn, unswnb15 | 83286 | False |
+| Benign | benign |  | cicids2018, iot23 | 105346 | False |
 | normal | benign |  | ctu13, toniot | 65915 | False |
+| Normal | benign |  | insdn, unswnb15 | 83286 | False |
 | Bot | botnet |  | cicids2017, cicids2018 | 2908 | True |
 | BOTNET | botnet |  | insdn | 101 | True |
 | botnet-s42 | botnet |  | ctu13 | 8228 | False |
@@ -41,8 +41,8 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | ddos | ddos |  | toniot | 11578 | True |
 | DDOS attack-HOIC | ddos |  | cicids2018 | 4210 | True |
 | DDOS attack-LOIC-UDP | ddos |  | cicids2018 | 42 | True |
-| DoS | dos |  | insdn, unswnb15 | 32224 | True |
 | dos | dos |  | toniot | 5097 | True |
+| DoS | dos |  | insdn, unswnb15 | 32224 | True |
 | DoS attacks-GoldenEye | dos |  | cicids2018 | 826 | True |
 | DoS attacks-Hulk | dos |  | cicids2018 | 2522 | True |
 | DoS attacks-SlowHTTPTest | dos |  | cicids2018 | 2 | True |
@@ -67,8 +67,8 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | TCPFlood-NoDefense | dos | NoDefense | usbids1 | 4080 | True |
 | TCPFlood-Reqtimeout | dos | Reqtimeout | usbids1 | 4374 | True |
 | TCPFlood-Security2 | dos | Security2 | usbids1 | 4221 | True |
-| backdoor | exploit_malware |  | toniot | 1812 | True |
 | Backdoor | exploit_malware |  | unswnb15 | 323 | True |
+| backdoor | exploit_malware |  | toniot | 1812 | True |
 | Exploits | exploit_malware |  | unswnb15 | 18400 | True |
 | Infilteration | exploit_malware |  | cicids2018 | 2317 | True |
 | Infiltration | exploit_malware |  | cicids2017 | 2 | False |

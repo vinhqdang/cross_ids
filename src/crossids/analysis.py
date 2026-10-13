@@ -628,14 +628,25 @@ def _plot_defence(defence: pd.DataFrame, mode: str, experiment: str, methods: li
 # ---------------------------------------------------------------------------------------------------------------------
 
 
+SHIFT_METHODS = ("hgb", "catboost", "dann", "rift-noDN")
+FEWSHOT_SERIES_LABEL = {"fewshot-catboost": "fewshot-catboost (continued)", "fewshot-targetonly": "fewshot-targetonly (control)"}
+
+
+def _fewshot_series(method: pd.Series) -> pd.Series:
+    """Series name of a few-shot row: the method without its ``@k`` budget suffix."""
+    return method.astype(str).str.split("@").str[0]
+
+
 def fewshot_curve(runs: pd.DataFrame) -> pd.DataFrame:
-    fs = runs[runs["experiment"] == "fewshot"]
+    """Mean and std over scenarios of few-shot ROC-AUC and balanced accuracy per series and budget k."""
+    fs = runs[runs["experiment"] == "fewshot"].copy()
     if fs.empty:
         return pd.DataFrame()
-    per_scen = fs.groupby(["method", "mode", "fewshot_k", "scenario"], as_index=False)[
+    fs["method"] = _fewshot_series(fs["method"])
+    per_scen = fs.groupby(["method", "fewshot_k", "scenario"], as_index=False)[
         ["roc_auc", "balanced_accuracy"]
     ].mean()
-    out = per_scen.groupby(["method", "mode", "fewshot_k"]).agg(
+    out = per_scen.groupby(["method", "fewshot_k"]).agg(
         roc_auc_mean=("roc_auc", "mean"),
         roc_auc_std=("roc_auc", "std"),
         balanced_accuracy_mean=("balanced_accuracy", "mean"),
@@ -643,6 +654,11 @@ def fewshot_curve(runs: pd.DataFrame) -> pd.DataFrame:
         n_scenarios=("scenario", "nunique"),
     )
     return out.reset_index()
+
+
+def fewshot_scenarios(runs: pd.DataFrame) -> set[str]:
+    """Scenarios covered by the few-shot rows (few-shot rows have their own mode label, 'fewshot')."""
+    return set(runs.loc[runs["experiment"] == "fewshot", "scenario"])
 
 
 def zero_shot_references(runs: pd.DataFrame, mode: str, scenarios: set[str]) -> pd.DataFrame:
@@ -655,67 +671,83 @@ def zero_shot_references(runs: pd.DataFrame, mode: str, scenarios: set[str]) -> 
 
 
 def _plot_fewshot(curve: pd.DataFrame, refs: pd.DataFrame, mode: str) -> plt.Figure:
-    fewshot_methods = list(dict.fromkeys(curve["method"]))
-    colours = _colours(fewshot_methods + ["ref-best", "ref-hgb"])
-    fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.6), sharex=True)
+    """Few-shot curves with two zero-shot reference lines: pairwise CatBoost and the best other label-free method."""
+    series = list(dict.fromkeys(curve["method"]))
+    catboost_ref = refs[refs["method"] == "catboost"] if len(refs) else refs
+    others = refs[refs["method"] != "catboost"] if len(refs) else refs
+    best = others.sort_values(["count", "mean"], ascending=[False, False]).iloc[0] if len(others) else None
+    colours = _colours(series + ["ref-catboost", "ref-best"])
+    fig, axes = plt.subplots(1, 2, figsize=(9.2, 3.8), sharex=True)
     panels = (
         ("roc_auc", "ROC-AUC"),
         ("balanced_accuracy", "balanced accuracy"),
     )
-    best = refs.sort_values(["count", "mean"], ascending=[False, False]).iloc[0] if len(refs) else None
-    hgb = refs[refs["method"] == "hgb"] if len(refs) else refs
     for ax, (metric, label) in zip(axes, panels):
-        for method in fewshot_methods:
-            sub = curve[curve["method"] == method].sort_values("fewshot_k")
+        for name in series:
+            sub = curve[curve["method"] == name].sort_values("fewshot_k")
             ax.errorbar(
                 sub["fewshot_k"],
                 sub[f"{metric}_mean"],
                 yerr=sub[f"{metric}_std"].fillna(0.0),
-                color=colours[method],
+                color=colours[name],
                 marker="o",
                 markersize=4,
                 capsize=2,
                 elinewidth=0.6,
-                label=method,
+                label=FEWSHOT_SERIES_LABEL.get(name, name),
             )
-        if best is not None and metric == "roc_auc":
-            ax.axhline(best["mean"], color=colours["ref-best"], linestyle="--", linewidth=1.0,
-                       label=f"best zero-shot pairwise: {best['method']}")
-        if len(hgb) and metric == "roc_auc":
-            ax.axhline(float(hgb["mean"].iloc[0]), color=colours["ref-hgb"], linestyle=":", linewidth=1.1,
-                       label="hgb zero-shot pairwise")
+        if metric == "roc_auc" and len(catboost_ref):
+            ax.axhline(float(catboost_ref["mean"].iloc[0]), color=colours["ref-catboost"], linestyle=":",
+                       linewidth=1.1, label="zero-shot catboost (pairwise)")
+        if metric == "roc_auc" and best is not None:
+            ax.axhline(float(best["mean"]), color=colours["ref-best"], linestyle="--", linewidth=1.0,
+                       label=f"best label-free zero-shot: {best['method']}")
         ax.set_xscale("log")
         ax.set_xlabel("labelled target samples per class, k (log scale)", color=MUTED)
         ax.set_ylabel(label, color=MUTED)
         ax.set_ylim(0, 1.02)
     handles, names = axes[0].get_legend_handles_labels()
-    fig.legend(handles, names, loc="lower center", ncol=min(len(names), 4), bbox_to_anchor=(0.5, -0.02))
+    fig.legend(handles, names, loc="lower center", ncol=min(len(names), 3), bbox_to_anchor=(0.5, -0.02), fontsize=8)
     k_values = sorted(curve["fewshot_k"].unique())
     axes[0].set_xticks(k_values)
     axes[0].set_xticklabels([f"{k:g}" for k in k_values])
     top_k = curve["fewshot_k"].max()
-    top = curve[curve["fewshot_k"] == top_k]["roc_auc_mean"].max()
-    zero = float(best["mean"]) if best is not None else float("nan")
+    top = curve[curve["fewshot_k"] == top_k].set_index("method")["roc_auc_mean"]
+    cat_top = float(top.get("fewshot-catboost", np.nan))
+    tgt_top = float(top.get("fewshot-targetonly", np.nan))
+    zero_cat = float(catboost_ref["mean"].iloc[0]) if len(catboost_ref) else float("nan")
+    tgt_text = f"{tgt_top:.2f}" if np.isfinite(tgt_top) else "not yet run"
     fig.suptitle(
-        f"Few-shot ROC-AUC at k={top_k:g} is {top:.2f} against {zero:.2f} for the best zero-shot pairwise method ({mode})",
+        f"Few-shot ROC-AUC at k={top_k:g}: catboost {cat_top:.2f}, targetonly {tgt_text}; "
+        f"zero-shot catboost {zero_cat:.2f} ({mode} pairwise references)",
         x=0.01, ha="left", fontsize=9.5)
-    fig.tight_layout(rect=(0, 0.12, 1, 0.93))
+    fig.tight_layout(rect=(0, 0.14, 1, 0.93))
     return fig
 
 
+def shift_by_scenario_seed(runs: pd.DataFrame) -> pd.DataFrame:
+    """Shift score per (scenario, seed), taken from the few-shot rows (the value is repeated over budgets k)."""
+    fs = runs[(runs["experiment"] == "fewshot") & runs["shift_score"].notna()]
+    if fs.empty:
+        return pd.DataFrame()
+    return fs.groupby(["scenario", "seed"], as_index=False)["shift_score"].mean()
+
+
 def shift_scores(runs: pd.DataFrame, mode: str) -> tuple[pd.DataFrame, pd.DataFrame]:
-    fs = runs[(runs["experiment"] == "fewshot") & (runs["mode"] == mode)]
-    if fs.empty or fs["shift_score"].notna().sum() == 0:
+    """Pairwise zero-shot ROC-AUC per (method, scenario, seed) joined to the shift score, and Spearman rho per method."""
+    shift = shift_by_scenario_seed(runs)
+    if shift.empty:
         return pd.DataFrame(), pd.DataFrame()
-    shift = fs.groupby("scenario")["shift_score"].mean()
     pw = runs[(runs["experiment"] == "pairwise") & (runs["mode"] == mode)]
-    zs = pw.groupby(["method", "scenario"])["roc_auc"].mean().reset_index()
-    points = zs.merge(shift.rename("shift_score").reset_index(), on="scenario")
+    zs = pw.groupby(["method", "scenario", "seed"], as_index=False)["roc_auc"].mean()
+    points = zs.merge(shift, on=["scenario", "seed"], how="inner")
+    if points.empty:
+        return pd.DataFrame(), pd.DataFrame()
     rows = []
     for method, grp in points.groupby("method"):
         rho = _spearman(grp["shift_score"], grp["roc_auc"])
-        rows.append({"method": method, "mode": mode, "n_scenarios": len(grp), "spearman_rho": rho})
-    overall = {"method": "all methods", "mode": mode, "n_scenarios": len(points),
+        rows.append({"method": method, "mode": mode, "n_points": len(grp), "spearman_rho": rho})
+    overall = {"method": "all methods", "mode": mode, "n_points": len(points),
                "spearman_rho": _spearman(points["shift_score"], points["roc_auc"])}
     return points, pd.DataFrame([overall, *rows])
 
@@ -736,10 +768,12 @@ def _plot_shift(points: pd.DataFrame, rho_table: pd.DataFrame, mode: str, method
         sub = points[points["method"] == method]
         ax.scatter(sub["shift_score"], sub["roc_auc"], s=18, color=colours[method], label=method, linewidths=0)
     ax.set_xlabel("IsolationForest shift score (target pool vs sources)", color=MUTED)
-    ax.set_ylabel("zero-shot ROC-AUC", color=MUTED)
-    word = "lower" if overall < 0 else "higher"
-    ax.set_title(f"Larger shift goes with {word} zero-shot ROC-AUC (Spearman rho = {overall:.2f}, {mode})",
-                 loc="left", fontsize=9)
+    ax.set_ylabel("zero-shot pairwise ROC-AUC", color=MUTED)
+    if not np.isfinite(overall) or abs(overall) < 0.1:
+        verdict = "No clear relation between shift and zero-shot ROC-AUC"
+    else:
+        verdict = ("Larger shift goes with lower" if overall < 0 else "Larger shift goes with higher") + " zero-shot ROC-AUC"
+    ax.set_title(f"{verdict} (Spearman rho = {overall:.2f}, {mode})", loc="left", fontsize=9)
     if len(shown) >= 2:
         ax.legend(loc="lower left", fontsize=7)
     fig.tight_layout()
@@ -1339,28 +1373,29 @@ def run_analysis(
             rep.table(
                 "07_fewshot_curve",
                 curve,
-                "few-shot ROC-AUC and balanced accuracy per method, mode and k",
+                "few-shot ROC-AUC and balanced accuracy per series (fewshot-catboost continued on k% target "
+                "rows; fewshot-targetonly trained on the same rows alone) and budget k",
                 "Few-shot curve",
             )
-            for mode in sorted(set(curve["mode"])):
-                sub = curve[curve["mode"] == mode]
-                scen = set(runs.loc[(runs["experiment"] == "fewshot") & (runs["mode"] == mode), "scenario"])
-                refs = zero_shot_references(runs, mode, scen)
-                fig = _plot_fewshot(sub, refs, mode)
-                rep.figure(f"fig07_fewshot_curve_{mode}", fig,
-                           f"few-shot curves with zero-shot reference lines ({mode})")
+            # the zero-shot reference lines use the transductive pairwise rows when present, else inductive
+            ref_mode = "transductive" if (runs["experiment"].eq("pairwise") & runs["mode"].eq("transductive")).any() else "inductive"
+            refs = zero_shot_references(runs, ref_mode, fewshot_scenarios(runs))
+            fig = _plot_fewshot(curve, refs, ref_mode)
+            rep.figure("fig07_fewshot_curve", fig,
+                       f"few-shot curves for both series with zero-shot reference lines ({ref_mode} pairwise)")
             for mode in modes:
                 points, rho = shift_scores(runs, mode)
                 if points.empty:
-                    rep.skip(f"shift score vs zero-shot ({mode})", "no shift_score values")
+                    rep.skip(f"shift score vs zero-shot ({mode})", "no shift_score values joined to pairwise rows")
                     continue
                 rep.table(
                     f"07_shift_spearman_{mode}",
                     rho,
-                    f"Spearman rho between the IsolationForest shift score and zero-shot ROC-AUC ({mode})",
+                    f"Spearman rho between the IsolationForest shift score and zero-shot pairwise ROC-AUC per "
+                    f"(scenario, seed) ({mode})",
                     f"Shift score vs zero-shot ROC-AUC ({mode})",
                 )
-                fig = _plot_shift(points, rho, mode, list(methods))
+                fig = _plot_shift(points, rho, mode, list(SHIFT_METHODS))
                 rep.figure(f"fig07b_shift_vs_zeroshot_{mode}", fig,
                            f"shift score vs zero-shot ROC-AUC scatter with Spearman rho ({mode})")
 

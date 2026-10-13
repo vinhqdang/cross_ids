@@ -19,7 +19,7 @@ from sklearn.model_selection import train_test_split
 from threadpoolctl import threadpool_limits
 
 from .datasets import DatasetInfo, load_processed, real_info, synthetic_info, synthetic_tables
-from .fewshot import fewshot_scores, shift_score
+from .fewshot import FEWSHOT_KINDS, fewshot_scores, shift_score, targetonly_scores
 from .methods import METHOD_NAMES, make_method
 from .methods.base import Domain, MethodUnavailable
 from .metrics import METRIC_NAMES, evaluate, per_attack_recall
@@ -76,6 +76,11 @@ RUN_COLUMNS = [
 ]
 PER_ATTACK_COLUMNS = ["config_hash", "schema", "mode", "method", "experiment", "scenario", "seed", "attack_type", "n", "detected", "recall"]
 RESULT_RESUME_COLUMNS = ("schema", "mode", "method", "experiment", "scenario", "seed")
+
+
+def fewshot_method(kind: str, k: float) -> str:
+    """Method name of a few-shot row: ``fewshot-catboost@k`` (continued) or ``fewshot-targetonly@k`` (control)."""
+    return f"fewshot-{kind}@{k}"
 
 
 def config_hash(cfg: dict) -> str:
@@ -249,7 +254,7 @@ def _run_all(cfg: dict, data_dir: Path | None, results_dir: Path | None) -> Path
     done = _done_keys(runs_path)
     seeds = list(cfg["seeds"])
     n_main = len(seeds) * len(cfg["modes"]) * len(scenarios) * len(usable)
-    n_few = len(seeds) * len(fewshot) * len(cfg["fewshot_k"])
+    n_few = len(seeds) * len(fewshot) * len(cfg["fewshot_k"]) * len(FEWSHOT_KINDS)
     total = n_main + n_few
     log.info("%d runs planned (%d main, %d few-shot)", total, n_main, n_few)
 
@@ -277,13 +282,19 @@ def _run_all(cfg: dict, data_dir: Path | None, results_dir: Path | None) -> Path
                         row["roc_auc"], row["balanced_accuracy"], row["fit_seconds"],
                     )
         for sc in fewshot:
-            counter += len(cfg["fewshot_k"])
-            pending = [k for k in cfg["fewshot_k"]
-                       if (tier, "fewshot", f"fewshot-catboost@{k}", "fewshot", sc.name, str(seed)) not in done]
-            if not pending:
+            counter += len(cfg["fewshot_k"]) * len(FEWSHOT_KINDS)
+            # Each (budget, kind) row is resumed on its own: a missing control row is computed without
+            # recomputing its sibling rows that already exist.
+            missing: dict = {}
+            for k in cfg["fewshot_k"]:
+                kinds = [kind for kind in FEWSHOT_KINDS
+                         if (tier, "fewshot", fewshot_method(kind, k), "fewshot", sc.name, str(seed)) not in done]
+                if kinds:
+                    missing[k] = kinds
+            if not missing:
                 log.info("skip (done) few-shot %s seed=%d", sc.name, seed)
                 continue
-            rows, attack_rows = _run_fewshot(sc, seed, splits, features, chash, cfg, pending)
+            rows, attack_rows = _run_fewshot(sc, seed, splits, features, chash, cfg, missing)
             for row, arows in zip(rows, attack_rows):
                 _append(attack_path, arows, PER_ATTACK_COLUMNS)
                 _append(runs_path, [row], RUN_COLUMNS)
@@ -377,8 +388,11 @@ def _run_one(name: str, sc: Scenario, seed: int, splits: dict, features: list[st
 
 
 def _run_fewshot(sc: Scenario, seed: int, splits: dict, features: list[str], chash: str, cfg: dict,
-                 ks: list[float]) -> tuple[list[dict], list[list[dict]]]:
-    """Few-shot reference rows: one per labelled budget k, with the shift score of the target pool."""
+                 missing: dict) -> tuple[list[dict], list[list[dict]]]:
+    """Few-shot rows for the (budget k -> kinds) pairs in ``missing``, with the shift score of the target pool.
+
+    The source-pretrained CatBoost is only fitted when a ``catboost`` row is missing.
+    """
     sources = [_domain(s, splits[s][0], features) for s in sc.sources]
     target_train, target_test = splits[sc.target]
     source_X = np.vstack([s.X for s in sources])
@@ -388,21 +402,33 @@ def _run_fewshot(sc: Scenario, seed: int, splits: dict, features: list[str], cha
     y_lab = target_train["label"].to_numpy().astype(int)
     X_test = target_test[features].to_numpy(dtype=np.float64)
     y_test = target_test["label"].to_numpy().astype(int)
-    t0 = time.perf_counter()
-    scores_by_k = fewshot_scores(sources, (X_lab, y_lab), X_test, ks, seed, cfg["threads"], cfg["device"])
-    elapsed = (time.perf_counter() - t0) / max(len(ks), 1)
+    scores_by_kind: dict[str, dict[float, np.ndarray]] = {}
+    seconds_by_kind: dict[str, float] = {}
+    for kind in FEWSHOT_KINDS:
+        ks = [k for k, kinds in missing.items() if kind in kinds]
+        if not ks:
+            continue
+        t0 = time.perf_counter()
+        if kind == "catboost":
+            scores_by_kind[kind] = fewshot_scores(sources, (X_lab, y_lab), X_test, ks, seed, cfg["threads"], cfg["device"])
+        else:
+            scores_by_kind[kind] = targetonly_scores((X_lab, y_lab), X_test, ks, seed, cfg["threads"], cfg["device"])
+        seconds_by_kind[kind] = (time.perf_counter() - t0) / len(ks)
     rows, attack_rows = [], []
-    for k in ks:
-        scores = scores_by_k[k]
-        pred = (scores >= 0.5).astype(int)
-        base = _blank_base()
-        base["shift_score"] = shift
-        base["fewshot_k"] = float(k)
-        base["n_features"] = float(len(features))
-        base["est_prior"] = math.nan
-        row, arows = _finish_row(base, y_test, scores, pred, target_test["attack_type"].to_numpy(), elapsed, 0.0,
-                                 sc, seed, "fewshot", f"fewshot-catboost@{k}", chash, cfg["schema"],
-                                 sum(len(s.y) for s in sources), True)
-        rows.append(row)
-        attack_rows.append(arows)
+    for k, kinds in missing.items():
+        for kind in FEWSHOT_KINDS:
+            if kind not in kinds:
+                continue
+            scores = scores_by_kind[kind][k]
+            pred = (scores >= 0.5).astype(int)
+            base = _blank_base()
+            base["shift_score"] = shift
+            base["fewshot_k"] = float(k)
+            base["n_features"] = float(len(features))
+            base["est_prior"] = math.nan
+            row, arows = _finish_row(base, y_test, scores, pred, target_test["attack_type"].to_numpy(),
+                                     seconds_by_kind[kind], 0.0, sc, seed, "fewshot", fewshot_method(kind, k),
+                                     chash, cfg["schema"], sum(len(s.y) for s in sources), True)
+            rows.append(row)
+            attack_rows.append(arows)
     return rows, attack_rows
