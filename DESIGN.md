@@ -429,3 +429,133 @@ Each control below answers one objection.
    artefact.
 7. **Reproducibility.** Three seeds, Friedman / Wilcoxon tests, released code,
    configs, sampled-row hashes and the raw per-run table.
+
+# Part II. FLARE: Few-shot Learning of Attack Rules across Environments
+
+## 11. Motivation from Part I
+
+Part I establishes three facts on eight datasets from six labs:
+
+1. **Concept shift.** No flow feature keeps the same direction of association
+   with "attack" across datasets (0 of 14), AUCs invert across datasets, and in
+   regions where source and target flows overlap the source labels disagree
+   with the target labels (§10.3). P(y | x) differs, so a decision function
+   learned on other networks cannot be identified for a new network without
+   target labels. Every domain-adaptation method that assumes P(y | x) fixed
+   (DANN, CORAL, importance weighting, our own RIFT) fails accordingly.
+2. **Labels are cheap in effect.** A CatBoost trained on ~70 labelled target
+   flows (0.1% of the target train split) reaches ~0.93 ROC-AUC.
+3. **Naive reuse of sources hurts.** Pretraining on sources and fine-tuning on
+   the target labels (the earlier approach, 10.1007/978-981-19-7346-8_4) is
+   *worse* than training on the target labels alone, at every budget.
+
+The question therefore becomes: **how can other networks help a new network
+when only a handful of its flows are labelled (k = 4 to 128)?** The answer cannot
+be "reuse their decision function" (fact 1, 3). FLARE reuses something
+different: *how to infer a detection rule from a few labelled examples*.
+
+## 12. Setting
+
+Meta-training datasets: all core-tier datasets except the target (LODO).
+Target: the held-out dataset; CTU-13 (minimal tier) is an extra test-only
+target, possible because FLARE accepts any number of features. At test time
+FLARE receives a support set S of k labelled target flows (at least one per
+class) and the unlabelled target flows; it never sees other target labels.
+k ∈ {4, 8, 16, 32, 64, 128}. Support sets are drawn 10 times per (target, k)
+with fixed seeds, identical for every method.
+
+## 13. Model
+
+In-context classifier over an *episode* (support rows with labels + query
+rows), in the spirit of prior-fitted networks, with two IDS-specific design
+decisions: feature-permutation invariance and direction-agnostic training.
+
+**Episode normalisation (label-free).** Within each episode, every feature is
+mapped to its Gaussian rank over the episode's rows (support + query), then
+clipped to [-4, 4]. Missing features are absent tokens, not zeros.
+
+**Tokens.** Row i with features x_i1..x_id becomes d feature tokens
+`t_ij = MLP_v(x_ij)` (shared scalar-value embedding, 2 x 64 hidden, GELU) plus
+one label token `l_i = E[y_i]` with E a 3-row table (benign, attack, unknown;
+query rows use unknown). There is no feature-identity embedding, so the model is
+invariant to feature order and cannot memorise "feature 7 high means attack".
+
+**Layers (L = 6, width 128, 4 heads, pre-LayerNorm, GELU MLP x4).** Each layer
+applies, in order:
+- *feature attention*: within each row, all d + 1 tokens attend to each other;
+- *row attention*: for each token position, rows attend across the episode;
+  support rows attend to support rows only, query rows attend to support rows
+  and to themselves only (no query-to-query mixing, so predictions do not depend
+  on which other queries share the batch). Feature tokens of different rows are
+  aligned by position *within the episode*, which is consistent because the
+  feature order is fixed inside one episode.
+
+**Head.** The query row's label token → LayerNorm → MLP(128, 1) → logit.
+
+**Test-time ensemble.** Average logits over E = 8 random feature
+permutations and per-feature sign flips (the same transforms as training).
+
+## 14. Meta-training episodes (the key ingredient)
+
+Each episode draws a source dataset (weighted by sqrt of its size), then:
+
+- support size k ~ log-uniform{4..128}, stratified with ≥ 1 row per class;
+  query size 512; **query attack prior ~ U(0.05, 0.95)** (support prior ~
+  U(0.1, 0.9)), so the model cannot learn a fixed prior;
+- **direction-agnostic augmentation (A1)**: each feature independently gets a
+  random sign flip (p = 0.5) and a random monotone warp (piecewise-linear CDF
+  warp with 4 random knots) before episode normalisation. This makes the
+  direction and shape of every feature uninformative across episodes, so the
+  only way to classify the query is to read the rule from the support set —
+  exactly what fact 1 demands;
+- **feature subset (A2)**: keep a random subset of 5..d features (p = 0.5),
+  matching targets with fewer features (CTU-13);
+- **cross-dataset composite tasks (A3, p = 0.3)**: benign rows from dataset A
+  and attack rows from dataset B ≠ A, to multiply task diversity
+  (the attack/benign boundary of a mixed network);
+- **label noise (A4)**: flip 2% of support labels, for robustness.
+
+Loss: binary cross-entropy on query rows. AdamW (lr 3e-4, wd 0.01, cosine
+schedule, 2k warm-up), batch 8 episodes, 60k steps, gradient clip 1.0, bf16 on
+GPU. Model selection: a validation episode stream from the meta-training
+datasets only (never the target).
+
+## 15. Active cold-start (FLARE-AL)
+
+Which k flows should the analyst label? Label-free first half: run the encoder
+on the target pool with an empty support (all label tokens unknown) and take
+the row embeddings (mean of feature tokens after the last layer); select k/2
+rows by greedy k-center on these embeddings. Second half: with the first k/2
+labels as support, score the pool, and pick the remaining k/2 by predictive
+entropy × distance to the selected set (batch-mode uncertainty-diversity).
+Baselines: random (the default for all methods), k-center on raw features.
+
+## 16. Baselines (same support sets)
+
+- target-only CatBoost, RF, LR, kNN on the k labels;
+- source-pretrained CatBoost fine-tuned on the k labels (earlier approach);
+- TabPFN v2 (off-the-shelf prior-fitted network, no IDS meta-training), if
+  installable;
+- ProtoNet: MLP encoder meta-trained on the same episodes, prototype classifier;
+- best label-free method from Part I (reference line);
+- in-domain full-label CatBoost (upper reference).
+
+## 17. Ablations
+
+FLARE without A1 (direction-agnostic augmentation), without A3, without the
+feature-attention (row MLP instead, fixed feature order), without meta-training
+on IDS data (synthetic random-function episodes only), and E = 1. The A1
+ablation is the direct test of the Part I diagnosis.
+
+## 18. Evaluation
+
+LODO over the 7 core datasets plus CTU-13 as an extra target; metrics ROC-AUC,
+PR-AUC, balanced accuracy, F1 on the target test split (the Part I split), mean
+over the 10 support draws; meta-training seeds 0-2 for FLARE (and ProtoNet).
+Learning curves vs k; Wilcoxon signed-rank vs target-only CatBoost per k over
+(target, draw) pairs; per-attack-family recall at k = 16.
+
+## 19. Compute
+
+Implementation in PyTorch; CPU for tests and a tiny smoke configuration, GPU
+(Google Colab) for meta-training: 8 targets × 3 seeds × ~40 min on a T4.
