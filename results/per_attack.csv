@@ -1,0 +1,470 @@
+config_hash,schema,mode,method,experiment,scenario,seed,attack_type,n,detected,recall
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,Bot,23,6,0.2608695652173913
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,DDoS,1764,1763,0.9994331065759637
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,DoS GoldenEye,138,88,0.6376811594202898
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,DoS Hulk,2387,2227,0.9329702555509007
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,DoS Slowhttptest,50,41,0.82
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,DoS slowloris,53,27,0.5094339622641509
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,FTP-Patator,53,0,0.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,PortScan,29,7,0.2413793103448276
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,SSH-Patator,46,0,0.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,DDoS,1764,1758,0.9965986394557823
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,DoS GoldenEye,138,130,0.9420289855072463
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,DoS Hulk,2387,2366,0.9912023460410557
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,DoS Slowhttptest,50,46,0.92
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,PortScan,29,22,0.7586206896551724
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,SSH-Patator,46,43,0.9347826086956522
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,Web Attack � Brute Force,19,1,0.05263157894736842
+012f12b4eb6d,core,transductive,rf,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,Bot,23,17,0.7391304347826086
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,DoS GoldenEye,138,133,0.9637681159420289
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,DoS Hulk,2387,2371,0.99329702555509
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,DoS Slowhttptest,50,46,0.92
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,PortScan,29,26,0.896551724137931
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,SSH-Patator,46,43,0.9347826086956522
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,Web Attack � Brute Force,19,1,0.05263157894736842
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2017,0,Web Attack � XSS,8,1,0.125
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,Bot,23,17,0.7391304347826086
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,DoS GoldenEye,138,133,0.9637681159420289
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,DoS Hulk,2387,2373,0.9941348973607038
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,DoS Slowhttptest,50,47,0.94
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,FTP-Patator,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,PortScan,29,27,0.9310344827586207
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,SSH-Patator,46,43,0.9347826086956522
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,Web Attack � Brute Force,19,1,0.05263157894736842
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,Bot,23,17,0.7391304347826086
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,DoS GoldenEye,138,132,0.9565217391304348
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,DoS Hulk,2387,2372,0.993715961457897
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,DoS Slowhttptest,50,48,0.96
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,PortScan,29,24,0.8275862068965517
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,SSH-Patator,46,43,0.9347826086956522
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,Web Attack � Brute Force,19,1,0.05263157894736842
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2017,0,Web Attack � XSS,8,1,0.125
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,DDoS,1764,1756,0.9954648526077098
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,DoS GoldenEye,138,128,0.927536231884058
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,DoS Hulk,2387,2356,0.987012987012987
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,DoS Slowhttptest,50,46,0.92
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,DoS slowloris,53,49,0.9245283018867925
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,PortScan,29,16,0.5517241379310345
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,Bot,23,17,0.7391304347826086
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,DoS GoldenEye,138,133,0.9637681159420289
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,DoS Hulk,2387,2371,0.99329702555509
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,DoS Slowhttptest,50,46,0.92
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,PortScan,29,26,0.896551724137931
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,SSH-Patator,46,43,0.9347826086956522
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,Web Attack � Brute Force,19,1,0.05263157894736842
+012f12b4eb6d,core,transductive,coral,indomain,cicids2017,0,Web Attack � XSS,8,1,0.125
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,DoS GoldenEye,138,133,0.9637681159420289
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,DoS Hulk,2387,2363,0.9899455383326351
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,DoS Slowhttptest,50,46,0.92
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,DoS slowloris,53,49,0.9245283018867925
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,PortScan,29,26,0.896551724137931
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,Bot,23,11,0.4782608695652174
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,DDoS,1764,1761,0.9982993197278912
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,DoS GoldenEye,138,126,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,DoS Hulk,2387,2345,0.9824046920821115
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,FTP-Patator,53,51,0.9622641509433962
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,PortScan,29,10,0.3448275862068966
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,Web Attack � Brute Force,19,0,0.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2017,0,Web Attack � XSS,8,0,0.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,Bot,850,824,0.9694117647058823
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DoS attacks-GoldenEye,256,47,0.18359375
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,1,1.0
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,DoS attacks-Slowloris,37,8,0.21621621621621623
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,Infilteration,700,173,0.24714285714285714
+012f12b4eb6d,core,transductive,lr,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,Bot,850,846,0.9952941176470588
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DDOS attack-HOIC,1226,1183,0.9649265905383361
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DoS attacks-GoldenEye,256,240,0.9375
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DoS attacks-Hulk,747,681,0.9116465863453815
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,DoS attacks-Slowloris,37,36,0.972972972972973
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,Infilteration,700,51,0.07285714285714286
+012f12b4eb6d,core,transductive,rf,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,Bot,850,848,0.9976470588235294
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DDOS attack-HOIC,1226,1225,0.9991843393148451
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DoS attacks-GoldenEye,256,252,0.984375
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DoS attacks-Hulk,747,745,0.9973226238286479
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,Infilteration,700,117,0.16714285714285715
+012f12b4eb6d,core,transductive,hgb,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,Bot,850,848,0.9976470588235294
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DoS attacks-GoldenEye,256,250,0.9765625
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DoS attacks-Hulk,747,746,0.998661311914324
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,Infilteration,700,123,0.1757142857142857
+012f12b4eb6d,core,transductive,catboost,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,Bot,850,848,0.9976470588235294
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DoS attacks-GoldenEye,256,250,0.9765625
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DoS attacks-Hulk,747,744,0.9959839357429718
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,DoS attacks-Slowloris,37,36,0.972972972972973
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,Infilteration,700,128,0.18285714285714286
+012f12b4eb6d,core,transductive,xgboost,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,Bot,850,844,0.9929411764705882
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DDOS attack-HOIC,1226,1202,0.9804241435562806
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DoS attacks-GoldenEye,256,227,0.88671875
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DoS attacks-Hulk,747,714,0.9558232931726908
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,DoS attacks-Slowloris,37,27,0.7297297297297297
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,Infilteration,700,12,0.017142857142857144
+012f12b4eb6d,core,transductive,mlp,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,Bot,850,848,0.9976470588235294
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,Brute Force -Web,2,1,0.5
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DDOS attack-HOIC,1226,1225,0.9991843393148451
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DoS attacks-GoldenEye,256,252,0.984375
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DoS attacks-Hulk,747,745,0.9973226238286479
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,Infilteration,700,117,0.16714285714285715
+012f12b4eb6d,core,transductive,coral,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,Bot,850,849,0.9988235294117647
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DoS attacks-GoldenEye,256,242,0.9453125
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DoS attacks-Hulk,747,743,0.9946452476572959
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,DoS attacks-Slowloris,37,37,1.0
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,Infilteration,700,141,0.20142857142857143
+012f12b4eb6d,core,transductive,dann,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-noDN,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-noAnchor,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-noIFS,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-noLSC,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-robust,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-standard,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-st,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,Bot,850,843,0.991764705882353
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,Brute Force -Web,2,0,0.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DDOS attack-HOIC,1226,1198,0.9771615008156607
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DoS attacks-GoldenEye,256,236,0.921875
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DoS attacks-Hulk,747,712,0.9531459170013387
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,DoS attacks-Slowloris,37,35,0.9459459459459459
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,Infilteration,700,10,0.014285714285714285
+012f12b4eb6d,core,transductive,rift-poolInit,indomain,cicids2018,0,SSH-Bruteforce,629,629,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Hulk-NoDefense,5896,5895,0.9998303934871099
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Hulk-Reqtimeout,5916,5915,0.9998309668695065
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Hulk-Security2,5571,5552,0.9965894812421469
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,22,0.7857142857142857
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowloris-Evasive,8,4,0.5
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowloris-NoDefense,10,6,0.6
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,Slowloris-Security2,5,3,0.6
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,lr,indomain,usbids1,0,TCPFlood-Security2,1269,1268,0.9992119779353822
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Hulk-Security2,5571,5571,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,rf,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Hulk-Security2,5571,5571,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,hgb,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,catboost,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,xgboost,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Hulk-Security2,5571,5570,0.9998204990127446
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,26,0.9285714285714286
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,mlp,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Hulk-Evasive,5226,5226,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Hulk-NoDefense,5896,5896,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Hulk-Security2,5571,5571,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowhttptest-Evasive,39,39,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowhttptest-Security2,39,39,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowloris-Evasive,8,8,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowloris-NoDefense,10,10,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,Slowloris-Security2,5,5,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+012f12b4eb6d,core,transductive,coral,indomain,usbids1,0,TCPFlood-Security2,1269,1269,1.0
