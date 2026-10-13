@@ -9,7 +9,7 @@ import pandas as pd
 
 from .metrics import METRIC_NAMES
 
-REPORT_GROUPS = ["experiment", "transfer_type", "method"]
+REPORT_GROUPS = ["mode", "experiment", "transfer_type", "method"]
 DISPLAY = {
     "roc_auc": "ROC-AUC",
     "pr_auc": "PR-AUC",
@@ -18,23 +18,41 @@ DISPLAY = {
     "mcc": "MCC",
     "detection_rate": "Recall",
     "fpr": "FPR",
+    "prior_abs_error": "abs prior err",
 }
+SUMMARY_METRICS = (*METRIC_NAMES, "prior_abs_error")
+
+
+def _with_defaults(runs: pd.DataFrame) -> pd.DataFrame:
+    runs = runs.copy()
+    if "mode" not in runs:
+        runs["mode"] = "transductive"
+    if "prior_abs_error" not in runs:
+        if {"est_prior", "true_prior"} <= set(runs.columns):
+            runs["prior_abs_error"] = (runs["est_prior"] - runs["true_prior"]).abs()
+        else:
+            runs["prior_abs_error"] = np.nan
+    return runs
 
 
 def summarise(runs: pd.DataFrame) -> pd.DataFrame:
-    """Average over scenarios within each seed, then mean and std over seeds."""
-    per_seed = runs.groupby([*REPORT_GROUPS, "seed"], as_index=False)[list(METRIC_NAMES)].mean()
+    """Average over scenarios within each seed, then mean and std over seeds, per mode/experiment/transfer type/method."""
+    runs = _with_defaults(runs)
+    per_seed = runs.groupby([*REPORT_GROUPS, "seed"], as_index=False)[list(SUMMARY_METRICS)].mean()
     rows = []
     for keys, grp in per_seed.groupby(REPORT_GROUPS, sort=True):
         record = dict(zip(REPORT_GROUPS, keys))
+        selector = np.ones(len(runs), dtype=bool)
+        for col, val in record.items():
+            selector &= (runs[col] == val).to_numpy()
         record["n_seeds"] = int(grp["seed"].nunique())
-        record["n_runs"] = int(((runs["experiment"] == record["experiment"])
-                                & (runs["transfer_type"] == record["transfer_type"])
-                                & (runs["method"] == record["method"])).sum())
-        for metric in METRIC_NAMES:
+        record["n_runs"] = int(selector.sum())
+        record["n_scenarios"] = int(runs.loc[selector, "scenario"].nunique())
+        for metric in SUMMARY_METRICS:
             values = grp[metric].to_numpy(dtype=float)
-            record[f"{metric}_mean"] = float(np.nanmean(values)) if np.isfinite(values).any() else float("nan")
-            record[f"{metric}_std"] = float(np.nanstd(values, ddof=1)) if len(values) > 1 else 0.0
+            finite = np.isfinite(values)
+            record[f"{metric}_mean"] = float(np.mean(values[finite])) if finite.any() else float("nan")
+            record[f"{metric}_std"] = float(np.std(values[finite], ddof=1)) if finite.sum() > 1 else 0.0
         rows.append(record)
     return pd.DataFrame(rows)
 
@@ -46,28 +64,36 @@ def _cell(mean: float, std: float) -> str:
 
 
 def _markdown_table(summary: pd.DataFrame) -> str:
-    header = "| Method | " + " | ".join(DISPLAY[m] for m in METRIC_NAMES) + " | Seeds |"
-    sep = "|" + "---|" * (len(METRIC_NAMES) + 2)
+    header = "| Method | " + " | ".join(DISPLAY[m] for m in SUMMARY_METRICS) + " | Seeds | Scenarios |"
+    sep = "|" + "---|" * (len(SUMMARY_METRICS) + 3)
     lines = [header, sep]
     for r in summary.itertuples():
-        cells = [_cell(getattr(r, f"{m}_mean"), getattr(r, f"{m}_std")) for m in METRIC_NAMES]
-        lines.append(f"| {r.method} | " + " | ".join(cells) + f" | {r.n_seeds} |")
+        cells = [_cell(getattr(r, f"{m}_mean"), getattr(r, f"{m}_std")) for m in SUMMARY_METRICS]
+        lines.append(f"| {r.method} | " + " | ".join(cells) + f" | {r.n_seeds} | {r.n_scenarios} |")
     return "\n".join(lines)
 
 
-def build_markdown(summary: pd.DataFrame, runs: pd.DataFrame) -> str:
-    """Markdown report with one table per experiment and transfer type."""
-    parts = ["# Results", "", "Mean ± std over seeds. Pairwise and LODO values average over scenarios within each seed.", ""]
-    order = [e for e in ("indomain", "pairwise", "lodo") if e in set(summary["experiment"])]
-    for exp in order:
-        sub = summary[summary["experiment"] == exp]
-        for tt in sorted(sub["transfer_type"].unique()):
-            block = sub[sub["transfer_type"] == tt].sort_values("method")
-            n_scen = runs[(runs["experiment"] == exp) & (runs["transfer_type"] == tt)]["scenario"].nunique()
-            parts.append(f"## {exp} / {tt} ({n_scen} scenarios)")
-            parts.append("")
-            parts.append(_markdown_table(block))
-            parts.append("")
+def build_markdown(summary: pd.DataFrame) -> str:
+    """Markdown report: one table per mode, experiment and transfer type."""
+    parts = [
+        "# Results",
+        "",
+        "Mean ± std over seeds. Pairwise, LODO and few-shot values average over scenarios within each seed.",
+        "Absolute prior error is |estimated − true| target attack fraction (RIFT variants only).",
+        "",
+    ]
+    order_exp = [e for e in ("indomain", "pairwise", "lodo", "fewshot") if e in set(summary["experiment"])]
+    for mode in [m for m in ("transductive", "inductive", "fewshot") if m in set(summary["mode"])]:
+        for exp in order_exp:
+            sub = summary[(summary["mode"] == mode) & (summary["experiment"] == exp)]
+            if sub.empty:
+                continue
+            for tt in sorted(sub["transfer_type"].unique()):
+                block = sub[sub["transfer_type"] == tt].sort_values("method")
+                parts.append(f"## {mode} / {exp} / {tt} ({int(block['n_scenarios'].max())} scenarios)")
+                parts.append("")
+                parts.append(_markdown_table(block))
+                parts.append("")
     return "\n".join(parts)
 
 
@@ -82,5 +108,5 @@ def write_report(results_dir: Path) -> tuple[Path, Path]:
     csv_path = results_dir / "summary.csv"
     md_path = results_dir / "summary.md"
     summary.to_csv(csv_path, index=False)
-    md_path.write_text(build_markdown(summary, runs), encoding="utf-8")
+    md_path.write_text(build_markdown(summary), encoding="utf-8")
     return csv_path, md_path

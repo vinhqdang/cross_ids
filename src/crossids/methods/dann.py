@@ -37,6 +37,7 @@ class Dann(Method):
 
     name = "dann"
     transductive = True
+    supports_inductive = False
 
     def __init__(self, seed: int = 0, epochs: int = 20, batch_size: int = 512, lr: float = 1e-3, hidden: int = 128):
         if torch is None:

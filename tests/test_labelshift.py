@@ -40,3 +40,23 @@ def test_adjust_posterior_matches_the_formula_and_identity_case():
     b = 0.4 / 0.7
     assert np.allclose(out, a * p / (a * p + b * (1 - p)))
     assert np.all(out > p)
+
+
+def test_adjust_posterior_extremes_stay_fixed_or_saturate():
+    p = np.array([0.0, 1.0])
+    # Same prior: the posterior is returned unchanged even at the extremes.
+    assert np.allclose(adjust_posterior(p, 0.5, 0.5), [1e-6, 1 - 1e-6], atol=1e-9)
+    # Any target prior keeps the output in [0, 1] and orders the two extremes.
+    for pi_t in (0.001, 0.2, 0.9, 0.999):
+        out = adjust_posterior(p, 0.5, pi_t)
+        assert np.all((out >= 0.0) & (out <= 1.0))
+        assert out[0] < out[1]
+    # Raising the target prior raises the adjusted posterior of an uncertain row, and lowering it lowers it.
+    mid = np.array([0.5])
+    assert adjust_posterior(mid, 0.5, 0.001)[0] < 0.01
+    assert adjust_posterior(mid, 0.5, 0.999)[0] > 0.99
+
+
+def test_estimate_prior_is_clipped_for_degenerate_posteriors():
+    assert estimate_prior(np.ones(100), 0.5) <= 0.999 + 1e-12
+    assert estimate_prior(np.zeros(100), 0.5) >= 0.001 - 1e-12

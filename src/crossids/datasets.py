@@ -6,6 +6,7 @@ import gzip
 import json
 import logging
 import os
+import re
 import time
 import urllib.request
 import zipfile
@@ -19,17 +20,18 @@ import pandas as pd
 import pyarrow.parquet as pq
 
 from .methods.base import Domain
+from .sampling import DistinctSampler
 from .schema import (
-    EXTENDED_FEATURES,
+    CICFLOW_FEATURES,
     MINIMAL_FEATURES,
     SOURCES,
     TIER_ORDER,
     dataset_features,
-    harmonise,
+    harmonise_with_stats,
     source_columns,
 )
 
-SYNTHETIC_FEATURES: tuple[str, ...] = tuple(dict.fromkeys((*MINIMAL_FEATURES, *EXTENDED_FEATURES)))
+SYNTHETIC_FEATURES: tuple[str, ...] = tuple(dict.fromkeys((*MINIMAL_FEATURES, *CICFLOW_FEATURES)))
 
 log = logging.getLogger("crossids")
 
@@ -212,75 +214,46 @@ def iter_raw_chunks(path: Path, key: str, chunk_rows: int = 200_000) -> Iterator
         yield from _csv_chunks(lambda: _open_binary(path), key, chunk_rows)
 
 
-class StratifiedReservoir:
-    """Bottom-k sample per binary label with exact duplicate removal inside the sample pool."""
-
-    def __init__(self, k: int, features: tuple[str, ...], seed: int):
-        self.k = k
-        self.features = list(features)
-        self.rng = np.random.default_rng(seed)
-        self.pool: pd.DataFrame | None = None
-        self.counts = np.zeros(2, dtype=np.int64)
-
-    def add(self, df: pd.DataFrame) -> None:
-        if df.empty:
-            return
-        self.counts += np.bincount(df["label"].to_numpy(dtype=np.int64), minlength=2)[:2]
-        tagged = df.assign(_u=self.rng.random(len(df)))
-        pool = tagged if self.pool is None else pd.concat([self.pool, tagged], ignore_index=True)
-        pool = pool.drop_duplicates(subset=[*self.features, "label"], keep="first")
-        parts = [pool[pool["label"] == c].nsmallest(self.k, "_u") for c in (0, 1)]
-        self.pool = pd.concat(parts, ignore_index=True)
-
-    def sample(self, max_rows: int, seed: int) -> pd.DataFrame:
-        if self.pool is None:
-            raise ValueError("no rows were read")
-        pool = self.pool.drop(columns="_u")
-        if len(pool) <= max_rows:
-            return pool.reset_index(drop=True)
-        total = self.counts.sum()
-        frac_attack = self.counts[1] / total if total else 0.5
-        pos = pool[pool["label"] == 1]
-        neg = pool[pool["label"] == 0]
-        n_pos = min(int(round(max_rows * frac_attack)), len(pos))
-        n_neg = min(max_rows - n_pos, len(neg))
-        n_pos = min(max_rows - n_neg, len(pos))
-        out = pd.concat(
-            [pos.sample(n=n_pos, random_state=seed), neg.sample(n=n_neg, random_state=seed)],
-            ignore_index=True,
-        )
-        return out.sample(frac=1.0, random_state=seed).reset_index(drop=True)
+def scenario_number(path: Path) -> int | None:
+    """Scenario number of a CTU-13 file name such as ``scenario42-capture20110810.binetflow``."""
+    match = re.match(r"scenario(\d+)-", Path(path).name)
+    return int(match.group(1)) if match else None
 
 
 def prepare(key: str, data_dir: Path, max_rows: int, seed: int = 0, chunk_rows: int = 200_000) -> Path:
-    """Harmonise, sample and cache one dataset as data/processed/{key}.parquet."""
+    """Harmonise, sample and cache one dataset as data/processed/{key}.parquet with a metadata json."""
     if key not in SOURCES:
         raise KeyError(f"unknown dataset {key!r}")
     paths = raw_paths(data_dir, key)
     missing = [p for p in paths if not p.exists()]
     if missing:
         raise FileNotFoundError(f"missing raw files for {key}: {[p.name for p in missing]}; run `crossids download`")
-    features = dataset_features(key)
-    res = StratifiedReservoir(max_rows, features, seed)
+    sampler = DistinctSampler(max_rows, dataset_features(key), seed)
     t0 = time.time()
     for path in paths:
         log.info("reading %s", path.name)
+        source_id = scenario_number(path)
         for chunk in iter_raw_chunks(path, key, chunk_rows):
-            res.add(harmonise(chunk, key))
-        log.info("  seen so far per label %s (%.0fs)", res.counts.tolist(), time.time() - t0)
-    table = res.sample(max_rows, seed)
+            frame, stats = harmonise_with_stats(chunk, key, source_id)
+            sampler.add(frame, stats)
+        log.info(
+            "  %s: raw=%d valid=%s dropped_nan=%s unlabelled=%d (%.0fs)",
+            path.name, sampler.rows_raw, sampler.valid, sampler.dropped_nan, sampler.unlabelled, time.time() - t0,
+        )
+    table, meta = sampler.finalize()
+    meta["dataset"] = key
+    meta["max_rows"] = int(max_rows)
+    meta["seed"] = int(seed)
     out = processed_path(data_dir, key)
     out.parent.mkdir(parents=True, exist_ok=True)
     table.to_parquet(out, index=False)
-    meta = {
-        "dataset": key,
-        "rows_valid_per_label": res.counts.tolist(),
-        "rows_cached": int(len(table)),
-        "attack_fraction_full": float(res.counts[1] / max(res.counts.sum(), 1)),
-        "attack_fraction_cached": float(table["label"].mean()) if len(table) else float("nan"),
-    }
     out.with_suffix(".json").write_text(json.dumps(meta, indent=2))
-    log.info("cached %s: %d rows", out, len(table))
+    log.info(
+        "cached %s: %d rows, prior_distinct=%.4f, prior_cached=%.4f, distinct=%s, dropped_nan=%s, unlabelled=%d",
+        key, meta["rows_cached"], meta["prior_distinct"], meta["prior_cached"],
+        {k: round(v) for k, v in meta["distinct_est_per_label"].items()},
+        meta["dropped_nan_per_label"], meta["unlabelled_dropped"],
+    )
     return out
 
 

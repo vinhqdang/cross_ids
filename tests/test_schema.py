@@ -5,7 +5,9 @@ import pandas as pd
 import pytest
 
 from crossids.schema import (
+    CICFLOW_FEATURES,
     CORE_FEATURES,
+    DATASET_TIERS,
     EXTENDED_FEATURES,
     MINIMAL_FEATURES,
     SOURCES,
@@ -13,6 +15,7 @@ from crossids.schema import (
     dataset_features,
     features_for,
     harmonise,
+    harmonise_with_stats,
     supports,
 )
 
@@ -163,12 +166,30 @@ def test_derived_minimal_and_core_values():
 def test_tiers_and_support():
     assert len(MINIMAL_FEATURES) == 9
     assert len(CORE_FEATURES) == 13
-    assert len(EXTENDED_FEATURES) == 17
+    assert len(EXTENDED_FEATURES) == 15
+    assert len(CICFLOW_FEATURES) == 17
     assert features_for("core") == CORE_FEATURES
     assert supports("ctu13", "minimal") and not supports("ctu13", "core")
     assert set(dataset_features("ctu13")) == set(MINIMAL_FEATURES)
     assert set(CORE_FEATURES) <= set(dataset_features("cicids2017"))
     assert not supports("toniot", "extended")
+    assert not supports("unswnb15", "cicflow") and supports("unswnb15", "extended")
+    assert set(EXTENDED_FEATURES) - set(CORE_FEATURES) == {"fwd_iat_mean", "bwd_iat_mean"}
+    assert set(CICFLOW_FEATURES) - set(EXTENDED_FEATURES) == {"fwd_init_win", "bwd_init_win"}
+
+
+def test_dataset_tier_counts_match_the_design():
+    tiers = {k: set(v) for k, v in DATASET_TIERS.items()}
+    assert len(tiers) == 8
+    assert sum("minimal" in t for t in tiers.values()) == 8
+    assert sum("core" in t for t in tiers.values()) == 7
+    assert sorted(k for k, t in tiers.items() if "extended" in t) == [
+        "cicids2017", "cicids2018", "insdn", "unswnb15", "usbids1",
+    ]
+    assert sorted(k for k, t in tiers.items() if "cicflow" in t) == [
+        "cicids2017", "cicids2018", "insdn", "usbids1",
+    ]
+    assert DATASET_TIERS["ctu13"] == ("minimal",)
     with pytest.raises(ValueError):
         features_for("bogus")
 
@@ -177,3 +198,47 @@ def test_missing_required_column_raises():
     frame = pd.DataFrame({"Flow Duration": [1.0], "Label": ["BENIGN"]})
     with pytest.raises(KeyError):
         harmonise(frame, "cicids2017")
+
+
+def test_ctu13_attack_type_is_normal_or_scenario_botnet():
+    frame = pd.DataFrame(
+        {
+            "Dur": [2.0, 2.0, 2.0],
+            "TotPkts": [4, 4, 4],
+            "SrcBytes": [100, 100, 10],
+            "TotBytes": [150, 150, 30],
+            "Label": ["flow=From-Botnet-V42-TCP", "flow=From-Normal-V42-Jist", "flow=Background-UDP"],
+        }
+    )
+    out, stats = harmonise_with_stats(frame, "ctu13", source_id=42)
+    assert list(out["attack_type"]) == ["botnet-s42", "normal"]
+    assert stats["unlabelled"] == 1
+
+
+def test_missing_and_empty_labels_are_dropped_not_mapped_to_attack():
+    frame = _cic_frame("cicids2017", ["BENIGN", "DDoS", "DDoS", "BENIGN"])
+    frame.loc[1, "Label"] = None
+    frame.loc[2, "Label"] = "   "
+    out, stats = harmonise_with_stats(frame, "cicids2017")
+    assert list(out["label"]) == [0, 0]
+    assert stats["unlabelled"] == 2
+    assert stats["valid"] == {0: 2, 1: 0}
+
+
+def test_zeek_empty_placeholder_is_treated_like_a_dash():
+    frame = pd.DataFrame(
+        {
+            "duration": ["(empty)", "2.0"],
+            "src_pkts": [1, 1],
+            "dst_pkts": [1, 1],
+            "src_bytes": ["(empty)", "100"],
+            "dst_bytes": ["-", "50"],
+            "label": [0, 1],
+            "type": ["normal", "dos"],
+        }
+    )
+    out = harmonise(frame, "toniot")
+    assert np.isclose(np.expm1(out["duration"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["fwd_bytes"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["bwd_bytes"].iloc[0]), 0.0)
+    assert list(out["label"]) == [0, 1]

@@ -1,9 +1,11 @@
 # Quick CatBoost: cic17+cic18__to__usb+insdn__cic
 
+> **Note on sampling.** Rows are water-filled per attack type (each attack type is drawn up to a common budget, with a per-label floor), so the attack prior in these samples is not the natural prior of any dataset. The numbers are exploratory and are not benchmark results. The benchmark (DESIGN.md §2) samples distinct rows and keeps natural priors.
+
 - Train datasets: cicids2017, cicids2018
 - Test datasets: usbids1, insdn
 - Feature mode: `cic` (76 features)
-- Sampling: at most 100000 rows per dataset, stratified by original label, seed 0
+- Sampling: at most 100000 rows per dataset, water-filled per attack type (floor 1000 per label), seed 0
 - Cleaning: inf replaced by NaN, NaN rows dropped on model features, duplicates dropped
 - Model: CatBoostClassifier(iterations=500, depth=6, auto_class_weights='Balanced', random_seed=0); early stopping on a 10% slice of pooled 70% splits; best iteration 469; threshold 0.5
 - Training rows: 125955 fit, 13996 early-stopping; fit time 15.2 s; total runtime 370.0 s

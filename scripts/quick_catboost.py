@@ -35,6 +35,12 @@ SAMPLE_MAX = 100_000
 CHUNK = 500_000
 MIN_PER_LABEL = 1_000
 SEED = 0
+SAMPLING_NOTE = (
+    "> **Note on sampling.** Rows are water-filled per attack type (each attack type is drawn up to a common "
+    "budget, with a per-label floor), so the attack prior in these samples is not the natural prior of any "
+    "dataset. The numbers are exploratory and are not benchmark results. The benchmark (DESIGN.md §2) samples "
+    "distinct rows and keeps natural priors."
+)
 
 SHORT = {
     "cicids2017": "cic17",
@@ -492,7 +498,8 @@ def main():
     L.append(f"- Train datasets: {', '.join(train)}")
     L.append(f"- Test datasets: {', '.join(test)}")
     L.append(f"- Feature mode: `{mode}` ({len(feats)} features)")
-    L.append(f"- Sampling: at most {SAMPLE_MAX} rows per dataset, stratified by original label, seed {SEED}")
+    L.append(f"- Sampling: at most {SAMPLE_MAX} rows per dataset, water-filled per attack type "
+             f"(floor {MIN_PER_LABEL} per label), seed {SEED}")
     L.append("- Cleaning: inf replaced by NaN, NaN rows dropped on model features, duplicates dropped")
     L.append("- Model: CatBoostClassifier(iterations=500, depth=6, auto_class_weights='Balanced', "
              f"random_seed=0); early stopping on a 10% slice of pooled 70% splits; best iteration "
@@ -539,6 +546,8 @@ def main():
     L.append("")
     L.append(md(imp_df))
     L.append("")
+    L.insert(1, "")
+    L.insert(2, SAMPLING_NOTE)
     report = "\n".join(L)
 
     (OUT / f"{run_name}.md").write_text(report, encoding="utf-8")

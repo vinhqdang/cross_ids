@@ -1,8 +1,10 @@
-"""Experiment protocols (in-domain, pairwise, LODO), resumable runs and result files."""
+"""Experiment protocols (in-domain, pairwise, LODO, few-shot), resumable runs and result files."""
 
 from __future__ import annotations
 
 import copy
+import hashlib
+import json
 import logging
 import math
 import time
@@ -17,14 +19,16 @@ from sklearn.model_selection import train_test_split
 from threadpoolctl import threadpool_limits
 
 from .datasets import DatasetInfo, load_processed, real_info, synthetic_info, synthetic_tables
+from .fewshot import fewshot_scores, shift_score
 from .methods import METHOD_NAMES, make_method
 from .methods.base import Domain, MethodUnavailable
 from .metrics import METRIC_NAMES, evaluate, per_attack_recall
-from .schema import SOURCES, features_for, supports
+from .schema import ALL_TIERS, SOURCES, features_for, supports
 
 log = logging.getLogger("crossids")
 
-EXPERIMENT_NAMES = ("indomain", "pairwise", "lodo")
+EXPERIMENT_NAMES = ("indomain", "pairwise", "lodo", "fewshot")
+MODE_NAMES = ("transductive", "inductive")
 
 DEFAULT_CONFIG: dict = {
     "source": "real",
@@ -33,16 +37,21 @@ DEFAULT_CONFIG: dict = {
     "seeds": [0, 1, 2],
     "schema": "core",
     "test_size": 0.3,
-    "transductive": True,
+    "modes": list(MODE_NAMES),
     "methods": list(METHOD_NAMES),
     "experiments": list(EXPERIMENT_NAMES),
+    "fewshot_k": [0.1, 1, 5],
+    "device": "cpu",
+    "threads": None,
     "data_dir": "data",
     "results_dir": "results",
     "synthetic": {"n_domains": 3, "n": 4000, "seed": 0},
-    "threads": None,
 }
 
 RUN_COLUMNS = [
+    "config_hash",
+    "schema",
+    "mode",
     "method",
     "experiment",
     "scenario",
@@ -50,8 +59,6 @@ RUN_COLUMNS = [
     "sources",
     "target",
     "seed",
-    "schema",
-    "transductive",
     "pool",
     "n_train",
     "n_test",
@@ -59,15 +66,26 @@ RUN_COLUMNS = [
     *METRIC_NAMES,
     "true_prior",
     "est_prior",
+    "prior_abs_error",
     "n_features",
+    "anchor_purity",
+    "shift_score",
+    "fewshot_k",
     "fit_seconds",
     "predict_seconds",
 ]
-PER_ATTACK_COLUMNS = ["method", "experiment", "scenario", "seed", "attack_type", "n", "detected", "recall"]
+PER_ATTACK_COLUMNS = ["config_hash", "schema", "mode", "method", "experiment", "scenario", "seed", "attack_type", "n", "detected", "recall"]
+RESULT_RESUME_COLUMNS = ("schema", "mode", "method", "experiment", "scenario", "seed")
+
+
+def config_hash(cfg: dict) -> str:
+    """Stable hash of the experiment-relevant configuration."""
+    relevant = {k: v for k, v in cfg.items() if k not in ("results_dir", "data_dir")}
+    return hashlib.sha1(json.dumps(relevant, sort_keys=True, default=str).encode()).hexdigest()[:12]
 
 
 def load_config(path: str | Path, overrides: dict | None = None) -> dict:
-    """Read a YAML config and merge it over the defaults."""
+    """Read a YAML config, merge it over the defaults, apply overrides and validate."""
     with open(path, encoding="utf-8") as fh:
         user = yaml.safe_load(fh) or {}
     cfg = copy.deepcopy(DEFAULT_CONFIG)
@@ -81,14 +99,19 @@ def load_config(path: str | Path, overrides: dict | None = None) -> dict:
     unknown = [e for e in cfg["experiments"] if e not in EXPERIMENT_NAMES]
     if unknown:
         raise ValueError(f"unknown experiments in config: {unknown}")
-    if cfg["schema"] not in ("minimal", "core", "extended"):
+    unknown = [m for m in cfg["modes"] if m not in MODE_NAMES]
+    if unknown:
+        raise ValueError(f"unknown modes in config: {unknown}")
+    if cfg["schema"] not in ALL_TIERS:
         raise ValueError(f"unknown schema {cfg['schema']!r}")
+    if cfg["device"] not in ("cpu", "cuda"):
+        raise ValueError(f"unknown device {cfg['device']!r}")
     return cfg
 
 
 @dataclass(frozen=True)
 class Scenario:
-    """One train/target configuration of an experiment."""
+    """One source/target configuration of an experiment."""
 
     experiment: str
     name: str
@@ -107,38 +130,34 @@ def transfer_type(a: DatasetInfo, b: DatasetInfo) -> str:
 
 
 def load_tables(cfg: dict, data_dir: Path, datasets: list[str] | None = None) -> tuple[dict, dict[str, DatasetInfo]]:
-    """Return the harmonised tables and metadata of the datasets that support the configured schema."""
+    """Harmonised tables and metadata of the datasets that support the configured schema."""
     tier = cfg["schema"]
+    if cfg["source"] == "synthetic":
+        tables = synthetic_tables(**cfg["synthetic"])
+        return tables, synthetic_info(list(tables))
     tables: dict[str, pd.DataFrame] = {}
     infos: dict[str, DatasetInfo] = {}
-    if cfg["source"] == "synthetic":
-        params = cfg["synthetic"]
-        tables = synthetic_tables(**params)
-        infos = synthetic_info(list(tables))
-        return tables, infos
     for key in datasets or cfg["datasets"]:
-        info = real_info(key)
         if not supports(key, tier):
             log.info("skipping %s: does not support schema %s", key, tier)
             continue
         tables[key] = load_processed(key, data_dir)
-        infos[key] = info
+        infos[key] = real_info(key)
     return tables, infos
 
 
 def build_scenarios(experiments: list[str], keys: list[str], infos: dict[str, DatasetInfo]) -> list[Scenario]:
-    """Enumerate the in-domain, pairwise and LODO scenarios over the available datasets."""
+    """Enumerate in-domain, pairwise and LODO scenarios over the available datasets."""
     scenarios: list[Scenario] = []
     for exp in experiments:
         if exp == "indomain":
-            for k in keys:
-                scenarios.append(Scenario("indomain", k, (k,), k, "in-domain"))
-        elif exp == "pairwise":
+            scenarios += [Scenario("indomain", k, (k,), k, "in-domain") for k in keys]
+        elif exp in ("pairwise", "fewshot"):
             for a in keys:
                 for b in keys:
                     if a != b:
                         tt = transfer_type(infos[a], infos[b])
-                        scenarios.append(Scenario("pairwise", f"{a}->{b}", (a,), b, tt))
+                        scenarios.append(Scenario(exp, f"{a}->{b}", (a,), b, tt))
         elif exp == "lodo":
             for b in keys:
                 others = tuple(k for k in keys if k != b)
@@ -150,25 +169,38 @@ def build_scenarios(experiments: list[str], keys: list[str], infos: dict[str, Da
 
 
 def split_tables(tables: dict[str, pd.DataFrame], test_size: float, seed: int) -> dict[str, tuple[pd.DataFrame, pd.DataFrame]]:
-    """Stratified train/test split of every table."""
+    """Stratified train/test split of every table (plain random split when a class is too small)."""
     out: dict[str, tuple[pd.DataFrame, pd.DataFrame]] = {}
     for key, frame in tables.items():
-        train, test = train_test_split(frame, test_size=test_size, stratify=frame["label"], random_state=seed)
+        counts = frame["label"].value_counts()
+        stratify = frame["label"] if len(counts) == 2 and counts.min() >= 2 else None
+        train, test = train_test_split(frame, test_size=test_size, stratify=stratify, random_state=seed)
         out[key] = (train.reset_index(drop=True), test.reset_index(drop=True))
     return out
 
 
-def _done_keys(path: Path) -> set[tuple[str, str, str, int]]:
-    if not path.exists():
+def _check_header(path: Path, columns: list[str]) -> None:
+    if not path.exists() or path.stat().st_size == 0:
+        return
+    with open(path, encoding="utf-8") as fh:
+        header = fh.readline().strip().split(",")
+    if header != columns:
+        raise ValueError(
+            f"{path} has a different header than this version of crossids; move or delete it, "
+            "or choose another results_dir"
+        )
+
+
+def _done_keys(path: Path) -> set[tuple]:
+    if not path.exists() or path.stat().st_size == 0:
         return set()
-    frame = pd.read_csv(path, usecols=["method", "experiment", "scenario", "seed"])
-    return {(str(r.method), str(r.experiment), str(r.scenario), int(r.seed)) for r in frame.itertuples()}
+    frame = pd.read_csv(path, usecols=list(RESULT_RESUME_COLUMNS), dtype=str)
+    return {tuple(str(v) for v in row) for row in frame.itertuples(index=False)}
 
 
 def _append(path: Path, rows: list[dict], columns: list[str]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    frame = pd.DataFrame(rows, columns=columns)
-    frame.to_csv(path, mode="a", header=not path.exists(), index=False)
+    pd.DataFrame(rows, columns=columns).to_csv(path, mode="a", header=not path.exists(), index=False)
 
 
 def _domain(key: str, frame: pd.DataFrame, features: list[str]) -> Domain:
@@ -176,12 +208,8 @@ def _domain(key: str, frame: pd.DataFrame, features: list[str]) -> Domain:
     return Domain(name=key, X=frame[features].to_numpy(dtype=np.float64), y=frame["label"].to_numpy(), meta=meta)
 
 
-def run_experiments(
-    cfg: dict,
-    data_dir: Path | None = None,
-    results_dir: Path | None = None,
-) -> Path:
-    """Run every (method, scenario, seed) combination not yet present in runs.csv and append the results.
+def run_experiments(cfg: dict, data_dir: Path | None = None, results_dir: Path | None = None) -> Path:
+    """Run every missing (schema, mode, method, experiment, scenario, seed) row and append the results.
 
     ``cfg["threads"]`` optionally caps the BLAS and OpenMP thread pools (None uses all cores).
     """
@@ -195,75 +223,86 @@ def _run_all(cfg: dict, data_dir: Path | None, results_dir: Path | None) -> Path
     results_dir = Path(results_dir or cfg["results_dir"])
     runs_path = results_dir / "runs.csv"
     attack_path = results_dir / "per_attack.csv"
+    _check_header(runs_path, RUN_COLUMNS)
+    _check_header(attack_path, PER_ATTACK_COLUMNS)
     tier = cfg["schema"]
     features = list(features_for(tier))
+    chash = config_hash(cfg)
 
     tables, infos = load_tables(cfg, data_dir)
     keys = list(tables)
     if not keys:
-        raise ValueError("no datasets available for this schema")
-    log.info("datasets (%s schema, %d features): %s", tier, len(features), ", ".join(keys))
-    scenarios = build_scenarios(cfg["experiments"], keys, infos)
-    done = _done_keys(runs_path)
-    usable_methods: list[str] = []
+        raise ValueError(f"no datasets support schema {tier!r}")
+    log.info("datasets (%s schema, %d features): %s  [config %s]", tier, len(features), ", ".join(keys), chash)
+    experiments = [e for e in cfg["experiments"] if e != "fewshot"]
+    scenarios = build_scenarios(experiments, keys, infos)
+    fewshot = build_scenarios(["fewshot"], keys, infos) if "fewshot" in cfg["experiments"] else []
+
+    usable: list[str] = []
     for name in cfg["methods"]:
         try:
-            make_method(name, 0)
-            usable_methods.append(name)
+            make_method(name, 0, cfg["threads"], cfg["device"])
+            usable.append(name)
         except MethodUnavailable as exc:
             log.warning("skipping method %s: %s", name, exc)
-    total = len(cfg["seeds"]) * len(scenarios) * len(usable_methods)
-    log.info("%d scenarios x %d methods x %d seeds = %d runs", len(scenarios), len(usable_methods), len(cfg["seeds"]), total)
+
+    done = _done_keys(runs_path)
+    seeds = list(cfg["seeds"])
+    n_main = len(seeds) * len(cfg["modes"]) * len(scenarios) * len(usable)
+    n_few = len(seeds) * len(fewshot) * len(cfg["fewshot_k"])
+    total = n_main + n_few
+    log.info("%d runs planned (%d main, %d few-shot)", total, n_main, n_few)
 
     counter = 0
-    for seed in cfg["seeds"]:
+    for seed in seeds:
         splits = split_tables(tables, cfg["test_size"], seed)
-        for sc in scenarios:
-            for name in usable_methods:
-                counter += 1
-                key = (name, sc.experiment, sc.name, int(seed))
-                if key in done:
-                    log.info("[%d/%d] skip (done) %s %s %s seed=%d", counter, total, name, sc.experiment, sc.name, seed)
-                    continue
-                row, attack_rows = _run_one(name, sc, seed, splits, features, tier, cfg["transductive"])
+        for mode in cfg["modes"]:
+            for sc in scenarios:
+                for name in usable:
+                    counter += 1
+                    key = (tier, mode, name, sc.experiment, sc.name, str(seed))
+                    if key in done:
+                        log.info("[%d/%d] skip (done) %s %s %s %s seed=%d", counter, total, mode, name, sc.experiment, sc.name, seed)
+                        continue
+                    method = make_method(name, seed, cfg["threads"], cfg["device"])
+                    if mode == "inductive" and not method.supports_inductive:
+                        continue
+                    row, attack_rows = _run_one(name, sc, seed, splits, features, tier, mode, chash, cfg)
+                    _append(attack_path, attack_rows, PER_ATTACK_COLUMNS)
+                    _append(runs_path, [row], RUN_COLUMNS)
+                    done.add(key)
+                    log.info(
+                        "[%d/%d] %s %s %s %s seed=%d roc_auc=%.4f bal_acc=%.4f fit=%.1fs",
+                        counter, total, mode, name, sc.experiment, sc.name, seed,
+                        row["roc_auc"], row["balanced_accuracy"], row["fit_seconds"],
+                    )
+        for sc in fewshot:
+            counter += len(cfg["fewshot_k"])
+            pending = [k for k in cfg["fewshot_k"]
+                       if (tier, "fewshot", f"fewshot-catboost@{k}", "fewshot", sc.name, str(seed)) not in done]
+            if not pending:
+                log.info("skip (done) few-shot %s seed=%d", sc.name, seed)
+                continue
+            rows, attack_rows = _run_fewshot(sc, seed, splits, features, chash, cfg, pending)
+            for row, arows in zip(rows, attack_rows):
+                _append(attack_path, arows, PER_ATTACK_COLUMNS)
                 _append(runs_path, [row], RUN_COLUMNS)
-                _append(attack_path, attack_rows, PER_ATTACK_COLUMNS)
-                done.add(key)
-                log.info(
-                    "[%d/%d] %s %s %s seed=%d roc_auc=%.4f bal_acc=%.4f fit=%.1fs",
-                    counter, total, name, sc.experiment, sc.name, seed,
-                    row["roc_auc"], row["balanced_accuracy"], row["fit_seconds"],
-                )
+                done.add((tier, "fewshot", row["method"], "fewshot", sc.name, str(seed)))
+                log.info("few-shot %s k=%s seed=%d roc_auc=%.4f bal_acc=%.4f",
+                         sc.name, row["fewshot_k"], seed, row["roc_auc"], row["balanced_accuracy"])
     log.info("results written to %s", runs_path)
     return runs_path
 
 
-def _run_one(
-    name: str,
-    sc: Scenario,
-    seed: int,
-    splits: dict[str, tuple[pd.DataFrame, pd.DataFrame]],
-    features: list[str],
-    tier: str,
-    transductive: bool,
-) -> tuple[dict, list[dict]]:
-    """Fit one method on one scenario and evaluate it on the target test split."""
-    method = make_method(name, seed)
-    sources = [_domain(s, splits[s][0], features) for s in sc.sources]
-    target_train, target_test = splits[sc.target]
-    use_pool = transductive and method.transductive and sc.experiment != "indomain"
-    pool = target_train[features].to_numpy(dtype=np.float64) if use_pool else None
-    t0 = time.perf_counter()
-    method.fit(sources, pool)
-    fit_seconds = time.perf_counter() - t0
-    X_test = target_test[features].to_numpy(dtype=np.float64)
-    t1 = time.perf_counter()
-    proba = method.predict_proba(X_test)
-    predict_seconds = time.perf_counter() - t1
-    y_test = target_test["label"].to_numpy().astype(int)
-    pred = (proba >= 0.5).astype(int)
-    metrics = evaluate(y_test, proba, pred)
+def _finish_row(base: dict, y_test: np.ndarray, scores: np.ndarray, pred: np.ndarray, attack_type: np.ndarray,
+                fit_seconds: float, predict_seconds: float, sc: Scenario, seed: int, mode: str, name: str,
+                chash: str, tier: str, n_train: int, pool: bool) -> tuple[dict, list[dict]]:
+    metrics = evaluate(y_test, scores, pred)
+    true_prior = float(y_test.mean())
     row = {
+        "config_hash": chash,
+        "schema": tier,
+        "mode": mode,
         "method": name,
         "experiment": sc.experiment,
         "scenario": sc.name,
@@ -271,22 +310,22 @@ def _run_one(
         "sources": "+".join(sc.sources),
         "target": sc.target,
         "seed": seed,
-        "schema": tier,
-        "transductive": bool(transductive and method.transductive),
-        "pool": pool is not None,
-        "n_train": int(sum(len(s.y) for s in sources)),
+        "pool": pool,
+        "n_train": n_train,
         "n_test": int(len(y_test)),
-        "attack_fraction_test": float(y_test.mean()),
+        "attack_fraction_test": true_prior,
         **metrics,
-        "true_prior": float(y_test.mean()),
-        "est_prior": float(method.info.get("pi_t", math.nan)),
-        "n_features": float(method.info.get("n_features", len(features))),
+        "true_prior": true_prior,
         "fit_seconds": round(fit_seconds, 3),
         "predict_seconds": round(predict_seconds, 3),
+        **base,
     }
-    per_attack = per_attack_recall(y_test, pred, target_test["attack_type"].to_numpy())
+    per_attack = per_attack_recall(y_test, pred, attack_type)
     attack_rows = [
         {
+            "config_hash": chash,
+            "schema": tier,
+            "mode": mode,
             "method": name,
             "experiment": sc.experiment,
             "scenario": sc.name,
@@ -299,3 +338,71 @@ def _run_one(
         for r in per_attack.itertuples()
     ]
     return row, attack_rows
+
+
+def _blank_base() -> dict:
+    return {"est_prior": math.nan, "prior_abs_error": math.nan, "n_features": math.nan,
+            "anchor_purity": math.nan, "shift_score": math.nan, "fewshot_k": math.nan}
+
+
+def _run_one(name: str, sc: Scenario, seed: int, splits: dict, features: list[str], tier: str, mode: str,
+             chash: str, cfg: dict) -> tuple[dict, list[dict]]:
+    """Fit one method on one scenario and evaluate it on the target test split."""
+    method = make_method(name, seed, cfg["threads"], cfg["device"])
+    sources = [_domain(s, splits[s][0], features) for s in sc.sources]
+    target_train, target_test = splits[sc.target]
+    use_pool = mode == "transductive" and method.transductive and sc.experiment != "indomain"
+    pool = target_train[features].to_numpy(dtype=np.float64) if use_pool else None
+    t0 = time.perf_counter()
+    method.fit(sources, pool)
+    fit_seconds = time.perf_counter() - t0
+    X_test = target_test[features].to_numpy(dtype=np.float64)
+    t1 = time.perf_counter()
+    scores = method.decision_scores(X_test)
+    pred = method.predict(X_test)
+    predict_seconds = time.perf_counter() - t1
+    y_test = target_test["label"].to_numpy().astype(int)
+    base = _blank_base()
+    base["n_features"] = float(method.info.get("n_features", len(features)))
+    base["est_prior"] = float(method.info.get("pi_t", math.nan))
+    if np.isfinite(base["est_prior"]):
+        base["prior_abs_error"] = abs(base["est_prior"] - float(y_test.mean()))
+    anchor = getattr(method, "anchor_idx_", None)
+    if anchor is not None and pool is not None:
+        y_pool = target_train["label"].to_numpy().astype(int)
+        base["anchor_purity"] = float(np.mean(y_pool[anchor] == 0))
+    return _finish_row(base, y_test, scores, pred, target_test["attack_type"].to_numpy(), fit_seconds,
+                       predict_seconds, sc, seed, mode, name, chash, tier, sum(len(s.y) for s in sources),
+                       pool is not None)
+
+
+def _run_fewshot(sc: Scenario, seed: int, splits: dict, features: list[str], chash: str, cfg: dict,
+                 ks: list[float]) -> tuple[list[dict], list[list[dict]]]:
+    """Few-shot reference rows: one per labelled budget k, with the shift score of the target pool."""
+    sources = [_domain(s, splits[s][0], features) for s in sc.sources]
+    target_train, target_test = splits[sc.target]
+    source_X = np.vstack([s.X for s in sources])
+    pool = target_train[features].to_numpy(dtype=np.float64)
+    shift = shift_score(source_X, pool, seed)
+    X_lab = pool
+    y_lab = target_train["label"].to_numpy().astype(int)
+    X_test = target_test[features].to_numpy(dtype=np.float64)
+    y_test = target_test["label"].to_numpy().astype(int)
+    t0 = time.perf_counter()
+    scores_by_k = fewshot_scores(sources, (X_lab, y_lab), X_test, ks, seed, cfg["threads"], cfg["device"])
+    elapsed = (time.perf_counter() - t0) / max(len(ks), 1)
+    rows, attack_rows = [], []
+    for k in ks:
+        scores = scores_by_k[k]
+        pred = (scores >= 0.5).astype(int)
+        base = _blank_base()
+        base["shift_score"] = shift
+        base["fewshot_k"] = float(k)
+        base["n_features"] = float(len(features))
+        base["est_prior"] = math.nan
+        row, arows = _finish_row(base, y_test, scores, pred, target_test["attack_type"].to_numpy(), elapsed, 0.0,
+                                 sc, seed, "fewshot", f"fewshot-catboost@{k}", chash, cfg["schema"],
+                                 sum(len(s.y) for s in sources), True)
+        rows.append(row)
+        attack_rows.append(arows)
+    return rows, attack_rows

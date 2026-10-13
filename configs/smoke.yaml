@@ -2,19 +2,22 @@
 source: synthetic
 synthetic:
   n_domains: 3
-  n: 800
+  n: 600
   seed: 0
 schema: core
 seeds: [0]
 test_size: 0.3
-transductive: true
-results_dir: results/smoke
+modes: [transductive, inductive]
+device: cpu
 threads: 1
+fewshot_k: [1, 5]
+results_dir: results/smoke
 methods:
   - lr
   - rf
   - hgb
   - catboost
+  - xgboost
   - mlp
   - coral
   - dann
@@ -25,4 +28,5 @@ methods:
   - rift-noLSC
   - rift-robust
   - rift-standard
-experiments: [indomain, pairwise, lodo]
+  - rift-st
+experiments: [indomain, pairwise, lodo, fewshot]

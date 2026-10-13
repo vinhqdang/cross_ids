@@ -15,11 +15,14 @@ from sklearn.metrics import (
 METRIC_NAMES = ("roc_auc", "pr_auc", "f1", "balanced_accuracy", "mcc", "detection_rate", "fpr")
 
 
-def evaluate(y: np.ndarray, proba: np.ndarray, pred: np.ndarray) -> dict[str, float]:
-    """Threshold-free and threshold-based detection metrics."""
+def evaluate(y: np.ndarray, scores: np.ndarray, pred: np.ndarray) -> dict[str, float]:
+    """Ranking metrics on ``scores`` and threshold metrics on the hard decisions ``pred``.
+
+    With a single-class target, ROC-AUC, PR-AUC, balanced accuracy and MCC are NaN.
+    """
     y = np.asarray(y).astype(int)
     pred = np.asarray(pred).astype(int)
-    proba = np.asarray(proba, dtype=np.float64)
+    proba = np.asarray(scores, dtype=np.float64)
     has_both = 0 < y.sum() < y.size
     tn = int(np.sum((y == 0) & (pred == 0)))
     fp = int(np.sum((y == 0) & (pred == 1)))
@@ -30,7 +33,7 @@ def evaluate(y: np.ndarray, proba: np.ndarray, pred: np.ndarray) -> dict[str, fl
         "pr_auc": float(average_precision_score(y, proba)) if has_both else float("nan"),
         "f1": float(f1_score(y, pred, zero_division=0)),
         "balanced_accuracy": float(balanced_accuracy_score(y, pred)) if has_both else float("nan"),
-        "mcc": float(matthews_corrcoef(y, pred)) if has_both else 0.0,
+        "mcc": float(matthews_corrcoef(y, pred)) if has_both else float("nan"),
         "detection_rate": tp / (tp + fn) if (tp + fn) else float("nan"),
         "fpr": fp / (fp + tn) if (fp + tn) else float("nan"),
     }

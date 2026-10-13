@@ -34,10 +34,16 @@ def pool_sources(sources: Sequence[Domain]) -> tuple[np.ndarray, np.ndarray]:
 
 
 class Method(ABC):
-    """A cross-domain detector. Target labels are never passed to ``fit``."""
+    """A cross-domain detector. Target labels are never passed to ``fit``.
+
+    ``transductive`` marks methods that use the unlabelled target pool when one is
+    given. ``supports_inductive`` is False for methods that cannot run without a
+    pool; the runner skips them in inductive mode.
+    """
 
     name: str = "method"
     transductive: bool = False
+    supports_inductive: bool = True
 
     def __init__(self, seed: int = 0):
         self.seed = seed
@@ -51,6 +57,10 @@ class Method(ABC):
     def predict_proba(self, X: np.ndarray) -> np.ndarray:
         """Return P(attack) for the rows of ``X``."""
 
+    def decision_scores(self, X: np.ndarray) -> np.ndarray:
+        """Continuous scores used for ranking metrics (ROC-AUC, PR-AUC)."""
+        return self.predict_proba(X)
+
     def predict(self, X: np.ndarray) -> np.ndarray:
-        """Hard decision at threshold 0.5."""
+        """Hard decision at threshold 0.5 on ``predict_proba``."""
         return (self.predict_proba(X) >= 0.5).astype(int)

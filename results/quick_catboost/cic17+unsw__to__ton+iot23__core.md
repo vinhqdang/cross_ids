@@ -1,9 +1,11 @@
 # Quick CatBoost: cic17+unsw__to__ton+iot23__core
 
+> **Note on sampling.** Rows are water-filled per attack type (each attack type is drawn up to a common budget, with a per-label floor), so the attack prior in these samples is not the natural prior of any dataset. The numbers are exploratory and are not benchmark results. The benchmark (DESIGN.md §2) samples distinct rows and keeps natural priors.
+
 - Train datasets: cicids2017, unswnb15
 - Test datasets: toniot, iot23
 - Feature mode: `core` (13 features)
-- Sampling: at most 100000 rows per dataset, stratified by original label, seed 0
+- Sampling: at most 100000 rows per dataset, water-filled per attack type (floor 1000 per label), seed 0
 - Cleaning: inf replaced by NaN, NaN rows dropped on model features, duplicates dropped
 - Model: CatBoostClassifier(iterations=500, depth=6, auto_class_weights='Balanced', random_seed=0); early stopping on a 10% slice of pooled 70% splits; best iteration 499; threshold 0.5
 - Training rows: 115825 fit, 12870 early-stopping; fit time 6.8 s; total runtime 26.7 s

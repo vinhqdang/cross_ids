@@ -8,11 +8,12 @@ import zipfile
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from crossids import datasets
 from crossids.cli import main
-from crossids.datasets import real_info
-from crossids.experiment import DEFAULT_CONFIG, RUN_COLUMNS, build_scenarios, run_experiments
+from crossids.datasets import real_info, synthetic_tables
+from crossids.experiment import DEFAULT_CONFIG, RUN_COLUMNS, build_scenarios, load_config, run_experiments, split_tables
 from crossids.methods import rift as rift_module
 from crossids.report import summarise, write_report
 from crossids.schema import SPELLINGS, dataset_features, features_for
@@ -38,8 +39,8 @@ def test_runner_writes_results_and_resumes(tmp_path):
     runs_path = run_experiments(cfg, data_dir=tmp_path)
     runs = pd.read_csv(runs_path)
     assert list(runs.columns) == RUN_COLUMNS
-    # 3 in-domain + 3 LODO scenarios, 3 methods, 1 seed
-    assert len(runs) == 6 * 3
+    # 3 in-domain + 3 LODO scenarios, 3 methods, 2 modes, 1 seed
+    assert len(runs) == 6 * 3 * 2
     assert set(runs["experiment"]) == {"indomain", "lodo"}
     attack = pd.read_csv(tmp_path / "results" / "per_attack.csv")
     assert {"attack_type", "recall"} <= set(attack.columns)
@@ -62,19 +63,28 @@ def test_runner_resumes_after_partial_results(tmp_path):
     assert sorted(resumed["scenario"]) == sorted(full["scenario"])
 
 
-def test_pool_contains_only_target_features(tmp_path, monkeypatch):
+def test_pool_equals_target_train_features_and_is_disjoint_from_test(tmp_path, monkeypatch):
     seen = []
     original = rift_module.Rift.fit
 
     def spy(self, sources, target_pool=None):
-        seen.append(None if target_pool is None else np.asarray(target_pool).shape)
+        seen.append(None if target_pool is None else np.array(target_pool, copy=True))
         return original(self, sources, target_pool)
 
     monkeypatch.setattr(rift_module.Rift, "fit", spy)
-    cfg = _cfg(tmp_path, methods=["rift"], experiments=["lodo"])
+    cfg = _cfg(tmp_path, methods=["rift"], experiments=["lodo"], modes=["transductive", "inductive"])
     run_experiments(cfg, data_dir=tmp_path)
-    assert seen and all(shape is not None and len(shape) == 2 for shape in seen)
-    assert all(shape[1] == len(features_for("core")) for shape in seen)
+    features = list(features_for("core"))
+    tables = synthetic_tables(**cfg["synthetic"])
+    splits = split_tables(tables, cfg["test_size"], 0)
+    pools = [p for p in seen if p is not None]
+    assert len(pools) == 3 and sum(p is None for p in seen) == 3
+    for pool in pools:
+        matches = [k for k, (train, test) in splits.items()
+                   if pool.shape == (len(train), len(features)) and np.array_equal(pool, train[features].to_numpy(float))]
+        assert len(matches) == 1
+        test_rows = {row.tobytes() for row in splits[matches[0]][1][features].to_numpy(float)}
+        assert not any(row.tobytes() in test_rows for row in pool)
 
 
 def test_scenarios_and_transfer_types():
@@ -87,6 +97,78 @@ def test_scenarios_and_transfer_types():
     assert types["cicids2017->unswnb15"] == "cross-extractor"
     lodo = build_scenarios(["lodo"], keys, real)
     assert len(lodo) == 3 and all(s.transfer_type == "lodo" for s in lodo)
+
+
+def test_transfer_types_for_zeek_argus_and_ucd_pairs():
+    keys = ["toniot", "iot23", "unswnb15", "ctu13", "insdn", "usbids1", "cicids2018"]
+    infos = {k: real_info(k) for k in keys}
+    types = {p.name: p.transfer_type for p in build_scenarios(["pairwise"], keys, infos)}
+    assert types["toniot->unswnb15"] == "same-family"
+    assert types["toniot->iot23"] == "same-extractor"
+    assert types["iot23->toniot"] == "same-extractor"
+    assert types["iot23->insdn"] == "cross-extractor"
+    assert types["insdn->usbids1"] == "same-extractor"
+    assert types["insdn->cicids2018"] == "same-extractor"
+    assert types["ctu13->unswnb15"] == "same-extractor"
+    assert types["unswnb15->insdn"] == "cross-extractor"
+    assert types["ctu13->cicids2018"] == "cross-extractor"
+
+
+def test_resume_does_not_skip_a_different_mode_or_schema(tmp_path):
+    cfg = _cfg(tmp_path, methods=["lr"], experiments=["indomain"], modes=["transductive"])
+    runs_path = run_experiments(cfg, data_dir=tmp_path)
+    assert len(pd.read_csv(runs_path)) == 3
+    run_experiments(_cfg(tmp_path, methods=["lr"], experiments=["indomain"], modes=["inductive"]), data_dir=tmp_path)
+    runs = pd.read_csv(runs_path)
+    assert len(runs) == 6 and set(runs["mode"]) == {"transductive", "inductive"}
+    run_experiments(_cfg(tmp_path, methods=["lr"], experiments=["indomain"], modes=["inductive"], schema="minimal"),
+                    data_dir=tmp_path)
+    runs = pd.read_csv(runs_path)
+    assert len(runs) == 9 and set(runs["schema"]) == {"core", "minimal"}
+    assert runs["config_hash"].notna().all()
+
+
+def test_resume_with_a_different_header_fails_with_a_clear_message(tmp_path):
+    results = tmp_path / "results"
+    results.mkdir()
+    (results / "runs.csv").write_text("method,roc_auc\nlr,0.9\n")
+    cfg = _cfg(tmp_path, methods=["lr"], experiments=["indomain"])
+    with pytest.raises(ValueError, match="different header"):
+        run_experiments(cfg, data_dir=tmp_path)
+
+
+def test_fewshot_rows_carry_k_and_shift_score(tmp_path):
+    cfg = _cfg(tmp_path, methods=[], experiments=["fewshot"], modes=["transductive"],
+               synthetic={"n_domains": 2, "n": 300, "seed": 0}, fewshot_k=[1, 5])
+    runs_path = run_experiments(cfg, data_dir=tmp_path)
+    runs = pd.read_csv(runs_path)
+    assert len(runs) == 2 * 2
+    assert set(runs["mode"]) == {"fewshot"}
+    assert set(runs["fewshot_k"]) == {1.0, 5.0}
+    assert runs["shift_score"].notna().all()
+    assert runs["method"].str.startswith("fewshot-catboost@").all()
+
+
+def test_device_and_mode_values_are_validated(tmp_path):
+    path = tmp_path / "cfg.yaml"
+    path.write_text("device: tpu\n")
+    with pytest.raises(ValueError, match="device"):
+        load_config(path)
+    path.write_text("modes: [sideways]\n")
+    with pytest.raises(ValueError, match="modes"):
+        load_config(path)
+
+
+def test_summary_reports_prior_error_and_distinct_scenario_counts():
+    rows = []
+    for scenario, est in (("a->b", 0.30), ("a->c", 0.10)):
+        rows.append({"method": "rift", "mode": "transductive", "experiment": "pairwise", "scenario": scenario,
+                     "transfer_type": "same-family", "seed": 0, "roc_auc": 0.9, "pr_auc": 0.5, "f1": 0.5,
+                     "balanced_accuracy": 0.5, "mcc": 0.0, "detection_rate": 0.5, "fpr": 0.1,
+                     "est_prior": est, "true_prior": 0.2})
+    summary = summarise(pd.DataFrame(rows)).iloc[0]
+    assert summary["n_scenarios"] == 2
+    assert np.isclose(summary["prior_abs_error_mean"], np.mean([0.10, 0.10]))
 
 
 def test_report_summary_averages_scenarios_then_seeds():

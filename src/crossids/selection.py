@@ -36,7 +36,11 @@ def select_multi_source(
     tau: float = 0.05,
     min_features: int = 6,
 ) -> Selection:
-    """Keep features whose signed AUC strength has one sign and magnitude >= tau in every source."""
+    """Keep features whose signed AUC strength has one sign and magnitude >= tau in every source.
+
+    If fewer than ``min_features`` pass, the top-up draws only from features whose
+    sign is consistent across sources; sign-inconsistent features are never admitted.
+    """
     S = np.stack([signed_strength(Z, y) for Z, y in zip(domain_Z, domain_y)])
     abs_s = np.abs(S)
     same_sign = np.all(S > 0, axis=0) | np.all(S < 0, axis=0)
@@ -44,9 +48,11 @@ def select_multi_source(
     max_abs = np.maximum(abs_s.max(axis=0), 1e-12)
     keep_mask = same_sign & (min_abs >= tau)
     keep = np.flatnonzero(keep_mask)
-    if keep.size < min(min_features, S.shape[1]):
-        order = np.argsort(-min_abs)
-        keep = np.sort(order[: min(min_features, S.shape[1])])
+    target = min(min_features, S.shape[1])
+    if keep.size < target:
+        candidates = np.flatnonzero(same_sign)
+        ranked = candidates[np.argsort(-min_abs[candidates], kind="stable")]
+        keep = np.sort(np.union1d(keep, ranked[: target - keep.size]))
     return Selection(keep=keep, weights=min_abs / max_abs, strength=S)
 
 

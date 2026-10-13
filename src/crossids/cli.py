@@ -36,7 +36,8 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--config", required=True)
     p.add_argument("--datasets", nargs="+", choices=list(SOURCES), default=None)
     p.add_argument("--methods", nargs="+", choices=list(METHOD_NAMES), default=None)
-    p.add_argument("--experiments", nargs="+", choices=["indomain", "pairwise", "lodo"], default=None)
+    p.add_argument("--experiments", nargs="+", choices=["indomain", "pairwise", "lodo", "fewshot"], default=None)
+    p.add_argument("--modes", nargs="+", choices=["transductive", "inductive"], default=None)
     p.add_argument("--results-dir", default=None)
     _add_common(p)
 
@@ -69,6 +70,7 @@ def main(argv: list[str] | None = None) -> int:
                 "datasets": args.datasets,
                 "methods": args.methods,
                 "experiments": args.experiments,
+                "modes": args.modes,
                 "results_dir": args.results_dir,
                 "data_dir": args.data_dir,
             },

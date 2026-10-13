@@ -4,14 +4,18 @@ max_rows: 100000
 seeds: [0, 1, 2]
 schema: core
 test_size: 0.3
-transductive: true
+modes: [transductive, inductive]
 data_dir: data
 results_dir: results
+device: cpu
+threads: null
+fewshot_k: [0.1, 1, 5]
 methods:
   - lr
   - rf
   - hgb
   - catboost
+  - xgboost
   - mlp
   - coral
   - dann
@@ -22,4 +26,5 @@ methods:
   - rift-noLSC
   - rift-robust
   - rift-standard
-experiments: [indomain, pairwise, lodo]
+  - rift-st
+experiments: [indomain, pairwise, lodo, fewshot]

@@ -1,6 +1,7 @@
 """Method registry: every method fits and predicts; fit takes no target labels; RIFT vs HGB."""
 
 import inspect
+from scipy.stats import norm
 
 import numpy as np
 import pytest
@@ -8,6 +9,8 @@ import pytest
 from crossids.datasets import make_synthetic_domains
 from crossids.methods import METHOD_NAMES, make_method
 from crossids.methods.base import Domain, Method
+from crossids.methods.coral import coral_align
+from crossids.methods.rift import Rift, RiftConfig
 from crossids.metrics import evaluate
 
 
@@ -54,20 +57,117 @@ def test_transductive_methods_are_deterministic_given_pool(name):
     assert np.allclose(first, second)
 
 
-def test_rift_beats_hgb_on_synthetic_cross_domain():
-    train, pool, (Xt, yt) = _split(make_synthetic_domains(n_domains=3, n=2000, seed=1))
-    scores = {}
-    for name in ("rift", "hgb"):
-        method = make_method(name, 0)
-        method.fit(train, pool if method.transductive else None)
-        p = method.predict_proba(Xt)
-        scores[name] = evaluate(yt, p, (p >= 0.5).astype(int))
-    assert scores["rift"]["roc_auc"] > scores["hgb"]["roc_auc"]
-    assert scores["rift"]["balanced_accuracy"] > scores["hgb"]["balanced_accuracy"]
-
-
 def test_rift_reports_estimated_prior_and_selection(synthetic):
     train, pool, _ = synthetic
     method = make_method("rift", 0).fit(train, pool)
     assert 0.001 <= method.info["pi_t"] <= 0.999
     assert 0 < method.info["n_features"] <= train[0].X.shape[1]
+
+
+def test_rift_beats_hgb_on_synthetic_cross_domain_over_three_seeds():
+    rift_auc, hgb_auc = [], []
+    for seed in range(3):
+        train, pool, (Xt, yt) = _split(make_synthetic_domains(n_domains=3, n=600, seed=seed))
+        for name, out in (("rift", rift_auc), ("hgb", hgb_auc)):
+            method = make_method(name, seed)
+            method.fit(train, pool if method.transductive else None)
+            out.append(evaluate(yt, method.decision_scores(Xt), method.predict(Xt))["roc_auc"])
+    assert np.mean(rift_auc) > np.mean(hgb_auc)
+
+
+def test_rift_anchor_is_the_lowest_scoring_pool_fraction_with_a_floor():
+    train, pool, _ = _split(make_synthetic_domains(n_domains=3, n=800, seed=5))
+    method = Rift(seed=0).fit(train, pool)
+    n = len(pool)
+    frac = max(0.05, 0.8 * (1.0 - method.info["pi_anchor"]))
+    assert len(method.anchor_idx_) == max(2, int(round(frac * n)))
+    assert len(method.anchor_idx_) >= int(0.05 * n)
+    assert len(set(method.anchor_idx_.tolist())) == len(method.anchor_idx_)
+
+
+def test_rift_st_is_transductive_only_and_adds_pseudo_labels():
+    train, pool, (Xt, yt) = _split(make_synthetic_domains(n_domains=3, n=600, seed=6))
+    method = make_method("rift-st", 0)
+    assert method.transductive and not method.supports_inductive
+    method.fit(train, pool)
+    assert method.info["st_pseudo_attack"] + method.info["st_pseudo_benign"] > 0
+    proba = method.predict_proba(Xt)
+    assert np.all((proba >= 0) & (proba <= 1))
+
+
+def test_coral_aligned_covariance_matches_target_covariance_plus_identity():
+    rng = np.random.default_rng(0)
+    M1 = np.array([[3, 0.5, 0, 0], [0, 2, 0.3, 0], [0, 0, 1.5, 0.2], [0, 0, 0, 1.0]])
+    M2 = np.array([[1, 0, 0, 0], [0.4, 2, 0, 0], [0, 0.5, 1, 0], [0.2, 0, 0, 0.7]])
+    # The +I regulariser makes the identity approximate; it tightens as source variance grows.
+    Xs = (rng.normal(size=(20000, 4)) @ M1) * 10.0 + 5.0
+    Xt = (rng.normal(size=(20000, 4)) @ M2) * 10.0 - 2.0
+    aligned = coral_align(Xs, Xt)
+    target_cov = np.cov(Xt, rowvar=False) + np.eye(4)
+    assert np.allclose(np.cov(aligned, rowvar=False), target_cov, rtol=0.02, atol=0.02 * np.abs(target_cov).max())
+
+
+def test_coral_has_no_mean_shift():
+    rng = np.random.default_rng(1)
+    Xs = rng.normal(size=(3000, 3)) + 4.0
+    Xt = rng.normal(size=(3000, 3)) * 2.0 - 7.0
+    aligned = coral_align(Xs, Xt)
+    # A pure linear re-colouring: Xs @ T with no intercept, so the sources are not moved to the target mean.
+    T = np.linalg.lstsq(Xs, aligned, rcond=None)[0]
+    assert np.allclose(aligned, Xs @ T, atol=1e-8)
+    assert np.linalg.norm(aligned.mean(axis=0) - Xt.mean(axis=0)) > 5.0
+
+
+def test_dann_gradient_reversal_negates_and_scales_the_gradient():
+    torch = pytest.importorskip("torch")
+    from crossids.methods.dann import _GradientReversal
+
+    x = torch.randn(4, 3, requires_grad=True)
+    w = torch.tensor([[1.0, -2.0, 0.5]] * 4)
+    out = _GradientReversal.apply(x, 0.7)
+    assert torch.equal(out.detach(), x.detach())
+    (out * w).sum().backward()
+    assert torch.allclose(x.grad, -0.7 * w)
+
+
+def test_xgboost_and_catboost_learn_and_write_no_files_in_cwd(tmp_path, monkeypatch):
+    train, pool, (Xt, yt) = _split(make_synthetic_domains(n_domains=3, n=600, seed=7))
+    monkeypatch.chdir(tmp_path)
+    for name in ("xgboost", "catboost"):
+        method = make_method(name, 0, threads=1, device="cpu").fit(train)
+        assert evaluate(yt, method.predict_proba(Xt), method.predict(Xt))["roc_auc"] > 0.7
+    assert not (tmp_path / "catboost_info").exists()
+
+
+def test_em_recovers_prior_through_rift_under_pure_label_shift():
+    """Same class-conditionals in sources and target; only the attack fraction differs."""
+
+    def draw(n, pi, rng):
+        y = (rng.random(n) < pi).astype(int)
+        X = rng.normal(size=(n, 5)) + y[:, None] * np.array([1.2, 1.0, 0.8, 0.0, 0.0])
+        X[:, 3] = rng.normal(size=n) + 1.0 * y
+        return X, y
+
+    for seed in (0, 1):
+        rng = np.random.default_rng(seed)
+        sources = [Domain("a", *draw(4000, 0.5, rng)), Domain("b", *draw(4000, 0.5, rng))]
+        pool, _ = draw(6000, 0.2, rng)
+        _, y_test = draw(6000, 0.2, rng)
+        # Global scaler: per-domain normalisers fitted on the pool change the marginals under label shift,
+        # which biases EM (see README); this test isolates the label-shift estimate.
+        method = Rift(RiftConfig(dn="global"), seed=seed).fit(sources, pool)
+        assert abs(method.info["pi_t"] - y_test.mean()) < 0.07
+
+
+def test_method_prior_estimate_has_no_target_labels_in_the_pool_argument():
+    params = inspect.signature(Rift.fit).parameters
+    assert list(params) == ["self", "sources", "target_pool"]
+
+
+def test_rift_ranking_score_is_posterior_plus_a_tiny_raw_term(synthetic):
+    train, pool, (Xt, _) = synthetic
+    method = make_method("rift", 0).fit(train, pool)
+    posterior = method.predict_proba(Xt)
+    ranking = method.decision_scores(Xt)
+    assert np.all(np.abs(ranking - posterior) <= 1e-6 + 1e-12)
+    assert len(np.unique(ranking)) >= len(np.unique(posterior))

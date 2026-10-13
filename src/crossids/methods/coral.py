@@ -17,13 +17,13 @@ def _sym_power(C: np.ndarray, power: float) -> np.ndarray:
     return (vectors * values**power) @ vectors.T
 
 
-def coral_align(Xs: np.ndarray, Xt: np.ndarray, eps: float = 1e-3) -> np.ndarray:
-    """Whiten source covariance, re-colour with the target covariance, keep the target mean."""
+def coral_align(Xs: np.ndarray, Xt: np.ndarray) -> np.ndarray:
+    """CORAL (Sun et al., 2016): whiten with C_s + I, re-colour with C_t + I, no mean shift."""
     d = Xs.shape[1]
-    Cs = np.atleast_2d(np.cov(Xs, rowvar=False)) + eps * np.eye(d)
-    Ct = np.atleast_2d(np.cov(Xt, rowvar=False)) + eps * np.eye(d)
+    Cs = np.atleast_2d(np.cov(Xs, rowvar=False)) + np.eye(d)
+    Ct = np.atleast_2d(np.cov(Xt, rowvar=False)) + np.eye(d)
     transform = _sym_power(Cs, -0.5) @ _sym_power(Ct, 0.5)
-    return (Xs - Xs.mean(axis=0)) @ transform + Xt.mean(axis=0)
+    return Xs @ transform
 
 
 class Coral(Method):
@@ -31,6 +31,7 @@ class Coral(Method):
 
     name = "coral"
     transductive = True
+    supports_inductive = False
 
     def __init__(self, seed: int = 0):
         super().__init__(seed)
