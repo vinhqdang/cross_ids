@@ -242,3 +242,38 @@ def test_zeek_empty_placeholder_is_treated_like_a_dash():
     assert np.isclose(np.expm1(out["fwd_bytes"].iloc[0]), 0.0)
     assert np.isclose(np.expm1(out["bwd_bytes"].iloc[0]), 0.0)
     assert list(out["label"]) == [0, 1]
+
+
+def test_zeek_null_response_fields_are_zero_for_iot23_and_toniot():
+    """Parquet exports write a flow with no response as null; that means the same as Zeek '-'."""
+    frame = pd.DataFrame(
+        {
+            "duration": pd.Series([None, 2.0], dtype=object),
+            "orig_pkts": [1, 1],
+            "resp_pkts": [1, 1],
+            "orig_bytes": pd.Series([None, 100.0], dtype=object),
+            "resp_bytes": pd.Series([np.nan, 50.0]),
+            "label": ["PartOfAHorizontalPortScan", "Benign"],
+        }
+    )
+    out = harmonise(frame, "iot23")
+    assert np.isclose(np.expm1(out["duration"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["fwd_bytes"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["bwd_bytes"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["fwd_bytes"].iloc[1]), 100.0)
+    assert list(out["label"]) == [1, 0]
+    tont = pd.DataFrame(
+        {
+            "duration": [None, "2.0"],
+            "src_pkts": [1, 1],
+            "dst_pkts": [1, 1],
+            "src_bytes": [None, "100"],
+            "dst_bytes": [np.nan, "50"],
+            "label": [0, 1],
+            "type": ["normal", "dos"],
+        }
+    )
+    out = harmonise(tont, "toniot")
+    assert np.isclose(np.expm1(out["duration"].iloc[0]), 0.0)
+    assert np.isclose(np.expm1(out["bwd_bytes"].iloc[0]), 0.0)
+    assert list(out["label"]) == [0, 1]

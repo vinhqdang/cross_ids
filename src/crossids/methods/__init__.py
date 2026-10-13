@@ -19,6 +19,7 @@ RIFT_VARIANTS: dict[str, RiftConfig] = {
     "rift-robust": RiftConfig(dn="robust"),
     "rift-standard": RiftConfig(dn="standard"),
     "rift-st": RiftConfig(self_train=True),
+    "rift-poolInit": RiftConfig(prior_init="pool"),
 }
 
 Factory = Callable[[int, int | None, str], Method]

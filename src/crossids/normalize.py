@@ -84,3 +84,60 @@ class DomainNormalizer:
         if self._loc is None or self._scale is None:
             raise RuntimeError("normaliser is not fitted")
         return (Xf - self._loc) / self._scale
+
+
+def _piecewise_linear(x: np.ndarray, xs: np.ndarray, ys: np.ndarray) -> np.ndarray:
+    """Interpolate on the grid ``xs``; beyond either end, extend linearly with that end's segment slope."""
+    y = np.interp(x, xs, ys)
+    if xs.size < 2:
+        return y
+    s_lo = (ys[1] - ys[0]) / (xs[1] - xs[0])
+    s_hi = (ys[-1] - ys[-2]) / (xs[-1] - xs[-2])
+    y = np.where(x < xs[0], ys[0] + (x - xs[0]) * s_lo, y)
+    return np.where(x > xs[-1], ys[-1] + (x - xs[-1]) * s_hi, y)
+
+
+class QuantileTransport:
+    """Per-feature monotone map ``x -> F_R^{-1}(F_A(x))`` from a target anchor sample to a reference profile.
+
+    ``fit(A, R)``: ``A`` holds raw target features (the anchor set), ``R`` holds reference rows already in the
+    shared normalised space. Both empirical CDFs use ``n_quantiles`` grid points with midpoint plotting
+    positions; outside the fitted range each side extends linearly with its end slope.
+    """
+
+    def __init__(self, n_quantiles: int = 1000):
+        self.n_quantiles = n_quantiles
+        self._a: list[tuple[np.ndarray, np.ndarray]] = []
+        self._r: list[tuple[np.ndarray, np.ndarray]] = []
+
+    def _grid(self, col: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        n = col.shape[0]
+        probs = np.linspace(0.0, 1.0, self.n_quantiles)
+        sorted_col = np.sort(col)
+        grid = np.unique(np.quantile(sorted_col, probs))
+        left = np.searchsorted(sorted_col, grid, side="left") / n
+        right = np.searchsorted(sorted_col, grid, side="right") / n
+        return grid, (left + right) / 2.0
+
+    def fit(self, A: np.ndarray, R: np.ndarray) -> "QuantileTransport":
+        A = np.asarray(A, dtype=np.float64)
+        R = np.asarray(R, dtype=np.float64)
+        if A.shape[0] == 0 or R.shape[0] == 0:
+            raise ValueError("cannot fit a quantile transport on zero rows")
+        if A.shape[1] != R.shape[1]:
+            raise ValueError("anchor and reference must have the same number of features")
+        self._a = [self._grid(A[:, j]) for j in range(A.shape[1])]
+        self._r = [self._grid(R[:, j]) for j in range(R.shape[1])]
+        return self
+
+    def transform(self, X: np.ndarray) -> np.ndarray:
+        if not self._a:
+            raise RuntimeError("quantile transport is not fitted")
+        X = np.asarray(X, dtype=np.float64)
+        out = np.empty_like(X)
+        for j in range(X.shape[1]):
+            gA, mA = self._a[j]
+            gR, mR = self._r[j]
+            u = _piecewise_linear(X[:, j], gA, mA)
+            out[:, j] = _piecewise_linear(u, mR, gR)
+        return out

@@ -27,4 +27,5 @@ methods:
   - rift-robust
   - rift-standard
   - rift-st
+  - rift-poolInit
 experiments: [indomain, pairwise, lodo, fewshot]

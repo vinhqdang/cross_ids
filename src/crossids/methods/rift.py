@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
 from ..labelshift import adjust_posterior, estimate_prior
-from ..normalize import DomainNormalizer
+from ..normalize import DomainNormalizer, QuantileTransport
 from ..selection import keep_all, select_ks, select_multi_source
 from .base import Domain, Method, pool_sources
 from .baselines import make_hgb
@@ -31,6 +31,9 @@ class RiftConfig:
     n_anchor_iter: int = 2
     gamma: float = 0.8
     anchor_min_frac: float = 0.05
+    prior_init: str = "source"
+    n_quantiles: int = 1000
+    ref_max: int = 50_000
     cal_frac: float = 0.2
     self_train: bool = False
     st_frac: float = 0.2
@@ -54,12 +57,16 @@ class Rift(Method):
         self.model = None
         self.calibrator: IsotonicRegression | None = None
         self.global_scaler: StandardScaler | None = None
-        self.target_norm: DomainNormalizer | None = None
+        self.target_norm: DomainNormalizer | QuantileTransport | None = None
+        self.source_norm: DomainNormalizer | None = None
         self.anchor_idx_: np.ndarray | None = None
         self.pi_s = float("nan")
         self.pi_t: float | None = None
         self._train: tuple[np.ndarray, np.ndarray] | None = None
         self._cal: tuple[np.ndarray, np.ndarray] | None = None
+        self._reference: np.ndarray | None = None
+        if self.config.prior_init not in ("source", "pool"):
+            raise ValueError(f"unknown prior_init {self.config.prior_init!r}")
 
     def fit(self, sources: Sequence[Domain], target_pool: np.ndarray | None = None) -> "Rift":
         cfg = self.config
@@ -73,19 +80,21 @@ class Rift(Method):
         if cfg.dn == "global":
             Zp = self.global_scaler.transform(pool) if transductive else None
         else:
+            # Pooled source benign-anchored normaliser: the classifier's training space.
+            self.source_norm = DomainNormalizer(cfg.dn).fit(np.vstack(anchor_rows))
             Zp = None
             if transductive:
                 self.target_norm = DomainNormalizer(cfg.dn).fit(pool)
                 Zp = self.target_norm.transform(pool)
             else:
-                self.target_norm = DomainNormalizer(cfg.dn).fit(np.vstack(anchor_rows))
+                self.target_norm = self.source_norm
 
         self.keep = self._select(srcs, Z_list, Zp, d)
         self.info["n_features"] = float(len(self.keep))
         self._fit_classifier(Z_list, y_all)
 
         if transductive and cfg.dn != "global" and cfg.anchor == "benign":
-            self._refine_target_anchor(pool)
+            self._refine_target_anchor(pool, Z_list, y_all)
         if transductive and cfg.self_train:
             self._self_train(pool)
         if transductive and cfg.lsc:
@@ -149,20 +158,46 @@ class Rift(Method):
         raw = self.model.predict_proba(Z_cal)[:, 1]
         self.calibrator = IsotonicRegression(out_of_bounds="clip", y_min=0.0, y_max=1.0).fit(raw, y_cal)
 
-    def _refine_target_anchor(self, pool: np.ndarray) -> None:
-        """Prior-aware pseudo-benign set: the (gamma * (1 - pi_t)) lowest-scoring pool rows, at least 5%."""
+    def _reference_rows(self, Z_list: list[np.ndarray], y_all: np.ndarray) -> np.ndarray:
+        """Source benign rows (shared normalised space) whose score is at or below the gamma quantile of benign scores.
+
+        The target anchor set is benign traffic truncated at the same score quantile, so transporting it onto
+        this truncated reference matches like with like. Subsampled to ``ref_max`` rows with the fit seed.
+        """
+        cfg = self.config
+        Zs = np.vstack(Z_list)
+        ben = Zs[y_all == 0]
+        scores = self._score(ben[:, self.keep])
+        ref = ben[scores <= np.quantile(scores, cfg.gamma)]
+        if ref.shape[0] > cfg.ref_max:
+            rng = np.random.default_rng(self.seed)
+            ref = ref[rng.choice(ref.shape[0], cfg.ref_max, replace=False)]
+        return ref
+
+    def _refine_target_anchor(self, pool: np.ndarray, Z_list: list[np.ndarray], y_all: np.ndarray) -> None:
+        """Prior-aware pseudo-benign set: the (gamma * (1 - pi_t)) lowest-scoring pool rows, at least 5%.
+
+        The first prior estimate maps the pool through ``prior_init``: ``"source"`` uses the pooled source
+        benign-anchored normaliser (the space the classifier was trained in); ``"pool"`` uses a normaliser
+        fitted on all pool rows, which absorbs the label shift. Each iteration re-anchors on the target
+        benign set and replaces the target map by an anchor-matched quantile transport onto the truncated
+        source benign reference (see ``QuantileTransport``), then re-estimates the prior in that space.
+        """
         cfg = self.config
         n = pool.shape[0]
-        norm = self.target_norm
-        for _ in range(cfg.n_anchor_iter):
+        self._reference = self._reference_rows(Z_list, y_all)
+        norm = self.source_norm if cfg.prior_init == "source" else self.target_norm
+        for it in range(cfg.n_anchor_iter):
             scores = self._score(norm.transform(pool)[:, self.keep])
             pi = estimate_prior(scores, self.pi_s)
+            if it == 0:
+                self.info["pi_init"] = pi
             frac = max(cfg.anchor_min_frac, cfg.gamma * (1.0 - pi))
             m = max(2, int(round(frac * n)))
             idx = np.argsort(scores, kind="stable")[:m]
             self.anchor_idx_ = idx
             self.info["pi_anchor"] = pi
-            norm = DomainNormalizer(cfg.dn).fit(pool[idx])
+            norm = QuantileTransport(cfg.n_quantiles).fit(pool[idx], self._reference)
         self.target_norm = norm
 
     def _self_train(self, pool: np.ndarray) -> None:

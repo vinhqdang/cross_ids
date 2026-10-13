@@ -111,16 +111,36 @@ the pool is used per round, and the HGB is retrained on sources plus these rows
 for two rounds. Target labels are never used.
 
 Ablations: `rift-noDN` (global scaler), `rift-noAnchor`, `rift-noIFS`,
-`rift-noLSC`, `rift-robust`, `rift-standard`.
+`rift-noLSC`, `rift-robust`, `rift-standard`, `rift-poolInit` (first prior estimate
+from a normaliser fitted on the whole pool instead of the pooled source normaliser).
 
 ### Known limitation: label-shift estimate under per-domain normalisation
 
 EM assumes pure label shift: the class-conditional distributions are the same
 in source and target. Per-domain normalisation fitted on the target pool changes
 the feature marginals whenever the attack fraction changes, so it breaks that
-assumption. On synthetic data with identical class-conditionals and a true
-target prior of 0.2, the default RIFT estimated 0.40 to 0.45 across three seeds, while the
-`rift-noDN` variant (global scaler) estimated 0.20 to 0.21. The benchmark reports
+assumption. The default RIFT starts from the pooled source benign-anchored
+normaliser (`prior_init="source"`) and then replaces the target map by an
+anchor-matched quantile transport: the target anchor set (lowest-scoring
+`gamma * (1 - pi_t)` rows) is mapped onto the source benign rows truncated at the
+same score quantile. Measured on synthetic data with identical class-conditionals
+(6000 pool rows, three seeds, true target attack fraction about 0.20 and 0.80):
+
+| variant | true 0.20 | true 0.80 |
+| --- | --- | --- |
+| `rift` (default), final `pi_t` | 0.23 to 0.32 | 0.86 to 0.95 |
+| `rift` first estimate (`pi_init`, source normaliser) | 0.20 to 0.22 | 0.78 to 0.81 |
+| `rift-poolInit` (`prior_init="pool"`) | 0.19 to 0.26 | 0.08 to 0.18 |
+| `rift-noDN` (global scaler) | 0.20 to 0.22 | 0.78 to 0.81 |
+
+The transport halves the upward drift of the earlier fitted-normaliser version
+but does not meet the 0.07 tolerance. Diagnostics: a transport fitted on the true
+benign pool rows truncated at the same score quantile estimates 0.21 and 0.80,
+so the mapping itself is correct. The shortfall comes from the estimated anchor
+set, whose purity is 0.97 at true 0.2 and 0.80 at true 0.8, and whose cut point
+depends on the estimated prior. The default RIFT test for this check is an
+expected failure (`test_default_rift_prior_under_pure_label_shift_within_tolerance`
+in `tests/test_methods.py`) and is not loosened. The benchmark reports
 `est_prior` and `prior_abs_error` for every method, so this bias is visible in
 the results and is not hidden by the summary.
 

@@ -159,6 +159,55 @@ def test_em_recovers_prior_through_rift_under_pure_label_shift():
         assert abs(method.info["pi_t"] - y_test.mean()) < 0.07
 
 
+def _pure_label_shift(pi_t, seed):
+    """Same class-conditionals in both sources and target; only the attack fraction differs."""
+
+    def draw(n, pi, rng):
+        y = (rng.random(n) < pi).astype(int)
+        X = rng.normal(size=(n, 5)) + y[:, None] * np.array([1.2, 1.0, 0.8, 0.0, 0.0])
+        X[:, 3] = rng.normal(size=n) + 1.0 * y
+        return X, y
+
+    rng = np.random.default_rng(seed)
+    sources = [Domain("a", *draw(4000, 0.5, rng)), Domain("b", *draw(4000, 0.5, rng))]
+    pool, y_pool = draw(6000, pi_t, rng)
+    return sources, pool, float(y_pool.mean())
+
+
+def test_prior_init_is_validated_and_registered_with_the_intended_defaults():
+    from crossids.methods import METHOD_NAMES, RIFT_VARIANTS
+
+    assert RiftConfig().prior_init == "source"
+    assert RIFT_VARIANTS["rift-st"].prior_init == "source"
+    assert RIFT_VARIANTS["rift-poolInit"].prior_init == "pool"
+    assert "rift-poolInit" in METHOD_NAMES
+    with pytest.raises(ValueError):
+        Rift(RiftConfig(prior_init="other"))
+
+
+@pytest.mark.parametrize("pi_t", [0.2, 0.8])
+def test_source_initial_prior_is_accurate_under_pure_label_shift(pi_t):
+    """The first EM estimate (pool mapped through the pooled source benign-anchored normaliser)."""
+    for seed in (0, 1, 2):
+        sources, pool, truth = _pure_label_shift(pi_t, seed)
+        method = Rift(RiftConfig(prior_init="source"), seed=seed).fit(sources, pool)
+        assert abs(method.info["pi_init"] - truth) < 0.07
+
+
+@pytest.mark.xfail(
+    strict=True,
+    reason="anchor-matched transport still biased under pure label shift: anchor purity 0.97 (true 0.2) and "
+    "0.80 (true 0.8) and the cut point depend on the estimated prior; measured 0.23-0.32 at true 0.2, "
+    "0.86-0.95 at true 0.8; see README",
+)
+@pytest.mark.parametrize("pi_t", [0.2, 0.8])
+def test_default_rift_prior_under_pure_label_shift_within_tolerance(pi_t):
+    for seed in (0, 1, 2):
+        sources, pool, truth = _pure_label_shift(pi_t, seed)
+        method = Rift(seed=seed).fit(sources, pool)
+        assert abs(method.info["pi_t"] - truth) < 0.07
+
+
 def test_method_prior_estimate_has_no_target_labels_in_the_pool_argument():
     params = inspect.signature(Rift.fit).parameters
     assert list(params) == ["self", "sources", "target_pool"]

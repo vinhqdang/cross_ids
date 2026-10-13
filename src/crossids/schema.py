@@ -205,7 +205,8 @@ def _spelling_names(spec: SourceSpec) -> list[str]:
 def _numeric(series: pd.Series, dash_is_zero: bool) -> np.ndarray:
     values = series
     if dash_is_zero:
-        mask = values.astype(str).str.strip().isin(ZERO_TOKENS)
+        # Parquet exports write a missing response as null; Zeek writes it as '-' or '(empty)'. Both mean zero.
+        mask = values.isna() | values.astype(str).str.strip().isin(ZERO_TOKENS)
         values = values.astype(object).mask(mask, 0)
     return pd.to_numeric(values, errors="coerce").to_numpy(dtype="float64")
 
