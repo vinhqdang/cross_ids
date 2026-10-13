@@ -12156,3 +12156,500 @@ config_hash,schema,mode,method,experiment,scenario,seed,attack_type,n,detected,r
 012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,243,0.15637065637065636
 012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->unswnb15,0,Shellcode,257,20,0.07782101167315175
 012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->unswnb15,0,Worms,42,2,0.047619047619047616
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Analysis,112,23,0.20535714285714285
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Backdoor,96,9,0.09375
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,DoS,758,193,0.2546174142480211
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Exploits,5532,921,0.16648590021691975
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,94,0.025100133511348464
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Generic,181,22,0.12154696132596685
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,6,0.003861003861003861
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Shellcode,257,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Analysis,112,22,0.19642857142857142
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Backdoor,96,3,0.03125
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,DoS,758,125,0.16490765171503957
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Exploits,5532,555,0.10032537960954446
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,40,0.010680907877169559
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Generic,181,6,0.03314917127071823
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,56,0.036036036036036036
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Shellcode,257,7,0.027237354085603113
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Analysis,112,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Backdoor,96,2,0.020833333333333332
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,DoS,758,38,0.05013192612137203
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Exploits,5532,231,0.04175704989154013
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,12,0.0032042723631508676
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Generic,181,2,0.011049723756906077
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Shellcode,257,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Analysis,112,10,0.08928571428571429
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Backdoor,96,7,0.07291666666666667
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,DoS,758,117,0.15435356200527706
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Exploits,5532,460,0.08315256688358641
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Fuzzers,3745,72,0.01922563417890521
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Generic,181,5,0.027624309392265192
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Reconnaissance,1554,90,0.05791505791505792
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Shellcode,257,10,0.038910505836575876
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->unswnb15,0,Worms,42,0,0.0
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,backdoor,550,515,0.9363636363636364
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,ddos,3448,853,0.24738979118329466
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,dos,1549,967,0.6242737249838606
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,injection,5943,4040,0.679791351169443
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,mitm,287,52,0.18118466898954705
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,password,4432,3324,0.75
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,scanning,1210,737,0.6090909090909091
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->toniot,0,xss,2447,835,0.34123416428279524
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,backdoor,550,23,0.04181818181818182
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,ddos,3448,33,0.0095707656612529
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,dos,1549,9,0.005810200129115558
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,injection,5943,56,0.009422850412249705
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,mitm,287,3,0.010452961672473868
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,password,4432,78,0.01759927797833935
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,scanning,1210,66,0.05454545454545454
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->toniot,0,xss,2447,210,0.08581937065794851
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,ddos,3448,178,0.05162412993039443
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,dos,1549,320,0.2065848934796643
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,injection,5943,501,0.08430085815244825
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,mitm,287,40,0.13937282229965156
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,password,4432,148,0.033393501805054154
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,scanning,1210,10,0.008264462809917356
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->toniot,0,xss,2447,497,0.20310584389047814
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,backdoor,550,6,0.01090909090909091
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,ddos,3448,111,0.03219257540603248
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,dos,1549,75,0.04841833440929632
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,injection,5943,525,0.08833922261484099
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,mitm,287,20,0.06968641114982578
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,password,4432,714,0.161101083032491
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,scanning,1210,3,0.0024793388429752068
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->toniot,0,xss,2447,443,0.1810380057212914
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,backdoor,550,24,0.04363636363636364
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,ddos,3448,183,0.05307424593967518
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,dos,1549,67,0.04325371207230471
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,injection,5943,256,0.0430758875988558
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,mitm,287,34,0.11846689895470383
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,password,4432,33,0.0074458483754512635
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,scanning,1210,1,0.0008264462809917355
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->toniot,0,xss,2447,467,0.19084593379648548
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,backdoor,550,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,ddos,3448,46,0.01334106728538283
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,dos,1549,8,0.005164622336991607
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,injection,5943,102,0.017163048965169108
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,mitm,287,33,0.11498257839721254
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,password,4432,1111,0.2506768953068592
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->toniot,0,xss,2447,98,0.04004903964037597
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,backdoor,550,2,0.0036363636363636364
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,ddos,3448,21,0.006090487238979118
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,dos,1549,1,0.0006455777921239509
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,injection,5943,220,0.0370183409052667
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,mitm,287,22,0.07665505226480836
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,password,4432,22,0.004963898916967509
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,scanning,1210,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->toniot,0,xss,2447,282,0.11524315488353086
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,Attack,158,7,0.04430379746835443
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,C&C,1311,932,0.7109077040427155
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,2,0.16666666666666666
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,140,0.8536585365853658
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,C&C-Torii,5,3,0.6
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,DDoS,25,19,0.76
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,FileDownload,4,4,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,Okiru,264,51,0.19318181818181818
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,lr,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,3787,0.996578947368421
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,Attack,158,18,0.11392405063291139
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,C&C,1311,510,0.3890160183066362
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,38,0.23170731707317074
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,Okiru,264,16,0.06060606060606061
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rf,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,8,0.002105263157894737
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,Attack,158,1,0.006329113924050633
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,C&C,1311,789,0.6018306636155606
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,C&C-Torii,5,3,0.6
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,DDoS,25,9,0.36
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,Okiru,264,7,0.026515151515151516
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,Okiru-Attack,1,1,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,85,0.02236842105263158
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,Attack,158,20,0.12658227848101267
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,52,0.3170731707317073
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,DDoS,25,10,0.4
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,Okiru,264,12,0.045454545454545456
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,catboost,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,116,0.030526315789473683
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,Attack,158,22,0.13924050632911392
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,52,0.3170731707317073
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,C&C-Torii,5,3,0.6
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,DDoS,25,10,0.4
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,Okiru,264,11,0.041666666666666664
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,86,0.022631578947368423
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,C&C,1311,28,0.02135774218154081
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,C&C-Torii,5,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,Okiru,264,1,0.003787878787878788
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,mlp,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-standard,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,Attack,158,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,C&C,1311,761,0.5804729214340199
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,C&C-FileDownload,12,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,C&C-HeartBeat,164,51,0.31097560975609756
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,C&C-Torii,5,2,0.4
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,DDoS,25,7,0.28
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,FileDownload,4,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,Okiru,264,4,0.015151515151515152
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+012f12b4eb6d,core,inductive,rift-poolInit,pairwise,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,2,0.0005263157894736842
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,Bot,23,23,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,DDoS,1764,790,0.4478458049886621
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,127,0.9202898550724637
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,1703,0.7134478424801005
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,45,0.9
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,DoS slowloris,53,30,0.5660377358490566
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,FTP-Patator,53,53,1.0
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,PortScan,29,23,0.7931034482758621
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,SSH-Patator,46,42,0.9130434782608695
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,17,0.8947368421052632
+012f12b4eb6d,core,inductive,lr,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,7,0.875
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,Bot,23,23,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,DDoS,1764,527,0.2987528344671202
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,136,0.9855072463768116
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2352,0.9853372434017595
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,45,0.9
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,PortScan,29,27,0.9310344827586207
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rf,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,Bot,23,21,0.9130434782608695
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,DDoS,1764,992,0.562358276643991
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,132,0.9565217391304348
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2119,0.8877251780477587
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,hgb,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,Bot,23,23,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,DDoS,1764,721,0.4087301587301587
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2347,0.9832425638877251
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,45,0.9
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,DoS slowloris,53,52,0.9811320754716981
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,FTP-Patator,53,53,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,19,1.0
+012f12b4eb6d,core,inductive,catboost,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,Bot,23,23,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,DDoS,1764,655,0.3713151927437642
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,111,0.8043478260869565
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2254,0.9442815249266863
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,45,0.9
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,SSH-Patator,46,28,0.6086956521739131
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,xgboost,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,Bot,23,23,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,DDoS,1764,816,0.46258503401360546
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,138,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2366,0.9912023460410557
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,49,0.98
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,FTP-Patator,53,53,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,19,1.0
+012f12b4eb6d,core,inductive,mlp,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-noDN,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-noAnchor,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-noIFS,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-noLSC,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,Bot,23,22,0.9565217391304348
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,DDoS,1764,1140,0.6462585034013606
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,DoS GoldenEye,138,137,0.9927536231884058
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,DoS Hulk,2387,2326,0.9744449099287809
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,DoS Slowhttptest,50,44,0.88
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,DoS slowloris,53,53,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,FTP-Patator,53,50,0.9433962264150944
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,PortScan,29,29,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,SSH-Patator,46,46,1.0
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,Web Attack � Brute Force,19,18,0.9473684210526315
+012f12b4eb6d,core,inductive,rift-robust,pairwise,usbids1->cicids2017,0,Web Attack � XSS,8,8,1.0
