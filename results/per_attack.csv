@@ -19151,3 +19151,1354 @@ config_hash,schema,mode,method,experiment,scenario,seed,attack_type,n,detected,r
 012f12b4eb6d,core,fewshot,fewshot-catboost@5,fewshot,iot23->toniot,0,password,4432,4369,0.9857851985559567
 012f12b4eb6d,core,fewshot,fewshot-catboost@5,fewshot,iot23->toniot,0,scanning,1210,1193,0.9859504132231405
 012f12b4eb6d,core,fewshot,fewshot-catboost@5,fewshot,iot23->toniot,0,xss,2447,2399,0.9803841438496118
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2017->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2017->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2017->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,cicids2018->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,usbids1->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,usbids1->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,usbids1->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,insdn->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,insdn->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,insdn->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,unswnb15->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,unswnb15->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,unswnb15->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,Attack,158,158,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,C&C,1311,550,0.41952707856598015
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,C&C-HeartBeat,164,105,0.6402439024390244
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,C&C-Torii,5,3,0.6
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,DDoS,25,25,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,Okiru,264,254,0.9621212121212122
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,Okiru-Attack,1,1,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,toniot->iot23,0,PartOfAHorizontalPortScan,3800,3793,0.9981578947368421
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,C&C,1311,491,0.37452326468344777
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,C&C-HeartBeat,164,99,0.6036585365853658
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,DDoS,25,18,0.72
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,Okiru,264,258,0.9772727272727273
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,toniot->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,Attack,158,156,0.9873417721518988
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,C&C,1311,522,0.39816933638443935
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,C&C-FileDownload,12,12,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,C&C-HeartBeat,164,113,0.6890243902439024
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,C&C-HeartBeat-FileDownload,2,2,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,C&C-Torii,5,1,0.2
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,DDoS,25,24,0.96
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,FileDownload,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,Okiru,264,249,0.9431818181818182
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,Okiru-Attack,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,toniot->iot23,0,PartOfAHorizontalPortScan,3800,3791,0.9976315789473684
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,DDoS,1764,1116,0.6326530612244898
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,DoS Hulk,2387,2270,0.9509844993715961
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,DoS Slowhttptest,50,16,0.32
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,DoS slowloris,53,19,0.3584905660377358
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,FTP-Patator,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2017,0,Web Attack � XSS,8,1,0.125
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,DoS GoldenEye,138,74,0.5362318840579711
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,DoS Hulk,2387,2259,0.9463762044407206
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,DoS Slowhttptest,50,35,0.7
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,DoS slowloris,53,24,0.4528301886792453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,SSH-Patator,46,40,0.8695652173913043
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,Bot,23,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,DDoS,1764,1761,0.9982993197278912
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,DoS GoldenEye,138,97,0.7028985507246377
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,DoS Hulk,2387,2313,0.9689987431922916
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,DoS Slowhttptest,50,19,0.38
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,DoS slowloris,53,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,FTP-Patator,53,48,0.9056603773584906
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,PortScan,29,2,0.06896551724137931
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,SSH-Patator,46,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,Web Attack � Brute Force,19,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2017,0,Web Attack � XSS,8,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,Bot,850,817,0.9611764705882353
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DoS attacks-GoldenEye,256,70,0.2734375
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DoS attacks-Hulk,747,689,0.9223560910307899
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,Infilteration,700,127,0.18142857142857144
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->cicids2018,0,SSH-Bruteforce,629,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DDOS attack-HOIC,1226,1226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DoS attacks-GoldenEye,256,132,0.515625
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DoS attacks-Hulk,747,740,0.9906291834002677
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,DoS attacks-Slowloris,37,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,Infilteration,700,94,0.13428571428571429
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,Bot,850,842,0.9905882352941177
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,Brute Force -Web,2,1,0.5
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DDOS attack-HOIC,1226,1223,0.9975530179445351
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DDOS attack-LOIC-UDP,16,16,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DoS attacks-GoldenEye,256,207,0.80859375
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DoS attacks-Hulk,747,738,0.9879518072289156
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DoS attacks-SlowHTTPTest,1,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,DoS attacks-Slowloris,37,34,0.918918918918919
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,Infilteration,700,88,0.12571428571428572
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->cicids2018,0,SSH-Bruteforce,629,629,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Hulk-Security2,5571,5568,0.9994614970382337
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Hulk-NoDefense,5896,5872,0.9959294436906377
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Hulk-Reqtimeout,5916,5897,0.9967883705206221
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Hulk-Security2,5571,5535,0.9935379644588045
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowhttptest-Reqtimeout,28,28,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowloris-Reqtimeout,37,36,0.972972972972973
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Hulk-Evasive,5226,5226,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Hulk-NoDefense,5896,5896,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Hulk-Reqtimeout,5916,5916,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Hulk-Security2,5571,5567,0.9992819960509782
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowhttptest-Evasive,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowhttptest-NoDefense,48,48,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowhttptest-Reqtimeout,28,20,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowhttptest-Security2,39,39,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowloris-Evasive,8,8,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowloris-NoDefense,10,10,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowloris-Reqtimeout,37,37,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,Slowloris-Security2,5,5,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,TCPFlood-Evasive,1312,1312,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,TCPFlood-NoDefense,1178,1178,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,TCPFlood-Reqtimeout,1330,1330,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->usbids1,0,TCPFlood-Security2,1269,1269,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,BFA,224,170,0.7589285714285714
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,BOTNET,22,12,0.5454545454545454
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,DDoS,267,267,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,DoS,8886,8667,0.9753544902093181
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->insdn,0,Web-Attack,29,27,0.9310344827586207
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,BFA,224,222,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,BOTNET,22,10,0.45454545454545453
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,DDoS,267,263,0.9850187265917603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,DoS,8886,8669,0.9755795633580914
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,Probe,9756,9731,0.9974374743747437
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,U2R,4,4,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->insdn,0,Web-Attack,29,29,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,BFA,224,138,0.6160714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,BOTNET,22,0,0.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,DDoS,267,262,0.9812734082397003
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,DoS,8886,8306,0.9347287868557281
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,Probe,9756,9710,0.9952849528495284
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,U2R,4,1,0.25
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->insdn,0,Web-Attack,29,14,0.4827586206896552
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Backdoor,96,88,0.9166666666666666
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,DoS,758,584,0.7704485488126649
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Exploits,5532,3945,0.7131236442516269
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Fuzzers,3745,2846,0.7599465954606142
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Generic,181,115,0.6353591160220995
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Reconnaissance,1554,1547,0.9954954954954955
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Shellcode,257,202,0.7859922178988327
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->unswnb15,0,Worms,42,30,0.7142857142857143
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Analysis,112,111,0.9910714285714286
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Backdoor,96,85,0.8854166666666666
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,DoS,758,697,0.9195250659630607
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Exploits,5532,5221,0.9437816341287057
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Fuzzers,3745,3431,0.916154873164219
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Generic,181,159,0.8784530386740331
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Reconnaissance,1554,1549,0.9967824967824968
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Shellcode,257,232,0.9027237354085603
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->unswnb15,0,Worms,42,40,0.9523809523809523
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Analysis,112,112,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Backdoor,96,92,0.9583333333333334
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,DoS,758,743,0.9802110817941952
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Exploits,5532,5427,0.9810195227765727
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Fuzzers,3745,3729,0.9957276368491321
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Generic,181,167,0.9226519337016574
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Reconnaissance,1554,1551,0.9980694980694981
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Shellcode,257,257,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->unswnb15,0,Worms,42,42,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,ddos,3448,3359,0.9741879350348028
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,dos,1549,1118,0.7217559715945772
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,injection,5943,5738,0.9655056368837287
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,mitm,287,144,0.5017421602787456
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,password,4432,4386,0.9896209386281588
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,scanning,1210,1200,0.9917355371900827
+b169375b711b,core,fewshot,fewshot-targetonly@0.1,fewshot,iot23->toniot,0,xss,2447,2088,0.853289742541888
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,backdoor,550,550,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,ddos,3448,3428,0.994199535962877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,dos,1549,1338,0.8637830858618464
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,injection,5943,5918,0.9957933703516743
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,mitm,287,264,0.9198606271777003
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,password,4432,4428,0.9990974729241877
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,scanning,1210,1210,1.0
+b169375b711b,core,fewshot,fewshot-targetonly@1,fewshot,iot23->toniot,0,xss,2447,2395,0.9787494891704127
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,backdoor,550,542,0.9854545454545455
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,ddos,3448,3412,0.9895591647331786
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,dos,1549,1360,0.8779857972885733
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,injection,5943,5922,0.9964664310954063
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,mitm,287,217,0.7560975609756098
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,password,4432,4410,0.9950361010830325
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,scanning,1210,1204,0.9950413223140496
+b169375b711b,core,fewshot,fewshot-targetonly@5,fewshot,iot23->toniot,0,xss,2447,2401,0.9812014711892113
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,Bot,24,7,0.2916666666666667
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,DDoS,1783,1782,0.9994391475042064
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,DoS GoldenEye,132,88,0.6666666666666666
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,DoS Hulk,2373,2212,0.9321533923303835
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,DoS Slowhttptest,48,42,0.875
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,DoS slowloris,53,29,0.5471698113207547
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,FTP-Patator,63,0,0.0
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,PortScan,23,4,0.17391304347826086
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,SSH-Patator,38,0,0.0
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,Web Attack � Brute Force,22,0,0.0
+b169375b711b,core,transductive,lr,indomain,cicids2017,1,Web Attack � XSS,11,0,0.0
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,Bot,24,15,0.625
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,DDoS,1783,1781,0.9988782950084127
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,DoS GoldenEye,132,126,0.9545454545454546
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,DoS Hulk,2373,2343,0.9873577749683944
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,DoS Slowhttptest,48,39,0.8125
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,DoS slowloris,53,51,0.9622641509433962
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,FTP-Patator,63,61,0.9682539682539683
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,PortScan,23,19,0.8260869565217391
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,SSH-Patator,38,32,0.8421052631578947
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,Web Attack � Brute Force,22,1,0.045454545454545456
+b169375b711b,core,transductive,rf,indomain,cicids2017,1,Web Attack � XSS,11,1,0.09090909090909091
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,Bot,24,20,0.8333333333333334
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,DDoS,1783,1782,0.9994391475042064
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,DoS GoldenEye,132,130,0.9848484848484849
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,DoS Hulk,2373,2352,0.9911504424778761
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,DoS Slowhttptest,48,46,0.9583333333333334
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,DoS slowloris,53,53,1.0
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,FTP-Patator,63,61,0.9682539682539683
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,PortScan,23,22,0.9565217391304348
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,SSH-Patator,38,32,0.8421052631578947
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,Web Attack � Brute Force,22,1,0.045454545454545456
+b169375b711b,core,transductive,hgb,indomain,cicids2017,1,Web Attack � XSS,11,0,0.0
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,Bot,24,20,0.8333333333333334
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,DDoS,1783,1782,0.9994391475042064
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,DoS GoldenEye,132,130,0.9848484848484849
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,DoS Hulk,2373,2350,0.9903076274757691
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,DoS Slowhttptest,48,46,0.9583333333333334
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,DoS slowloris,53,53,1.0
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,FTP-Patator,63,62,0.9841269841269841
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,PortScan,23,23,1.0
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,SSH-Patator,38,32,0.8421052631578947
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,Web Attack � Brute Force,22,1,0.045454545454545456
+b169375b711b,core,transductive,catboost,indomain,cicids2017,1,Web Attack � XSS,11,0,0.0
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,Bot,24,19,0.7916666666666666
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,DDoS,1783,1782,0.9994391475042064
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,DoS GoldenEye,132,130,0.9848484848484849
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,DoS Hulk,2373,2354,0.9919932574799831
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,DoS Slowhttptest,48,47,0.9791666666666666
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,DoS slowloris,53,53,1.0
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,FTP-Patator,63,62,0.9841269841269841
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,PortScan,23,21,0.9130434782608695
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,SSH-Patator,38,32,0.8421052631578947
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,Web Attack � Brute Force,22,1,0.045454545454545456
+b169375b711b,core,transductive,xgboost,indomain,cicids2017,1,Web Attack � XSS,11,1,0.09090909090909091
