@@ -191,9 +191,24 @@ mixture), so the first prior estimate must not come from it. Two stages:
 (1) initial `pi_t`: map the pool with the pooled *source* benign-anchored
 normaliser (`prior_init="source"`), score, run EM; (2) the anchor set is the
 `gamma * (1 - pi_t)` fraction of pool rows with the lowest score
-(`gamma = 0.8`, a purity margin; at least 5% of the pool) → fit the target
-normaliser on it → rescore → re-estimate `pi_t` by EM in the anchored space,
-for `n_anchor_iter` (default 2) iterations. Ablation `rift-poolInit` uses
+(`gamma = 0.8`, a purity margin; at least 5% of the pool) → transport the
+target into the source representation by **anchor-matched quantile transport**
+→ rescore → re-estimate `pi_t` by EM, for `n_anchor_iter` (default 2)
+iterations.
+
+Anchor-matched quantile transport. Fitting a target normaliser directly on the
+anchor set is biased: the anchor set is benign traffic *truncated* at a score
+quantile, while the source normaliser was fitted on all benign rows. The
+reference set is therefore truncated by the same rule on the source: `R` =
+pooled source benign rows (in the shared normalised space) whose model score is
+at or below the `gamma` quantile of source benign scores. For each feature,
+target value `x` maps to `F_R^{-1}(F_A(x))`, where `F_A` is the empirical CDF of
+the target anchor set (raw harmonised features, 1 000 quantiles, linear tails as
+in the rank normaliser) and `F_R^{-1}` the quantile function of `R`. Under pure
+label shift both `A` and `R` are benign truncated at the same benign quantile,
+so the transport is exact; under covariate shift it is a monotone per-feature
+alignment of benign backgrounds. The model, IFS and calibration stay in source
+space; nothing is retrained. Ablation `rift-poolInit` uses
 `prior_init="pool"` (first estimate from a normaliser fitted on all pool rows). A median split would anchor on
 attacks whenever the target attack prior exceeds 0.5 (e.g. USB-IDS-1, ~94%).
 `anchor_purity` (fraction of anchor rows that are truly benign) is logged as a
