@@ -1,0 +1,28 @@
+# Fast end-to-end check on synthetic domains (no downloads needed).
+source: synthetic
+synthetic:
+  n_domains: 3
+  n: 800
+  seed: 0
+schema: core
+seeds: [0]
+test_size: 0.3
+transductive: true
+results_dir: results/smoke
+threads: 1
+methods:
+  - lr
+  - rf
+  - hgb
+  - catboost
+  - mlp
+  - coral
+  - dann
+  - rift
+  - rift-noDN
+  - rift-noAnchor
+  - rift-noIFS
+  - rift-noLSC
+  - rift-robust
+  - rift-standard
+experiments: [indomain, pairwise, lodo]

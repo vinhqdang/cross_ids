@@ -1,0 +1,25 @@
+# Full benchmark: all eight datasets, core schema (seven datasets; CTU-13 is minimal-only).
+datasets: [cicids2017, cicids2018, usbids1, insdn, unswnb15, toniot, iot23, ctu13]
+max_rows: 100000
+seeds: [0, 1, 2]
+schema: core
+test_size: 0.3
+transductive: true
+data_dir: data
+results_dir: results
+methods:
+  - lr
+  - rf
+  - hgb
+  - catboost
+  - mlp
+  - coral
+  - dann
+  - rift
+  - rift-noDN
+  - rift-noAnchor
+  - rift-noIFS
+  - rift-noLSC
+  - rift-robust
+  - rift-standard
+experiments: [indomain, pairwise, lodo]
