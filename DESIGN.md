@@ -232,6 +232,11 @@ sources, threshold 0.5:
   thread_count = all cores, verbose 0). This is the "naive" reference: it
   reaches ~0.999 ROC-AUC in-domain on CIC-IDS2017 and is known to collapse
   across datasets; the benchmark quantifies that collapse.
+- `xgboost`: XGBClassifier (500 trees, depth 6, learning_rate 0.1,
+  hist tree method, `scale_pos_weight` = benign/attack ratio of the sources,
+  early stopping on a 10% source validation split). `device` comes from the
+  config key `device: cpu|cuda` (default cpu); CatBoost uses
+  `task_type="GPU"` when `device: cuda`.
 - `mlp`: sklearn MLPClassifier (128, 64), early stopping.
 - `coral`: CORAL (Sun et al., 2016) — whiten source covariance, re-colour with
   target covariance (transductive), then HGB.
