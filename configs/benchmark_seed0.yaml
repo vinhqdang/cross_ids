@@ -1,0 +1,31 @@
+# Stage 1 of the benchmark: seed 0 only; the default config later fills seeds 1-2 (runs are resumable).
+datasets: [cicids2017, cicids2018, usbids1, insdn, unswnb15, toniot, iot23, ctu13]
+max_rows: 100000
+seeds: [0]
+schema: core
+test_size: 0.3
+modes: [transductive, inductive]
+data_dir: data
+results_dir: results
+device: cpu
+threads: 4
+fewshot_k: [0.1, 1, 5]
+methods:
+  - lr
+  - rf
+  - hgb
+  - catboost
+  - xgboost
+  - mlp
+  - coral
+  - dann
+  - rift
+  - rift-noDN
+  - rift-noAnchor
+  - rift-noIFS
+  - rift-noLSC
+  - rift-robust
+  - rift-standard
+  - rift-st
+  - rift-poolInit
+experiments: [indomain, pairwise, lodo, fewshot]
