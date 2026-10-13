@@ -185,11 +185,16 @@ no labels:
 Benign-anchored variant (`anchor="benign"`): on **source** domains the
 normaliser is fitted on benign rows only, because benign traffic is the stable
 "background" of a network. On the target, where labels are unknown, the anchor
-set is chosen with the estimated target prior: fit the normaliser on all pool
-rows → score → estimate `pi_t` by EM (§4.4) → the anchor set is the
+set is chosen with the estimated target prior. A normaliser fitted on the whole
+pool absorbs the label shift (it maps a 20%-attack target onto the source
+mixture), so the first prior estimate must not come from it. Two stages:
+(1) initial `pi_t`: map the pool with the pooled *source* benign-anchored
+normaliser (`prior_init="source"`), score, run EM; (2) the anchor set is the
 `gamma * (1 - pi_t)` fraction of pool rows with the lowest score
-(`gamma = 0.8`, a purity margin; at least 5% of the pool) → refit → rescore,
-for `n_anchor_iter` (default 2) iterations. A median split would anchor on
+(`gamma = 0.8`, a purity margin; at least 5% of the pool) → fit the target
+normaliser on it → rescore → re-estimate `pi_t` by EM in the anchored space,
+for `n_anchor_iter` (default 2) iterations. Ablation `rift-poolInit` uses
+`prior_init="pool"` (first estimate from a normaliser fitted on all pool rows). A median split would anchor on
 attacks whenever the target attack prior exceeds 0.5 (e.g. USB-IDS-1, ~94%).
 `anchor_purity` (fraction of anchor rows that are truly benign) is logged as a
 diagnostic only and never used by the method.
