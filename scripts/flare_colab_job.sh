@@ -39,7 +39,8 @@ remote() {  # remote TIMEOUT SHELL_COMMAND
 import sys
 cmd = sys.argv[2]
 print("import subprocess, sys")
-print(f"r = subprocess.run({cmd!r}, shell=True)")
+print(f"r = subprocess.run({cmd!r} + ' 2>&1', shell=True, capture_output=True, text=True)")
+print("print(r.stdout[-6000:])")
 print("print('RC', r.returncode)")
 print("assert r.returncode == 0")
 PY
@@ -71,7 +72,7 @@ mirror() {
 }
 mirror & MIRROR=$!
 trap 'kill $MIRROR 2>/dev/null || true; cleanup' EXIT
-remote 14400 "cd /content/cx && python -m crossids.flare.train --target $TARGET --seed $SEED --steps $STEPS --device cuda --num-workers 2 $TRAIN_ARGS --out runs/flare/$RUN"
+[[ -f "$ROOT/runs/flare/$RUN/summary.json" ]] || remote 14400 "cd /content/cx && python -m crossids.flare.train --target $TARGET --seed $SEED --steps $STEPS --device cuda --num-workers 2 $TRAIN_ARGS --out runs/flare/$RUN"
 kill $MIRROR 2>/dev/null || true
 remote 7200 "cd /content/cx && python -m crossids.flare.evaluate --target $TARGET --seeds $SEED --methods $EVAL_METHODS --device cuda --threads 2 --out $EVAL_CSV --supports-dir runs/flare"
 remote 600 "cd /content/cx && tar czf /content/out.tgz runs/flare/$RUN $EVAL_CSV runs/flare/supports_${TARGET}_s${SEED}.json"
