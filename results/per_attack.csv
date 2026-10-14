@@ -49090,3 +49090,10 @@ b169375b711b,core,transductive,xgboost,pairwise,iot23->insdn,2,DoS,8991,2433,0.2
 b169375b711b,core,transductive,xgboost,pairwise,iot23->insdn,2,Probe,9630,4898,0.5086188992731049
 b169375b711b,core,transductive,xgboost,pairwise,iot23->insdn,2,U2R,3,2,0.6666666666666666
 b169375b711b,core,transductive,xgboost,pairwise,iot23->insdn,2,Web-Attack,40,17,0.425
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,BFA,235,93,0.39574468085106385
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,BOTNET,28,13,0.4642857142857143
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,DDoS,261,77,0.2950191570881226
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,DoS,8991,1901,0.2114336558781003
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,Probe,9630,3341,0.3469366562824507
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,U2R,3,3,1.0
+b169375b711b,core,transductive,mlp,pairwise,iot23->insdn,2,Web-Attack,40,2,0.05
