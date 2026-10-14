@@ -559,3 +559,38 @@ Learning curves vs k; Wilcoxon signed-rank vs target-only CatBoost per k over
 
 Implementation in PyTorch; CPU for tests and a tiny smoke configuration, GPU
 (Google Colab) for meta-training: 8 targets × 3 seeds × ~40 min on a T4.
+
+## 20. FLARE improvements and zero-shot references
+
+### 20.1 Semi-supervised context (FLARE-U)
+
+Besides the k labelled support rows, the episode carries U unlabelled
+**context rows** from the same network (label token = unknown). Attention rule:
+support and context rows attend to support + context; query rows attend to
+support + context + themselves (still no query-to-query mixing). Episode rank
+normalisation runs over support + context + query. Training: U ~ U{0, 512}
+per episode (U = 0 keeps the plain few-shot case in the training mix), context
+rows drawn from the same dataset with their own prior ~ U(0.05, 0.95),
+disjoint from support and query. Test: context = 512 rows sampled (seeded)
+from the target **train** split features (never labels), disjoint from the
+support. Motivation: with k = 4 labels the cluster structure of the target's
+own traffic is the most informative label-free signal available, and a
+target-only CatBoost cannot use it.
+
+### 20.2 FLARE + CatBoost ensemble
+
+`flare+cb`: average of FLARE's P(attack) and the target-only CatBoost
+P(attack) on the same support (no extra training). `flare-u+cb` likewise.
+
+### 20.3 Zero-shot cross-dataset references (k = 0)
+
+On the same target test split:
+- `catboost-lodo`: CatBoost trained on all meta-training datasets pooled
+  (exactly FLARE's meta-training data), predicting the target with no target
+  labels;
+- `catboost-pairwise-mean` / `catboost-pairwise-best`: per target, the mean and
+  the best (oracle choice of source) single-source CatBoost ROC-AUC from Part I
+  (`results/runs.csv`, transductive pairwise, seed 0).
+
+These answer the practitioner's question "train on a public dataset, deploy
+on my network" and are drawn at k = 0 on the learning curves.
