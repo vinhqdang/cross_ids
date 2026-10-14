@@ -141,7 +141,7 @@ def _rng_state() -> dict:
 
 
 def _set_rng_state(state: dict) -> None:
-    torch.set_rng_state(state["torch"])
+    torch.set_rng_state(torch.as_tensor(state["torch"]).cpu().to(torch.uint8))
     np.random.set_state(state["numpy"])
     random.setstate(state["python"])
 
