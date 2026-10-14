@@ -594,3 +594,69 @@ On the same target test split:
 
 These answer the practitioner's question "train on a public dataset, deploy
 on my network" and are drawn at k = 0 on the learning curves.
+
+## 21. FLARE-2: attack-class level, task-diverse meta-training
+
+### 21.1 Diagnosis from the FLARE-U preview
+
+FLARE-U reached 0.974 validation AUC but 0.66-0.76 ROC-AUC on the unseen
+IoT-23 target, below FLARE (0.79-0.85) and target-only CatBoost (0.82-0.88).
+Validation episodes came from the meta-training datasets, and datasets are
+91% identifiable from their flows (§10.4), so unlabelled context lets the
+model recognise *which* source dataset an episode comes from and apply a
+memorised rule. With six meta-training datasets there are only six binary
+"attack vs benign" tasks to memorise. Two fixes follow.
+
+### 21.2 Held-out-source model selection
+
+For a target T, one meta-training dataset V ≠ T is held out (rotating: V is
+the next dataset in a fixed order) and used **only** for validation episodes;
+the model is trained on the remaining five. Checkpoint selection uses the
+held-out-source validation loss. The previous in-source validation is still
+logged for comparison (its gap to held-out-source validation measures
+memorisation).
+
+### 21.3 Label-space tasks (the task augmentation)
+
+Every training episode samples a *task* over the dataset's attack classes
+(raw `attack_type`, classes with < 30 rows dropped):
+
+| task | p | classes |
+|---|---|---|
+| binary attack vs benign | 0.25 | {benign, all attacks} |
+| one class vs benign | 0.25 | {benign, attack class c} |
+| class vs class | 0.15 | {attack c1, attack c2} |
+| N-way | 0.35 | N ~ U{3..6} classes drawn from {benign} ∪ attack classes |
+
+Composite episodes (A3) combine benign of one dataset with attack classes of
+another. This turns 6 datasets into thousands of distinct tasks, and because
+the meaning of a class changes from episode to episode, the only reliable
+strategy is to read the rule from the support set.
+
+### 21.4 Model change: label slots
+
+Class identities are arbitrary per episode, so labels use **M = 8 label-slot
+embeddings**, randomly permuted for every episode (slot 0 is never reserved
+for benign), plus the unknown token for queries/context. The head scores each
+query against the N active slots: logit_j = <W h_query, slot_j> / sqrt(width),
+softmax over the N classes (binary = N = 2). Everything else (§13: feature
+attention, row attention with the support/query rule, per-episode ranks,
+sign-flip augmentation, no feature identity) is unchanged.
+
+### 21.5 Evaluation at attack-class level
+
+On each target (LODO), with the Part I split:
+1. **Binary detection** (as in §18) — comparable with all earlier results.
+2. **Per-class detection**: for every target attack class c with ≥ 50 test
+   rows, k-shot support of c and benign (k per class ∈ {2, 4, 8, 16, 32}),
+   queries = test rows of c and benign; ROC-AUC, recall at 0.5, FPR.
+3. **N-way attack-type classification**: all target classes with ≥ 50 test
+   rows (benign included), k shots per class; macro-F1, balanced accuracy,
+   per-class recall and the confusion matrix (mean over draws).
+Baselines on identical supports: CatBoost / RF / LR / kNN multi-class on the
+k-per-class labels, ProtoNet, FLARE (binary-only, used in one-vs-rest form
+for N-way), and for binary detection the zero-shot references (§20.3). A
+zero-shot method cannot produce target attack-type labels at all, which is
+the practical argument for few-shot transfer at class level.
+Ablations: no label-space tasks (binary only), no held-out-source selection,
+no slot permutation, with/without context rows.
