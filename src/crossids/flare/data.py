@@ -2,7 +2,12 @@
 
 Episodes are plain numpy objects. Batching and padding happen in :func:`collate`, the model consumes the
 resulting :class:`Batch`. Every random draw goes through one ``numpy.random.Generator`` owned by the sampler,
-so a seed fixes the whole episode stream.
+so a seed fixes the whole episode stream. :class:`EpisodeStream` runs the sampler in DataLoader workers, each with
+its own seeded generator.
+
+The model sees per-episode ranks of each feature, so it is invariant to any strictly monotone per-feature transform
+by construction. For that reason augmentation A1 is the sign flip only. The monotone warp is kept behind
+``AugConfig.warp`` (default off) because rank normalisation erases it.
 """
 
 from __future__ import annotations
@@ -12,6 +17,7 @@ from pathlib import Path
 
 import numpy as np
 from scipy.stats import norm, rankdata
+from torch.utils.data import IterableDataset
 
 from ..datasets import load_processed
 from ..experiment import split_tables
@@ -106,8 +112,8 @@ def warp_knots(rng: np.random.Generator, n_knots: int) -> tuple[np.ndarray, np.n
 class AugConfig:
     """Switches for the §14 augmentations. Ablations turn individual switches off."""
 
-    sign_flip: bool = True  # A1, sign part (p = sign_p per feature)
-    warp: bool = True  # A1, monotone warp part (every feature, 4 knots)
+    sign_flip: bool = True  # A1: sign flip per feature (p = sign_p)
+    warp: bool = False  # A1 monotone warp (4 knots). Off by default: rank normalisation makes it a no-op.
     subset: bool = True  # A2 (p = subset_p)
     composite: bool = True  # A3 (p = composite_p)
     label_noise: bool = True  # A4 (rate = noise_rate on support labels)
@@ -125,7 +131,7 @@ class EpisodeConfig:
 
     k_min: int = 4
     k_max: int = 128
-    query_size: int = 512
+    query_size: int = 256
     query_prior: tuple[float, float] = (0.05, 0.95)
     support_prior: tuple[float, float] = (0.1, 0.9)
     clip: float = CLIP
@@ -357,3 +363,48 @@ def collate(episodes: list[Episode]) -> Batch:
         label[b, rows] = e.label
         truth[b, rows] = e.truth
     return Batch(x, feat_pad, row_valid, is_query, label, truth)
+
+
+def _stream_seed(base_seed: int, stream: int, worker: int, n_workers: int) -> int:
+    """Seed of one worker's episode generator. Depends only on (seed, stream offset, worker id, worker count)."""
+    return int(np.random.SeedSequence([base_seed, stream, worker, n_workers]).generate_state(1)[0])
+
+
+def batch_arrays(episodes: list[Episode]) -> dict[str, np.ndarray]:
+    """Collated batch as a dict of numpy arrays (what the DataLoader moves to the main process)."""
+    b = collate(episodes)
+    return {"x": b.x, "feat_pad": b.feat_pad, "row_valid": b.row_valid, "is_query": b.is_query,
+            "label": b.label, "truth": b.truth}
+
+
+class EpisodeStream(IterableDataset):
+    """Infinite stream of collated episode batches for a torch DataLoader (use ``batch_size=None``).
+
+    Each worker draws from its own generator seeded by (seed, stream, worker id, worker count). With a fixed
+    worker count the sequence of batches is deterministic. ``stream`` offsets the seed, which is how a resumed
+    run starts a fresh stream.
+    """
+
+    def __init__(self, pools: list[Pools] | None, cfg: EpisodeConfig, seed: int, batch_size: int = 8,
+                 stream: int = 0, synthetic: bool = False, max_features: int = 13):
+        super().__init__()
+        self.pools = pools
+        self.cfg = cfg
+        self.seed = seed
+        self.batch_size = batch_size
+        self.stream = stream
+        self.synthetic = synthetic
+        self.max_features = max_features
+
+    def __iter__(self):
+        from torch.utils.data import get_worker_info
+
+        info = get_worker_info()
+        worker, n_workers = (info.id, info.num_workers) if info is not None else (0, 1)
+        seed = _stream_seed(self.seed, self.stream, worker, n_workers)
+        if self.synthetic:
+            sampler = SyntheticSampler(self.cfg, seed, max_features=self.max_features)
+        else:
+            sampler = EpisodeSampler(self.pools, self.cfg, seed)
+        while True:
+            yield batch_arrays(sampler.batch(self.batch_size))

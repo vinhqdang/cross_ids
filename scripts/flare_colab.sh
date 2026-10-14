@@ -1,24 +1,29 @@
 #!/usr/bin/env bash
-# FLARE on Google Colab (GPU): packages the project, meta-trains every (target, seed) job plus the ablations and
-# ProtoNet, runs the few-shot evaluation per target and downloads the outputs of every finished job.
+# FLARE on Google Colab (GPU): packages the project, runs every (target, seed) training job, the ablations and
+# ProtoNet, evaluates each target, then builds the report locally.
 #
-# Needs the google-colab-cli (`colab`) with a logged-in account. Each job is skipped when its outputs already exist
-# locally, so rerunning the script resumes at the first unfinished (target, seed) job. A job that is interrupted
-# restarts from its beginning (checkpoints are per job, not per step).
+# Each job starts detached on the VM (nohup, log file on the VM). The local side polls it with short
+# `colab exec --timeout 60` calls and downloads the job's archive when it finishes, so no call blocks for long.
+# Training resumes from last.pt when a job is relaunched after the VM or session was lost. Rerunning this script
+# skips jobs whose outputs already exist locally.
+#
+# Needs the google-colab-cli (`colab`) with a logged-in account.
 #
 # Usage:
-#   scripts/flare_colab.sh [stage ...]             stages: package setup train eval stop (default: all, in order)
+#   scripts/flare_colab.sh [stage ...]             stages: package setup train eval report stop (default: all)
 #   FLARE_DRY_RUN=1 scripts/flare_colab.sh train   print the colab commands without running them
 #
 # Environment (defaults in brackets):
-#   FLARE_SESSION [flare]     Colab session name             FLARE_GPU [T4]        accelerator for `colab new`
-#   FLARE_STEPS [60000]       meta-training steps            FLARE_SEEDS ["0 1 2"] meta-training seeds
-#   FLARE_TARGETS [all 8]     FLARE_ABLATIONS ["noA1 noA3 rowmlp synthetic"]    ablations, seed 0 only
-#   FLARE_PROTONET [1]        also meta-train ProtoNet per (target, seed)
-#   FLARE_TIMEOUT [14400]     seconds allowed for one training job, or one evaluation target
+#   FLARE_SESSION [flare]      Colab session name            FLARE_GPU [T4]           accelerator for `colab new`
+#   FLARE_STEPS [20000]        training steps per run        FLARE_SEEDS ["0 1 2"]    meta-training seeds
+#   FLARE_TARGETS [all 8]      FLARE_ABLATIONS ["noA1 noA3 rowmlp synthetic"]       ablations (seed 0 only)
+#   FLARE_PROTONET [1]         also meta-train ProtoNet      FLARE_QUERY [256]        query size
+#   FLARE_WORKERS [2]          DataLoader workers            FLARE_COMPILE [0]        1 = --compile
+#   FLARE_POLL [60]            seconds between polls         FLARE_BENCHMARK [results] Part I folder for the report
 #
-# Outputs (local): runs/flare/<target>_s<seed>[_<ablation>|_protonet]/{best.pt,last.pt,log.jsonl,summary.json},
-#                  runs/flare/eval_<target>.csv and runs/flare/supports_<target>_s<seed>.json.
+# Outputs (local): runs/flare/<target>_s<seed>[_<ablation>|_protonet]/ (best.pt, last.pt, log.jsonl, summary.json),
+#                  runs/flare/eval_<target>.csv, runs/flare/per_attack_<target>.csv, runs/flare/supports_*.json,
+#                  results/flare/ (report).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
@@ -26,12 +31,16 @@ cd "$ROOT"
 
 SESSION="${FLARE_SESSION:-flare}"
 GPU="${FLARE_GPU:-T4}"
-STEPS="${FLARE_STEPS:-60000}"
+STEPS="${FLARE_STEPS:-20000}"
 SEEDS="${FLARE_SEEDS:-0 1 2}"
 TARGETS="${FLARE_TARGETS:-cicids2017 cicids2018 usbids1 unswnb15 toniot iot23 insdn ctu13}"
 ABLATIONS="${FLARE_ABLATIONS:-noA1 noA3 rowmlp synthetic}"
-TIMEOUT="${FLARE_TIMEOUT:-14400}"
 PROTONET="${FLARE_PROTONET:-1}"
+QUERY="${FLARE_QUERY:-256}"
+WORKERS="${FLARE_WORKERS:-2}"
+COMPILE="${FLARE_COMPILE:-0}"
+POLL="${FLARE_POLL:-60}"
+BENCHMARK="${FLARE_BENCHMARK:-results}"
 DRY="${FLARE_DRY_RUN:-0}"
 
 BUILD="$ROOT/build/flare"
@@ -50,6 +59,7 @@ run() {  # run <command...>: executes, or prints when FLARE_DRY_RUN=1
 
 stage_package() {
   local stage
+  mkdir -p "$BUILD"
   stage="$(mktemp -d "$BUILD/stage.XXXXXX")"
   mkdir -p "$stage/data/processed"
   cp -r src pyproject.toml README.md LICENSE "$stage/"
@@ -59,35 +69,6 @@ stage_package() {
   tar --exclude=__pycache__ --exclude='*.egg-info' -czf "$TARBALL" -C "$stage" .
   rm -rf "$stage"
   echo "packaged $TARBALL ($(du -h "$TARBALL" | cut -f1))"
-}
-
-# remote_job <name> <setup-shell-command-or-empty> <archive-paths> <command...>
-# Writes a Python file for `colab exec` that runs the command in the project folder and archives the outputs.
-remote_job() {
-  local name="$1" setup="$2" archive="$3"; shift 3
-  local file="$JOBS/$name.py"
-  mkdir -p "$JOBS"
-  python3 - "$file" "$name" "$setup" "$archive" "$REMOTE_ROOT" "$@" <<'PY'
-import json, pathlib, sys
-path, name, setup, archive, root, *cmd = sys.argv[1:]
-body = f'''import os, subprocess, pathlib
-os.makedirs("/content/out", exist_ok=True)
-if {setup!r}:
-    subprocess.run({setup!r}, shell=True, check=True)
-cmd = {json.dumps(cmd)}
-print("+", " ".join(cmd), flush=True)
-subprocess.run(cmd, cwd={root!r}, check=True, env={{**os.environ, "PYTHONUNBUFFERED": "1"}})
-subprocess.run("tar -czf /content/out/{name}.tgz -C {root} {archive}", shell=True, check=True)
-print("archived /content/out/{name}.tgz", flush=True)
-'''
-pathlib.Path(path).write_text(body)
-PY
-  echo "$file"
-}
-
-fetch_job() {  # fetch_job <name>: download the archive of a finished remote job and unpack it locally
-  run colab download "/content/out/$1.tgz" "$BUILD/$1.tgz" -s "$SESSION"
-  run tar -xzf "$BUILD/$1.tgz" -C "$ROOT"
 }
 
 stage_setup() {
@@ -101,14 +82,91 @@ import os, subprocess, sys
 def sh(cmd):
     print("+", cmd, flush=True)
     subprocess.run(cmd, shell=True, check=True)
-sh("rm -rf /content/flare && mkdir -p /content/flare && tar -xzf /content/crossids-flare.tar.gz -C /content/flare")
+sh("rm -rf /content/flare && mkdir -p /content/flare /content/out && tar -xzf /content/crossids-flare.tar.gz -C /content/flare")
 sh(f"{sys.executable} -m pip install -q -r /content/flare/requirements.txt || true")
 sh(f"{sys.executable} -m pip install -q -e /content/flare")
 import torch
 print("torch", torch.__version__, "cuda", torch.cuda.is_available(),
       torch.cuda.get_device_name(0) if torch.cuda.is_available() else "", flush=True)
 PY
-  run colab exec -s "$SESSION" --timeout 1800 -f "$JOBS/setup.py"
+  run colab exec -s "$SESSION" --timeout 60 -f "$JOBS/setup.py"
+}
+
+# launch_job <name> <archive-paths> <command...>
+# Writes a launcher that starts the command detached on the VM (idempotent: nothing happens if it is running or done).
+launch_job() {
+  local name="$1" archive="$2"; shift 2
+  local file="$JOBS/launch_$name.py"
+  mkdir -p "$JOBS"
+  python3 - "$file" "$name" "$archive" "$REMOTE_ROOT" "$@" <<'PY'
+import json, pathlib, shlex, sys
+path, name, archive, root, *cmd = sys.argv[1:]
+body = f'''import os, subprocess, pathlib
+out = pathlib.Path("/content/out"); out.mkdir(parents=True, exist_ok=True)
+rc, pid = out / "{name}.rc", out / "{name}.pid"
+def alive(p):
+    try:
+        os.kill(int(p.read_text()), 0); return True
+    except Exception:
+        return False
+if rc.exists():
+    print("DONE already", rc.read_text().strip())
+elif pid.exists() and alive(pid):
+    print("RUNNING", pid.read_text().strip())
+else:
+    script = "cd {root} && {' '.join(shlex.quote(c) for c in cmd)}; s=$?; " \\
+             "tar -czf /content/out/{name}.tgz -C {root} {archive}; echo $s > /content/out/{name}.rc"
+    logf = open(out / "{name}.log", "a")
+    p = subprocess.Popen(["bash", "-c", script], stdout=logf, stderr=subprocess.STDOUT,
+                         stdin=subprocess.DEVNULL, start_new_session=True)
+    pid.write_text(str(p.pid))
+    print("LAUNCHED", p.pid, flush=True)
+'''
+pathlib.Path(path).write_text(body)
+PY
+  run colab exec -s "$SESSION" --timeout 60 -f "$file"
+}
+
+# poll_job <name>: prints DONE <rc> when the job has finished, otherwise the last log lines
+poll_job() {
+  local name="$1"
+  local file="$JOBS/poll_$name.py"
+  mkdir -p "$JOBS"
+  cat > "$file" <<PY
+import pathlib, subprocess
+out = pathlib.Path("/content/out")
+rc = out / "$name.rc"
+if rc.exists():
+    print("DONE", rc.read_text().strip(), flush=True)
+else:
+    log = out / "$name.log"
+    tail = subprocess.run(["tail", "-n", "2", "$REMOTE_ROOT/runs/flare/$name/log.jsonl"],
+                          capture_output=True, text=True).stdout
+    print("RUNNING", tail.strip(), (log.read_text()[-200:] if log.exists() else ""), flush=True)
+PY
+  run colab exec -s "$SESSION" --timeout 60 -f "$file"
+}
+
+# run_job <name> <archive-paths> <command...>: launch, poll until finished, download and unpack the archive
+run_job() {
+  local name="$1" archive="$2"; shift 2
+  launch_job "$name" "$archive" "$@"
+  if [[ "$DRY" == "1" ]]; then
+    run colab download "/content/out/$name.tgz" "$BUILD/$name.tgz" -s "$SESSION"
+    return
+  fi
+  while true; do
+    local status
+    status="$(colab exec -s "$SESSION" --timeout 60 -f "$JOBS/poll_$name.py" 2>&1 || true)"
+    if grep -q "^DONE" <<<"$status"; then
+      echo "$status" | grep "^DONE" | sed "s/^/$name: /"
+      break
+    fi
+    echo "$name: $(grep -v '^$' <<<"$status" | tail -n 1 | cut -c1-160)"
+    sleep "$POLL"
+  done
+  run colab download "/content/out/$name.tgz" "$BUILD/$name.tgz" -s "$SESSION"
+  run tar -xzf "$BUILD/$name.tgz" -C "$ROOT"
 }
 
 train_job() {  # train_job <target> <seed> <suffix> <extra args...>
@@ -117,13 +175,12 @@ train_job() {  # train_job <target> <seed> <suffix> <extra args...>
   if [[ -f "$RUNS/$name/summary.json" ]]; then
     echo "skip (done) $name"; return
   fi
+  local extra=()
+  if [[ "$COMPILE" == "1" ]]; then extra+=(--compile); fi
   echo "train $name"
-  local file
-  file="$(remote_job "$name" "" "runs/flare/$name" \
-          python -m crossids.flare.train --target "$target" --seed "$seed" --steps "$STEPS" \
-          --out "runs/flare/$name" --device cuda "$@")"
-  run colab exec -s "$SESSION" --timeout "$TIMEOUT" -f "$file"
-  fetch_job "$name"
+  run_job "$name" "runs/flare/$name" \
+    python -m crossids.flare.train --target "$target" --seed "$seed" --steps "$STEPS" --query-size "$QUERY" \
+    --num-workers "$WORKERS" --out "runs/flare/$name" --device cuda "${extra[@]}" "$@"
 }
 
 stage_train() {
@@ -139,7 +196,7 @@ stage_train() {
 }
 
 stage_eval() {
-  # checkpoints from earlier sessions are pushed once so the evaluation can run on this session
+  # checkpoints from earlier sessions are pushed once so the evaluation can run on this session (no last.pt)
   if [[ -d "$RUNS" ]]; then
     run tar -czf "$BUILD/checkpoints.tgz" -C "$ROOT" --exclude='last.pt' runs/flare
     run colab upload "$BUILD/checkpoints.tgz" /content/checkpoints.tgz -s "$SESSION"
@@ -147,16 +204,16 @@ stage_eval() {
   for t in $TARGETS; do
     if [[ -f "$RUNS/eval_done_$t" ]]; then echo "skip (done) eval $t"; continue; fi
     echo "eval $t"
-    local name="eval_$t"
-    local file
-    file="$(remote_job "$name" "mkdir -p /content/flare/runs && tar -xzf /content/checkpoints.tgz -C /content/flare 2>/dev/null || true" \
-            "runs/flare/eval_$t.csv runs/flare/supports_${t}_s*.json" \
-            python -m crossids.flare.evaluate --target "$t" --seeds $SEEDS --runs-dir runs/flare \
-            --out "runs/flare/eval_$t.csv" --supports-dir runs/flare --device cuda)"
-    run colab exec -s "$SESSION" --timeout "$TIMEOUT" -f "$file"
-    fetch_job "$name"
+    run_job "eval_$t" "runs/flare/eval_$t.csv runs/flare/per_attack_$t.csv runs/flare/supports_${t}_s*.json" \
+      bash -c "mkdir -p /content/flare/runs/flare && tar -xzf /content/checkpoints.tgz -C /content/flare 2>/dev/null; \
+      python -m crossids.flare.evaluate --target $t --seeds $SEEDS --runs-dir runs/flare \
+      --out runs/flare/eval_$t.csv --supports-dir runs/flare --device cuda"
     run touch "$RUNS/eval_done_$t"
   done
+}
+
+stage_report() {
+  run python -m crossids.flare.report --runs "$RUNS" --out "$ROOT/results/flare" --benchmark "$BENCHMARK"
 }
 
 stage_stop() {
@@ -165,7 +222,7 @@ stage_stop() {
 
 main() {
   local stages=("$@")
-  if [[ ${#stages[@]} -eq 0 ]]; then stages=(package setup train eval stop); fi
+  if [[ ${#stages[@]} -eq 0 ]]; then stages=(package setup train eval report stop); fi
   mkdir -p "$BUILD" "$RUNS"
   for st in "${stages[@]}"; do
     case "$st" in
@@ -173,6 +230,7 @@ main() {
       setup) stage_setup ;;
       train) stage_train ;;
       eval) stage_eval ;;
+      report) stage_report ;;
       stop) stage_stop ;;
       *) echo "unknown stage: $st" >&2; exit 2 ;;
     esac

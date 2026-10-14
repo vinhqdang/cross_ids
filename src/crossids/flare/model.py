@@ -161,21 +161,23 @@ class _Layer(nn.Module):
 
 
 class EpisodeModel(nn.Module):
-    """Shared inference: normalisation, test-time ensemble over feature permutations and sign flips, query chunks."""
+    """Shared inference: rank normalisation, test-time ensemble over sign flips (E members), query chunks."""
 
     kind = "base"
 
     def forward_episode(self, x, feat_pad, row_valid, is_query, label, return_embedding: bool = False):
         raise NotImplementedError
 
-    def _members(self, d: int, ensemble: int, seed: int) -> tuple[np.ndarray, np.ndarray]:
-        """Feature permutations (E, d) and sign vectors (E, d). Member 0 is the identity when E == 1."""
+    def _sign_members(self, d: int, ensemble: int, seed: int) -> np.ndarray:
+        """Per-feature sign vectors (E, d) for the test-time ensemble. All ones (identity) when E == 1.
+
+        Feature order does not enter: the model is permutation-invariant by construction, so the ensemble
+        varies only the sign flips, the same transform as augmentation A1.
+        """
         if ensemble == 1:
-            return np.arange(d)[None], np.ones((1, d))
+            return np.ones((1, d))
         rng = np.random.default_rng(seed)
-        perms = np.stack([rng.permutation(d) for _ in range(ensemble)])
-        signs = rng.choice([-1.0, 1.0], size=(ensemble, d))
-        return perms, signs
+        return rng.choice([-1.0, 1.0], size=(ensemble, d))
 
     @torch.no_grad()
     def _run(self, support_X, support_y, query_X, *, chunk: int, ensemble: int | None, seed: int, embed: bool):
@@ -188,8 +190,8 @@ class EpisodeModel(nn.Module):
             raise ValueError("support_X and support_y disagree")
         Z = gauss_rank(np.vstack([S, Q]))
         E = 1 if embed else (ensemble or getattr(self, "ensemble", 1))
-        perms, signs = self._members(d, E, seed)
-        Zs = np.stack([Z[:, perms[e]] * signs[e] for e in range(E)]).astype(np.float32)
+        signs = self._sign_members(d, E, seed)
+        Zs = np.stack([Z * signs[e] for e in range(E)]).astype(np.float32)
         Zs = torch.from_numpy(Zs)
         sup_lab = np.asarray(support_y, dtype=np.int64)
         out = []

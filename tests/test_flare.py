@@ -317,13 +317,24 @@ def test_rowmlp_and_protonet_run_and_respect_padding():
         small.forward_episode(*_tensors([_episode(9, d=6)])[:5])
 
 
-def test_ensemble_changes_predictions_only_through_sign_flips():
+def test_ensemble_is_sign_flips_only_and_identity_for_one_member():
     model = _tiny_model(4).eval()
     e = _episode(10, d=8)
     S, y, Q = e.x[: e.n_support], e.label[: e.n_support], e.x[e.n_support:]
+    signs = model._sign_members(8, 5, seed=0)
+    assert signs.shape == (5, 8) and set(np.unique(signs)) <= {-1.0, 1.0}
+    assert np.array_equal(model._sign_members(8, 1, seed=0), np.ones((1, 8)))
+    # with E = 1 the output equals the plain forward pass on the normalised episode
     single = model.predict_logits(S, y, Q, ensemble=1)
-    perm_only = model.predict_logits(S, y, Q, ensemble=3, seed=0)
-    assert np.all(np.isfinite(perm_only)) and perm_only.shape == single.shape
+    again = model.predict_logits(S, y, Q, ensemble=1, seed=7)
+    np.testing.assert_allclose(single, again, atol=1e-6)
+    ens = model.predict_logits(S, y, Q, ensemble=4, seed=0)
+    assert ens.shape == single.shape and np.all(np.isfinite(ens))
+
+
+def test_warp_default_is_off_and_sign_flip_is_default():
+    assert data.AugConfig().warp is False and data.AugConfig().sign_flip is True
+    assert data.EpisodeConfig().query_size == 256
 
 
 # ---------- training ----------
@@ -363,7 +374,7 @@ def test_learns_rule_from_support_within_a_few_hundred_cpu_steps(tmp_path):
     gen = _RuleEpisodes(seed=0, d=2, k=32, q=64)
     val = _RuleEpisodes(seed=99, d=2, k=32, q=64).batch(16)
     summary = train.fit(model, gen, val, steps=300, lr=3e-3, warmup=20, batch_size=8, device="cpu",
-                        eval_every=300, log_every=100, out=tmp_path / "run")
+                        val_every=300, log_every=100, out=tmp_path / "run")
     assert summary["best_step"] == 300
     assert (tmp_path / "run" / "best.pt").exists() and (tmp_path / "run" / "last.pt").exists()
     lines = (tmp_path / "run" / "log.jsonl").read_text().splitlines()
@@ -382,7 +393,7 @@ def test_fit_checkpoints_reload_with_same_predictions(tmp_path):
     model = FlareModel(TINY_CONFIG)
     val = EpisodeSampler(_two_pools(), EpisodeConfig(), 1).batch(4)
     train.fit(model, EpisodeSampler(_two_pools(), EpisodeConfig(), 0), val, steps=3, out=tmp_path,
-              batch_size=2, device="cpu", eval_every=3, log_every=1, warmup=1)
+              batch_size=2, device="cpu", val_every=3, log_every=1, warmup=1)
     loaded = flare_model.load_model(tmp_path / "last.pt")
     e = _episode(12, d=D)
     model.eval()
@@ -451,7 +462,7 @@ def test_evaluation_pipeline_end_to_end(tmp_path):
     save_checkpoint(runs / "tgt_s0" / "best.pt", FlareModel(replace(TINY_CONFIG, ensemble=2)), step=0)
     save_checkpoint(runs / "tgt_s0_protonet" / "best.pt", ProtoNet(TINY_CONFIG), step=0)
     ctx = evaluate.EvalContext(runs_dir=runs, supports_dir=tmp_path, device="cpu", threads=2, al_pool=200,
-                               ks=(8, 32), n_draws=2)
+                               ks=(8, 16), n_draws=2)
 
     def sources():
         rng = np.random.default_rng(5)
@@ -460,32 +471,158 @@ def test_evaluation_pipeline_end_to_end(tmp_path):
         return [Domain_for("src", X, y)]
 
     methods = ["catboost-target", "knn", "lr", "rf", "catboost-ft", "protonet", "flare", "flare-E1", "flare-noA1",
-               "flare-al", "flare-kcenter-raw"]
+               "flare-al", "flare-kcenter-raw", "catboost-fulllabel"]
     out = tmp_path / "eval_tgt.csv"
+    attack_rows = []
 
     def emit(row):
         pd.DataFrame([row], columns=evaluate.RESULT_COLUMNS).to_csv(out, mode="a", header=not out.exists(), index=False)
 
-    rows = evaluate.evaluate_seed("tgt", split, ctx, methods, sources_fn=sources, done=set(), emit=emit)
-    # flare-noA1 has no checkpoint here, so it is skipped
-    expected = (len(methods) - 1) * 2 * 2
+    rows = evaluate.evaluate_seed("tgt", split, ctx, methods, sources_fn=sources, done=set(), emit=emit,
+                                  emit_attack=attack_rows.append)
+    # flare-noA1 has no checkpoint here, so it is skipped; the full-label reference is one row with k = 0
+    expected = (len(methods) - 2) * 2 * 2 + 1
     assert len(rows) == expected
     frame = pd.read_csv(out)
     assert list(frame.columns) == evaluate.RESULT_COLUMNS
     assert set(frame["method"]) == set(methods) - {"flare-noA1"}
-    metric_cols = frame[["roc_auc", "pr_auc", "balanced_accuracy", "f1"]].dropna()
+    full = frame[frame["method"] == "catboost-fulllabel"]
+    assert len(full) == 1 and int(full["k"].iloc[0]) == 0 and int(full["n_support"].iloc[0]) == len(split.y_train)
+    fl = frame[frame["k"] > 0]
+    metric_cols = fl[["roc_auc", "pr_auc", "balanced_accuracy", "f1"]].dropna()
     assert ((metric_cols >= 0) & (metric_cols <= 1)).all().all()
-    assert (frame["n_support"] == frame["k"]).all()
+    assert (fl["n_support"] == fl["k"]).all()
+    # per-attack recall is produced for k = PER_ATTACK_K only (16 here)
+    assert attack_rows and {r["k"] for r in attack_rows} == {evaluate.PER_ATTACK_K}
+    assert set(r["attack_type"] for r in attack_rows) == {"x"}
     # resuming with the finished rows adds nothing
     done = evaluate._done_keys(out)
     again = evaluate.evaluate_seed("tgt", split, ctx, methods, sources_fn=sources, done=done, emit=None)
     assert again == []
     # supports are identical across methods for the same (k, draw)
-    sup = evaluate.load_or_draw_supports(tmp_path / "supports_tgt_s0.json", "tgt", 0, split.y_train, (8, 32), 2)
-    for name, grp in frame.groupby(["k", "draw"]):
+    sup = evaluate.load_or_draw_supports(tmp_path / "supports_tgt_s0.json", "tgt", 0, split.y_train, (8, 16), 2)
+    for name, grp in fl.groupby(["k", "draw"]):
         assert grp["n_support"].nunique() == 1
     assert len(sup[8]) == 2
 
 
 def Domain_for(name, X, y):
     return Domain(name=name, X=X, y=y)
+
+
+# ---------- training infrastructure ----------
+
+
+def test_episode_stream_is_deterministic_per_seed_and_worker_count():
+    from crossids.flare.data import EpisodeStream
+
+    def first_batches(workers_id: int, n_workers: int, stream: int):
+        from crossids.flare import data as d
+
+        seed = d._stream_seed(3, stream, workers_id, n_workers)
+        sampler = EpisodeSampler(_two_pools(), EpisodeConfig(), seed)
+        return [d.batch_arrays(sampler.batch(4))["x"] for _ in range(2)]
+
+    a, b = first_batches(0, 2, 0), first_batches(0, 2, 0)
+    for x, y in zip(a, b):
+        np.testing.assert_array_equal(x, y)
+    c = first_batches(1, 2, 0)
+    assert not np.array_equal(a[0], c[0])
+    d = first_batches(0, 2, 5)
+    assert not np.array_equal(a[0], d[0])
+    # the DataLoader-facing stream yields dict batches in-process (no workers)
+    stream = EpisodeStream(_two_pools(), EpisodeConfig(), 3, batch_size=4)
+    it = iter(stream)
+    item = next(it)
+    assert set(item) == {"x", "feat_pad", "row_valid", "is_query", "label", "truth"}
+    assert item["x"].shape[0] == 4
+
+
+def test_fit_resumes_from_last_checkpoint(tmp_path):
+    torch.manual_seed(2)
+    model = FlareModel(TINY_CONFIG)
+    val = EpisodeSampler(_two_pools(), EpisodeConfig(), 1).batch(4)
+    run_dir = tmp_path / "resume"
+    first = train.fit(model, EpisodeSampler(_two_pools(), EpisodeConfig(), 0), val, steps=4, out=run_dir,
+                      batch_size=2, device="cpu", val_every=2, ckpt_every=2, log_every=1, warmup=1)
+    assert first["resumed_from"] == 0 and (run_dir / "last.pt").exists()
+    model2 = FlareModel(TINY_CONFIG)
+    second = train.fit(model2, EpisodeSampler(_two_pools(), EpisodeConfig(), 1), val, steps=8, out=run_dir,
+                       batch_size=2, device="cpu", val_every=2, ckpt_every=2, log_every=1, warmup=1)
+    assert second["resumed_from"] == 4 and second["steps"] == 8
+    assert train.read_resume_step(run_dir) == 8
+    lines = [json.loads(ln) for ln in (run_dir / "log.jsonl").read_text().splitlines()]
+    assert max(r["step"] for r in lines) == 8
+
+
+def test_bench_reports_seconds_per_step_without_writing_outputs(tmp_path):
+    model = FlareModel(TINY_CONFIG)
+    summary = train.fit(model, EpisodeSampler(_two_pools(), EpisodeConfig(), 0), [], steps=0, bench=2,
+                        batch_size=2, device="cpu")
+    assert summary["bench_seconds_per_step"] > 0
+    assert not (tmp_path / "log.jsonl").exists()
+
+
+def test_precision_is_fp32_on_cpu():
+    dtype, scaler, desc = train.select_precision(torch.device("cpu"))
+    assert dtype is None and scaler is False and "fp32" in desc
+
+
+def test_fulllabel_and_per_attack_csv_helpers_are_consistent():
+    from crossids.flare import report
+
+    frame = pd.DataFrame([
+        {"method": "catboost-target", "target": "t", "k": 8, "draw": 0, "seed": 0, "roc_auc": 0.6,
+         "balanced_accuracy": 0.5, "pr_auc": 0.5, "f1": 0.5},
+        {"method": "flare", "target": "t", "k": 8, "draw": 0, "seed": 0, "roc_auc": 0.9,
+         "balanced_accuracy": 0.8, "pr_auc": 0.8, "f1": 0.7},
+    ])
+    table = report.learning_table(frame)
+    assert set(table["method"]) == {"catboost-target", "flare"}
+    wil = report.wilcoxon_table(frame)
+    assert {"flare", "protonet", "flare-al", "flare-kcenter-raw"} >= set(wil["method"]) - {"x"}
+    pa = pd.DataFrame([{"method": "flare", "target": "t", "k": 16, "draw": 0, "seed": 0, "attack_type": "DDoS",
+                        "n": 10, "detected": 7, "recall": 0.7}])
+    fam = report.family_recall(pa)
+    assert fam.loc[0, "family"] == "ddos" and abs(fam.loc[0, "recall"] - 0.7) < 1e-12
+
+
+def test_report_writes_tables_and_figures(tmp_path):
+    from crossids.flare import report
+
+    rng = np.random.default_rng(0)
+    rows, arows = [], []
+    for target in ("alpha", "beta"):
+        for seed in (0, 1):
+            for method, shift in (("flare", 0.1), ("protonet", 0.05), ("catboost-target", 0.0),
+                                  ("flare-al", 0.08), ("flare-kcenter-raw", 0.09)):
+                for k in (4, 8, 16):
+                    for draw in range(3):
+                        auc = 0.5 + shift * np.log2(k) + 0.02 * rng.standard_normal()
+                        rows.append({"method": method, "target": target, "k": k, "draw": draw, "seed": seed,
+                                     "roc_auc": auc, "pr_auc": 0.5, "balanced_accuracy": 0.5 + auc / 3,
+                                     "f1": 0.6, "n_support": k, "n_attack_support": 1, "seconds": 0.1})
+                        for fam_type in ("DDoS", "PortScan"):
+                            arows.append({"method": method, "target": target, "k": 16, "draw": draw, "seed": seed,
+                                          "attack_type": fam_type, "n": 20, "detected": 10, "recall": 0.5})
+    rows.append({"method": "catboost-fulllabel", "target": "alpha", "k": 0, "draw": 0, "seed": 0, "roc_auc": 0.95,
+                 "pr_auc": 0.9, "balanced_accuracy": 0.9, "f1": 0.9, "n_support": 100, "n_attack_support": 20,
+                 "seconds": 1.0})
+    runs = tmp_path / "runs"
+    runs.mkdir()
+    pd.DataFrame(rows, columns=evaluate.RESULT_COLUMNS).to_csv(runs / "eval_alpha.csv", index=False)
+    pd.DataFrame(arows, columns=evaluate.ATTACK_COLUMNS).to_csv(runs / "per_attack_alpha.csv", index=False)
+    bench = tmp_path / "bench"
+    bench.mkdir()
+    pd.DataFrame([{"schema": "core", "mode": "transductive", "experiment": "lodo", "method": "rift", "target": "alpha",
+                   "seed": 0, "roc_auc": 0.7}]).to_csv(bench / "runs.csv", index=False)
+    out = tmp_path / "out"
+    report.run(runs, out, bench)
+    for name in ("learning_by_target.csv", "learning_average.csv", "wilcoxon_vs_catboost_target.csv",
+                 "partI_best_label_free.csv", "catboost_fulllabel.csv", "per_attack_family_k16.csv",
+                 "learning_curves_roc_auc.png", "learning_curves_balanced_accuracy.png", "per_attack_family_k16.png"):
+        assert (out / name).exists(), name
+    ref = pd.read_csv(out / "partI_best_label_free.csv")
+    assert ref.loc[0, "method"] == "rift"
+    wil = pd.read_csv(out / "wilcoxon_vs_catboost_target.csv")
+    assert set(wil["method"]) == {"flare", "protonet", "flare-al", "flare-kcenter-raw"}

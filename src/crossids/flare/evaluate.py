@@ -30,6 +30,7 @@ from sklearn.preprocessing import StandardScaler
 from ..methods.base import Domain
 from ..methods.baselines import CatBoostBaseline
 from ..metrics import evaluate as score_predictions
+from ..metrics import per_attack_recall
 from .al import empty_support_embeddings, select_flare_al, select_kcenter_raw
 from .data import Split, load_split, meta_train_keys, target_features, target_keys
 from .model import EpisodeModel, load_model
@@ -41,6 +42,7 @@ N_DRAWS = 10
 AL_POOL_CAP = 20_000
 METRICS = ("roc_auc", "pr_auc", "balanced_accuracy", "f1")
 RESULT_COLUMNS = ["method", "target", "k", "draw", "seed", *METRICS, "n_support", "n_attack_support", "seconds"]
+ATTACK_COLUMNS = ["method", "target", "k", "draw", "seed", "attack_type", "n", "detected", "recall"]
 FLARE_VARIANTS = {
     "flare": ("", None),
     "flare-E1": ("", 1),  # same checkpoint, no test-time ensemble (section 17)
@@ -53,7 +55,9 @@ PROTONET = "protonet"
 PROTONET_SUFFIX = "_protonet"
 BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn")
 ACTIVE = ("flare-al", "flare-kcenter-raw")
-ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE
+FULLLABEL = "catboost-fulllabel"  # upper reference: trained on the whole target train split (k = 0 in the CSV)
+ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE + (FULLLABEL,)
+PER_ATTACK_K = 16
 DEFAULT_SEEDS = (0, 1, 2)
 
 
@@ -240,15 +244,36 @@ def score_row(y_test: np.ndarray, proba: np.ndarray) -> dict[str, float]:
     return {name: m[name] for name in METRICS}
 
 
+def _fulllabel_proba(split: Split, ctx: EvalContext) -> np.ndarray:
+    from catboost import CatBoostClassifier
+
+    est = CatBoostClassifier(iterations=500, depth=6, learning_rate=0.05, auto_class_weights="Balanced", verbose=0,
+                             random_seed=split.seed, allow_writing_files=False, thread_count=ctx.threads)
+    return _sklearn_predict(est, split.X_train, split.y_train, split.X_test)
+
+
 def evaluate_seed(target: str, split: Split, ctx: EvalContext, methods: list[str], *, sources_fn=None,
-                  done: set | None = None, emit=None) -> list[dict]:
-    """All requested (method, k, draw) rows for one target and seed. ``emit`` receives each row as it is produced."""
+                  done: set | None = None, emit=None, emit_attack=None) -> list[dict]:
+    """All requested (method, k, draw) rows for one target and seed. ``emit`` receives each row as it is produced.
+
+    ``emit_attack`` receives per-attack-type recall rows for k = PER_ATTACK_K. The full-label CatBoost reference
+    is computed once per seed and stored with k = 0 and draw = 0.
+    """
     done = done or set()
     rows: list[dict] = []
     st = SeedState(target, split.seed, split, ctx, sources_fn=sources_fn)
     sup = load_or_draw_supports(ctx.supports_dir / f"supports_{target}_s{split.seed}.json", target, split.seed,
                                 split.y_train, ctx.ks, ctx.n_draws)
     y_test = split.y_test
+    if FULLLABEL in methods and (FULLLABEL, target, 0, 0, split.seed) not in done:
+        proba = _fulllabel_proba(split, ctx)
+        row = {"method": FULLLABEL, "target": target, "k": 0, "draw": 0, "seed": split.seed,
+               **score_row(y_test, proba), "n_support": int(len(split.y_train)),
+               "n_attack_support": int(np.sum(split.y_train)), "seconds": 0.0}
+        rows.append(row)
+        if emit is not None:
+            emit(row)
+    methods = [m for m in methods if m != FULLLABEL]
     for k in ctx.ks:
         for draw in range(ctx.n_draws):
             idx = sup[k][draw]
@@ -268,6 +293,12 @@ def evaluate_seed(target: str, split: Split, ctx: EvalContext, methods: list[str
                 rows.append(row)
                 if emit is not None:
                     emit(row)
+                if emit_attack is not None and k == PER_ATTACK_K:
+                    per = per_attack_recall(y_test, (np.asarray(proba) >= 0.5).astype(int), split.attack_test)
+                    for r in per.itertuples(index=False):
+                        emit_attack({"method": name, "target": target, "k": k, "draw": draw, "seed": split.seed,
+                                     "attack_type": r.attack_type, "n": int(r.n), "detected": int(r.detected),
+                                     "recall": float(r.recall)})
                 log.info("%s %s k=%d draw=%d seed=%d roc_auc=%.4f pr_auc=%.4f bal_acc=%.4f f1=%.4f",
                          name, target, k, draw, split.seed, row["roc_auc"], row["pr_auc"],
                          row["balanced_accuracy"], row["f1"])
@@ -292,6 +323,12 @@ def evaluate_target(target: str, seeds, out: Path, ctx: EvalContext, methods: li
     def emit(row: dict) -> None:
         pd.DataFrame([row], columns=RESULT_COLUMNS).to_csv(out, mode="a", header=not out.exists(), index=False)
 
+    attack_out = out.parent / f"per_attack_{target}.csv"
+
+    def emit_attack(row: dict) -> None:
+        pd.DataFrame([row], columns=ATTACK_COLUMNS).to_csv(attack_out, mode="a", header=not attack_out.exists(),
+                                                           index=False)
+
     for seed in seeds:
         split = load_split(target, seed, data_dir, features=feats)
 
@@ -299,7 +336,8 @@ def evaluate_target(target: str, seeds, out: Path, ctx: EvalContext, methods: li
             return [Domain(name=k, X=s.X_train.astype(np.float64), y=s.y_train) for k in meta_train_keys(target)
                     for s in [load_split(k, seed, data_dir, features=feats)]]
 
-        evaluate_seed(target, split, ctx, methods, sources_fn=sources_fn, done=done, emit=emit)
+        evaluate_seed(target, split, ctx, methods, sources_fn=sources_fn, done=done, emit=emit,
+                      emit_attack=emit_attack)
     return out
 
 

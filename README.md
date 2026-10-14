@@ -271,42 +271,72 @@ every target flow without any gradient step on the target. Code lives in
 
 | Module | Contents |
 |---|---|
-| `data.py` | Part I 70/30 split per seed (same `split_tables` call, so test rows match the benchmark), Gaussian-rank normalisation, episode sampler with augmentations A1–A4 (switchable), padded batches |
-| `model.py` | FLARE encoder (§13), ProtoNet baseline, test-time ensemble, checkpoints |
-| `train.py` | Meta-training with AdamW, warm-up and cosine schedule, validation on held-out source rows, best and last checkpoints |
-| `evaluate.py` | Shared support draws (`supports_<target>_s<seed>.json`), FLARE variants, ProtoNet, active cold start, CatBoost, RF, LR, kNN, source-pretrained CatBoost, TabPFN when available |
+| `data.py` | Part I 70/30 split per seed (same `split_tables` call, so test rows match the benchmark), per-episode Gaussian-rank normalisation, episode sampler with augmentations A1–A4 (switchable), padded batches, `EpisodeStream` for DataLoader workers with per-worker seeded generators |
+| `model.py` | FLARE encoder (§13), ProtoNet baseline, sign-flip test-time ensemble, checkpoints |
+| `train.py` | Meta-training: AdamW, 1000-step warm-up and cosine schedule, validation every 500 steps on 64 held-out source episodes, `last.pt` every 1000 steps with automatic resume, `--bench` timing |
+| `evaluate.py` | Shared support draws (`supports_<target>_s<seed>.json`), FLARE variants, ProtoNet, active cold start, CatBoost, RF, LR, kNN, source-pretrained CatBoost, TabPFN when available, full-label CatBoost reference, per-attack recall at k = 16 |
 | `al.py` | Active cold start (§15): k-center on label-free embeddings, then entropy times distance; raw-feature k-center |
+| `report.py` | Learning curves, Wilcoxon tests against target-only CatBoost, per-attack-family recall, Part I reference line |
+
+**Invariance and augmentation.** The model sees, for every feature, the rank of
+each row within its episode. It is therefore invariant to any strictly monotone
+per-feature transform by construction, and a monotone warp of the raw values
+changes nothing. Augmentation A1 is the per-feature sign flip (p = 0.5). The
+monotone warp exists behind `--warp` but is off by default. The model is
+invariant to feature order, so the test-time ensemble (E = 8) varies only the
+sign flips. With `E = 1` the prediction is the plain forward pass.
 
 Usage (run from the repository root; the default device is CUDA when available,
 pass `--device cpu` for the tiny configuration):
 
 ```bash
-# meta-train FLARE for one target and seed (default config: 6 layers, width 128, 4 heads, 60k steps)
-python -m crossids.flare.train --target usbids1 --seed 0 --steps 60000 --out runs/flare/usbids1_s0
+# meta-train FLARE for one target and seed (default: 6 layers, width 128, 4 heads, 20k steps, query 256)
+python -m crossids.flare.train --target usbids1 --seed 0 --out runs/flare/usbids1_s0
+# same command again resumes from runs/flare/usbids1_s0/last.pt
+# timing only: 3 timed steps after a 5-step warm-up, no validation or checkpoints
+python -m crossids.flare.train --target usbids1 --bench 3 --device cpu
 
-# ablations (seed 0): no direction-agnostic augmentation, no composite tasks, row MLP instead of
-# feature attention, synthetic random-function episodes only; and ProtoNet
-python -m crossids.flare.train --target usbids1 --seed 0 --ablation noA1 --out runs/flare/usbids1_s0_noA1
-python -m crossids.flare.train --target usbids1 --seed 0 --model protonet --out runs/flare/usbids1_s0_protonet
+# ablations (seed 0): no sign flip (noA1), no composite tasks (noA3), row MLP instead of feature
+# attention (rowmlp), synthetic random-function episodes only (synthetic); and ProtoNet
+python -m crossids.flare.train --target usbids1 --ablation noA1 --out runs/flare/usbids1_s0_noA1
+python -m crossids.flare.train --target usbids1 --model protonet --out runs/flare/usbids1_s0_protonet
 
 # few-shot evaluation: k in {4,...,128}, 10 shared support draws, metrics on the Part I target test split
 python -m crossids.flare.evaluate --target usbids1 --seeds 0 1 2 --runs-dir runs/flare --out runs/flare/eval_usbids1.csv
+
+# summary: learning curves per target and averaged, Wilcoxon tests, per-attack-family recall at k = 16
+python -m crossids.flare.report --runs runs/flare --out results/flare
 ```
 
+Training options: `--num-workers` (DataLoader workers that generate episodes,
+default 2; the episode sequence is deterministic for a given seed and worker count),
+`--query-size` (256), `--val-every` (500), `--log-every` (50), `--compile`
+(`torch.compile`, off by default). On CUDA, bf16 autocast is used only when the
+device supports it natively (compute capability 8.0 or newer); otherwise fp16
+autocast with a gradient scaler is used. The chosen mode is logged.
+
 The evaluation CSV has one row per (method, target, k, draw, seed) with ROC-AUC,
-PR-AUC, balanced accuracy and F1. It is appended as it is produced, and rows already
-present are skipped on restart. Support draws are stored in `supports_<target>_s<seed>.json`
-and reused by every method. Test-time normalisation uses the unlabelled target test
-features, as the episode normalisation does during meta-training.
+PR-AUC, balanced accuracy and F1. `catboost-fulllabel` is the full-label upper
+reference, stored once per seed with k = 0. `per_attack_<target>.csv` holds
+per-attack-type recall at k = 16. Rows are appended as they are produced, and rows
+already present are skipped on restart. Support draws are stored in
+`supports_<target>_s<seed>.json` and reused by every method. Test-time normalisation
+uses the unlabelled target test features, as the episode normalisation does during
+meta-training.
+
+The report reads the Part I table `results/runs.csv` read-only for the best
+label-free method per target (LODO, transductive, seed 0), and writes CSVs and
+figures under `results/flare/`.
 
 Meta-training on a GPU is run by `scripts/flare_colab.sh`. It packages `src/`, the
 project metadata and the cached parquet files, creates a Colab session with
-`google-colab-cli`, runs the 8 targets × 3 seeds (plus ProtoNet and the ablations
-for seed 0), evaluates each target and downloads the outputs. Each job is skipped
-when its outputs already exist locally, so rerunning the script resumes:
+`google-colab-cli`, and runs each job detached on the VM with a log file. The
+local side polls every job with short calls and downloads its outputs when it
+finishes. A relaunched job resumes from its `last.pt`, and a finished job is
+skipped:
 
 ```bash
-scripts/flare_colab.sh              # all stages: package setup train eval stop
+scripts/flare_colab.sh              # all stages: package setup train eval report stop
 FLARE_DRY_RUN=1 scripts/flare_colab.sh train   # print the colab commands without running them
 ```
 
