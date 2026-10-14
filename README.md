@@ -259,3 +259,59 @@ table per mode, experiment and transfer type.
 `results/quick_catboost/` contains exploratory CatBoost runs. Their samples are
 water-filled per attack type, so their priors are not natural priors and their
 numbers are not benchmark results; each file says so at the top.
+
+## Part II: FLARE
+
+FLARE (Few-shot Learning of Attack Rules across Environments, DESIGN.md §11–19)
+is an in-context detector meta-trained on the other core-tier datasets (leave one
+dataset out). At test time it receives k labelled target flows (at least one per
+class) and the unlabelled target flows, and it predicts the attack probability of
+every target flow without any gradient step on the target. Code lives in
+`src/crossids/flare/`:
+
+| Module | Contents |
+|---|---|
+| `data.py` | Part I 70/30 split per seed (same `split_tables` call, so test rows match the benchmark), Gaussian-rank normalisation, episode sampler with augmentations A1–A4 (switchable), padded batches |
+| `model.py` | FLARE encoder (§13), ProtoNet baseline, test-time ensemble, checkpoints |
+| `train.py` | Meta-training with AdamW, warm-up and cosine schedule, validation on held-out source rows, best and last checkpoints |
+| `evaluate.py` | Shared support draws (`supports_<target>_s<seed>.json`), FLARE variants, ProtoNet, active cold start, CatBoost, RF, LR, kNN, source-pretrained CatBoost, TabPFN when available |
+| `al.py` | Active cold start (§15): k-center on label-free embeddings, then entropy times distance; raw-feature k-center |
+
+Usage (run from the repository root; the default device is CUDA when available,
+pass `--device cpu` for the tiny configuration):
+
+```bash
+# meta-train FLARE for one target and seed (default config: 6 layers, width 128, 4 heads, 60k steps)
+python -m crossids.flare.train --target usbids1 --seed 0 --steps 60000 --out runs/flare/usbids1_s0
+
+# ablations (seed 0): no direction-agnostic augmentation, no composite tasks, row MLP instead of
+# feature attention, synthetic random-function episodes only; and ProtoNet
+python -m crossids.flare.train --target usbids1 --seed 0 --ablation noA1 --out runs/flare/usbids1_s0_noA1
+python -m crossids.flare.train --target usbids1 --seed 0 --model protonet --out runs/flare/usbids1_s0_protonet
+
+# few-shot evaluation: k in {4,...,128}, 10 shared support draws, metrics on the Part I target test split
+python -m crossids.flare.evaluate --target usbids1 --seeds 0 1 2 --runs-dir runs/flare --out runs/flare/eval_usbids1.csv
+```
+
+The evaluation CSV has one row per (method, target, k, draw, seed) with ROC-AUC,
+PR-AUC, balanced accuracy and F1. It is appended as it is produced, and rows already
+present are skipped on restart. Support draws are stored in `supports_<target>_s<seed>.json`
+and reused by every method. Test-time normalisation uses the unlabelled target test
+features, as the episode normalisation does during meta-training.
+
+Meta-training on a GPU is run by `scripts/flare_colab.sh`. It packages `src/`, the
+project metadata and the cached parquet files, creates a Colab session with
+`google-colab-cli`, runs the 8 targets × 3 seeds (plus ProtoNet and the ablations
+for seed 0), evaluates each target and downloads the outputs. Each job is skipped
+when its outputs already exist locally, so rerunning the script resumes:
+
+```bash
+scripts/flare_colab.sh              # all stages: package setup train eval stop
+FLARE_DRY_RUN=1 scripts/flare_colab.sh train   # print the colab commands without running them
+```
+
+Tests for FLARE run on CPU with the tiny configuration:
+
+```bash
+pytest tests/test_flare.py
+```

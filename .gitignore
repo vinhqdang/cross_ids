@@ -227,3 +227,6 @@ results/raw/
 *.part
 catboost_info/
 results/smoke/
+
+# FLARE run folders (checkpoints, logs, evaluation CSVs)
+runs/

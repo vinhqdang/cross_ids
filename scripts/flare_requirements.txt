@@ -1,0 +1,9 @@
+# Installed on the Colab VM on top of its preinstalled torch, numpy and pandas (see scripts/flare_colab.sh).
+catboost
+pyarrow
+scikit-learn
+scipy
+pyyaml
+threadpoolctl
+# TabPFN v2 weights need a Prior Labs token (TABPFN_TOKEN); the evaluation skips it with a logged reason otherwise.
+tabpfn
