@@ -47119,3 +47119,498 @@ b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->toniot,2,mitm,269,1
 b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->toniot,2,password,4390,121,0.0275626423690205
 b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->toniot,2,scanning,1266,732,0.5781990521327014
 b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->toniot,2,xss,2515,2148,0.8540755467196819
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,backdoor,579,29,0.05008635578583765
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,ddos,3477,1864,0.536094334196146
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,dos,1499,487,0.3248832555036691
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,injection,5871,4133,0.7039686595128598
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,mitm,269,100,0.37174721189591076
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,password,4390,171,0.03895216400911162
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,scanning,1266,341,0.2693522906793049
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->toniot,2,xss,2515,1974,0.7848906560636183
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,backdoor,579,136,0.23488773747841105
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,ddos,3477,1782,0.5125107851596203
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,dos,1499,266,0.17745163442294865
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,injection,5871,3963,0.6750127746550844
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,mitm,269,139,0.516728624535316
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,password,4390,213,0.04851936218678816
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,scanning,1266,755,0.5963665086887836
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->toniot,2,xss,2515,2158,0.858051689860835
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,backdoor,579,18,0.031088082901554404
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,ddos,3477,485,0.13948806442335346
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,dos,1499,35,0.02334889926617745
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,injection,5871,2815,0.4794753874978709
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,mitm,269,73,0.27137546468401486
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,password,4390,19,0.004328018223234624
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,scanning,1266,14,0.011058451816745656
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->toniot,2,xss,2515,1439,0.5721669980119284
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,backdoor,579,233,0.40241796200345425
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,ddos,3477,2096,0.6028185217141213
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,dos,1499,633,0.42228152101400934
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,injection,5871,5517,0.939703628002044
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,mitm,269,202,0.7509293680297398
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,password,4390,884,0.20136674259681092
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,scanning,1266,953,0.7527646129541864
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->toniot,2,xss,2515,2255,0.8966202783300199
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,Attack,183,47,0.2568306010928962
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,C&C,1265,1055,0.83399209486166
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,14,0.875
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,85,0.5592105263157895
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,C&C-Torii,6,2,0.3333333333333333
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,DDoS,38,12,0.3157894736842105
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,FileDownload,2,1,0.5
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,Okiru,243,13,0.053497942386831275
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,Okiru-Attack,1,0,0.0
+b169375b711b,core,transductive,lr,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,3536,0.921793534932221
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,Attack,183,43,0.23497267759562843
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,C&C,1265,458,0.36205533596837947
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,16,1.0
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,82,0.5394736842105263
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,4,1.0
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,C&C-Torii,6,3,0.5
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,DDoS,38,12,0.3157894736842105
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,FileDownload,2,2,1.0
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,Okiru,243,39,0.16049382716049382
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rf,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,14,0.0036496350364963502
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,Attack,183,74,0.40437158469945356
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,C&C,1265,415,0.32806324110671936
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,11,0.6875
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,82,0.5394736842105263
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,C&C-Torii,6,3,0.5
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,DDoS,38,22,0.5789473684210527
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,FileDownload,2,1,0.5
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,Okiru,243,91,0.37448559670781895
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,hgb,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,56,0.014598540145985401
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,Attack,183,136,0.7431693989071039
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,C&C,1265,341,0.26956521739130435
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,12,0.75
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,73,0.48026315789473684
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,2,0.5
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,DDoS,38,37,0.9736842105263158
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,FileDownload,2,2,1.0
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,Okiru,243,238,0.9794238683127572
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,catboost,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,438,0.11418143899895725
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,Attack,183,79,0.43169398907103823
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,C&C,1265,379,0.29960474308300394
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,9,0.5625
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,1,0.006578947368421052
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,C&C-Torii,6,3,0.5
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,DDoS,38,25,0.6578947368421053
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,FileDownload,2,1,0.5
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,Okiru,243,11,0.04526748971193416
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,xgboost,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,239,0.06230448383733055
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,Attack,183,183,1.0
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,C&C,1265,1264,0.9992094861660079
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,16,1.0
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,151,0.993421052631579
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,4,1.0
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,C&C-Torii,6,5,0.8333333333333334
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,DDoS,38,28,0.7368421052631579
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,FileDownload,2,2,1.0
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,Okiru,243,236,0.9711934156378601
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,mlp,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,21,0.005474452554744526
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,Attack,183,177,0.9672131147540983
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,C&C,1265,419,0.3312252964426877
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,97,0.6381578947368421
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,C&C-Torii,6,1,0.16666666666666666
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,DDoS,38,28,0.7368421052631579
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,Okiru,243,235,0.9670781893004116
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,coral,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,163,0.04249217935349322
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,Attack,183,8,0.04371584699453552
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,C&C,1265,401,0.31699604743083004
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,16,1.0
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,15,0.09868421052631579
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,4,1.0
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,C&C-Torii,6,1,0.16666666666666666
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,DDoS,38,11,0.2894736842105263
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,FileDownload,2,2,1.0
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,Okiru,243,0,0.0
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,dann,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,2,0.0005213764337851929
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,Attack,183,9,0.04918032786885246
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,C&C,1265,924,0.7304347826086957
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,63,0.4144736842105263
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,DDoS,38,8,0.21052631578947367
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,Okiru,243,13,0.053497942386831275
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,2844,0.7413972888425443
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,Attack,183,183,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,C&C,1265,1265,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,152,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,C&C-Torii,6,6,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,DDoS,38,38,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,Okiru,243,243,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,3836,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,Attack,183,11,0.060109289617486336
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,C&C,1265,924,0.7304347826086957
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,78,0.5131578947368421
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,C&C-Torii,6,5,0.8333333333333334
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,DDoS,38,8,0.21052631578947367
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,Okiru,243,13,0.053497942386831275
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,1622,0.42283628779979143
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,Attack,183,0,0.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,C&C,1265,679,0.5367588932806324
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,47,0.3092105263157895
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,DDoS,38,0,0.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,Okiru,243,2,0.00823045267489712
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,6,0.0015641293013555788
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,Attack,183,9,0.04918032786885246
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,C&C,1265,924,0.7304347826086957
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,63,0.4144736842105263
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,DDoS,38,8,0.21052631578947367
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,Okiru,243,4,0.01646090534979424
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,2750,0.7168925964546402
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,Attack,183,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,C&C,1265,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,C&C-Torii,6,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,DDoS,38,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,Okiru,243,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,Okiru-Attack,1,0,0.0
+b169375b711b,core,transductive,rift-robust,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,1,0.00026068821689259646
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,Attack,183,8,0.04371584699453552
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,C&C,1265,747,0.5905138339920949
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,69,0.45394736842105265
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,C&C-Torii,6,2,0.3333333333333333
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,DDoS,38,13,0.34210526315789475
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,Okiru,243,3,0.012345679012345678
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-standard,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,3514,0.916058394160584
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,Attack,183,9,0.04918032786885246
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,C&C,1265,918,0.7256916996047431
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,63,0.4144736842105263
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,DDoS,38,8,0.21052631578947367
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,Okiru,243,13,0.053497942386831275
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,Okiru-Attack,1,1,1.0
+b169375b711b,core,transductive,rift-st,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,2447,0.6379040667361835
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,Attack,183,1,0.00546448087431694
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,C&C,1265,918,0.7256916996047431
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,C&C-FileDownload,16,0,0.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,C&C-HeartBeat,152,55,0.3618421052631579
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,C&C-HeartBeat-FileDownload,4,0,0.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,C&C-Torii,6,4,0.6666666666666666
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,DDoS,38,8,0.21052631578947367
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,FileDownload,2,0,0.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,Okiru,243,13,0.053497942386831275
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,Okiru-Attack,1,0,0.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,unswnb15->iot23,2,PartOfAHorizontalPortScan,3836,10,0.0026068821689259644
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,DDoS,1759,93,0.052870949403069925
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,132,0.9361702127659575
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2295,0.9602510460251046
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,7,0.125
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,DoS slowloris,54,18,0.3333333333333333
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,FTP-Patator,56,54,0.9642857142857143
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,DDoS,1759,1640,0.9323479249573622
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,139,0.9858156028368794
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2137,0.894142259414226
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,51,0.9107142857142857
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,DoS slowloris,54,54,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,DDoS,1759,875,0.4974417282546902
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,104,0.7375886524822695
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1434,0.6
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,50,0.8928571428571429
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,DoS slowloris,54,54,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,DDoS,1759,1120,0.6367254121660034
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,131,0.9290780141843972
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1371,0.5736401673640167
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,50,0.8928571428571429
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,DoS slowloris,54,53,0.9814814814814815
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,DDoS,1759,947,0.5383740761796475
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,128,0.9078014184397163
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1635,0.6841004184100419
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,50,0.8928571428571429
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,DoS slowloris,54,53,0.9814814814814815
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,14,0.7368421052631579
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,5,0.8333333333333334
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,DDoS,1759,1248,0.709494030699261
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,64,0.45390070921985815
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,DoS Hulk,2390,713,0.298326359832636
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,51,0.9107142857142857
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,DoS slowloris,54,54,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,Infiltration,2,1,0.5
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,DDoS,1759,1079,0.6134167140420693
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,141,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2366,0.9899581589958159
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,51,0.9107142857142857
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,DoS slowloris,54,52,0.9629629629629629
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,SSH-Patator,37,1,0.02702702702702703
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,DDoS,1759,1533,0.8715179079022172
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,133,0.9432624113475178
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2291,0.9585774058577405
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,46,0.8214285714285714
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,DoS slowloris,54,24,0.4444444444444444
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,FTP-Patator,56,49,0.875
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,PortScan,25,16,0.64
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,DDoS,1759,302,0.1716884593519045
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,64,0.45390070921985815
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,DoS Hulk,2390,210,0.08786610878661087
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,0,0.0
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,DoS slowloris,54,12,0.2222222222222222
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,FTP-Patator,56,48,0.8571428571428571
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,PortScan,25,5,0.2
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,DDoS,1759,838,0.4764070494599204
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,134,0.950354609929078
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1737,0.7267782426778243
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,51,0.9107142857142857
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,DoS slowloris,54,54,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,FTP-Patator,56,55,0.9821428571428571
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-noDN,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,DDoS,1759,1078,0.6128482092097783
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,135,0.9574468085106383
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2288,0.9573221757322176
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,25,0.44642857142857145
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,DoS slowloris,54,13,0.24074074074074073
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,SSH-Patator,37,1,0.02702702702702703
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-noAnchor,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,DDoS,1759,725,0.412166003411029
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,44,0.3120567375886525
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,DoS Hulk,2390,381,0.1594142259414226
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,4,0.07142857142857142
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,DoS slowloris,54,34,0.6296296296296297
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,FTP-Patator,56,48,0.8571428571428571
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,PortScan,25,7,0.28
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,2,0.10526315789473684
+b169375b711b,core,transductive,rift-noIFS,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,1,0.16666666666666666
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,DDoS,1759,877,0.4985787379192723
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,65,0.46099290780141844
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1106,0.46276150627615065
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,0,0.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,DoS slowloris,54,24,0.4444444444444444
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,FTP-Patator,56,49,0.875
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,PortScan,25,11,0.44
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-noLSC,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,Bot,25,25,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,DDoS,1759,1750,0.9948834565093804
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,141,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,DoS Hulk,2390,2356,0.9857740585774059
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,29,0.5178571428571429
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,DoS slowloris,54,53,0.9814814814814815
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,FTP-Patator,56,56,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,PortScan,25,25,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,SSH-Patator,37,37,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,19,1.0
+b169375b711b,core,transductive,rift-robust,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,DDoS,1759,1611,0.915861284820921
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,134,0.950354609929078
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1896,0.793305439330544
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,34,0.6071428571428571
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,DoS slowloris,54,44,0.8148148148148148
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,FTP-Patator,56,53,0.9464285714285714
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,PortScan,25,16,0.64
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-standard,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,DDoS,1759,810,0.4604889141557703
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,65,0.46099290780141844
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,DoS Hulk,2390,354,0.14811715481171547
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,0,0.0
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,DoS slowloris,54,12,0.2222222222222222
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,FTP-Patator,56,48,0.8571428571428571
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,PortScan,25,4,0.16
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-st,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,Bot,25,22,0.88
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,DDoS,1759,1218,0.6924388857305287
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,DoS GoldenEye,141,114,0.8085106382978723
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,DoS Hulk,2390,1899,0.794560669456067
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,DoS Slowhttptest,56,7,0.125
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,DoS slowloris,54,48,0.8888888888888888
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,FTP-Patator,56,55,0.9821428571428571
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,Infiltration,2,2,1.0
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,PortScan,25,17,0.68
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,SSH-Patator,37,36,0.972972972972973
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,Web Attack � Brute Force,19,17,0.8947368421052632
+b169375b711b,core,transductive,rift-poolInit,pairwise,toniot->cicids2017,2,Web Attack � XSS,6,6,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,Bot,814,813,0.9987714987714987
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1278,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,0,0.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,249,0.9920318725099602
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,807,1.0
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,13,0.35135135135135137
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,Infilteration,663,396,0.5972850678733032
+b169375b711b,core,transductive,lr,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,599,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,Bot,814,810,0.995085995085995
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1262,0.9874804381846636
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,13,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,247,0.9840637450199203
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,735,0.9107806691449815
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,37,1.0
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,Infilteration,663,456,0.6877828054298643
+b169375b711b,core,transductive,rf,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,599,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,Bot,814,806,0.9901719901719902
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1245,0.9741784037558685
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,13,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,251,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,695,0.8612143742255266
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,37,1.0
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,Infilteration,663,423,0.6380090497737556
+b169375b711b,core,transductive,hgb,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,10,0.01669449081803005
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,Bot,814,806,0.9901719901719902
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1249,0.9773082942097027
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,13,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,251,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,725,0.8983890954151177
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,37,1.0
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,Infilteration,663,447,0.6742081447963801
+b169375b711b,core,transductive,catboost,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,316,0.5275459098497496
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,Bot,814,806,0.9901719901719902
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,Brute Force -Web,2,1,0.5
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1245,0.9741784037558685
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,13,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,251,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,623,0.7719950433705081
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,37,1.0
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,Infilteration,663,438,0.6606334841628959
+b169375b711b,core,transductive,xgboost,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,464,0.7746243739565943
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,Bot,814,807,0.9914004914004914
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1250,0.9780907668231612
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,13,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,251,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,786,0.9739776951672863
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,37,1.0
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,Infilteration,663,448,0.6757164404223228
+b169375b711b,core,transductive,mlp,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,599,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,Bot,814,813,0.9987714987714987
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,Brute Force -Web,2,2,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1278,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,0,0.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,249,0.9920318725099602
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,807,1.0
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,36,0.972972972972973
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,Infilteration,663,396,0.5972850678733032
+b169375b711b,core,transductive,coral,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,0,0.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,Bot,814,814,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,Brute Force -Web,2,1,0.5
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,DDOS attack-HOIC,1278,1278,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,DDOS attack-LOIC-UDP,13,0,0.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,DoS attacks-GoldenEye,251,251,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,DoS attacks-Hulk,807,807,1.0
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,DoS attacks-Slowloris,37,31,0.8378378378378378
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,Infilteration,663,406,0.6123680241327301
+b169375b711b,core,transductive,dann,pairwise,toniot->cicids2018,2,SSH-Bruteforce,599,0,0.0
