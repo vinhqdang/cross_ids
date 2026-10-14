@@ -3,9 +3,13 @@
 Example::
 
     python -m crossids.flare.train --target usbids1 --seed 0 --out runs/flare/usbids1_s0
+    python -m crossids.flare.train --target usbids1 --seed 0 --model flare2        # FLARE-2 (section 21)
 
 Validation episodes come from the held-out 30% of the meta-training datasets only; the target is never touched.
-Running again with the same ``--out`` resumes from ``last.pt`` (written every 1000 steps and at the end).
+FLARE-2 defaults to held-out-source validation (section 21.2): the dataset after the target in
+``VALIDATION_ORDER`` is used only for validation and the other meta-training datasets only for training. The in-source
+validation loss is logged next to it. Running again with the same ``--out`` resumes from ``last.pt`` (written every
+1000 steps and at the end).
 """
 
 from __future__ import annotations
@@ -33,8 +37,12 @@ from .data import (
     EpisodeSampler,
     EpisodeStream,
     SyntheticSampler,
+    TaskConfig,
+    TaskSampler,
     batch_arrays,
+    class_pools,
     collate,
+    heldout_sources,
     load_split,
     meta_train_keys,
     pools_from_split,
@@ -45,6 +53,8 @@ from .model import NAMED_CONFIGS, EpisodeModel, batch_to_torch, build_model, sav
 log = logging.getLogger("crossids.flare")
 
 ABLATIONS = (None, "noA1", "noA3", "rowmlp", "synthetic")
+MODELS = ("flare", "protonet", "flare2")
+VAL_MODES = ("heldout", "insource")
 VAL_SEED_OFFSET = 10_000
 DEFAULT_STEPS = 20_000
 DEFAULT_WARMUP = 1000
@@ -75,19 +85,80 @@ def episode_settings(ablation: str | None, query_size: int = DEFAULT_QUERY, warp
     return EpisodeConfig(query_size=query_size, aug=aug, context_max=context_max), mixing
 
 
+def default_val_mode(model_kind: str) -> str:
+    """FLARE-2 selects on held-out-source validation (section 21.2); FLARE and ProtoNet keep in-source validation."""
+    return "heldout" if model_kind == "flare2" else "insource"
+
+
+def _val_sampler(pools_or_none, ecfg: EpisodeConfig, seed: int, model_kind: str, tasks: TaskConfig, n_slots: int,
+                 slot_perm: bool):
+    """Episode source of validation pools: class episodes for FLARE-2, binary episodes otherwise."""
+    if model_kind == "flare2":
+        return TaskSampler(pools_or_none, ecfg, VAL_SEED_OFFSET + seed, tasks, n_slots, slot_perm)
+    return EpisodeSampler(pools_or_none, ecfg, VAL_SEED_OFFSET + seed)
+
+
 def build_training_data(target: str, seed: int, ablation: str | None, data_dir: str | Path, ecfg: EpisodeConfig,
-                        n_val: int, max_features: int = 13):
-    """Returns (pools or None, synthetic flag, validation episodes, meta-train keys)."""
+                        n_val: int, max_features: int = 13, model_kind: str = "flare", val_mode: str | None = None,
+                        tasks: TaskConfig | None = None, n_slots: int = 16, slot_perm: bool = True):
+    """Returns (pools or None, synthetic flag, validation episodes, meta-train keys).
+
+    ``val_mode`` ``heldout`` trains on the meta-training datasets minus V (section 21.2) and validates on V's held-out
+    30%; ``insource`` trains and validates on the held-out 30% of every meta-training dataset. FLARE-2 pools are
+    :class:`ClassPools` and its validation episodes are label-space tasks.
+    """
+    val_mode = val_mode or default_val_mode(model_kind)
+    if val_mode not in VAL_MODES:
+        raise ValueError(f"unknown validation mode {val_mode!r}")
+    tasks = tasks or TaskConfig()
     if ablation == "synthetic":
+        if model_kind == "flare2":
+            raise ValueError("the synthetic ablation is not defined for flare2")
         val = SyntheticSampler(ecfg, VAL_SEED_OFFSET + seed, max_features=max_features).batch(n_val)
         return None, True, val, []
     keys = meta_train_keys(target)
     if not keys:
         raise ValueError(f"no meta-training datasets for target {target}")
+    if val_mode == "heldout":
+        train_keys, v = heldout_sources(target)
+        val_keys = [v]
+    else:
+        train_keys, val_keys = keys, keys
+    splits = {k: load_split(k, seed, data_dir, features=CORE_FEATURES) for k in set(train_keys) | set(val_keys)}
+    if model_kind == "flare2":
+        pools = [class_pools(splits[k], "train") for k in train_keys]
+        val_pools = [class_pools(splits[k], "test") for k in val_keys]
+        val_pools = [p for p in val_pools if p.classes]
+    else:
+        pools = [pools_from_split(splits[k], "train") for k in train_keys]
+        val_pools = [pools_from_split(splits[k], "test") for k in val_keys]
+    val = _val_sampler(val_pools, ecfg, seed, model_kind, tasks, n_slots, slot_perm).batch(n_val)
+    return pools, False, val, train_keys
+
+
+def insource_validation(target: str, seed: int, data_dir: str | Path, ecfg: EpisodeConfig, n_val: int,
+                        model_kind: str = "flare", tasks: TaskConfig | None = None, n_slots: int = 16,
+                        slot_perm: bool = True) -> list:
+    """In-source validation episodes (held-out 30% of every meta-training dataset), logged next to held-out ones."""
+    keys = meta_train_keys(target)
     splits = [load_split(k, seed, data_dir, features=CORE_FEATURES) for k in keys]
-    pools = [pools_from_split(s, "train") for s in splits]
-    val = EpisodeSampler([pools_from_split(s, "test") for s in splits], ecfg, VAL_SEED_OFFSET + seed).batch(n_val)
-    return pools, False, val, keys
+    pools = [class_pools(s, "test") if model_kind == "flare2" else pools_from_split(s, "test") for s in splits]
+    pools = [p for p in pools if model_kind != "flare2" or p.classes]
+    return _val_sampler(pools, ecfg, seed, model_kind, tasks or TaskConfig(), n_slots, slot_perm).batch(n_val)
+
+
+def class_loss(logits: torch.Tensor, batch: dict) -> torch.Tensor:
+    """FLARE-2 cross-entropy over the active slots of each episode, averaged over query rows (section 21.4)."""
+    mask = batch["is_query"] & batch["row_valid"]
+    z = logits.float().masked_fill(~batch["slot_active"][:, None, :], float("-inf"))
+    return F.cross_entropy(z[mask], batch["slot_target"][mask])
+
+
+def episode_loss(model_kind: str, logits: torch.Tensor, batch: dict) -> torch.Tensor:
+    if model_kind == "flare2":
+        return class_loss(logits, batch)
+    mask = batch["is_query"] & batch["row_valid"]
+    return F.binary_cross_entropy_with_logits(logits.float()[mask], batch["truth"][mask])
 
 
 def _lr_factor(step: int, steps: int, warmup: int) -> float:
@@ -112,8 +183,37 @@ def _to_device(batch: dict, device: torch.device) -> dict:
 
 
 @torch.no_grad()
+def validate_classes(model: EpisodeModel, val_batches: list[dict]) -> dict[str, float]:
+    """FLARE-2 validation: mean query cross-entropy (stored as ``val_bce``), slot accuracy, and ROC-AUC of
+    attack vs benign on the two-class episodes (``val_auc``)."""
+    model.eval()
+    losses, accs, aucs = [], [], []
+    for t in val_batches:
+        logits = model.forward_episode(t["x"], t["feat_pad"], t["row_valid"], t["is_query"], t["label"]).float()
+        z = logits.masked_fill(~t["slot_active"][:, None, :], float("-inf"))
+        logp = torch.log_softmax(z, dim=-1)
+        for b in range(logits.shape[0]):
+            m = t["is_query"][b] & t["row_valid"][b]
+            tgt = t["slot_target"][b][m]
+            lp = logp[b][m]
+            losses.append(float(-lp.gather(1, tgt[:, None]).mean()))
+            accs.append(float((lp.argmax(1) == tgt).float().mean()))
+            if bool(t["binary"][b]):
+                cs = t["class_slots"][b]
+                s = (z[b][m][:, int(cs[1])] - z[b][m][:, int(cs[0])]).cpu().numpy()
+                y = (tgt == int(cs[1])).cpu().numpy().astype(int)
+                if 0 < y.sum() < len(y):
+                    aucs.append(float(roc_auc_score(y, s)))
+    model.train()
+    return {"val_bce": float(np.mean(losses)), "val_auc": float(np.mean(aucs)) if aucs else float("nan"),
+            "val_acc": float(np.mean(accs))}
+
+
+@torch.no_grad()
 def validate(model: EpisodeModel, val_batches: list[dict]) -> dict[str, float]:
-    """Mean query BCE and mean per-episode ROC-AUC over the validation episodes."""
+    """Mean query BCE and mean per-episode ROC-AUC over the validation episodes (FLARE-2: see validate_classes)."""
+    if model.kind == "flare2":
+        return validate_classes(model, val_batches)
     model.eval()
     losses, aucs = [], []
     for t in val_batches:
@@ -148,7 +248,8 @@ def _set_rng_state(state: dict) -> None:
 
 def _save_last(path: Path, model, opt, sched, scaler, step: int, best: dict, meta: dict) -> None:
     tmp = path.with_suffix(".tmp")
-    save_checkpoint(tmp, model, step=step, context_max=int(meta.get("context_max", 0)), train_state={
+    save_checkpoint(tmp, model, step=step, context_max=int(meta.get("context_max", 0)),
+                    slot_perm=bool(meta.get("slot_perm", True)), train_state={
         "optimizer": opt.state_dict(),
         "scheduler": sched.state_dict(),
         "scaler": scaler.state_dict() if scaler is not None else None,
@@ -163,7 +264,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
         lr: float = 3e-4, weight_decay: float = 0.01, warmup: int = DEFAULT_WARMUP, clip: float = 1.0,
         batch_size: int = 8, device="cpu", val_every: int = DEFAULT_VAL_EVERY, log_every: int = DEFAULT_LOG_EVERY,
         ckpt_every: int = CKPT_EVERY, compile: bool = False, bench: int = 0, val_batch_size: int = 8,
-        meta: dict | None = None) -> dict:
+        meta: dict | None = None, val_aux: dict | None = None) -> dict:
     """Train with AdamW and a warm-up + cosine schedule; keep the checkpoint with the lowest validation BCE.
 
     ``source`` is either a sampler with a ``batch(n)`` method (episodes built in-process) or an iterable of
@@ -202,8 +303,12 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
             step = int(state["step"])
             log.info("resuming %s from step %d", out, step)
 
-    val_batches = [batch_to_torch(collate(val_episodes[i:i + val_batch_size]), device)
-                   for i in range(0, len(val_episodes), val_batch_size)]
+    def _batches(episodes: list) -> list[dict]:
+        return [batch_to_torch(collate(episodes[i:i + val_batch_size]), device)
+                for i in range(0, len(episodes), val_batch_size)]
+
+    val_batches = _batches(val_episodes)
+    aux_batches = {name: _batches(eps) for name, eps in (val_aux or {}).items()}
     it = None if hasattr(source, "batch") else iter(source)
     log_fh = None
     if out is not None and not bench:
@@ -227,8 +332,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
         amp = torch.autocast(device_type=device.type, dtype=amp_dtype, enabled=amp_dtype is not None)
         with amp:
             logits = forward(batch["x"], batch["feat_pad"], batch["row_valid"], batch["is_query"], batch["label"])
-        mask = batch["is_query"] & batch["row_valid"]
-        loss = F.binary_cross_entropy_with_logits(logits.float()[mask], batch["truth"][mask])
+        loss = episode_loss(model.kind, logits, batch)
         opt.zero_grad(set_to_none=True)
         if scaler is not None:
             scaler.scale(loss).backward()
@@ -262,9 +366,12 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
             if is_best:
                 best = {"val_bce": metrics["val_bce"], "step": step, "val_auc": metrics["val_auc"]}
                 if out is not None:
-                    save_checkpoint(out / "best.tmp", model, step=step, context_max=ctx_max, **metrics)
+                    save_checkpoint(out / "best.tmp", model, step=step, context_max=ctx_max,
+                                    slot_perm=bool(meta.get("slot_perm", True)), **metrics)
                     os.replace(out / "best.tmp", out / "best.pt")
-            write({"step": step, **metrics, "best": is_best})
+            aux = {f"{name}_{key}": value for name, batches in aux_batches.items()
+                   for key, value in validate(model, batches).items()}
+            write({"step": step, **metrics, **aux, "best": is_best})
             log.info("eval step %d val_bce %.4f val_auc %.4f%s", step, metrics["val_bce"], metrics["val_auc"],
                      " (best)" if is_best else "")
             if out is not None and (step % ckpt_every == 0 or step == total):
@@ -308,7 +415,14 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--steps", type=int, default=DEFAULT_STEPS)
     p.add_argument("--out", default=None, help="run directory (default runs/flare/<target>_s<seed>); resumes if it has last.pt")
     p.add_argument("--ablation", choices=[a for a in ABLATIONS if a], default=None)
-    p.add_argument("--model", choices=["flare", "protonet"], default="flare")
+    p.add_argument("--model", choices=list(MODELS), default="flare",
+                   help="flare (binary, section 13), protonet (section 16) or flare2 (section 21)")
+    p.add_argument("--val-mode", choices=list(VAL_MODES), default=None,
+                   help="validation episodes: heldout (section 21.2, default for flare2) or insource (default otherwise)")
+    p.add_argument("--tasks", choices=["mixed", "binary"], default="mixed",
+                   help="flare2 only: mixed label-space tasks (section 21.3) or binary attack-vs-benign episodes only")
+    p.add_argument("--no-slot-perm", action="store_true",
+                   help="flare2 only: no random class-to-slot permutation per episode (ablation)")
     p.add_argument("--config", choices=sorted(NAMED_CONFIGS), default="default")
     p.add_argument("--device", default=None, help="cuda or cpu (default: cuda when available)")
     p.add_argument("--data-dir", default="data")
@@ -331,39 +445,78 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     return p.parse_args(argv)
 
 
+def run_name(args: argparse.Namespace) -> str:
+    """Default run directory name. FLARE-2 variants carry their suffixes: _f2, _f2_binary, _f2_noperm, _f2_insrc, _f2_ctx."""
+    base = f"{args.target}_s{args.seed}"
+    if args.model != "flare2":
+        return base
+    val_mode = args.val_mode or default_val_mode(args.model)
+    suffix = "_f2"
+    suffix += "_binary" if args.tasks == "binary" else ""
+    suffix += "_noperm" if args.no_slot_perm else ""
+    suffix += "_insrc" if val_mode == "insource" else ""
+    suffix += "_ctx" if args.context_max > 0 else ""
+    return base + suffix
+
+
 def run(args: argparse.Namespace) -> dict:
     torch.set_num_threads(args.threads)
     torch.manual_seed(args.seed)
     device = torch.device(args.device or ("cuda" if torch.cuda.is_available() else "cpu"))
     if device.type == "cuda" and not torch.cuda.is_available():
         raise RuntimeError("cuda requested but not available")
-    out = None if args.bench else Path(args.out or f"runs/flare/{args.target}_s{args.seed}")
+    if args.model != "flare2" and (args.tasks != "mixed" or args.no_slot_perm):
+        raise ValueError("--tasks and --no-slot-perm apply to --model flare2 only")
+    is_f2 = args.model == "flare2"
+    val_mode = args.val_mode or default_val_mode(args.model)
+    tasks = TaskConfig.binary_only() if args.tasks == "binary" else TaskConfig()
+    out = None if args.bench else Path(args.out or f"runs/flare/{run_name(args)}")
     resume_step = read_resume_step(out)
     ecfg, mixing = episode_settings(args.ablation, query_size=args.query_size, warp=args.warp,
                                     context_max=args.context_max)
     cfg = NAMED_CONFIGS[args.config]
     cfg = replace(cfg, feature_mixing=mixing, max_features=max(cfg.max_features, len(CORE_FEATURES)))
-    pools, synthetic, val, keys = build_training_data(args.target, args.seed, args.ablation, args.data_dir, ecfg,
-                                                      args.val_episodes, max_features=cfg.max_features)
+    slot_perm = not args.no_slot_perm
+    pools, synthetic, val, keys = build_training_data(
+        args.target, args.seed, args.ablation, args.data_dir, ecfg, args.val_episodes,
+        max_features=cfg.max_features, model_kind=args.model, val_mode=val_mode, tasks=tasks,
+        n_slots=cfg.slots, slot_perm=slot_perm)
+    val_aux = None
+    if val_mode == "heldout" and not synthetic:
+        val_aux = {"insrc": insource_validation(args.target, args.seed, args.data_dir, ecfg, args.val_episodes,
+                                                model_kind=args.model, tasks=tasks, n_slots=cfg.slots,
+                                                slot_perm=slot_perm)}
     stream = EpisodeStream(pools, ecfg, args.seed, batch_size=args.batch_size, stream=resume_step,
-                           synthetic=synthetic, max_features=cfg.max_features)
+                           synthetic=synthetic, max_features=cfg.max_features,
+                           tasks=tasks if is_f2 else None, n_slots=cfg.slots, slot_perm=slot_perm)
     source = DataLoader(stream, batch_size=None, num_workers=args.num_workers,
                         pin_memory=device.type == "cuda", persistent_workers=args.num_workers > 0)
-    log.info("target %s seed %d ablation %s model %s config %s on %s; meta-train: %s; query %d; workers %d",
-             args.target, args.seed, args.ablation, args.model, args.config, device, ", ".join(keys) or "synthetic",
+    log.info("target %s seed %d ablation %s model %s config %s on %s; meta-train: %s; val %s (%s); query %d; "
+             "workers %d", args.target, args.seed, args.ablation, args.model, args.config, device,
+             ", ".join(keys) or "synthetic", val_mode, validation_source_name(args.target, val_mode, keys),
              args.query_size, args.num_workers)
     torch.manual_seed(args.seed)
     model = build_model(args.model, cfg)
     meta = {"target": args.target, "seed": args.seed, "ablation": args.ablation, "meta_train": keys,
             "model_kind": args.model, "query_size": args.query_size, "num_workers": args.num_workers,
-            "stream": resume_step, "context_max": args.context_max}
+            "stream": resume_step, "context_max": args.context_max, "val_mode": val_mode,
+            "validation_source": validation_source_name(args.target, val_mode, keys),
+            "tasks": args.tasks if is_f2 else None, "slot_perm": slot_perm,
+            "slots": cfg.slots if is_f2 else None}
     summary = fit(model, source, val, steps=args.steps, out=out, lr=args.lr, weight_decay=args.weight_decay,
                   warmup=args.warmup, clip=args.clip, batch_size=args.batch_size, device=device,
                   val_every=args.val_every, log_every=args.log_every, compile=args.compile, bench=args.bench,
-                  meta=meta)
+                  meta=meta, val_aux=val_aux)
     if out is not None:
         (out / "run.json").write_text(json.dumps({**meta, "args": vars(args)}, indent=2, default=str), encoding="utf-8")
     return summary
+
+
+def validation_source_name(target: str, val_mode: str, keys: list[str]) -> str:
+    """Dataset(s) the validation episodes come from, for the run record."""
+    if val_mode == "heldout":
+        return heldout_sources(target)[1]
+    return "+".join(keys) or "synthetic"
 
 
 def main(argv: list[str] | None = None) -> None:

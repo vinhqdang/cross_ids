@@ -34,12 +34,12 @@ from ..analysis import INK, MUTED, PALETTE, SEQUENTIAL_CMAP, STYLE, attack_famil
 from .evaluate import PER_ATTACK_K  # noqa: E402
 
 FLARE_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet", "flare-noA1", "flare-noA3", "flare-rowmlp",
-                 "flare-synthetic", "flare-E1", "flare-u", "flare+cb", "flare-u+cb")
+                 "flare-synthetic", "flare-E1", "flare-u", "flare+cb", "flare-u+cb", "flare2")
 BASELINE_METHODS = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn")
 REFERENCE = "catboost-fulllabel"
 ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best")  # k = 0 references (section 20.3)
-WILCOXON_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet", "flare-u", "flare+cb", "flare-u+cb")
-METHOD_ORDER = ("flare", "flare-u", "flare+cb", "flare-u+cb", "flare-al", "flare-kcenter-raw", "flare-E1",
+WILCOXON_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet", "flare-u", "flare+cb", "flare-u+cb", "flare2")
+METHOD_ORDER = ("flare2", "flare", "flare-u", "flare+cb", "flare-u+cb", "flare-al", "flare-kcenter-raw", "flare-E1",
                 "flare-noA1", "flare-noA3", "flare-rowmlp", "flare-synthetic", "protonet", "catboost-target",
                 "catboost-ft", "rf", "lr", "knn", "tabpfn", *ZERO_SHOT)
 K0_POSITION = 2  # k = 0 is drawn at this x on the log-2 axis, labelled "0"

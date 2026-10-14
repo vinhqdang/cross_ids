@@ -9,6 +9,9 @@ Methods of §20: ``flare-u`` (FLARE-U, 512 unlabelled context rows from the targ
 references ``catboost-lodo`` (CatBoost on all meta-training datasets, no target labels) and
 ``catboost-pairwise-mean`` / ``catboost-pairwise-best`` (read from the Part I benchmark, ``results/runs.csv``).
 
+``flare2`` is the FLARE-2 checkpoint (section 21) used through its binary API (P(attack) over two random label slots,
+ensembled over sign flips and slot permutations). Attack-class evaluation is in ``crossids.flare.evaluate_class``.
+
 Example::
 
     python -m crossids.flare.evaluate --target usbids1 --seeds 0 1 2 --runs-dir runs/flare --out runs/flare/eval_usbids1.csv
@@ -56,8 +59,14 @@ FLARE_VARIANTS = {
     "flare-rowmlp": ("_rowmlp", None),
     "flare-synthetic": ("_synthetic", None),
     "flare-u": ("_ctx", None),  # FLARE-U (section 20.1): needs the context checkpoint and context rows
+    "flare2": ("_f2", None),  # FLARE-2 (section 21.5): binary detection through the two-class API
+    "flare2-binary": ("_f2_binary", None),  # ablation: binary attack-vs-benign episodes only
+    "flare2-noperm": ("_f2_noperm", None),  # ablation: no class-to-slot permutation
+    "flare2-insrc": ("_f2_insrc", None),  # ablation: in-source validation
+    "flare2-ctx": ("_f2_ctx", None),  # FLARE-2 with context rows (needs the context checkpoint)
 }
-CONTEXT_ROWS = 512  # unlabelled target rows given to flare-u (section 20.1)
+CONTEXT_ROWS = 512  # unlabelled target rows given to flare-u and flare2-ctx (sections 20.1, 21)
+CONTEXT_METHODS = ("flare-u", "flare2-ctx")
 COMBOS = {"flare+cb": "flare", "flare-u+cb": "flare-u"}  # section 20.2: mean of the two P(attack)
 COMBO_PARTS = ("catboost-target",)  # per-(k, draw) predictions cached within a draw and reused by the combinations
 ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best")  # section 20.3, k = 0 rows
@@ -256,7 +265,7 @@ def _compute(name: str, st: SeedState, idx: np.ndarray, k: int, draw: int) -> tu
 
         est = TabPFNClassifier(device=ctx.device if ctx.device == "cuda" else "cpu", random_state=draw)
         return _sklearn_predict(est, Xs, ys, Xt), ys
-    if name == "flare-u":
+    if name in CONTEXT_METHODS:
         model = st.model(name)
         if model is None:
             return None

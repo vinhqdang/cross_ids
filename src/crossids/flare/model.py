@@ -15,6 +15,7 @@ pass to float rounding (tested in ``tests/test_flare.py``).
 
 from __future__ import annotations
 
+import math
 from dataclasses import asdict, dataclass, replace
 from pathlib import Path
 
@@ -42,6 +43,7 @@ class FlareConfig:
     feature_mixing: str = "attention"
     max_features: int = 13
     ensemble: int = 8
+    slots: int = 16  # FLARE-2 (section 21.4): label-slot embeddings M (>= the largest N-way task); unused by other kinds
 
     def __post_init__(self) -> None:
         if self.width % self.heads:
@@ -221,6 +223,8 @@ class SupportCache:
     feat_mask: torch.Tensor  # (E, T) bool
     bias: torch.Tensor | None
     n_sup: int
+    keys: torch.Tensor | None = None  # FLARE-2: matching keys of the support block, (E, K, C)
+    labels: torch.Tensor | None = None  # FLARE-2: label-slot ids of the support block, (E, K)
 
 
 class EpisodeModel(nn.Module):
@@ -229,6 +233,7 @@ class EpisodeModel(nn.Module):
     kind = "base"
     cached = False  # True when predictions reuse a support cache (FlareModel)
     context_max = 0  # context rows the model was meta-trained with (0 = no context, §13)
+    slot_perm = True  # FLARE-2 only: classes get random label slots per ensemble member (False = --no-slot-perm)
 
     def forward_episode(self, x, feat_pad, row_valid, is_query, label, return_embedding: bool = False):
         raise NotImplementedError
@@ -328,16 +333,32 @@ class FlareModel(EpisodeModel):
 
     def __init__(self, cfg: FlareConfig):
         super().__init__()
+        self._build_encoder(cfg)
+        self.head = nn.Sequential(nn.Linear(cfg.width, cfg.width), nn.GELU(), nn.Linear(cfg.width, 1))
+
+    def _build_encoder(self, cfg: FlareConfig) -> None:
+        """Feature tokens, label table, layers and output norm (shared by FLARE and FLARE-2)."""
         self.cfg = cfg
         self.width = cfg.width
         self.ensemble = cfg.ensemble
         C = cfg.width
         self.value = nn.Sequential(nn.Linear(1, cfg.value_hidden), nn.GELU(), nn.Linear(cfg.value_hidden, C))
         self.absent = nn.Parameter(torch.randn(C) * 0.02)
-        self.label_emb = nn.Embedding(3, C)
+        self.label_emb = nn.Embedding(self._label_rows(), C)
         self.layers = nn.ModuleList([_Layer(cfg) for _ in range(cfg.layers)])
         self.ln_out = nn.LayerNorm(C)
-        self.head = nn.Sequential(nn.Linear(C, C), nn.GELU(), nn.Linear(C, 1))
+
+    def _label_rows(self) -> int:
+        """Rows of the label table: benign, attack, unknown (section 13)."""
+        return 3
+
+    def unknown_label(self) -> int:
+        """Label-table index of query and context rows."""
+        return LABEL_UNKNOWN
+
+    def _readout(self, h0: torch.Tensor) -> torch.Tensor:
+        """Logit of a query row from its label token after the last layer (section 13 head)."""
+        return self.head(self.ln_out(h0)).squeeze(-1)
 
     def _tokens(self, x: torch.Tensor, label: torch.Tensor) -> torch.Tensor:
         """Feature tokens and the label token of every row: (B, N, T = D + 1, C). Token 0 is the label token."""
@@ -364,7 +385,7 @@ class FlareModel(EpisodeModel):
             w = feat_pad.to(h.dtype)[:, None, :, None]
             feats = h[:, :, 1:]
             return (feats * w).sum(2) / w.sum(2).clamp(min=1.0)
-        return self.head(self.ln_out(h[:, :, 0])).squeeze(-1)
+        return self._readout(h[:, :, 0])
 
     def _query_step(self, E: int, d: int, nb: int, chunk: int) -> int:
         """Query rows per chunk, capped so that the (E, T, H, c, nb + 1) attention scores stay within SCORE_BUDGET."""
@@ -383,7 +404,8 @@ class FlareModel(EpisodeModel):
         feat_mask = self._feat_mask(feat_pad)
         sv = torch.ones(E, K, dtype=torch.bool, device=x.device) if sup_valid is None else \
             sup_valid[None].expand(E, K)
-        h = self._tokens(x, label[None].expand(E, K))
+        lab = label if label.dim() == 2 else label[None].expand(E, K)
+        h = self._tokens(x, lab)
         layers = []
         for layer in self.layers:
             h = layer.feat_step(h, feat_mask)
@@ -402,7 +424,7 @@ class FlareModel(EpisodeModel):
         other queries in the chunk.
         """
         E, c, _ = x.shape
-        label = torch.full((E, c), LABEL_UNKNOWN, dtype=torch.long, device=x.device)
+        label = torch.full((E, c), self.unknown_label(), dtype=torch.long, device=x.device)
         h = self._tokens(x, label)
         for li, layer in enumerate(self.layers):
             h = layer.feat_step(h, cache.feat_mask)
@@ -415,7 +437,208 @@ class FlareModel(EpisodeModel):
             w = cache.feat_mask.to(h.dtype)[:, None, 1:, None]
             feats = h[:, :, 1:]
             return (feats * w).sum(2) / w.sum(2).clamp(min=1.0)
-        return self.head(self.ln_out(h[:, :, 0])).squeeze(-1)
+        return self._readout(h[:, :, 0])
+
+
+NEG_LOGIT = -1e9  # score of a class with no support row (masked out of the pooling)
+
+
+class Flare2Model(FlareModel):
+    """FLARE-2 (DESIGN.md section 21.4): label slots as input tokens and a class-equivariant matching readout.
+
+    Support rows carry their label-slot embedding (M = cfg.slots, randomly assigned to classes per episode); query
+    and context rows carry the unknown token. After the last layer each row is summarised by its mean token,
+    layer-normalised, then projected: queries q = W_q r, support keys k = W_k r. The logit of a class is a soft
+    maximum over its support keys, interpolated between sum and mean pooling by a learnable b in [0, 1]:
+
+        logit_j = logsumexp_{s in S_j}(<q, k_s> / (sqrt(width) * tau)) - b * log|S_j|
+
+    with learnable temperature tau = softplus(.) (init 1) and b = sigmoid(.) (init 0.5). The softmax runs over the
+    active classes of the episode. Classes are defined by their support rows, so the readout is equivariant to class
+    and slot permutations by construction. Logits are reported per slot (M values) so that the slot mapping of the
+    ensemble can be applied afterwards.
+    """
+
+    kind = "flare2"
+
+    def __init__(self, cfg: FlareConfig):
+        nn.Module.__init__(self)
+        self._build_encoder(cfg)
+        C = cfg.width
+        self.row_norm = nn.LayerNorm(C)
+        self.w_q = nn.Linear(C, C, bias=False)
+        self.w_k = nn.Linear(C, C, bias=False)
+        self.tau_raw = nn.Parameter(torch.tensor(math.log(math.e - 1.0)))  # softplus(tau_raw) = 1 at init
+        self.pool_raw = nn.Parameter(torch.tensor(0.0))  # b = sigmoid(0) = 0.5 at init
+
+    def _label_rows(self) -> int:
+        return self.cfg.slots + 1
+
+    def unknown_label(self) -> int:
+        return self.cfg.slots
+
+    def _tau(self) -> torch.Tensor:
+        return F.softplus(self.tau_raw)
+
+    def _pool(self) -> torch.Tensor:
+        return torch.sigmoid(self.pool_raw)
+
+    def _rows(self, h: torch.Tensor, feat_mask: torch.Tensor) -> torch.Tensor:
+        """Row summary: mean over the valid tokens (label token included), layer-normalised. feat_mask is (..., 1, T)."""
+        w = feat_mask.to(h.dtype)
+        r = (h * w[..., None]).sum(-2) / w.sum(-1, keepdim=True).clamp(min=1.0)
+        return self.row_norm(r)
+
+    def _match_logits(self, q: torch.Tensor, k: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+        """Per-slot logits (E, Nq, M) of query rows q (E, Nq, C) against support keys k (E, Ns, C) with slot ids."""
+        M = self.cfg.slots
+        s = torch.einsum("eqc,esc->eqs", q, k) / (math.sqrt(self.width) * self._tau())  # (E, Nq, Ns)
+        member = F.one_hot(labels.clamp(max=M), M + 1)[..., :M].bool()  # (E, Ns, M); unknown rows belong to no slot
+        count = member.sum(1).to(s.dtype)  # (E, M)
+        z = s[..., None].masked_fill(~member[:, None], NEG_LOGIT)  # (E, Nq, Ns, M)
+        lse = torch.logsumexp(z, dim=2)  # (E, Nq, M)
+        return lse - self._pool() * torch.log(count.clamp(min=1.0))[:, None, :]
+
+    def forward_episode(self, x, feat_pad, row_valid, is_query, label, return_embedding: bool = False):
+        """Per-slot logits (B, N, M) for every row; the query rows are the ones the loss reads.
+
+        Rows must be laid out as [support + context block | query block] (see ``data.collate``).
+        """
+        if return_embedding:
+            raise NotImplementedError("FLARE-2 has no label-aware embedding API")
+        n_sup = support_block_size(is_query)
+        h = self._tokens(x, label)
+        feat_mask = self._feat_mask(feat_pad)
+        sup_valid = row_valid[:, :n_sup]
+        for layer in self.layers:
+            h = layer(h, feat_mask, n_sup, sup_valid)
+        r = self._rows(h, feat_mask[:, None, :])  # (B, N, C)
+        q = self.w_q(r[:, n_sup:])
+        k = self.w_k(r[:, :n_sup])
+        out = h.new_zeros(h.shape[0], h.shape[1], self.cfg.slots)
+        out[:, n_sup:] = self._match_logits(q, k, label[:, :n_sup])
+        return out
+
+    def build_support_cache(self, x: torch.Tensor, label: torch.Tensor, feat_pad: torch.Tensor | None = None,
+                            sup_valid: torch.Tensor | None = None) -> SupportCache:
+        """Support-and-context block of every member: per-layer keys and values, plus the matching keys and labels."""
+        E, K, D = x.shape
+        if feat_pad is None:
+            feat_pad = torch.ones(E, D, dtype=torch.bool, device=x.device)
+        feat_mask = self._feat_mask(feat_pad)
+        sv = torch.ones(E, K, dtype=torch.bool, device=x.device) if sup_valid is None else \
+            sup_valid[None].expand(E, K)
+        lab = label if label.dim() == 2 else label[None].expand(E, K)
+        h = self._tokens(x, lab)
+        layers = []
+        for layer in self.layers:
+            h = layer.feat_step(h, feat_mask)
+            hn = layer.ln_r(h)
+            _, k, v = layer.row.project(hn)
+            layers.append((k.permute(0, 2, 3, 1, 4).contiguous(), v.permute(0, 2, 3, 1, 4).contiguous()))
+            h = h + layer.row(hn, K, sv)
+            h = h + layer.mlp(layer.ln_m(h))
+        keys = self.w_k(self._rows(h, feat_mask[:, None, :]))  # (E, K, C)
+        bias = None if sup_valid is None else torch.where(sup_valid, 0.0, float("-inf")).to(x.dtype)
+        return SupportCache(layers=layers, feat_mask=feat_mask, bias=bias, n_sup=K, keys=keys,
+                            labels=lab.to(torch.long))
+
+    def query_forward(self, cache: SupportCache, x: torch.Tensor, return_embedding: bool = False) -> torch.Tensor:
+        """Per-slot logits (E, c, M) of a chunk of query rows x (E, c, D). Queries attend to the cached block and to
+        themselves only, so the result does not depend on the other queries in the chunk."""
+        if return_embedding:
+            raise NotImplementedError("FLARE-2 has no label-aware embedding API")
+        E, c, _ = x.shape
+        label = torch.full((E, c), self.unknown_label(), dtype=torch.long, device=x.device)
+        h = self._tokens(x, label)
+        for li, layer in enumerate(self.layers):
+            h = layer.feat_step(h, cache.feat_mask)
+            hn = layer.ln_r(h)
+            q, k, v = layer.row.project(hn)
+            ks, vs = cache.layers[li]
+            h = h + layer.row.attend_queries(q, k, v, ks, vs, cache.bias)
+            h = h + layer.mlp(layer.ln_m(h))
+        q = self.w_q(self._rows(h, cache.feat_mask[:, None, :]))
+        return self._match_logits(q, cache.keys, cache.labels)
+
+    def _slot_assignments(self, n_classes: int, ensemble: int, seed: int) -> np.ndarray:
+        """Class-to-slot map of each ensemble member, (E, N). Identity when the model was trained without permutation."""
+        if not self.slot_perm:
+            return np.tile(np.arange(n_classes), (ensemble, 1))
+        rng = np.random.default_rng([int(seed), 4242])
+        return np.stack([rng.permutation(self.cfg.slots)[:n_classes] for _ in range(ensemble)]).astype(np.int64)
+
+    @torch.inference_mode()
+    def class_logits(self, support_X, support_y, query_X, chunk: int = QUERY_CHUNK, ensemble: int | None = None,
+                     seed: int = 0, context_X=None) -> np.ndarray:
+        """(Q, N) mean over ensemble members of the class logits. Labels are 0..N-1 and every class needs support.
+
+        Members differ in sign flips and in the class-to-slot map; logits are read back in class order before
+        averaging. Support and context are encoded once per member and cached.
+        """
+        self.eval()
+        Q = np.asarray(query_X, dtype=np.float64)
+        d = Q.shape[1]
+        S = np.asarray(support_X, dtype=np.float64)
+        S = np.zeros((0, d)) if S.size == 0 else S.reshape(-1, d)
+        Cx = np.zeros((0, d)) if context_X is None else np.asarray(context_X, dtype=np.float64).reshape(-1, d)
+        y = np.asarray(support_y, dtype=np.int64).reshape(-1)
+        if len(y) != S.shape[0]:
+            raise ValueError("support_X and support_y disagree")
+        N = int(y.max()) + 1 if len(y) else 0
+        if N < 2 or set(np.unique(y).tolist()) != set(range(N)):
+            raise ValueError("support labels must be 0..N-1 with N >= 2 and every class present")
+        if N > self.cfg.slots:
+            raise ValueError(f"{N} classes exceed the {self.cfg.slots} label slots of this model")
+        ns, nc, nq = S.shape[0], Cx.shape[0], Q.shape[0]
+        Z = gauss_rank(np.vstack([S, Cx, Q]))
+        E = ensemble or self.ensemble
+        signs = self._sign_members(d, E, seed)
+        slots_of = self._slot_assignments(N, E, seed)
+        dev = next(self.parameters()).device
+        Zs = torch.from_numpy(np.stack([Z * signs[e] for e in range(E)]).astype(np.float32)).to(dev)
+        nb = ns + nc
+        lab = np.full((E, nb), self.unknown_label(), dtype=np.int64)
+        lab[:, :ns] = slots_of[:, y]
+        cache = self.build_support_cache(Zs[:, :nb], torch.from_numpy(lab).to(dev))
+        if nq == 0:
+            return np.zeros((0, N))
+        step = self._query_step(E, d, nb, chunk)
+        outs = []
+        for start in range(0, nq, step):
+            stop = min(start + step, nq)
+            outs.append(self.query_forward(cache, Zs[:, nb + start: nb + stop]))
+        slot_logits = torch.cat(outs, dim=1)  # (E, nq, M)
+        idx = torch.from_numpy(slots_of).to(dev)[:, None, :].expand(E, nq, N)
+        cls = torch.gather(slot_logits, 2, idx)
+        return cls.float().mean(0).cpu().numpy().astype(np.float64)
+
+    def predict_classes(self, support_X, support_y, query_X, chunk: int = QUERY_CHUNK, ensemble: int | None = None,
+                        seed: int = 0, context_X=None) -> np.ndarray:
+        """Probabilities (Q, N) over the N classes of the support (labels 0..N-1). Rows sum to one."""
+        logits = self.class_logits(support_X, support_y, query_X, chunk=chunk, ensemble=ensemble, seed=seed,
+                                   context_X=context_X)
+        logits = logits - logits.max(axis=1, keepdims=True) if logits.size else logits
+        e = np.exp(logits)
+        return e / e.sum(axis=1, keepdims=True) if e.size else e
+
+    def predict_logits(self, support_X, support_y, query_X, chunk: int = QUERY_CHUNK, ensemble: int | None = None,
+                       seed: int = 0, context_X=None) -> np.ndarray:
+        """Binary API: logit of attack (class 1) minus benign (class 0) for two-class supports."""
+        logits = self.class_logits(support_X, support_y, query_X, chunk=chunk, ensemble=ensemble, seed=seed,
+                                   context_X=context_X)
+        if logits.shape[1] != 2:
+            raise ValueError("predict_logits / predict_proba need a two-class support (0 benign, 1 attack)")
+        return logits[:, 1] - logits[:, 0]
+
+    def predict_proba(self, support_X, support_y, query_X, chunk: int = QUERY_CHUNK, ensemble: int | None = None,
+                      seed: int = 0, context_X=None) -> np.ndarray:
+        """P(attack) for the query rows. Equals ``predict_classes(...)[:, 1]`` for a two-class support."""
+        return 1.0 / (1.0 + np.exp(-self.predict_logits(support_X, support_y, query_X, chunk=chunk, ensemble=ensemble,
+                                                        seed=seed, context_X=context_X)))
+
+    def embed(self, *args, **kwargs):
+        raise NotImplementedError("FLARE-2 has no label-aware embedding API")
 
 
 def support_block_size(is_query: torch.Tensor) -> int:
@@ -469,6 +692,8 @@ class ProtoNet(EpisodeModel):
 def build_model(kind: str, cfg: FlareConfig) -> EpisodeModel:
     if kind == "flare":
         return FlareModel(cfg)
+    if kind == "flare2":
+        return Flare2Model(cfg)
     if kind == "protonet":
         return ProtoNet(cfg)
     raise ValueError(f"unknown model kind {kind!r}")
@@ -490,12 +715,13 @@ def load_model(path: str | Path, device: str = "cpu", ensemble: int | None = Non
     model = build_model(blob["kind"], cfg)
     model.load_state_dict(blob["state_dict"])
     model.context_max = int(blob.get("context_max", 0))
+    model.slot_perm = bool(blob.get("slot_perm", True))
     return model.to(device).eval()
 
 
 def batch_to_torch(batch, device: str | torch.device = "cpu"):
     """Convert a ``data.Batch`` to the tensors ``forward_episode`` expects."""
-    return dict(
+    out = dict(
         x=torch.from_numpy(batch.x).to(device),
         feat_pad=torch.from_numpy(batch.feat_pad).to(device),
         row_valid=torch.from_numpy(batch.row_valid).to(device),
@@ -503,3 +729,9 @@ def batch_to_torch(batch, device: str | torch.device = "cpu"):
         label=torch.from_numpy(batch.label).to(device),
         truth=torch.from_numpy(batch.truth).to(device),
     )
+    if batch.slot_target is not None:  # FLARE-2 class episodes (section 21.4)
+        out.update(slot_target=torch.from_numpy(batch.slot_target).to(device),
+                   slot_active=torch.from_numpy(batch.slot_active).to(device),
+                   class_slots=torch.from_numpy(batch.class_slots).to(device),
+                   binary=torch.from_numpy(batch.binary).to(device))
+    return out

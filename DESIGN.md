@@ -633,15 +633,30 @@ another. This turns 6 datasets into thousands of distinct tasks, and because
 the meaning of a class changes from episode to episode, the only reliable
 strategy is to read the rule from the support set.
 
-### 21.4 Model change: label slots
+### 21.4 Model change: label slots and a matching readout
 
-Class identities are arbitrary per episode, so labels use **M = 8 label-slot
-embeddings**, randomly permuted for every episode (slot 0 is never reserved
-for benign), plus the unknown token for queries/context. The head scores each
-query against the N active slots: logit_j = <W h_query, slot_j> / sqrt(width),
-softmax over the N classes (binary = N = 2). Everything else (§13: feature
-attention, row attention with the support/query rule, per-episode ranks,
-sign-flip augmentation, no feature identity) is unchanged.
+Class identities are arbitrary per episode, so support rows carry **M = 16
+label-slot embeddings** as input tokens, each class assigned a random slot per
+episode (slot 0 is never reserved for benign). Query and context rows carry the
+unknown token. Labels therefore condition the support representations, but
+no slot identity has to be learned, because the readout does not index
+slots. The readout is a class-equivariant matching head. After the last layer
+each row is summarised by the mean of its d + 1 tokens, layer-normalised as
+r_i; queries use q = W_q r_query and support rows keys k_s = W_k r_s (width
+128). The logit of an active class j is a soft maximum over its support keys,
+interpolated between sum and mean pooling:
+
+    logit_j = logsumexp_{s in S_j}( <q, k_s> / (sqrt(width) * tau) ) - b * log|S_j|
+
+with a learnable temperature tau = softplus(.) (initialised to 1) and a
+learnable b = sigmoid(.) in [0, 1] (initialised to 0.5). The softmax runs over
+the N active classes, trained with cross-entropy. The readout is equivariant to
+class and slot permutations by construction. The test-time ensemble averages
+the class logits over E = 8 members, each with its own sign flips and its own
+random class-to-slot map. The binary API (flare2) is the two-class case of the
+same readout. The binary model kind `flare` (§13) is unchanged. Everything
+else (§13: feature attention, row attention with the support/query rule,
+per-episode ranks, sign-flip augmentation, no feature identity) is unchanged.
 
 ### 21.5 Evaluation at attack-class level
 

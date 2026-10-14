@@ -5,6 +5,8 @@
 #
 # Usage: scripts/flare_colab_job.sh TARGET SEED [VARIANT] [STEPS]
 #   VARIANT: flare (default) | ctx (FLARE-U, section 20.1) | noA1 | noA3 | rowmlp | synthetic | protonet
+#            f2 (FLARE-2, section 21) | f2binary | f2noperm | f2insrc | f2ctx (its ablations and context variant)
+#   SKIP_EVAL=1 trains only (the run directory is downloaded, evaluation happens locally with EVAL_METHODS).
 # Outputs: runs/flare/<target>_s<seed>[_variant]/ and runs/flare/eval_<target>_<variant>_s<seed>.csv
 set -euo pipefail
 
@@ -21,6 +23,11 @@ case $VARIANT in
   flare) SUFFIX=""; TRAIN_ARGS=""; EVAL_METHODS="flare flare-E1 flare-al flare-kcenter-raw" ;;
   ctx) SUFFIX="_ctx"; TRAIN_ARGS="--context-max 512"; EVAL_METHODS="flare-u" ;;
   protonet) SUFFIX="_protonet"; TRAIN_ARGS="--model protonet"; EVAL_METHODS="protonet" ;;
+  f2) SUFFIX="_f2"; TRAIN_ARGS="--model flare2"; EVAL_METHODS="flare2" ;;
+  f2binary) SUFFIX="_f2_binary"; TRAIN_ARGS="--model flare2 --tasks binary"; EVAL_METHODS="flare2-binary" ;;
+  f2noperm) SUFFIX="_f2_noperm"; TRAIN_ARGS="--model flare2 --no-slot-perm"; EVAL_METHODS="flare2-noperm" ;;
+  f2insrc) SUFFIX="_f2_insrc"; TRAIN_ARGS="--model flare2 --val-mode insource"; EVAL_METHODS="flare2-insrc" ;;
+  f2ctx) SUFFIX="_f2_ctx"; TRAIN_ARGS="--model flare2 --context-max 512"; EVAL_METHODS="flare2-ctx" ;;
   noA1|noA3|rowmlp|synthetic) SUFFIX="_$VARIANT"; TRAIN_ARGS="--ablation $VARIANT"; EVAL_METHODS="flare-$VARIANT" ;;
   *) echo "unknown variant $VARIANT" >&2; exit 2 ;;
 esac
