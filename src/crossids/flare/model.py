@@ -206,11 +206,14 @@ class EpisodeModel(nn.Module):
             label = torch.from_numpy(np.concatenate([sup_lab, np.full(c, LABEL_UNKNOWN)]))[None].expand(E, n)
             row_valid = torch.ones(E, n, dtype=torch.bool)
             feat_pad = torch.ones(E, d, dtype=torch.bool)
+            dev = next(self.parameters()).device
+            x, feat_pad, row_valid, is_query = x.to(dev), feat_pad.to(dev), row_valid.to(dev), is_query.to(dev)
+            label = label.contiguous().to(dev)
             if embed:
-                res = self.forward_episode(x, feat_pad, row_valid, is_query, label.contiguous(), return_embedding=True)
+                res = self.forward_episode(x, feat_pad, row_valid, is_query, label, return_embedding=True)
                 out.append(res[0, ns:].float().cpu().numpy())
             else:
-                logits = self.forward_episode(x, feat_pad, row_valid, is_query, label.contiguous())
+                logits = self.forward_episode(x, feat_pad, row_valid, is_query, label)
                 out.append(logits[:, ns:].float().mean(0).cpu().numpy())
         if not out:
             return np.zeros((0, self.width) if embed else (0,), dtype=np.float64)
