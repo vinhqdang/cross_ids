@@ -4,6 +4,11 @@ For every (seed, k, draw) the same stratified support rows, drawn from the Part 
 every method. Metrics are computed on the Part I target test split. Results are appended to a CSV and rows already
 present are skipped, so an interrupted run resumes.
 
+Methods of §20: ``flare-u`` (FLARE-U, 512 unlabelled context rows from the target train split), ``flare+cb`` and
+``flare-u+cb`` (mean of FLARE's and the target-only CatBoost's P(attack) on the same support), and the k = 0 zero-shot
+references ``catboost-lodo`` (CatBoost on all meta-training datasets, no target labels) and
+``catboost-pairwise-mean`` / ``catboost-pairwise-best`` (read from the Part I benchmark, ``results/runs.csv``).
+
 Example::
 
     python -m crossids.flare.evaluate --target usbids1 --seeds 0 1 2 --runs-dir runs/flare --out runs/flare/eval_usbids1.csv
@@ -50,13 +55,19 @@ FLARE_VARIANTS = {
     "flare-noA3": ("_noA3", None),
     "flare-rowmlp": ("_rowmlp", None),
     "flare-synthetic": ("_synthetic", None),
+    "flare-u": ("_ctx", None),  # FLARE-U (section 20.1): needs the context checkpoint and context rows
 }
+CONTEXT_ROWS = 512  # unlabelled target rows given to flare-u (section 20.1)
+COMBOS = {"flare+cb": "flare", "flare-u+cb": "flare-u"}  # section 20.2: mean of the two P(attack)
+COMBO_PARTS = ("catboost-target",)  # per-(k, draw) predictions cached within a draw and reused by the combinations
+ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best")  # section 20.3, k = 0 rows
+PAIRWISE_METHOD = "catboost"
 PROTONET = "protonet"
 PROTONET_SUFFIX = "_protonet"
 BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn")
 ACTIVE = ("flare-al", "flare-kcenter-raw")
 FULLLABEL = "catboost-fulllabel"  # upper reference: trained on the whole target train split (k = 0 in the CSV)
-ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE + (FULLLABEL,)
+ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE + (FULLLABEL,) + tuple(COMBOS) + ZERO_SHOT
 PER_ATTACK_K = 16
 DEFAULT_SEEDS = (0, 1, 2)
 
@@ -132,11 +143,15 @@ class EvalContext:
     al_pool: int = AL_POOL_CAP
     ks: tuple[int, ...] = FEW_SHOT_KS
     n_draws: int = N_DRAWS
+    benchmark_dir: Path = Path("results")  # folder with the Part I runs.csv (read only)
 
 
 @dataclass
 class SeedState:
-    """Per (target, seed) resources: the split, source domains for catboost-ft and cached models."""
+    """Per (target, seed) resources: the split, source domains for catboost-ft and cached models.
+
+    ``cache`` holds the P(attack) of the components of the combinations for the current (k, draw) only.
+    """
 
     target: str
     seed: int
@@ -148,6 +163,7 @@ class SeedState:
     source_base: CatBoostBaseline | None = None
     pool: tuple | None = None
     emb0: np.ndarray | None = None
+    cache: dict = field(default_factory=dict)
 
     def model(self, name: str) -> EpisodeModel | None:
         suffix = PROTONET_SUFFIX if name == PROTONET else FLARE_VARIANTS[name][0]
@@ -185,10 +201,33 @@ def _sklearn_predict(estimator, Xs, ys, Xt) -> np.ndarray:
     return estimator.fit(Xs, ys).predict_proba(Xt)[:, 1]
 
 
-def _run_method(name: str, st: SeedState, Xs, ys, k: int, draw: int) -> tuple[np.ndarray, np.ndarray] | None:
-    """Return (P(attack) on the target test split, labels of the support actually used) or None if unavailable."""
+def context_rows(split: Split, sup_idx: np.ndarray, seed: int, k: int, draw: int,
+                 n: int = CONTEXT_ROWS) -> np.ndarray:
+    """Unlabelled context rows of FLARE-U: ``n`` seeded rows of the target train split, disjoint from the support.
+
+    Only features are returned. Labels of the context are never read.
+    """
+    keep = np.ones(len(split.y_train), dtype=bool)
+    keep[np.asarray(sup_idx, dtype=np.int64)] = False
+    pool = np.flatnonzero(keep)
+    rng = np.random.default_rng([int(seed), 9001, int(k), int(draw)])
+    take = min(int(n), len(pool))
+    return split.X_train[np.sort(rng.choice(pool, size=take, replace=False))]
+
+
+def _compute(name: str, st: SeedState, idx: np.ndarray, k: int, draw: int) -> tuple[np.ndarray, np.ndarray] | None:
+    """Uncached (P(attack) on the target test split, labels of the support actually used) or None if unavailable."""
+    Xs, ys = st.split.X_train[idx], st.split.y_train[idx]
     Xt = st.split.X_test
     ctx = st.ctx
+    if name in COMBOS:
+        parts = []
+        for part in (COMBOS[name], "catboost-target"):
+            res = _run_method(part, st, idx, k, draw)
+            if res is None:
+                return None
+            parts.append(res[0])
+        return np.mean(parts, axis=0), ys
     if name == "catboost-target":
         from catboost import CatBoostClassifier
 
@@ -217,6 +256,12 @@ def _run_method(name: str, st: SeedState, Xs, ys, k: int, draw: int) -> tuple[np
 
         est = TabPFNClassifier(device=ctx.device if ctx.device == "cuda" else "cpu", random_state=draw)
         return _sklearn_predict(est, Xs, ys, Xt), ys
+    if name == "flare-u":
+        model = st.model(name)
+        if model is None:
+            return None
+        ctx_X = context_rows(st.split, idx, st.seed, k, draw)
+        return model.predict_proba(Xs, ys, Xt, seed=draw, context_X=ctx_X), ys
     if name in FLARE_VARIANTS or name == PROTONET:
         model = st.model(name)
         if model is None:
@@ -239,6 +284,52 @@ def _run_method(name: str, st: SeedState, Xs, ys, k: int, draw: int) -> tuple[np
     raise KeyError(f"unknown method {name!r}")
 
 
+def _run_method(name: str, st: SeedState, idx: np.ndarray, k: int, draw: int) -> tuple[np.ndarray, np.ndarray] | None:
+    """(P(attack) on the target test split, labels of the support used) for one method, or None if unavailable.
+
+    Components of the combinations (catboost-target, the FLARE models) are kept in ``st.cache`` for the current
+    (k, draw), so ``flare+cb`` reuses the CatBoost predictions of ``catboost-target`` instead of refitting.
+    """
+    cacheable = name in COMBO_PARTS or name in ("flare", "flare-u")
+    key = (name, k, draw)
+    if cacheable and key in st.cache:
+        return st.cache[key]
+    res = _compute(name, st, idx, k, draw)
+    if cacheable and res is not None:
+        st.cache[key] = res
+    return res
+
+
+def zero_shot_catboost_lodo(st: SeedState) -> np.ndarray:
+    """CatBoost (catboost-ft base model) trained on all meta-training datasets pooled. Reads no target labels."""
+    return st.source_model().predict_proba(st.split.X_test)
+
+
+def pairwise_reference(target: str, benchmark: Path) -> dict[str, dict]:
+    """Zero-shot Part I rows of one target: pairwise CatBoost, transductive, seed 0. Mean and oracle-best source.
+
+    The mean row averages every metric over the sources. The best row is the source with the highest ROC-AUC and
+    carries that source's metrics. Returns {} when the benchmark has no such rows.
+    """
+    path = Path(benchmark) / "runs.csv"
+    if not path.exists():
+        return {}
+    runs = pd.read_csv(path, low_memory=False)
+    sel = runs[(runs["experiment"] == "pairwise") & (runs["mode"] == "transductive")
+               & (runs["method"] == PAIRWISE_METHOD) & (runs["seed"] == 0) & (runs["target"] == target)]
+    if sel.empty:
+        return {}
+    if sel["sources"].duplicated().any():
+        raise ValueError(f"duplicate pairwise sources for {target} in {path}")
+    best = sel.loc[sel["roc_auc"].idxmax()]
+    log.info("pairwise best source for %s: %s (roc_auc %.4f) of %d sources", target, best["sources"],
+             float(best["roc_auc"]), len(sel))
+    return {
+        "catboost-pairwise-mean": {m: float(sel[m].mean()) for m in METRICS},
+        "catboost-pairwise-best": {m: float(best[m]) for m in METRICS},
+    }
+
+
 def score_row(y_test: np.ndarray, proba: np.ndarray) -> dict[str, float]:
     m = score_predictions(y_test, proba, (np.asarray(proba) >= 0.5).astype(int))
     return {name: m[name] for name in METRICS}
@@ -252,12 +343,35 @@ def _fulllabel_proba(split: Split, ctx: EvalContext) -> np.ndarray:
     return _sklearn_predict(est, split.X_train, split.y_train, split.X_test)
 
 
+def _zero_shot_rows(target: str, st: SeedState, methods: list[str], done: set) -> list[dict]:
+    """k = 0 rows (draw 0) of the zero-shot references. CatBoost on the meta-training datasets is fitted once."""
+    rows = []
+    split = st.split
+    wanted = [m for m in ZERO_SHOT if m in methods and (m, target, 0, 0, split.seed) not in done]
+    if "catboost-lodo" in wanted:
+        t0 = time.perf_counter()
+        proba = zero_shot_catboost_lodo(st)
+        rows.append({"method": "catboost-lodo", "target": target, "k": 0, "draw": 0, "seed": split.seed,
+                     **score_row(split.y_test, proba), "n_support": 0, "n_attack_support": 0,
+                     "seconds": round(time.perf_counter() - t0, 3)})
+    pairs = {}
+    if split.seed == 0 and any(m.startswith("catboost-pairwise") for m in wanted):
+        pairs = pairwise_reference(target, st.ctx.benchmark_dir)
+        if not pairs:
+            log.warning("no pairwise catboost rows for %s in %s", target, st.ctx.benchmark_dir)
+    for name, metrics in pairs.items():
+        if name in wanted:
+            rows.append({"method": name, "target": target, "k": 0, "draw": 0, "seed": split.seed,
+                         **metrics, "n_support": 0, "n_attack_support": 0, "seconds": 0.0})
+    return rows
+
+
 def evaluate_seed(target: str, split: Split, ctx: EvalContext, methods: list[str], *, sources_fn=None,
                   done: set | None = None, emit=None, emit_attack=None) -> list[dict]:
     """All requested (method, k, draw) rows for one target and seed. ``emit`` receives each row as it is produced.
 
     ``emit_attack`` receives per-attack-type recall rows for k = PER_ATTACK_K. The full-label CatBoost reference
-    is computed once per seed and stored with k = 0 and draw = 0.
+    is computed once per seed and stored with k = 0 and draw = 0, as are the zero-shot references (ZERO_SHOT).
     """
     done = done or set()
     rows: list[dict] = []
@@ -265,25 +379,30 @@ def evaluate_seed(target: str, split: Split, ctx: EvalContext, methods: list[str
     sup = load_or_draw_supports(ctx.supports_dir / f"supports_{target}_s{split.seed}.json", target, split.seed,
                                 split.y_train, ctx.ks, ctx.n_draws)
     y_test = split.y_test
+
+    def _emit_all(batch: list[dict]) -> None:
+        for row in batch:
+            rows.append(row)
+            if emit is not None:
+                emit(row)
+
     if FULLLABEL in methods and (FULLLABEL, target, 0, 0, split.seed) not in done:
         proba = _fulllabel_proba(split, ctx)
-        row = {"method": FULLLABEL, "target": target, "k": 0, "draw": 0, "seed": split.seed,
-               **score_row(y_test, proba), "n_support": int(len(split.y_train)),
-               "n_attack_support": int(np.sum(split.y_train)), "seconds": 0.0}
-        rows.append(row)
-        if emit is not None:
-            emit(row)
-    methods = [m for m in methods if m != FULLLABEL]
+        _emit_all([{"method": FULLLABEL, "target": target, "k": 0, "draw": 0, "seed": split.seed,
+                    **score_row(y_test, proba), "n_support": int(len(split.y_train)),
+                    "n_attack_support": int(np.sum(split.y_train)), "seconds": 0.0}])
+    _emit_all(_zero_shot_rows(target, st, methods, done))
+    methods = [m for m in methods if m != FULLLABEL and m not in ZERO_SHOT]
     for k in ctx.ks:
         for draw in range(ctx.n_draws):
             idx = sup[k][draw]
-            Xs, ys = split.X_train[idx], split.y_train[idx]
+            st.cache.clear()
             for name in methods:
                 key = (name, target, k, draw, split.seed)
                 if key in done:
                     continue
                 t0 = time.perf_counter()
-                res = _run_method(name, st, Xs, ys, k, draw)
+                res = _run_method(name, st, idx, k, draw)
                 if res is None:
                     continue
                 proba, ys_used = res
@@ -313,8 +432,12 @@ def _done_keys(path: Path) -> set[tuple]:
     return {(str(r.method), str(r.target), int(r.k), int(r.draw), int(r.seed)) for r in frame.itertuples(index=False)}
 
 
-def evaluate_target(target: str, seeds, out: Path, ctx: EvalContext, methods: list[str], data_dir: str | Path) -> Path:
-    """Evaluate one target over the given seeds and append the results to ``out`` (resumable)."""
+def evaluate_target(target: str, seeds, out: Path, ctx: EvalContext, methods: list[str], data_dir: str | Path,
+                    per_attack: Path | None = None) -> Path:
+    """Evaluate one target over the given seeds and append the results to ``out`` (resumable).
+
+    Per-attack recall goes to ``per_attack`` (default: ``per_attack_<target>.csv`` next to ``out``).
+    """
     out = Path(out)
     out.parent.mkdir(parents=True, exist_ok=True)
     done = _done_keys(out)
@@ -323,7 +446,8 @@ def evaluate_target(target: str, seeds, out: Path, ctx: EvalContext, methods: li
     def emit(row: dict) -> None:
         pd.DataFrame([row], columns=RESULT_COLUMNS).to_csv(out, mode="a", header=not out.exists(), index=False)
 
-    attack_out = out.parent / f"per_attack_{target}.csv"
+    attack_out = Path(per_attack) if per_attack is not None else out.parent / f"per_attack_{target}.csv"
+    attack_out.parent.mkdir(parents=True, exist_ok=True)
 
     def emit_attack(row: dict) -> None:
         pd.DataFrame([row], columns=ATTACK_COLUMNS).to_csv(attack_out, mode="a", header=not attack_out.exists(),
@@ -355,6 +479,9 @@ def _parse(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--device", default="cpu", choices=["cpu", "cuda"])
     p.add_argument("--threads", type=int, default=2)
     p.add_argument("--al-pool", type=int, default=AL_POOL_CAP)
+    p.add_argument("--benchmark", default="results", help="folder with the Part I runs.csv (read only)")
+    p.add_argument("--per-attack", default=None,
+                   help="CSV for per-attack recall (default: per_attack_<target>.csv next to --out)")
     return p.parse_args(argv)
 
 
@@ -371,8 +498,8 @@ def main(argv: list[str] | None = None) -> None:
             methods.remove("tabpfn")
     ctx = EvalContext(runs_dir=Path(args.runs_dir), supports_dir=Path(args.supports_dir or out.parent),
                       device=args.device, threads=args.threads, al_pool=args.al_pool,
-                      ks=tuple(args.ks), n_draws=args.draws)
-    path = evaluate_target(args.target, args.seeds, out, ctx, methods, args.data_dir)
+                      ks=tuple(args.ks), n_draws=args.draws, benchmark_dir=Path(args.benchmark))
+    path = evaluate_target(args.target, args.seeds, out, ctx, methods, args.data_dir, per_attack=args.per_attack)
     log.info("results in %s", path)
 
 

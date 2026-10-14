@@ -55,10 +55,12 @@ CKPT_EVERY = 1000
 BENCH_WARMUP = 5
 
 
-def episode_settings(ablation: str | None, query_size: int = DEFAULT_QUERY, warp: bool = False):
+def episode_settings(ablation: str | None, query_size: int = DEFAULT_QUERY, warp: bool = False,
+                     context_max: int = 0):
     """Episode config and architecture mixing of an ablation (None = the full method).
 
     A1 is the sign flip. ``warp`` switches on the monotone warp (a no-op under rank normalisation, kept for tests).
+    ``context_max`` > 0 adds U ~ U{0..context_max} unlabelled context rows per episode (§20.1, FLARE-U).
     """
     if ablation not in ABLATIONS:
         raise ValueError(f"unknown ablation {ablation!r}")
@@ -70,7 +72,7 @@ def episode_settings(ablation: str | None, query_size: int = DEFAULT_QUERY, warp
         aug = replace(aug, composite=False)
     elif ablation == "rowmlp":
         mixing = "rowmlp"
-    return EpisodeConfig(query_size=query_size, aug=aug), mixing
+    return EpisodeConfig(query_size=query_size, aug=aug, context_max=context_max), mixing
 
 
 def build_training_data(target: str, seed: int, ablation: str | None, data_dir: str | Path, ecfg: EpisodeConfig,
@@ -146,7 +148,7 @@ def _set_rng_state(state: dict) -> None:
 
 def _save_last(path: Path, model, opt, sched, scaler, step: int, best: dict, meta: dict) -> None:
     tmp = path.with_suffix(".tmp")
-    save_checkpoint(tmp, model, step=step, train_state={
+    save_checkpoint(tmp, model, step=step, context_max=int(meta.get("context_max", 0)), train_state={
         "optimizer": opt.state_dict(),
         "scheduler": sched.state_dict(),
         "scaler": scaler.state_dict() if scaler is not None else None,
@@ -173,6 +175,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
     total = bench + BENCH_WARMUP if bench else steps
     warmup = min(warmup, max(1, total // 10))
     model.to(device).train()
+    ctx_max = int(meta.get("context_max", 0))
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=weight_decay)
     sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: _lr_factor(s, total, warmup))
     amp_dtype, use_scaler, precision = select_precision(device)
@@ -259,7 +262,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
             if is_best:
                 best = {"val_bce": metrics["val_bce"], "step": step, "val_auc": metrics["val_auc"]}
                 if out is not None:
-                    save_checkpoint(out / "best.tmp", model, step=step, **metrics)
+                    save_checkpoint(out / "best.tmp", model, step=step, context_max=ctx_max, **metrics)
                     os.replace(out / "best.tmp", out / "best.pt")
             write({"step": step, **metrics, "best": is_best})
             log.info("eval step %d val_bce %.4f val_auc %.4f%s", step, metrics["val_bce"], metrics["val_auc"],
@@ -312,6 +315,8 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     p.add_argument("--batch-size", type=int, default=8)
     p.add_argument("--query-size", type=int, default=DEFAULT_QUERY)
     p.add_argument("--warp", action="store_true", help="enable the A1 monotone warp (no-op under rank normalisation)")
+    p.add_argument("--context-max", type=int, default=0,
+                   help="FLARE-U (§20.1): up to this many unlabelled context rows per episode, U ~ U{0..N} (0 = off)")
     p.add_argument("--lr", type=float, default=3e-4)
     p.add_argument("--weight-decay", type=float, default=0.01)
     p.add_argument("--warmup", type=int, default=DEFAULT_WARMUP)
@@ -334,7 +339,8 @@ def run(args: argparse.Namespace) -> dict:
         raise RuntimeError("cuda requested but not available")
     out = None if args.bench else Path(args.out or f"runs/flare/{args.target}_s{args.seed}")
     resume_step = read_resume_step(out)
-    ecfg, mixing = episode_settings(args.ablation, query_size=args.query_size, warp=args.warp)
+    ecfg, mixing = episode_settings(args.ablation, query_size=args.query_size, warp=args.warp,
+                                    context_max=args.context_max)
     cfg = NAMED_CONFIGS[args.config]
     cfg = replace(cfg, feature_mixing=mixing, max_features=max(cfg.max_features, len(CORE_FEATURES)))
     pools, synthetic, val, keys = build_training_data(args.target, args.seed, args.ablation, args.data_dir, ecfg,
@@ -350,7 +356,7 @@ def run(args: argparse.Namespace) -> dict:
     model = build_model(args.model, cfg)
     meta = {"target": args.target, "seed": args.seed, "ablation": args.ablation, "meta_train": keys,
             "model_kind": args.model, "query_size": args.query_size, "num_workers": args.num_workers,
-            "stream": resume_step}
+            "stream": resume_step, "context_max": args.context_max}
     summary = fit(model, source, val, steps=args.steps, out=out, lr=args.lr, weight_decay=args.weight_decay,
                   warmup=args.warmup, clip=args.clip, batch_size=args.batch_size, device=device,
                   val_every=args.val_every, log_every=args.log_every, compile=args.compile, bench=args.bench,

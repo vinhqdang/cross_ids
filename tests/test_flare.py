@@ -580,7 +580,8 @@ def test_fulllabel_and_per_attack_csv_helpers_are_consistent():
     table = report.learning_table(frame)
     assert set(table["method"]) == {"catboost-target", "flare"}
     wil = report.wilcoxon_table(frame)
-    assert {"flare", "protonet", "flare-al", "flare-kcenter-raw"} >= set(wil["method"]) - {"x"}
+    assert {"flare", "protonet", "flare-al", "flare-kcenter-raw", "flare-u", "flare+cb", "flare-u+cb"} >= set(
+        wil["method"]) - {"x"}
     pa = pd.DataFrame([{"method": "flare", "target": "t", "k": 16, "draw": 0, "seed": 0, "attack_type": "DDoS",
                         "n": 10, "detected": 7, "recall": 0.7}])
     fam = report.family_recall(pa)
@@ -626,3 +627,340 @@ def test_report_writes_tables_and_figures(tmp_path):
     assert ref.loc[0, "method"] == "rift"
     wil = pd.read_csv(out / "wilcoxon_vs_catboost_target.csv")
     assert set(wil["method"]) == {"flare", "protonet", "flare-al", "flare-kcenter-raw"}
+
+
+# ---------- §20: context rows, support cache, combinations and zero-shot references ----------
+
+from pathlib import Path  # noqa: E402
+
+from crossids.flare import report as flare_report  # noqa: E402
+from crossids.flare.data import Split  # noqa: E402
+from crossids.flare.evaluate import (  # noqa: E402
+    EvalContext,
+    SeedState,
+    _run_method,
+    context_rows,
+    pairwise_reference,
+    zero_shot_catboost_lodo,
+)
+
+FIXTURES = Path(__file__).parent / "fixtures"
+
+
+def _episode_ctx(seed: int, d: int = D, k: int = 6, u: int = 10, q: int = 20) -> Episode:
+    rng = np.random.default_rng(seed)
+    X = rng.normal(0, 1, (k + u + q, d))
+    y = np.concatenate([np.arange(k) % 2, (rng.random(u + q) < 0.5).astype(int)])
+    X[y == 1, : max(1, d // 3)] += 1.0
+    label = y.copy()
+    label[k:] = data.LABEL_UNKNOWN
+    return Episode(x=data.gauss_rank(X).astype(np.float32), label=label.astype(np.int64),
+                   truth=y.astype(np.int64), n_support=k, n_context=u)
+
+
+def _digest(episodes) -> bytes:
+    import hashlib
+
+    h = hashlib.sha256()
+    for e in episodes:
+        for arr in (e.x, e.label, e.truth):
+            h.update(np.ascontiguousarray(arr).tobytes())
+        h.update(str(e.n_support).encode())
+    return h.digest()
+
+
+# ---------- U = 0 is the pre-context behaviour ----------
+
+
+def test_context_max_zero_reproduces_the_pre_context_sampler():
+    io = np.load(FIXTURES / "flare_tiny_precontext_io.npz")
+    rng = np.random.default_rng(42)
+    d = 9
+    pools = [Pools("a", rng.normal(0, 1, (400, d)).astype(np.float32), rng.normal(1, 1, (150, d)).astype(np.float32)),
+             Pools("b", rng.normal(0, 2, (300, d)).astype(np.float32), rng.normal(-1, 1, (120, d)).astype(np.float32))]
+    eps = EpisodeSampler(pools, EpisodeConfig(query_size=24), seed=7).batch(4)
+    assert all(e.n_context == 0 for e in eps)
+    assert _digest(eps) == io["sampler_digest"].tobytes()
+
+
+def test_pre_context_checkpoint_loads_and_predicts_as_before():
+    io = np.load(FIXTURES / "flare_tiny_precontext_io.npz")
+    model = flare_model.load_model(FIXTURES / "flare_tiny_precontext.pt")
+    assert model.context_max == 0
+    np.testing.assert_allclose(model.predict_logits(io["S"], io["y"], io["Q"], ensemble=4, seed=3),
+                               io["logits"], atol=1e-6)
+    np.testing.assert_allclose(model.predict_logits(io["S"], io["y"], io["Q"], ensemble=1), io["logits_e1"], atol=1e-6)
+
+
+def test_context_checkpoint_stores_context_max(tmp_path):
+    model = _tiny_model(6)
+    save_checkpoint(tmp_path / "c.pt", model, step=1, context_max=512)
+    assert flare_model.load_model(tmp_path / "c.pt").context_max == 512
+    save_checkpoint(tmp_path / "o.pt", model, step=1)
+    assert flare_model.load_model(tmp_path / "o.pt").context_max == 0
+
+
+# ---------- context rows in the sampler and the collate layout ----------
+
+
+def test_context_rows_are_disjoint_from_support_and_query():
+    benign = np.arange(0, 400, dtype=float)[:, None]
+    attack = np.arange(1000, 1200, dtype=float)[:, None]
+    composite = np.arange(2000, 2300, dtype=float)[:, None]
+    rng = np.random.default_rng(0)
+    for pool in (attack, composite):
+        s_rows, s_lab, c_rows, c_lab, q_rows, q_lab = data._disjoint_rows(
+            rng, benign, attack, pool, k=12, n_s_att=4, u=30, c_att=7, q=50, q_att=20)
+        ids = np.concatenate([s_rows, c_rows, q_rows])[:, 0]
+        assert len(np.unique(ids)) == len(ids) == 12 + 30 + 50
+        assert len(c_rows) == 30 and int(c_lab.sum()) == 7
+        assert int(s_lab.sum()) == 4 and int(q_lab.sum()) == 20
+
+
+def test_draw_episode_with_context_has_unlabelled_context_rows():
+    cfg = EpisodeConfig(query_size=24, context_max=16, aug=NO_AUG)
+    pools = _two_pools()
+    rng = np.random.default_rng(3)
+    for _ in range(20):
+        e = data.draw_episode(rng, pools[0].benign, pools[0].attack, cfg)
+        k, u = e.n_support, e.n_context
+        assert 0 <= u <= 16 and e.x.shape[0] == k + u + 24
+        assert np.all(e.label[k:] == data.LABEL_UNKNOWN)
+        assert set(np.unique(e.label[:k])) <= {0, 1}
+        assert e.meta["context"] == u
+
+
+def test_collate_places_context_in_the_support_block():
+    e1 = _episode_ctx(1, d=9, k=4, u=3, q=5)
+    e2 = _episode(2, d=9, k=6, q=7)
+    b = collate([e1, e2])
+    assert b.x.shape == (2, 7 + 7, 9)  # support + context block is max(4 + 3, 6) = 7 wide
+    assert not b.is_query[:, :7].any() and b.is_query[:, 7:].all()
+    assert b.row_valid[0, :7].sum() == 7 and b.row_valid[1, :7].sum() == 6
+    assert np.all(b.label[0, 4:7] == data.LABEL_UNKNOWN)
+
+
+def test_context_rows_for_flare_u_exclude_the_support_and_labels():
+    benign = np.arange(0, 300, dtype=float)[:, None]
+    X = np.hstack([benign, np.zeros((300, 2))])
+    y = (np.arange(300) % 3 == 0).astype(np.int64)
+    split = Split(key="t", seed=0, features=("a", "b", "c"), X_train=X, y_train=y, X_test=X[:10], y_test=y[:10],
+                  attack_test=np.array(["x"] * 10, dtype=object))
+    sup_idx = np.array([0, 5, 17, 40])
+    ctx_X = context_rows(split, sup_idx, seed=0, k=4, draw=0, n=50)
+    assert ctx_X.shape == (50, 3)
+    assert not set(ctx_X[:, 0].tolist()) & set(X[sup_idx, 0].tolist())
+    np.testing.assert_array_equal(context_rows(split, sup_idx, 0, 4, 0, 50), ctx_X)
+
+
+# ---------- attention rule with context, and query independence ----------
+
+
+def test_context_mask_matches_dense_reference():
+    torch.manual_seed(0)
+    cfg = TINY_CONFIG
+    ra = flare_model._RowAttention(cfg.width, cfg.heads).eval()
+    B, T, k, u, q = 2, 4, 3, 4, 5
+    N, n_sup = k + u + q, k + u
+    h = torch.randn(B, N, T, cfg.width)
+    sup_valid = torch.ones(B, n_sup, dtype=torch.bool)
+    sup_valid[1, 2] = False  # a padded support row
+    sup_valid[0, 5] = False  # a padded context row
+    out = ra(h, n_sup, sup_valid)
+    # dense reference: support and context rows attend to valid support + context rows; query rows attend to the
+    # same rows and to themselves. Queries never attend to other queries.
+    row_valid = torch.ones(B, N, dtype=torch.bool)
+    row_valid[:, :n_sup] = sup_valid
+    is_q = torch.arange(N) >= n_sup
+    nonq_valid = row_valid & ~is_q[None]
+    eye = torch.eye(N, dtype=torch.bool)
+    allow = nonq_valid[:, None, :] | eye[None]
+    x = h.permute(0, 2, 1, 3).reshape(B * T, N, cfg.width)
+    qkv = ra.qkv(x).reshape(B * T, N, 3, cfg.heads, cfg.width // cfg.heads).permute(2, 0, 3, 1, 4)
+    mask = allow[:, None, None].expand(B, T, 1, N, N).reshape(B * T, 1, N, N)
+    ref = F.scaled_dot_product_attention(qkv[0], qkv[1], qkv[2], attn_mask=mask)
+    ref = ra.proj(ref.transpose(1, 2).reshape(B * T, N, cfg.width)).reshape(B, T, N, cfg.width).permute(0, 2, 1, 3)
+    for b in range(B):
+        torch.testing.assert_close(out[b, row_valid[b]], ref[b, row_valid[b]], atol=1e-5, rtol=1e-4)
+    # support and context outputs do not depend on the queries
+    h2 = h.clone()
+    h2[:, n_sup:] = torch.randn_like(h2[:, n_sup:]) * 3
+    torch.testing.assert_close(ra(h2, n_sup, sup_valid)[:, :n_sup], out[:, :n_sup], atol=1e-6, rtol=1e-5)
+    # ... but they do depend on the context rows
+    h3 = h.clone()
+    h3[:, k:n_sup] += 1.0
+    assert not torch.allclose(ra(h3, n_sup, sup_valid)[:, :k], out[:, :k], atol=1e-3)
+
+
+def test_query_predictions_do_not_depend_on_other_queries_with_context():
+    model = _tiny_model(7).eval()
+    e = _episode_ctx(8, d=7, k=6, u=10, q=16)
+    nb = e.n_support + e.n_context
+    with torch.no_grad():
+        b = batch_to_torch(collate([e]))
+        ref = model.forward_episode(b["x"], b["feat_pad"], b["row_valid"], b["is_query"], b["label"])[0, nb:]
+        x2 = e.x.copy()
+        x2[nb + 4:] = np.random.default_rng(3).normal(0, 3, x2[nb + 4:].shape).astype(np.float32)
+        b2 = batch_to_torch(collate([replace(e, x=x2)]))
+        alt = model.forward_episode(b2["x"], b2["feat_pad"], b2["row_valid"], b2["is_query"], b2["label"])[0, nb:]
+    torch.testing.assert_close(ref[:4], alt[:4], atol=1e-5, rtol=1e-4)
+
+
+# ---------- support cache: equivalence with the dense pass, ensemble arithmetic ----------
+
+
+@pytest.mark.parametrize("mixing", ["attention", "rowmlp"])
+@pytest.mark.parametrize("n_ctx", [0, 9])
+def test_cached_inference_matches_dense_forward_and_is_chunk_invariant(mixing, n_ctx):
+    torch.manual_seed(5)
+    cfg = replace(TINY_CONFIG, feature_mixing=mixing, max_features=13, ensemble=3)
+    model = FlareModel(cfg).eval()
+    rng = np.random.default_rng(11)
+    d, k, q = 7, 6, 23
+    S = rng.normal(0, 1, (k, d))
+    y = np.arange(k) % 2
+    C = rng.normal(0, 1, (n_ctx, d))
+    Q = rng.normal(0.3, 1.2, (q, d))
+    cached = model.predict_logits(S, y, Q, chunk=5, ensemble=3, seed=2, context_X=C)
+    whole = model.predict_logits(S, y, Q, chunk=1024, ensemble=3, seed=2, context_X=C)
+    np.testing.assert_allclose(cached, whole, atol=1e-5)
+    # dense reference: one forward pass per member on the whole normalised episode, then the mean over members
+    Z = data.gauss_rank(np.vstack([S, C, Q]))
+    signs = model._sign_members(d, 3, 2)
+    nb = k + n_ctx
+    is_q = torch.zeros(1, nb + q, dtype=torch.bool)
+    is_q[:, nb:] = True
+    label = torch.from_numpy(np.concatenate([y, np.full(n_ctx, data.LABEL_UNKNOWN), np.full(q, data.LABEL_UNKNOWN)]))
+    refs = []
+    with torch.no_grad():
+        for e in range(3):
+            x = torch.from_numpy((Z * signs[e]).astype(np.float32))[None]
+            logits = model.forward_episode(x, torch.ones(1, d, dtype=torch.bool), torch.ones(1, nb + q, dtype=torch.bool),
+                                           is_q, label[None])
+            refs.append(logits[0, nb:].numpy())
+    np.testing.assert_allclose(cached, np.mean(refs, axis=0), atol=1e-5)
+    # embeddings of the cached path match the dense embeddings
+    emb = model.embed(S, y, Q)
+    Zq = data.gauss_rank(np.vstack([S, Q])).astype(np.float32)
+    dense_emb = model.forward_episode(torch.from_numpy(Zq)[None], torch.ones(1, d, dtype=torch.bool),
+                                      torch.ones(1, k + q, dtype=torch.bool),
+                                      torch.arange(k + q)[None] >= k,
+                                      torch.from_numpy(np.concatenate([y, np.full(q, data.LABEL_UNKNOWN)]))[None],
+                                      return_embedding=True)[0, k:]
+    np.testing.assert_allclose(emb, dense_emb.detach().numpy(), atol=1e-5)
+
+
+def test_context_does_not_change_predictions_when_empty():
+    model = _tiny_model(8).eval()
+    e = _episode(9, d=8, k=8, q=20)
+    S, y, Q = e.x[:8], e.label[:8], e.x[8:]
+    a = model.predict_logits(S, y, Q, ensemble=2, seed=1)
+    b = model.predict_logits(S, y, Q, ensemble=2, seed=1, context_X=np.zeros((0, 8)))
+    np.testing.assert_array_equal(a, b)
+
+
+# ---------- combinations and zero-shot references ----------
+
+
+class _ConstantModel:
+    """Stands in for a FLARE checkpoint: predicts the same P(attack) for every query."""
+
+    def __init__(self, p: float):
+        self.p = p
+
+    def predict_proba(self, Xs, ys, Xt, seed=0, context_X=None, **_):
+        return np.full(len(Xt), self.p)
+
+
+def _toy_split(seed: int = 0, n_train: int = 300, n_test: int = 120, d: int = 5, shift: float = 0.0) -> Split:
+    rng = np.random.default_rng(seed)
+    X_train = rng.normal(0, 1, (n_train, d))
+    y_train = (X_train[:, 0] + 0.5 * rng.normal(size=n_train) > 0.3).astype(np.int64)
+    X_test = rng.normal(shift, 1, (n_test, d))
+    y_test = (X_test[:, 0] > 0.3).astype(np.int64)
+    return Split(key="t", seed=seed, features=tuple(f"f{i}" for i in range(d)), X_train=X_train, y_train=y_train,
+                 X_test=X_test, y_test=y_test, attack_test=np.array(["x"] * n_test, dtype=object))
+
+
+def _sources_fn(seed: int = 0):
+    out = []
+    for i, name in enumerate(["s1", "s2"]):
+        r = _toy_split(seed=10 + i, n_train=260, d=5, shift=0.2 * i)
+        out.append(Domain(name=name, X=r.X_train.astype(np.float64), y=r.y_train))
+    return out
+
+
+def test_flare_plus_catboost_is_the_mean_and_reuses_the_catboost_fit(tmp_path):
+    split = _toy_split(seed=1)
+    ctx = EvalContext(runs_dir=tmp_path, supports_dir=tmp_path, threads=2)
+    st = SeedState("t", 1, split, ctx)
+    st.models["flare"] = _ConstantModel(0.2)
+    idx = np.arange(0, 40, 5)
+    cb = _run_method("catboost-target", st, idx, 8, 0)
+    assert ("catboost-target", 8, 0) in st.cache
+    combo = _run_method("flare+cb", st, idx, 8, 0)
+    np.testing.assert_allclose(combo[0], 0.5 * (np.full(len(split.y_test), 0.2) + cb[0]))
+    np.testing.assert_array_equal(combo[1], split.y_train[idx])
+
+
+def test_catboost_lodo_uses_no_target_labels(tmp_path):
+    base = _toy_split(seed=2)
+    perm = np.random.default_rng(0).permutation(len(base.y_train))
+    flipped = replace(base, y_train=base.y_train[perm], y_test=1 - base.y_test)
+    ctx = EvalContext(runs_dir=tmp_path, supports_dir=tmp_path, threads=2)
+    p1 = zero_shot_catboost_lodo(SeedState("t", 0, base, ctx, sources_fn=_sources_fn))
+    p2 = zero_shot_catboost_lodo(SeedState("t", 0, flipped, ctx, sources_fn=_sources_fn))
+    np.testing.assert_array_equal(p1, p2)
+    assert p1.shape == (len(base.y_test),) and np.all((p1 >= 0) & (p1 <= 1))
+
+
+def test_pairwise_reference_is_mean_and_oracle_best_source(tmp_path):
+    rows = [
+        dict(experiment="pairwise", mode="transductive", method="catboost", seed=0, target="iot23", sources=s,
+             roc_auc=r, pr_auc=p, balanced_accuracy=b, f1=f)
+        for s, r, p, b, f in [("a", 0.6, 0.3, 0.55, 0.2), ("b", 0.9, 0.7, 0.8, 0.6), ("c", 0.3, 0.1, 0.5, 0.0)]
+    ]
+    rows.append(dict(experiment="pairwise", mode="transductive", method="catboost", seed=1, target="iot23",
+                     sources="z", roc_auc=0.99, pr_auc=0.9, balanced_accuracy=0.9, f1=0.9))
+    rows.append(dict(experiment="pairwise", mode="transductive", method="catboost", seed=0, target="usbids1",
+                     sources="a", roc_auc=0.1, pr_auc=0.1, balanced_accuracy=0.1, f1=0.1))
+    pd.DataFrame(rows).to_csv(tmp_path / "runs.csv", index=False)
+    ref = pairwise_reference("iot23", tmp_path)
+    assert ref["catboost-pairwise-mean"]["roc_auc"] == pytest.approx((0.6 + 0.9 + 0.3) / 3)
+    assert ref["catboost-pairwise-best"] == {"roc_auc": 0.9, "pr_auc": 0.7, "balanced_accuracy": 0.8, "f1": 0.6}
+    assert pairwise_reference("cicids2017", tmp_path) == {}
+
+
+def test_wilcoxon_and_zero_shot_tables_cover_the_new_methods():
+    recs = []
+    for target in ("iot23", "usbids1"):
+        for draw in range(3):
+            base = 0.6 + 0.01 * draw
+            recs.append(dict(method="catboost-target", target=target, k=4, draw=draw, seed=0, roc_auc=base,
+                             balanced_accuracy=base, pr_auc=base, f1=base))
+            for m, bump in [("flare-u", 0.2), ("flare+cb", 0.15), ("flare-u+cb", 0.18)]:
+                recs.append(dict(method=m, target=target, k=4, draw=draw, seed=0, roc_auc=base + bump,
+                                 balanced_accuracy=base + bump, pr_auc=base, f1=base))
+        recs.append(dict(method="catboost-lodo", target=target, k=0, draw=0, seed=0, roc_auc=0.7,
+                         balanced_accuracy=0.6, pr_auc=0.5, f1=0.4))
+    frame = pd.DataFrame(recs)
+    wil = flare_report.wilcoxon_table(frame)
+    got = wil[(wil.method == "flare-u") & (wil.metric == "roc_auc") & (wil.k == 4)]
+    assert len(got) == 1 and got["pairs"].iloc[0] == 6 and got["p_value"].iloc[0] < 0.1
+    zero = flare_report.zero_shot_table(frame)
+    assert set(zero["method"]) == {"catboost-lodo"} and len(zero) == 2
+
+
+def test_fit_with_context_records_context_max_in_checkpoints(tmp_path):
+    torch.manual_seed(2)
+    ecfg, mixing = train.episode_settings(None, query_size=24, context_max=32)
+    assert ecfg.context_max == 32 and mixing == "attention"
+    assert train.episode_settings(None)[0].context_max == 0
+    model = FlareModel(TINY_CONFIG)
+    sampler = EpisodeSampler(_two_pools(), ecfg, 0)
+    val = EpisodeSampler(_two_pools(), ecfg, 1).batch(4)
+    summary = train.fit(model, sampler, val, steps=3, out=tmp_path, batch_size=2, device="cpu", val_every=3,
+                        log_every=1, warmup=1, meta={"context_max": 32})
+    assert summary["best_step"] == 3
+    assert flare_model.load_model(tmp_path / "best.pt").context_max == 32
+    assert flare_model.load_model(tmp_path / "last.pt").context_max == 32

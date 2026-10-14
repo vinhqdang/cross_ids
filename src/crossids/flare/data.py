@@ -127,7 +127,11 @@ class AugConfig:
 
 @dataclass(frozen=True)
 class EpisodeConfig:
-    """Episode shape (§14): support size log-uniform in [k_min, k_max], query size and priors."""
+    """Episode shape (§14): support size log-uniform in [k_min, k_max], query size and priors.
+
+    ``context_max`` > 0 turns on the unlabelled context rows of §20.1: U ~ U{0..context_max} rows from the same
+    dataset, with their own attack prior ``context_prior``. The default 0 leaves episodes exactly as in §14.
+    """
 
     k_min: int = 4
     k_max: int = 128
@@ -136,13 +140,15 @@ class EpisodeConfig:
     support_prior: tuple[float, float] = (0.1, 0.9)
     clip: float = CLIP
     aug: AugConfig = field(default_factory=AugConfig)
+    context_max: int = 0
+    context_prior: tuple[float, float] = (0.05, 0.95)
 
 
 @dataclass
 class Episode:
-    """Normalised episode. Rows are support first, then query.
+    """Normalised episode. Rows are support first, then context (``n_context`` unlabelled rows), then query.
 
-    ``label`` holds the (possibly noisy) support label, and ``LABEL_UNKNOWN`` for query rows.
+    ``label`` holds the (possibly noisy) support label, and ``LABEL_UNKNOWN`` for context and query rows.
     ``truth`` holds the true label of every row; only query truth is used for the loss.
     """
 
@@ -150,6 +156,7 @@ class Episode:
     label: np.ndarray
     truth: np.ndarray
     n_support: int
+    n_context: int = 0
     meta: dict = field(default_factory=dict)
 
 
@@ -175,6 +182,42 @@ def pools_from_split(split: Split, which: str = "train") -> Pools:
     else:
         raise ValueError(f"unknown part {which!r}")
     return Pools(split.key, X[y == 0], X[y == 1])
+
+
+def _partition(rng: np.random.Generator, pool: np.ndarray, sizes: list[int]) -> list[np.ndarray]:
+    """Disjoint row groups of the given sizes from one pool (with replacement only if the pool is too small)."""
+    total = int(sum(sizes))
+    if total == 0:
+        return [pool[:0] for _ in sizes]
+    if len(pool) == 0:
+        raise ValueError("empty class pool")
+    idx = rng.choice(len(pool), size=total, replace=total > len(pool))
+    out, o = [], 0
+    for s in sizes:
+        out.append(pool[idx[o:o + s]])
+        o += s
+    return out
+
+
+def _disjoint_rows(rng, benign, attack, attack_pool, k, n_s_att, u, c_att, q, q_att):
+    """Support, context and query rows of one episode. Rows of one dataset never repeat across the three parts.
+
+    Attacks come from ``attack_pool`` (another dataset for composite episodes); context attacks always come from the
+    episode's own dataset, so they can never coincide with a composite row.
+    """
+    if attack_pool is attack:
+        s_att, q_att_rows, c_att_rows = _partition(rng, attack, [n_s_att, q_att, c_att])
+    else:
+        s_att, q_att_rows = _partition(rng, attack_pool, [n_s_att, q_att])
+        (c_att_rows,) = _partition(rng, attack, [c_att])
+    s_ben, q_ben, c_ben = _partition(rng, benign, [k - n_s_att, q - q_att, u - c_att])
+    s_rows = np.concatenate([s_att, s_ben])
+    s_lab = np.concatenate([np.ones(len(s_att), np.int64), np.zeros(len(s_ben), np.int64)])
+    c_rows = np.concatenate([c_att_rows, c_ben])
+    c_lab = np.concatenate([np.ones(len(c_att_rows), np.int64), np.zeros(len(c_ben), np.int64)])
+    q_rows = np.concatenate([q_att_rows, q_ben])
+    q_lab = np.concatenate([np.ones(len(q_att_rows), np.int64), np.zeros(len(q_ben), np.int64)])
+    return s_rows, s_lab, c_rows, c_lab, q_rows, q_lab
 
 
 def _take(rng: np.random.Generator, pool: np.ndarray, n: int) -> np.ndarray:
@@ -211,14 +254,30 @@ def draw_episode(
     q_att = int(np.clip(q_att, 1, q - 1))
 
     attack_pool = composite_attack if composite_attack is not None else attack
-    s_rows = np.concatenate([_take(rng, attack_pool, n_s_att), _take(rng, benign, k - n_s_att)])
-    s_lab = np.concatenate([np.ones(n_s_att, np.int64), np.zeros(k - n_s_att, np.int64)])
-    q_rows = np.concatenate([_take(rng, attack_pool, q_att), _take(rng, benign, q - q_att)])
-    q_lab = np.concatenate([np.ones(q_att, np.int64), np.zeros(q - q_att, np.int64)])
-    s_order = rng.permutation(k)
-    q_order = rng.permutation(q)
-    s_rows, s_lab = s_rows[s_order], s_lab[s_order]
-    q_rows, q_lab = q_rows[q_order], q_lab[q_order]
+    if cfg.context_max > 0:
+        # §20.1: context rows, drawn without replacement so that support, context and query are disjoint rows
+        u = int(rng.integers(0, cfg.context_max + 1))
+        c_att = int(np.clip(np.round(u * rng.uniform(*cfg.context_prior)), 0, u))
+        s_rows, s_lab, c_rows, c_lab, q_rows, q_lab = _disjoint_rows(
+            rng, benign, attack, attack_pool, k, n_s_att, u, c_att, q, q_att)
+        s_order = rng.permutation(k)
+        c_order = rng.permutation(u)
+        q_order = rng.permutation(q)
+        s_rows, s_lab = s_rows[s_order], s_lab[s_order]
+        c_rows, c_lab = c_rows[c_order], c_lab[c_order]
+        q_rows, q_lab = q_rows[q_order], q_lab[q_order]
+    else:
+        u, c_att = 0, 0
+        s_rows = np.concatenate([_take(rng, attack_pool, n_s_att), _take(rng, benign, k - n_s_att)])
+        s_lab = np.concatenate([np.ones(n_s_att, np.int64), np.zeros(k - n_s_att, np.int64)])
+        q_rows = np.concatenate([_take(rng, attack_pool, q_att), _take(rng, benign, q - q_att)])
+        q_lab = np.concatenate([np.ones(q_att, np.int64), np.zeros(q - q_att, np.int64)])
+        s_order = rng.permutation(k)
+        q_order = rng.permutation(q)
+        s_rows, s_lab = s_rows[s_order], s_lab[s_order]
+        q_rows, q_lab = q_rows[q_order], q_lab[q_order]
+        c_rows = np.zeros((0, d), dtype=s_rows.dtype)
+        c_lab = np.zeros(0, np.int64)
 
     if aug.subset and d > aug.min_features and rng.random() < aug.subset_p:
         m = int(rng.integers(min(aug.min_features, d), d + 1))
@@ -226,8 +285,8 @@ def draw_episode(
     else:
         cols = np.arange(d)
 
-    X = np.vstack([s_rows, q_rows])[:, cols].astype(np.float64)
-    truth = np.concatenate([s_lab, q_lab])
+    X = np.vstack([s_rows, c_rows, q_rows])[:, cols].astype(np.float64)
+    truth = np.concatenate([s_lab, c_lab, q_lab])
     n = X.shape[0]
 
     flipped = np.zeros(len(cols), dtype=bool)
@@ -248,9 +307,10 @@ def draw_episode(
 
     info = {"k": k, "support_attack": n_s_att, "query_attack": q_att, "features": cols.tolist(),
             "flipped": flipped.tolist(), "label_noise_rows": int(noisy.sum()),
-            "composite": composite_attack is not None}
+            "composite": composite_attack is not None, "context": u, "context_attack": c_att}
     info.update(meta or {})
-    return Episode(x=gauss_rank(X, cfg.clip).astype(np.float32), label=label, truth=truth, n_support=k, meta=info)
+    return Episode(x=gauss_rank(X, cfg.clip).astype(np.float32), label=label, truth=truth, n_support=k,
+                   n_context=u, meta=info)
 
 
 class EpisodeSampler:
@@ -333,16 +393,17 @@ class Batch:
 
 
 def collate(episodes: list[Episode]) -> Batch:
-    """Pad episodes into the block layout [support block | query block].
+    """Pad episodes into the block layout [support + context block | query block].
 
-    The support block has ``max n_support`` columns and the query block ``max n_query`` columns. Padding sits inside
-    each block, so every episode in a batch shares the same block boundary (``model.support_block_size``).
+    The first block has ``max(n_support + n_context)`` columns and the query block ``max n_query`` columns.
+    Padding sits inside each block, so every episode in a batch shares the same block boundary
+    (``model.support_block_size``).
     """
     if not episodes:
         raise ValueError("empty batch")
     B = len(episodes)
-    K = max(e.n_support for e in episodes)
-    Qm = max(e.x.shape[0] - e.n_support for e in episodes)
+    K = max(e.n_support + e.n_context for e in episodes)
+    Qm = max(e.x.shape[0] - e.n_support - e.n_context for e in episodes)
     N = K + Qm
     D = max(e.x.shape[1] for e in episodes)
     x = np.zeros((B, N, D), np.float32)
@@ -353,7 +414,7 @@ def collate(episodes: list[Episode]) -> Batch:
     label = np.full((B, N), LABEL_UNKNOWN, np.int64)
     truth = np.zeros((B, N), np.float32)
     for b, e in enumerate(episodes):
-        n_s = e.n_support
+        n_s = e.n_support + e.n_context  # support and context rows form the non-query block
         n_q = e.x.shape[0] - n_s
         d = e.x.shape[1]
         feat_pad[b, :d] = True

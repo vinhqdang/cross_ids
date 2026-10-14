@@ -1,10 +1,12 @@
 """Summary of the FLARE few-shot evaluation (DESIGN.md §18).
 
-Reads ``<runs>/eval_<target>.csv`` and ``<runs>/per_attack_<target>.csv`` (written by ``flare.evaluate``) and the Part
-I benchmark table ``<benchmark>/runs.csv`` (read only). Writes CSV tables and figures to ``--out``:
+Reads ``<runs>/eval_*.csv`` and ``<runs>/per_attack_<target>.csv`` (written by ``flare.evaluate``) and the Part I
+benchmark table ``<benchmark>/runs.csv`` (read only). Writes CSV tables and figures to ``--out``:
 
 * learning curves vs k per target and averaged over targets (ROC-AUC, balanced accuracy), with the best label-free
   Part I method and the full-label CatBoost as horizontal reference lines;
+* the k = 0 zero-shot references (CatBoost on the meta-training datasets, and the Part I pairwise mean and best
+  source), drawn as points at the k = 0 position of the learning curves;
 * Wilcoxon signed-rank tests of each method against target-only CatBoost per k, over (target, draw) pairs;
 * per-attack-family recall at k = 16, using ``crossids.analysis.attack_family``.
 
@@ -32,12 +34,15 @@ from ..analysis import INK, MUTED, PALETTE, SEQUENTIAL_CMAP, STYLE, attack_famil
 from .evaluate import PER_ATTACK_K  # noqa: E402
 
 FLARE_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet", "flare-noA1", "flare-noA3", "flare-rowmlp",
-                 "flare-synthetic", "flare-E1")
+                 "flare-synthetic", "flare-E1", "flare-u", "flare+cb", "flare-u+cb")
 BASELINE_METHODS = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn")
 REFERENCE = "catboost-fulllabel"
-WILCOXON_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet")
-METHOD_ORDER = ("flare", "flare-al", "flare-kcenter-raw", "flare-E1", "flare-noA1", "flare-noA3", "flare-rowmlp",
-                "flare-synthetic", "protonet", "catboost-target", "catboost-ft", "rf", "lr", "knn", "tabpfn")
+ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best")  # k = 0 references (section 20.3)
+WILCOXON_METHODS = ("flare", "flare-al", "flare-kcenter-raw", "protonet", "flare-u", "flare+cb", "flare-u+cb")
+METHOD_ORDER = ("flare", "flare-u", "flare+cb", "flare-u+cb", "flare-al", "flare-kcenter-raw", "flare-E1",
+                "flare-noA1", "flare-noA3", "flare-rowmlp", "flare-synthetic", "protonet", "catboost-target",
+                "catboost-ft", "rf", "lr", "knn", "tabpfn", *ZERO_SHOT)
+K0_POSITION = 2  # k = 0 is drawn at this x on the log-2 axis, labelled "0"
 FAMILY_ORDER = ("benign", "web", "ddos", "dos", "scan", "botnet", "bruteforce", "exploit_malware", "other")
 
 
@@ -64,6 +69,18 @@ def learning_table(frame: pd.DataFrame) -> pd.DataFrame:
                 balanced_accuracy_sd=("balanced_accuracy", "std"), f1=("f1", "mean"),
                 n=("roc_auc", "size")).reset_index()
     return out
+
+
+def zero_shot_table(frame: pd.DataFrame) -> pd.DataFrame:
+    """k = 0 references per (method, target): mean over seeds of each metric (one row per target)."""
+    z = frame[(frame["k"] == 0) & (frame["method"].isin(ZERO_SHOT))]
+    if z.empty:
+        return pd.DataFrame(columns=["method", "target", "k", "roc_auc", "balanced_accuracy", "pr_auc", "f1", "n"])
+    g = z.groupby(["method", "target"]).agg(roc_auc=("roc_auc", "mean"), balanced_accuracy=("balanced_accuracy", "mean"),
+                                           pr_auc=("pr_auc", "mean"), f1=("f1", "mean"), n=("roc_auc", "size"))
+    g = g.reset_index()
+    g["k"] = 0
+    return g
 
 
 def average_over_targets(table: pd.DataFrame) -> pd.DataFrame:
@@ -101,10 +118,16 @@ def wilcoxon_table(frame: pd.DataFrame) -> pd.DataFrame:
     for metric in ("roc_auc", "balanced_accuracy"):
         base = fl[fl["method"] == "catboost-target"].groupby(["k", "target", "draw"])[metric].mean()
         for method in WILCOXON_METHODS:
+            if method not in set(fl["method"]):
+                continue  # only methods that were evaluated
             mine = fl[fl["method"] == method].groupby(["k", "target", "draw"])[metric].mean()
+            ks_mine = set(mine.index.get_level_values("k")) if len(mine) else set()
+            ks_base = set(base.index.get_level_values("k")) if len(base) else set()
             for k in sorted(fl["k"].unique()):
-                a = mine.xs(k, level="k") if len(mine) else pd.Series(dtype=float)
-                b = base.xs(k, level="k") if len(base) else pd.Series(dtype=float)
+                if k not in ks_mine or k not in ks_base:
+                    continue  # partially evaluated method: test only the k values it has
+                a = mine.xs(k, level="k")
+                b = base.xs(k, level="k")
                 common = a.index.intersection(b.index)
                 x, y = a.loc[common].to_numpy(), b.loc[common].to_numpy()
                 diff = x - y
@@ -140,21 +163,28 @@ def _save(fig, out: Path, stem: str) -> None:
 
 
 def plot_learning(table: pd.DataFrame, avg: pd.DataFrame, partI: pd.DataFrame, full: pd.DataFrame,
-                  metric: str, out: Path) -> None:
+                  metric: str, out: Path, zero: pd.DataFrame | None = None) -> None:
+    """Learning curves per target and averaged. ``zero`` holds the k = 0 references, drawn at K0_POSITION."""
+    zero = pd.DataFrame(columns=table.columns) if zero is None or zero.empty else zero
+    zero_avg = zero.groupby(["method"]).agg(**{metric: (metric, "mean")}).reset_index() if len(zero) else zero
     targets = sorted(table["target"].unique())
-    methods = _order(table["method"].unique())
+    methods = _order(set(table["method"].unique()) | set(zero["method"].unique()))
     colour = {m: PALETTE[i % len(PALETTE)] for i, m in enumerate(methods)}
     with plt.rc_context(STYLE):
         ncols = 3
         nrows = int(np.ceil((len(targets) + 1) / ncols))
         fig, axes = plt.subplots(nrows, ncols, figsize=(4.2 * ncols, 3.2 * nrows), squeeze=False)
-        panels = [(t, table[table["target"] == t]) for t in targets] + [("average over targets", avg)]
-        for ax, (title, data) in zip(axes.flat, panels):
+        panels = [(t, table[table["target"] == t], zero[zero["target"] == t]) for t in targets]
+        panels += [("average over targets", avg, zero_avg)]
+        for ax, (title, data, zdata) in zip(axes.flat, panels):
             for m in methods:
                 d = data[data["method"] == m].sort_values("k")
-                if d.empty:
-                    continue
-                ax.plot(d["k"], d[metric], marker="o", ms=3.5, lw=1.4, color=colour[m], label=m)
+                if len(d):
+                    ax.plot(d["k"], d[metric], marker="o", ms=3.5, lw=1.4, color=colour[m], label=m)
+                zm = zdata[zdata["method"] == m]
+                if len(zm):
+                    ax.plot([K0_POSITION] * len(zm), zm[metric], marker="D", ms=5, lw=0, color=colour[m],
+                            markeredgecolor=INK, label=m if not len(d) else None)
             if title != "average over targets":
                 ref = partI[partI["target"] == title]
                 if len(ref) and metric == "roc_auc":
@@ -164,8 +194,8 @@ def plot_learning(table: pd.DataFrame, avg: pd.DataFrame, partI: pd.DataFrame, f
                 if len(fr):
                     ax.axhline(float(fr[metric].iloc[0]), ls="--", color=INK, lw=1, label="CatBoost, full labels")
             ax.set_xscale("log", base=2)
-            ax.set_xticks([4, 8, 16, 32, 64, 128])
-            ax.set_xticklabels(["4", "8", "16", "32", "64", "128"])
+            ax.set_xticks([K0_POSITION, 4, 8, 16, 32, 64, 128])
+            ax.set_xticklabels(["0", "4", "8", "16", "32", "64", "128"])
             ax.set_title(title, fontsize=10)
             ax.set_xlabel("labelled target flows k")
             ax.set_ylabel(metric.replace("_", " "))
@@ -173,7 +203,7 @@ def plot_learning(table: pd.DataFrame, avg: pd.DataFrame, partI: pd.DataFrame, f
             ax.axis("off")
         handles, labels = axes.flat[0].get_legend_handles_labels()
         fig.legend(handles, labels, loc="lower center", ncol=min(5, len(labels)), frameon=False, fontsize=8)
-        fig.tight_layout(rect=(0, 0.08, 1, 1))
+        fig.tight_layout(rect=(0, 0.13, 1, 1))
         _save(fig, out, f"learning_curves_{metric}")
 
 
@@ -205,14 +235,17 @@ def run(runs: Path, out: Path, benchmark: Path) -> None:
     avg = average_over_targets(table)
     partI = partI_reference(benchmark)
     full = fulllabel_reference(frame)
+    zero = zero_shot_table(frame)
+    zero_avg = average_over_targets(zero.assign(k=0)) if len(zero) else zero
     table.to_csv(out / "learning_by_target.csv", index=False)
     avg.to_csv(out / "learning_average.csv", index=False)
+    zero.to_csv(out / "zero_shot_by_target.csv", index=False)
     wil = wilcoxon_table(frame)
     wil.to_csv(out / "wilcoxon_vs_catboost_target.csv", index=False)
     partI.to_csv(out / "partI_best_label_free.csv", index=False)
     full.to_csv(out / "catboost_fulllabel.csv", index=False)
-    plot_learning(table, avg, partI, full, "roc_auc", out)
-    plot_learning(table, avg, partI, full, "balanced_accuracy", out)
+    plot_learning(table, avg, partI, full, "roc_auc", out, zero=zero)
+    plot_learning(table, avg, partI, full, "balanced_accuracy", out, zero=zero)
     pa = _read_glob(str(runs / "per_attack_*.csv"))
     if not pa.empty:
         fam = family_recall(pa)

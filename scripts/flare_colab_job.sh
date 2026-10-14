@@ -4,7 +4,7 @@
 # so training runs as a foreground cell rather than a detached process).
 #
 # Usage: scripts/flare_colab_job.sh TARGET SEED [VARIANT] [STEPS]
-#   VARIANT: flare (default) | noA1 | noA3 | rowmlp | synthetic | protonet
+#   VARIANT: flare (default) | ctx (FLARE-U, section 20.1) | noA1 | noA3 | rowmlp | synthetic | protonet
 # Outputs: runs/flare/<target>_s<seed>[_variant]/ and runs/flare/eval_<target>_<variant>_s<seed>.csv
 set -euo pipefail
 
@@ -19,6 +19,7 @@ mkdir -p "$WORK" "$ROOT/runs/flare"
 
 case $VARIANT in
   flare) SUFFIX=""; TRAIN_ARGS=""; EVAL_METHODS="flare flare-E1 flare-al flare-kcenter-raw" ;;
+  ctx) SUFFIX="_ctx"; TRAIN_ARGS="--context-max 512"; EVAL_METHODS="flare-u" ;;
   protonet) SUFFIX="_protonet"; TRAIN_ARGS="--model protonet"; EVAL_METHODS="protonet" ;;
   noA1|noA3|rowmlp|synthetic) SUFFIX="_$VARIANT"; TRAIN_ARGS="--ablation $VARIANT"; EVAL_METHODS="flare-$VARIANT" ;;
   *) echo "unknown variant $VARIANT" >&2; exit 2 ;;
