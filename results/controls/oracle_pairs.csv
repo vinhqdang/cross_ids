@@ -1,0 +1,3 @@
+pair,source,target,transfer_type,seed,n_cells,oracle_roc_auc,oracle_config,oracle_pr_auc,oracle_balanced_accuracy,median_roc_auc,benchmark_hgb_roc_auc,benchmark_hgb_balanced_accuracy,n_source_rows,n_test_rows
+cicids2017->cicids2018,cicids2017,cicids2018,same-family,0,264,0.799309098764777,"rf | class_weight=none,max_depth=16 | norm=none | subset=-rate",0.3402595593602722,0.4851980000404237,0.5568712143191199,0.6834439684841584,0.488347675303851,30000,30000
+cicids2017->usbids1,cicids2017,usbids1,same-extractor,0,33,0.8616438644332653,"hgb | class_weight=none,max_leaf_nodes=15 | norm=none | subset=-size_per_pkt",0.9889652314726554,0.7863068412053646,0.359710602506619,0.9724626810149906,0.8030627044603236,30000,30000

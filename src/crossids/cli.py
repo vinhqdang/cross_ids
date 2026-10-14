@@ -1,4 +1,4 @@
-"""Command line interface: crossids download | prepare | run | report | synth | analyze."""
+"""Command line interface: crossids download | prepare | run | report | analyze | controls | synth."""
 
 from __future__ import annotations
 
@@ -50,6 +50,16 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--out", default="results/analysis", help="output directory (default: results/analysis)")
     p.add_argument("--methods", nargs="+", default=None, help="methods for matrices and heatmaps (max 8)")
 
+    p = sub.add_parser("controls", help="DESIGN section 10 controls: oracle, concept, separability, fewshot_fair (resumable)")
+    p.add_argument("--which", default="oracle,concept,separability,fewshot_fair",
+                   help="comma-separated controls, run in the order given")
+    p.add_argument("--seeds", nargs="+", type=int, default=[0])
+    p.add_argument("--out", default="results/controls")
+    p.add_argument("--pairs", nargs="+", default=None, help="ordered pairs as source->target (default: all 42)")
+    p.add_argument("--threads", type=int, default=2, help="thread cap for BLAS/OpenMP and model fits (default 2)")
+    p.add_argument("--results", default="results", help="benchmark results read for comparison (never written)")
+    _add_common(p)
+
     p = sub.add_parser("synth", help="write synthetic domains as parquet")
     p.add_argument("--out", default="data/synthetic")
     p.add_argument("--n-domains", type=int, default=3)
@@ -90,6 +100,21 @@ def main(argv: list[str] | None = None) -> int:
 
         methods = tuple(args.methods) if args.methods else DEFAULT_METHODS
         run_analysis(args.results, args.data_dir, args.out, methods)
+    elif args.command == "controls":
+        from .controls import parse_pairs, run_controls
+
+        which = [w.strip() for w in args.which.split(",") if w.strip()]
+        written = run_controls(
+            which,
+            Path(args.out),
+            list(args.seeds),
+            parse_pairs(args.pairs),
+            threads=args.threads,
+            data_dir=Path(args.data_dir),
+            results_dir=Path(args.results),
+        )
+        for name, path in written.items():
+            logging.getLogger("crossids").info("%s -> %s", name, path)
     elif args.command == "synth":
         from .datasets import synthetic_tables
 
