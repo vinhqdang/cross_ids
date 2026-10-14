@@ -30,7 +30,8 @@ LOG="$WORK/$RUN.log"
 PKG="$WORK/pkg.tgz"
 EVAL_CSV="runs/flare/eval_${TARGET}_${VARIANT}_s${SEED}.csv"
 
-if [[ -f "$ROOT/runs/flare/$RUN/summary.json" && -f "$ROOT/$EVAL_CSV" ]]; then
+SKIP_EVAL=${SKIP_EVAL:-0}  # 1: train on the GPU only and evaluate locally
+if [[ -f "$ROOT/runs/flare/$RUN/summary.json" && ( "$SKIP_EVAL" == 1 || -f "$ROOT/$EVAL_CSV" ) ]]; then
   echo "$RUN already done"; exit 0
 fi
 
@@ -74,8 +75,12 @@ mirror & MIRROR=$!
 trap 'kill $MIRROR 2>/dev/null || true; cleanup' EXIT
 [[ -f "$ROOT/runs/flare/$RUN/summary.json" ]] || remote 14400 "cd /content/cx && python -m crossids.flare.train --target $TARGET --seed $SEED --steps $STEPS --device cuda --num-workers 2 $TRAIN_ARGS --out runs/flare/$RUN"
 kill $MIRROR 2>/dev/null || true
+if [[ "$SKIP_EVAL" == 1 ]]; then
+  remote 600 "cd /content/cx && tar czf /content/out.tgz runs/flare/$RUN"
+else
 remote 7200 "cd /content/cx && python -m crossids.flare.evaluate --target $TARGET --seeds $SEED --methods $EVAL_METHODS --device cuda --threads 2 --out $EVAL_CSV --supports-dir runs/flare"
 remote 600 "cd /content/cx && tar czf /content/out.tgz runs/flare/$RUN $EVAL_CSV runs/flare/supports_${TARGET}_s${SEED}.json"
+fi
 colab download -s "$SESSION" /content/out.tgz "$WORK/$RUN.out.tgz" >> "$LOG" 2>&1
 (cd "$ROOT" && tar xzf "$WORK/$RUN.out.tgz")
 echo "== $RUN done $(date -u +%FT%TZ)" >> "$LOG"
