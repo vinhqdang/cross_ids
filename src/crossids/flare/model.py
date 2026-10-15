@@ -491,8 +491,12 @@ class Flare2Model(FlareModel):
 
     def _match_logits(self, q: torch.Tensor, k: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
         """Per-slot logits (E, Nq, M) of query rows q (E, Nq, C) against support keys k (E, Ns, C) with slot ids."""
+        with torch.autocast(device_type=q.device.type, enabled=False):  # fp32: masked logits overflow half precision
+            return self._match_logits_fp32(q.float(), k.float(), labels)
+
+    def _match_logits_fp32(self, q: torch.Tensor, k: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
         M = self.cfg.slots
-        s = torch.einsum("eqc,esc->eqs", q, k) / (math.sqrt(self.width) * self._tau())  # (E, Nq, Ns)
+        s = torch.einsum("eqc,esc->eqs", q, k) / (math.sqrt(self.width) * self._tau().float())  # (E, Nq, Ns)
         member = F.one_hot(labels.clamp(max=M), M + 1)[..., :M].bool()  # (E, Ns, M); unknown rows belong to no slot
         count = member.sum(1).to(s.dtype)  # (E, M)
         z = s[..., None].masked_fill(~member[:, None], NEG_LOGIT)  # (E, Nq, Ns, M)
@@ -515,7 +519,7 @@ class Flare2Model(FlareModel):
         r = self._rows(h, feat_mask[:, None, :])  # (B, N, C)
         q = self.w_q(r[:, n_sup:])
         k = self.w_k(r[:, :n_sup])
-        out = h.new_zeros(h.shape[0], h.shape[1], self.cfg.slots)
+        out = h.new_zeros(h.shape[0], h.shape[1], self.cfg.slots, dtype=torch.float32)
         out[:, n_sup:] = self._match_logits(q, k, label[:, :n_sup])
         return out
 
