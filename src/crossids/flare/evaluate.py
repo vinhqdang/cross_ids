@@ -64,6 +64,7 @@ FLARE_VARIANTS = {
     "flare2-noperm": ("_f2_noperm", None),  # ablation: no class-to-slot permutation
     "flare2-insrc": ("_f2_insrc", None),  # ablation: in-source validation
     "flare2-ctx": ("_f2_ctx", None),  # FLARE-2 with context rows (needs the context checkpoint)
+    "flare2-m": ("_f2m", None),  # FLARE-2 trained with the unsupported-query loss mask (same model kind as flare2)
 }
 CONTEXT_ROWS = 512  # unlabelled target rows given to flare-u and flare2-ctx (sections 20.1, 21)
 CONTEXT_METHODS = ("flare-u", "flare2-ctx")

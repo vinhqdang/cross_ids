@@ -5,7 +5,7 @@
 # again attaches to the existing session (no second session, no relaunch) and keeps polling.
 #
 # Usage: scripts/flare_colab_target.sh TARGET SEED [VARIANT]
-#   VARIANT: f2 (default) | f2binary | f2noperm | f2insrc | f2ctx
+#   VARIANT: f2 (default) | f2binary | f2noperm | f2insrc | f2ctx | f2m (loss mask, --loss-mask-unsupported)
 # Environment:
 #   COLAB_ACCOUNT_DIR   run under an alternate Colab account (see scripts/flare_colab_common.sh); unset = default account
 #   GPU [T4]  STEPS [20000]  POLL [300] seconds between checks  MAX_ATTEMPTS [3] session losses before giving up

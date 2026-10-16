@@ -147,16 +147,49 @@ def insource_validation(target: str, seed: int, data_dir: str | Path, ecfg: Epis
     return _val_sampler(pools, ecfg, seed, model_kind, tasks or TaskConfig(), n_slots, slot_perm).batch(n_val)
 
 
-def class_loss(logits: torch.Tensor, batch: dict) -> torch.Tensor:
-    """FLARE-2 cross-entropy over the active slots of each episode, averaged over query rows (section 21.4)."""
-    mask = batch["is_query"] & batch["row_valid"]
-    z = logits.float().masked_fill(~batch["slot_active"][:, None, :], float("-inf"))
+def support_split(batch: dict) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """Support bookkeeping of a FLARE-2 batch, read from the labels the model sees (A4 noisy labels included).
+
+    Returns (valid query rows (B, N), the valid query rows whose true class has at least one support row (B, N),
+    and the slots with at least one support row (B, M)). Every class of an episode has a slot, but when A4 relabels
+    all of a class's support rows, the class has no support row and the model scores its slot at NEG_LOGIT.
+    """
+    M = batch["slot_active"].shape[1]
+    sup = batch["row_valid"] & ~batch["is_query"] & (batch["label"] < M)
+    lab = torch.where(sup, batch["label"], torch.full_like(batch["label"], M))
+    present = F.one_hot(lab, M + 1).sum(1)[:, :M] > 0
+    q = batch["is_query"] & batch["row_valid"]
+    return q, q & present.gather(1, batch["slot_target"]), present
+
+
+def unsupported_fraction(batch: dict) -> float:
+    """Fraction of the valid query rows whose class has no support row (``frac_unsupported_queries`` in the logs)."""
+    q, qs, _ = support_split(batch)
+    n = int(q.sum())
+    return float((q & ~qs).sum()) / n if n else 0.0
+
+
+def class_loss(logits: torch.Tensor, batch: dict, mask_unsupported: bool = False) -> torch.Tensor:
+    """FLARE-2 cross-entropy over the active slots of each episode, averaged over query rows (section 21.4).
+
+    ``mask_unsupported`` (``--loss-mask-unsupported``, run suffix _f2m): query rows whose class has no support row are
+    left out, and the softmax runs over the slots that have support. Off, the loss is the original one: such a row
+    targets a slot scored at NEG_LOGIT (about -1e9), so its cross-entropy is about 1e9.
+    """
+    if not mask_unsupported:
+        mask = batch["is_query"] & batch["row_valid"]
+        z = logits.float().masked_fill(~batch["slot_active"][:, None, :], float("-inf"))
+        return F.cross_entropy(z[mask], batch["slot_target"][mask])
+    _, mask, present = support_split(batch)
+    z = logits.float().masked_fill(~(batch["slot_active"] & present)[:, None, :], float("-inf"))
+    if not bool(mask.any()):
+        return logits.float().sum() * 0.0
     return F.cross_entropy(z[mask], batch["slot_target"][mask])
 
 
-def episode_loss(model_kind: str, logits: torch.Tensor, batch: dict) -> torch.Tensor:
+def episode_loss(model_kind: str, logits: torch.Tensor, batch: dict, mask_unsupported: bool = False) -> torch.Tensor:
     if model_kind == "flare2":
-        return class_loss(logits, batch)
+        return class_loss(logits, batch, mask_unsupported)
     mask = batch["is_query"] & batch["row_valid"]
     return F.binary_cross_entropy_with_logits(logits.float()[mask], batch["truth"][mask])
 
@@ -183,17 +216,25 @@ def _to_device(batch: dict, device: torch.device) -> dict:
 
 
 @torch.no_grad()
-def validate_classes(model: EpisodeModel, val_batches: list[dict]) -> dict[str, float]:
+def validate_classes(model: EpisodeModel, val_batches: list[dict], mask_unsupported: bool = False) -> dict[str, float]:
     """FLARE-2 validation: mean query cross-entropy (stored as ``val_bce``), slot accuracy, and ROC-AUC of
     attack vs benign on the two-class episodes (``val_auc``)."""
     model.eval()
     losses, accs, aucs = [], [], []
+    n_query = n_unsup = 0
     for t in val_batches:
         logits = model.forward_episode(t["x"], t["feat_pad"], t["row_valid"], t["is_query"], t["label"]).float()
-        z = logits.masked_fill(~t["slot_active"][:, None, :], float("-inf"))
+        q, qs, present = support_split(t)
+        n_query += int(q.sum())
+        n_unsup += int((q & ~qs).sum())
+        scored = qs if mask_unsupported else q
+        active = (t["slot_active"] & present) if mask_unsupported else t["slot_active"]
+        z = logits.masked_fill(~active[:, None, :], float("-inf"))
         logp = torch.log_softmax(z, dim=-1)
         for b in range(logits.shape[0]):
-            m = t["is_query"][b] & t["row_valid"][b]
+            m = scored[b]
+            if not bool(m.any()):
+                continue
             tgt = t["slot_target"][b][m]
             lp = logp[b][m]
             losses.append(float(-lp.gather(1, tgt[:, None]).mean()))
@@ -206,14 +247,14 @@ def validate_classes(model: EpisodeModel, val_batches: list[dict]) -> dict[str, 
                     aucs.append(float(roc_auc_score(y, s)))
     model.train()
     return {"val_bce": float(np.mean(losses)), "val_auc": float(np.mean(aucs)) if aucs else float("nan"),
-            "val_acc": float(np.mean(accs))}
+            "val_acc": float(np.mean(accs)), "frac_unsupported_queries": n_unsup / max(n_query, 1)}
 
 
 @torch.no_grad()
-def validate(model: EpisodeModel, val_batches: list[dict]) -> dict[str, float]:
+def validate(model: EpisodeModel, val_batches: list[dict], mask_unsupported: bool = False) -> dict[str, float]:
     """Mean query BCE and mean per-episode ROC-AUC over the validation episodes (FLARE-2: see validate_classes)."""
     if model.kind == "flare2":
-        return validate_classes(model, val_batches)
+        return validate_classes(model, val_batches, mask_unsupported)
     model.eval()
     losses, aucs = [], []
     for t in val_batches:
@@ -264,7 +305,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
         lr: float = 3e-4, weight_decay: float = 0.01, warmup: int = DEFAULT_WARMUP, clip: float = 1.0,
         batch_size: int = 8, device="cpu", val_every: int = DEFAULT_VAL_EVERY, log_every: int = DEFAULT_LOG_EVERY,
         ckpt_every: int = CKPT_EVERY, compile: bool = False, bench: int = 0, val_batch_size: int = 8,
-        meta: dict | None = None, val_aux: dict | None = None) -> dict:
+        meta: dict | None = None, val_aux: dict | None = None, mask_unsupported: bool = False) -> dict:
     """Train with AdamW and a warm-up + cosine schedule; keep the checkpoint with the lowest validation BCE.
 
     ``source`` is either a sampler with a ``batch(n)`` method (episodes built in-process) or an iterable of
@@ -322,6 +363,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
     t_start = time.perf_counter()
     t_bench = None
     loss_acc, n_acc = 0.0, 0
+    frac_acc = 0.0
     params = list(model.parameters())
     start_step = step
     while step < total:
@@ -332,7 +374,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
         amp = torch.autocast(device_type=device.type, dtype=amp_dtype, enabled=amp_dtype is not None)
         with amp:
             logits = forward(batch["x"], batch["feat_pad"], batch["row_valid"], batch["is_query"], batch["label"])
-        loss = episode_loss(model.kind, logits, batch)
+        loss = episode_loss(model.kind, logits, batch, mask_unsupported)
         opt.zero_grad(set_to_none=True)
         if scaler is not None:
             scaler.scale(loss).backward()
@@ -354,14 +396,19 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
             continue
         loss_acc += float(loss.detach())
         n_acc += 1
+        if model.kind == "flare2":
+            frac_acc += unsupported_fraction(batch)
         if step % log_every == 0 or step == start_step + 1:
             rec = {"step": step, "loss": loss_acc / n_acc, "lr": sched.get_last_lr()[0],
                    "elapsed": time.perf_counter() - t_start}
+            if model.kind == "flare2":
+                rec["frac_unsupported_queries"] = frac_acc / n_acc
+                frac_acc = 0.0
             write(rec)
             log.info("step %d loss %.4f lr %.2e (%.1fs)", step, rec["loss"], rec["lr"], rec["elapsed"])
             loss_acc, n_acc = 0.0, 0
         if step % val_every == 0 or step == total:
-            metrics = validate(model, val_batches)
+            metrics = validate(model, val_batches, mask_unsupported)
             is_best = metrics["val_bce"] < best["val_bce"]
             if is_best:
                 best = {"val_bce": metrics["val_bce"], "step": step, "val_auc": metrics["val_auc"]}
@@ -370,7 +417,7 @@ def fit(model: EpisodeModel, source, val_episodes: list, *, steps: int, out: Pat
                                     slot_perm=bool(meta.get("slot_perm", True)), **metrics)
                     os.replace(out / "best.tmp", out / "best.pt")
             aux = {f"{name}_{key}": value for name, batches in aux_batches.items()
-                   for key, value in validate(model, batches).items()}
+                   for key, value in validate(model, batches, mask_unsupported).items()}
             write({"step": step, **metrics, **aux, "best": is_best})
             log.info("eval step %d val_bce %.4f val_auc %.4f%s", step, metrics["val_bce"], metrics["val_auc"],
                      " (best)" if is_best else "")
@@ -423,6 +470,12 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
                    help="flare2 only: mixed label-space tasks (section 21.3) or binary attack-vs-benign episodes only")
     p.add_argument("--no-slot-perm", action="store_true",
                    help="flare2 only: no random class-to-slot permutation per episode (ablation)")
+    p.add_argument("--loss-mask-unsupported", action="store_true",
+                   help="flare2 only: leave query rows whose class has no support row out of the loss and of the "
+                        "validation metrics, and take the softmax over slots with support (default off; run suffix m)")
+    p.add_argument("--ensure-support", action="store_true",
+                   help="flare2 only: label noise (A4) never removes the last support row of a class (default off; "
+                        "run suffix _ens)")
     p.add_argument("--config", choices=sorted(NAMED_CONFIGS), default="default")
     p.add_argument("--device", default=None, help="cuda or cpu (default: cuda when available)")
     p.add_argument("--data-dir", default="data")
@@ -446,16 +499,19 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def run_name(args: argparse.Namespace) -> str:
-    """Default run directory name. FLARE-2 variants carry their suffixes: _f2, _f2_binary, _f2_noperm, _f2_insrc, _f2_ctx."""
+    """Default run directory name. FLARE-2 variants carry their suffixes: _f2, _f2m (loss mask), _f2_binary,
+    _f2_noperm, _f2_insrc, _f2_ctx and _ens (ensure-support), e.g. _f2m_binary."""
     base = f"{args.target}_s{args.seed}"
     if args.model != "flare2":
         return base
     val_mode = args.val_mode or default_val_mode(args.model)
     suffix = "_f2"
+    suffix += "m" if getattr(args, "loss_mask_unsupported", False) else ""
     suffix += "_binary" if args.tasks == "binary" else ""
     suffix += "_noperm" if args.no_slot_perm else ""
     suffix += "_insrc" if val_mode == "insource" else ""
     suffix += "_ctx" if args.context_max > 0 else ""
+    suffix += "_ens" if getattr(args, "ensure_support", False) else ""
     return base + suffix
 
 
@@ -470,6 +526,11 @@ def run(args: argparse.Namespace) -> dict:
     is_f2 = args.model == "flare2"
     val_mode = args.val_mode or default_val_mode(args.model)
     tasks = TaskConfig.binary_only() if args.tasks == "binary" else TaskConfig()
+    loss_mask = bool(getattr(args, "loss_mask_unsupported", False))
+    ensure = bool(getattr(args, "ensure_support", False))
+    if not is_f2 and (loss_mask or ensure):
+        raise ValueError("--loss-mask-unsupported and --ensure-support apply to --model flare2 only")
+    tasks = replace(tasks, ensure_support=ensure, loss_mask_unsupported=loss_mask)
     out = None if args.bench else Path(args.out or f"runs/flare/{run_name(args)}")
     resume_step = read_resume_step(out)
     ecfg, mixing = episode_settings(args.ablation, query_size=args.query_size, warp=args.warp,
@@ -502,11 +563,12 @@ def run(args: argparse.Namespace) -> dict:
             "stream": resume_step, "context_max": args.context_max, "val_mode": val_mode,
             "validation_source": validation_source_name(args.target, val_mode, keys),
             "tasks": args.tasks if is_f2 else None, "slot_perm": slot_perm,
-            "slots": cfg.slots if is_f2 else None}
+            "slots": cfg.slots if is_f2 else None,
+            "loss_mask_unsupported": loss_mask if is_f2 else None, "ensure_support": ensure if is_f2 else None}
     summary = fit(model, source, val, steps=args.steps, out=out, lr=args.lr, weight_decay=args.weight_decay,
                   warmup=args.warmup, clip=args.clip, batch_size=args.batch_size, device=device,
                   val_every=args.val_every, log_every=args.log_every, compile=args.compile, bench=args.bench,
-                  meta=meta, val_aux=val_aux)
+                  meta=meta, val_aux=val_aux, mask_unsupported=loss_mask)
     if out is not None:
         (out / "run.json").write_text(json.dumps({**meta, "args": vars(args)}, indent=2, default=str), encoding="utf-8")
     return summary

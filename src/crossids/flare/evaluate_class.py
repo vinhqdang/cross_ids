@@ -11,7 +11,7 @@ Two tasks on the Part I target split, with supports drawn from the target train 
 Output is one long-format CSV (``task, method, target, seed, k, draw, metric, cls, pred, value, n``) that is appended
 to and resumed on re-runs. The support draws go to ``class_supports_<target>_s<seed>.json`` next to it.
 
-Methods: ``flare2`` and its checkpoint variants (``flare2-binary``, ``flare2-noperm``, ``flare2-insrc``, ``flare2-ctx``),
+Methods: ``flare2`` and its checkpoint variants (``flare2-binary``, ``flare2-noperm``, ``flare2-insrc``, ``flare2-ctx``, ``flare2-m``),
 ``catboost`` (multi-class, 300 iterations, balanced weights), ``rf``, ``lr``, ``knn``, ``protonet`` and ``flare``.
 FLARE and ProtoNet are binary models: N-way uses one-vs-rest over the per-class episodes (argmax of P(class c)).
 A method whose checkpoint is missing is skipped with a log line. FLARE-2 holds up to ``cfg.slots`` (16 by default)
@@ -64,11 +64,12 @@ CHECKPOINT_SUFFIX = {
     "flare2-noperm": "_f2_noperm",
     "flare2-insrc": "_f2_insrc",
     "flare2-ctx": "_f2_ctx",
+    "flare2-m": "_f2m",
     "flare": "",
     "protonet": "_protonet",
 }
-METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "catboost", "rf", "lr", "knn",
-           "protonet", "flare")
+METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "flare2-m",
+           "catboost", "rf", "lr", "knn", "protonet", "flare")
 NEURAL = tuple(m for m in METHODS if m in CHECKPOINT_SUFFIX)
 RESULT_COLUMNS = ["task", "method", "target", "seed", "k", "draw", "metric", "cls", "pred", "value", "n"]
 

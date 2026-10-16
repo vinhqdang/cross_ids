@@ -464,6 +464,12 @@ class TaskConfig:
     nway: tuple[int, int] = NWAY_RANGE
     k_max: int = CLASS_K_MAX
     support_cap: int = SUPPORT_CAP
+    # Off by default (old episodes and old runs unchanged). ensure_support: A4 label noise never removes the last
+    # correctly labelled support row of a class, so every class of an episode keeps one correctly labelled row.
+    ensure_support: bool = False
+    # Read by flare.train (not by the sampler): query rows whose class has no support row are left out of the loss
+    # and of the validation metrics, and the softmax runs over slots with support only.
+    loss_mask_unsupported: bool = False
 
     def __post_init__(self) -> None:
         if len(self.mix) != 4 or min(self.mix) < 0 or abs(sum(self.mix) - 1.0) > 1e-9:
@@ -565,6 +571,10 @@ class TaskSampler:
             noisy = rng.random(len(s_lab)) < aug.noise_rate
             shift = rng.integers(1, N, size=int(noisy.sum()))
             s_lab[noisy] = (s_lab[noisy] + shift) % N
+            if self.tasks.ensure_support:  # every class keeps one correctly labelled support row (its first)
+                for c in range(N):
+                    if not np.any((s_lab == c) & (Sy == c)):
+                        s_lab[np.flatnonzero(Sy == c)[0]] = c
 
         X = np.vstack([S, C, Q])
         truth = np.concatenate([Sy, Cy, Qy])
