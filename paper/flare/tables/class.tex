@@ -1,0 +1,22 @@
+\begin{tabular}{llccccc}
+\toprule
+Metric & Baseline & $\Delta$ (targets) & FLARE-2 higher & $p$ & $\Delta$ (units) & units \\
+\midrule
+Per-class ROC-AUC & RF & +0.014 & 7/8 & 0.016 & +0.012 & 57 \\
+Per-class ROC-AUC & CatBoost & +0.015 & 7/8 & 0.016 & +0.013 & 57 \\
+Per-class ROC-AUC & LR & +0.082 & 8/8 & 0.008 & +0.075 & 57 \\
+Per-class ROC-AUC & kNN & +0.175 & 8/8 & 0.008 & +0.167 & 57 \\
+Per-class recall@0.5 & RF & -0.041 & 0/8 & 0.008 & -0.044 & 57 \\
+Per-class recall@0.5 & CatBoost & -0.026 & 1/8 & 0.016 & -0.030 & 57 \\
+Per-class recall@0.5 & LR & -0.025 & 2/8 & 0.078 & -0.030 & 57 \\
+Per-class recall@0.5 & kNN & -0.048 & 1/8 & 0.023 & -0.056 & 57 \\
+Per-class FPR@0.5 & RF & -0.053 & 1/8 & 0.078 & -0.052 & 57 \\
+Per-class FPR@0.5 & CatBoost & -0.052 & 1/8 & 0.078 & -0.050 & 57 \\
+Per-class FPR@0.5 & LR & -0.077 & 1/8 & 0.016 & -0.074 & 57 \\
+Per-class FPR@0.5 & kNN & -0.334 & 0/8 & 0.008 & -0.330 & 57 \\
+N-way macro-F1 & RF & +0.026 & 3/8 & 0.742 & +0.026 & 8 \\
+N-way macro-F1 & CatBoost & +0.022 & 3/8 & 0.742 & +0.022 & 8 \\
+N-way macro-F1 & LR & +0.074 & 7/8 & 0.016 & +0.074 & 8 \\
+N-way macro-F1 & kNN & +0.127 & 8/8 & 0.008 & +0.127 & 8 \\
+\bottomrule
+\end{tabular}
