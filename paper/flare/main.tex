@@ -152,7 +152,7 @@ Raw attack types with fewer than 30 rows are dropped.
 Support size is log-uniform on $\{4,\dots,128\}$ with at least one row per class; the query attack prior is drawn from $U(0.05,0.95)$ so no fixed prior can be learned; 30\% of episodes combine benign rows of one dataset with attack classes of another; 2\% of support labels are flipped; each feature is sign-flipped independently with probability 0.5.
 A monotone warp was also tried; it has no effect under rank normalisation and was dropped.
 Because both the meaning of a class and the sign of every feature change from episode to episode, the only reliable strategy is to read the rule from the support set.
-This is the direct response to the concept shift of Sect.~\ref{sec:shift}.
+This is the design response to the concept shift of Sect.~\ref{sec:shift}; Sect.~\ref{sec:ablation} measures how much the individual choices, including the class-level tasks, contribute, and the evidence for them is modest.
 
 \paragraph{Held-out-source model selection.}
 Our first variant added unlabelled context rows from the target network.
@@ -239,7 +239,7 @@ Per-target values are in Table~\ref{tab:classtarget}.
 \item One meta-training seed and one set of 10 support draws per target; the confidence intervals bound the target-to-target spread, not the training variance.
 \item FLARE-2 is not better than fixed-setting tree ensembles on binary ROC-AUC; its gains are class-level and conditional on the operating point.
 \item Eight datasets from six laboratories, with the CIC pair counted separately; results on other networks may differ.
-\item A training run assigns a very large negative logit to rare queries whose class has no support (label noise at $k=1$); an optional loss-mask variant exists and its effect is reported in the ablations.
+\item Queries whose class has no support row (label noise at $k=1$) receive a target logit of $-10^{9}$. This produced training losses of order $10^{6}$ and, in one binary-only ablation run, made validation loss pick a collapsed checkpoint (AUC about 0.50); checkpoint selection now scores supported queries only. The main FLARE-2 runs are unaffected (their validation episodes contained no unsupported queries), and the loss-masked variant is within 0.01 ROC-AUC of FLARE-2 on CTU-13, but not on CIC-IDS2017 (Sect.~\ref{sec:ablation}).
 \item Flows only; payload features and temporal context are not used.
 \item The datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}.
 \end{itemize}

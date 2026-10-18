@@ -174,12 +174,41 @@ def pertarget_figure(d: pd.DataFrame) -> None:
     plt.close(fig)
 
 
+ABL_ROWS = [("flare2", "FLARE-2 (reference)"), ("flare2-noperm", "no slot permutation"),
+            ("flare2-insrc", "in-source validation"), ("flare2-m", "loss mask (reference)"),
+            ("flare2-m-binary", "loss mask, binary tasks only")]
+ABL_TARGETS = ["ctu13", "cicids2017"]
+
+
+def _abl_binary(method: str, target: str, k: int) -> float:
+    fs = glob.glob(f"{sf.RAW}/eval_{target}_*.csv")
+    d = pd.concat([pd.read_csv(f) for f in fs], ignore_index=True)
+    d = d[(d.method == method) & (d.k == k) & (d.seed == 0)]
+    return d.roc_auc.mean() if len(d) else np.nan
+
+
+def _abl_class(method: str, target: str, task: str, metric: str, k: int) -> float:
+    fs = glob.glob(f"{sf.RAW}/class_{target}_*.csv")
+    d = pd.concat([pd.read_csv(f) for f in fs], ignore_index=True)
+    d = d[(d.method == method) & (d.task == task) & (d.metric == metric) & (d.k == k) & (d.seed == 0)]
+    return d.value.mean() if len(d) else np.nan
+
+
 def ablation_table() -> None:
-    files = glob.glob(f"{sf.RAW}/ablation_*.csv")
-    if not files:
-        return
-    a = pd.concat([pd.read_csv(f) for f in files])
-    a.to_csv("results/flare/stats/ablation_all.csv", index=False)
+    """Seed 0, two targets: binary ROC-AUC at k=4/16/64, N-way macro-F1 (k=16), per-class ROC-AUC (k=4)."""
+    lines = [r"\begin{tabular}{l" + "rrrrr" * len(ABL_TARGETS) + "}", r"\toprule",
+             " & " + " & ".join(rf"\multicolumn{{5}}{{c}}{{{NAMES[t]}}}" for t in ABL_TARGETS) + " \\\\",
+             "Variant & " + " & ".join(["$k{=}4$ & $k{=}16$ & $k{=}64$ & F1@16 & AUC@4"] * len(ABL_TARGETS)) + " \\\\",
+             r"\midrule"]
+    for m, label in ABL_ROWS:
+        cells = []
+        for t in ABL_TARGETS:
+            vals = [_abl_binary(m, t, k) for k in (4, 16, 64)]
+            vals += [_abl_class(m, t, "nway", "macro_f1", 16), _abl_class(m, t, "perclass", "roc_auc", 4)]
+            cells += [fmt(v) for v in vals]
+        lines.append(f"{label} & " + " & ".join(cells) + " \\\\")
+    lines += [r"\bottomrule", r"\end{tabular}", ""]
+    write("ablation", chr(10).join(lines))
 
 
 def main() -> None:
@@ -190,6 +219,7 @@ def main() -> None:
     binary_table(d)
     stats_table()
     class_table()
+    ablation_table()
     class_by_target()
     curve_figure(d)
     pertarget_figure(d)
