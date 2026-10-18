@@ -136,7 +136,7 @@ def test_validation_metrics_exclude_unsupported_rows_when_masked():
     on = train.validate_classes(model, [batch], mask_unsupported=True)
     off = train.validate_classes(model, [batch])
     assert on["frac_unsupported_queries"] == off["frac_unsupported_queries"] > 0
-    assert on["val_bce"] < 20 and off["val_bce"] > 1e6
+    assert on["val_bce"] < 20 and off["val_bce"] < 20  # selection never scores unsupported rows, masked or not
     assert np.isfinite(on["val_acc"])
 
 

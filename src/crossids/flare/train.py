@@ -227,7 +227,7 @@ def validate_classes(model: EpisodeModel, val_batches: list[dict], mask_unsuppor
         q, qs, present = support_split(t)
         n_query += int(q.sum())
         n_unsup += int((q & ~qs).sum())
-        scored = qs if mask_unsupported else q
+        scored = qs  # selection never scores rows whose class has no support: their ~1e9 loss would decide the best checkpoint
         active = (t["slot_active"] & present) if mask_unsupported else t["slot_active"]
         z = logits.masked_fill(~active[:, None, :], float("-inf"))
         logp = torch.log_softmax(z, dim=-1)

@@ -65,10 +65,11 @@ CHECKPOINT_SUFFIX = {
     "flare2-insrc": "_f2_insrc",
     "flare2-ctx": "_f2_ctx",
     "flare2-m": "_f2m",
+    "flare2-m-binary": "_f2m_binary",
     "flare": "",
     "protonet": "_protonet",
 }
-METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "flare2-m",
+METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "flare2-m", "flare2-m-binary",
            "catboost", "rf", "lr", "knn", "protonet", "flare")
 NEURAL = tuple(m for m in METHODS if m in CHECKPOINT_SUFFIX)
 RESULT_COLUMNS = ["task", "method", "target", "seed", "k", "draw", "metric", "cls", "pred", "value", "n"]

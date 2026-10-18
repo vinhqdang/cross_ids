@@ -13,8 +13,9 @@ variant_config() {
     f2noperm) SUFFIX=_f2_noperm; TRAIN_ARGS="--model flare2 --no-slot-perm"; bin=flare2-noperm ;;
     f2insrc) SUFFIX=_f2_insrc; TRAIN_ARGS="--model flare2 --val-mode insource"; bin=flare2-insrc ;;
     f2ctx) SUFFIX=_f2_ctx; TRAIN_ARGS="--model flare2 --context-max 512"; bin=flare2-ctx ;;
+    f2mbinary) SUFFIX=_f2m_binary; TRAIN_ARGS="--model flare2 --tasks binary --loss-mask-unsupported"; bin=flare2-m-binary ;;
     f2m) SUFFIX=_f2m; TRAIN_ARGS="--model flare2 --loss-mask-unsupported"; bin=flare2-m ;;
-    *) echo "unknown FLARE-2 variant '$1' (f2 f2binary f2noperm f2insrc f2ctx f2m)" >&2; return 2 ;;
+    *) echo "unknown FLARE-2 variant '$1' (f2 f2binary f2noperm f2insrc f2ctx f2m f2mbinary)" >&2; return 2 ;;
   esac
   if [[ $1 == f2 ]]; then
     VTAG=""; EVAL_METHODS="$base $bin"
