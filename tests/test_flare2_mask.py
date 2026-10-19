@@ -6,6 +6,7 @@ original one (covered by ``test_flare2.py``, which must keep passing unchanged).
 from __future__ import annotations
 
 import json
+import shutil
 import subprocess
 from argparse import Namespace
 from dataclasses import replace
@@ -204,8 +205,8 @@ BASE_BINARY = ("catboost-target rf lr knn catboost-ft catboost-fulllabel catboos
 ])
 def test_colab_variant_tables_name_the_fixed_variant(variant, expected):
     script = (
-        f'. "{ROOT}/scripts/flare_colab_common.sh"; output_names iot23 0 {variant}; '
+        f'. "{ROOT.as_posix()}/scripts/flare_colab_common.sh"; output_names iot23 0 {variant}; '
         'printf "%s|%s|%s|%s|%s|%s" "$RUN" "$EVAL_CSV" "$CLASS_CSV" "$EVAL_METHODS" "$CLASS_METHODS" "$TRAIN_ARGS"'
     )
-    out = subprocess.run(["bash", "-c", script], capture_output=True, text=True, check=True).stdout
+    out = subprocess.run([shutil.which("bash"), "-c", script], capture_output=True, text=True, check=True).stdout
     assert tuple(out.split("|")) == expected

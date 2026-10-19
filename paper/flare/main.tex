@@ -22,16 +22,16 @@ British University Vietnam, Hung Yen, Vietnam\\
 
 \begin{abstract}
 Flow-based intrusion detectors that score above 0.99 ROC-AUC inside one dataset often fall to chance on another.
-On eight public flow datasets from six laboratories, we find that this is not a tuning problem: no flow feature keeps the same direction of association with the attack label across datasets, and a classifier trained on the pooled other datasets reaches only 0.32 to 0.95 ROC-AUC on a held-out one.
-Domain-adaptation methods that assume a fixed $P(y\mid x)$ cannot fix this.
+On eight public flow datasets from five laboratories, we find that this is not a tuning problem: no flow feature keeps the same direction of association with the attack label across datasets, and a classifier trained on the pooled other datasets reaches only 0.32 to 0.95 ROC-AUC on a held-out one.
+In our pairwise benchmark, domain-adaptation methods and our own transfer method did not improve on a plain gradient-boosted baseline, which is consistent with a change in $P(y\mid x)$ between datasets.
 We therefore ask what other networks can still teach a new network when only $k=4$ to $128$ of its flows are labelled.
 FLARE-2 is a transformer meta-trained on episodes drawn from the other datasets.
-It reads the detection rule from the labelled flows given at test time instead of storing a rule, so no model is trained or tuned on the target.
+It reads the detection rule from the labelled flows given at test time instead of storing a rule, so no model is trained or tuned on the target; its per-episode rank normalisation does use the unlabelled target flows.
 Each episode uses a random label space (binary, one class against benign, class against class, or $N$-way), random class-to-slot assignments, per-episode rank normalisation, and random feature sign flips; the model has no feature identity and a class-equivariant matching readout.
 Checkpoints are selected on a held-out source dataset.
-Over the eight targets, FLARE-2 is statistically indistinguishable from random forest and CatBoost on binary ROC-AUC (mean difference to target-only CatBoost $-0.001$, to random forest $+0.004$), and clearly better than logistic regression and $k$NN.
-At attack-class level it has higher per-class ROC-AUC than random forest and CatBoost on 7 of 8 targets and a lower false-positive rate, at lower recall at the default threshold.
-We report where it does not help: easy targets and $k\ge 32$.
+Over the eight targets, FLARE-2 shows no significant difference from random forest and CatBoost on binary ROC-AUC (mean difference to target-only CatBoost $-0.001$, 95\% interval $[-0.004,+0.003]$; to random forest $+0.004$, $[-0.003,+0.010]$), and is better than logistic regression and $k$NN.
+At attack-class level it has higher per-class ROC-AUC than random forest and CatBoost on 7 of 8 targets (mean $+0.014$, not significant after correction), and a lower false-positive rate on 7 of 8 targets (not significant at target level) with lower recall at the default threshold.
+We report where it does not help: it does not outperform tree ensembles fitted on the target labels at $k\ge 32$ or on easy targets, and source-pretrained CatBoost is better at $k=4$ on four targets.
 Code, configurations and all raw per-run results are public.
 \end{abstract}
 
@@ -40,19 +40,19 @@ Machine-learning intrusion detection on network flows is usually evaluated by sp
 Under that protocol, gradient-boosted trees reach ROC-AUC above 0.99 on CIC-IDS2017, USB-IDS-1 and similar sets.
 Studies that move the same model to a second dataset report a collapse \citep{layeghy2023explainable,cantone2024crossdataset,dhooge2020inter,apruzzese2022cross}, and a line of work asks whether domain adaptation helps \citep{layeghy2023dinids}.
 An earlier study of ours trained on one dataset, measured the distance of a new dataset to it with an isolation-forest score, and fine-tuned CatBoost on labelled target rows \citep{dang2023learning}.
-That approach needs target labels, and we show below that source pre-training does not even beat training on the target labels alone.
+That approach needs target labels, and we show below that, on average, source pre-training does not beat training on the target labels alone.
 
 This paper builds on the diagnosis and proposes a different use of source data.
 We make three contributions.
 \begin{enumerate}
 \item \textbf{Evidence that cross-dataset failure is concept shift.}
-On eight datasets from six laboratories and three flow extractors, no common flow feature keeps its sign of association with the attack label (0 of 14), a domain classifier recognises the dataset of a flow with 91.5\% accuracy, and a pooled-source CatBoost reaches 0.32--0.95 ROC-AUC on the held-out dataset.
+On eight datasets from five laboratories and three flow extractors, no common flow feature keeps its sign of association with the attack label (0 of 14), a domain classifier recognises the source dataset of a flow with 91.5\% accuracy among the seven core datasets, and a pooled-source CatBoost reaches 0.32--0.95 ROC-AUC on the held-out dataset.
 \item \textbf{FLARE-2}, a few-label meta-learner for flow data.
 It is permutation-invariant over features, accepts any feature set, and handles binary detection and attack-type classification with the same readout.
 \item \textbf{A paired evaluation at the level of the target dataset and the attack class}, with exact Wilcoxon tests, bootstrap intervals over targets and a candid account of the cases FLARE-2 loses.
 \end{enumerate}
 We do not claim a large gain in binary ROC-AUC over tuned tree ensembles.
-The result is parity with fixed-setting tree ensembles without any per-target fitting of the network, a gain in per-class ranking, and one model family for binary and attack-type output.
+The result is no significant difference from fixed-setting tree ensembles without any per-target fitting of the network, a gain in per-class ranking, and one model family for binary and attack-type output.
 
 \section{Related work}
 \paragraph{Cross-dataset intrusion detection.}
@@ -69,9 +69,9 @@ Set-based architectures \citep{lee2019settransformer} motivate our permutation i
 \section{Problem, data and evidence of concept shift}
 \subsection{Datasets and common flow schema}
 Table~\ref{tab:data} lists the eight datasets.
-CIC-IDS2017 and CIC-IDS2018 share a laboratory and extractor, so we report the benchmark across six laboratories and three extractors (CICFlowMeter, Argus, Zeek).
+CIC-IDS2017 and CIC-IDS2018 share a laboratory and extractor, so we report the benchmark across five laboratories and three extractors (CICFlowMeter, Argus, Zeek).
 Extractors export different features, so we keep only features of the same physical meaning and units: five base features (duration, forward and backward packets, forward and backward bytes) plus nine derived rates and ratios, all passed through $\log(1+x)$.
-CTU-13 supports only a four-feature minimal tier; FLARE-2 takes it as a target without change because it accepts any number of features.
+CTU-13 supports only a nine-feature minimal tier (four base features and five derived); FLARE-2 takes it as a target without change because it accepts any number of features.
 Ports and protocol are excluded.
 Rows are sampled by a seeded 64-bit hash of the harmonised features and label (a bottom-$k$ sketch), which gives a uniform sample of distinct rows and preserves the natural attack prior.
 
@@ -96,7 +96,7 @@ CTU-13 & Stratosphere Lab, CTU & Argus & \citep{garcia2014ctu13}\\
 
 \subsection{Setting}
 We use leave-one-dataset-out (LODO): the target dataset is never seen in meta-training or checkpoint selection.
-At test time a method receives a support set of $k\in\{4,8,16,32,64,128\}$ labelled target flows with at least one flow per class, and may use no other target label.
+At test time a method receives a support set of $k\in\{4,8,16,32,64,128\}$ labelled target flows with at least one flow per class, and may use no other target label. FLARE-2 additionally ranks features over the unlabelled target rows it scores (Sect.~\ref{sec:method}); the baselines receive no such information.
 Support sets are drawn 10 times per $(\text{target},k)$ with fixed seeds and are identical for every method.
 Evaluation is on the target test split.
 For class level we use $k\in\{2,4,8,16\}$ labelled flows \emph{per class} and 5 draws.
@@ -123,7 +123,7 @@ FLARE-2 classifies a query flow by attending to labelled support flows of the sa
 At test time the episode is the $k$ support flows and the query flows; nothing is trained.
 
 \paragraph{Episode normalisation.}
-Within an episode, each feature is mapped to its Gaussian rank over support and query rows and clipped to $[-4,4]$.
+Within an episode, each feature is mapped to its Gaussian rank over support and query rows and clipped to $[-4,4]$. At test time the query rows are the whole unlabelled target test split (and, for per-class evaluation, only the rows of the class and of benign), whereas training episodes rank over 256 query rows, so FLARE-2 is transductive in the target features and the per-class pool depends on the class labels of the test rows.
 Absolute scales, which differ across extractors, therefore never reach the network.
 Missing features are absent tokens.
 
@@ -131,7 +131,7 @@ Missing features are absent tokens.
 Flow $i$ with features $x_{i1},\dots,x_{id}$ becomes $d$ feature tokens $t_{ij}=\mathrm{MLP}_v(x_{ij})$ with a shared scalar embedding, plus one label token.
 There is no feature-identity embedding, so the model cannot memorise that ``feature 7 high means attack'' and is invariant to feature order.
 Six layers of width 128 with 4 heads alternate \emph{feature attention} (tokens of one row attend to each other) and \emph{row attention} (rows attend across the episode).
-Support rows attend to support rows; a query row attends to support rows and itself only, so predictions do not depend on which other queries share the batch.
+Support rows attend to support rows; a query row attends to support rows and itself only, so attention does not depend on which other queries share the batch; the rank normalisation above does.
 
 \paragraph{Label slots and matching readout.}
 Class identities differ between episodes, so each support class is given a random one of $M=16$ label-slot embeddings as input.
@@ -149,19 +149,19 @@ At test time we average class logits over 8 members with different sign flips an
 \paragraph{Meta-training episodes.}
 Each episode draws a source dataset (weighted by $\sqrt{\text{size}}$) and a \emph{task}: binary attack vs benign (probability 0.25), one attack class vs benign (0.25), class vs class (0.15), or $N$-way with $N\sim U\{3..6\}$ among benign and attack classes (0.35).
 Raw attack types with fewer than 30 rows are dropped.
-Support size is log-uniform on $\{4,\dots,128\}$ with at least one row per class; the query attack prior is drawn from $U(0.05,0.95)$ so no fixed prior can be learned; 30\% of episodes combine benign rows of one dataset with attack classes of another; 2\% of support labels are flipped; each feature is sign-flipped independently with probability 0.5.
+The per-class support size is log-uniform on $\{1,\dots,32\}$ with at most 160 support rows in total, so a binary episode never has more than 64 support rows while evaluation uses up to 128; the query class proportions are Dirichlet(1) with at least one query row per class, so no fixed prior can be learned; 30\% of binary, one-class and $N$-way episodes (about 25\% of all episodes) combine benign rows of one dataset with attack classes of another; with probability 0.5 a random subset of at least 5 features is kept; 2\% of support labels are flipped; each feature is sign-flipped independently with probability 0.5.
 A monotone warp was also tried; it has no effect under rank normalisation and was dropped.
 Because both the meaning of a class and the sign of every feature change from episode to episode, the only reliable strategy is to read the rule from the support set.
 This is the design response to the concept shift of Sect.~\ref{sec:shift}; Sect.~\ref{sec:ablation} measures how much the individual choices, including the class-level tasks, contribute, and the evidence for them is modest.
 
 \paragraph{Held-out-source model selection.}
 Our first variant added unlabelled context rows from the target network.
-It reached 0.97 AUC on validation episodes from the meta-training datasets but fell to 0.66--0.76 on the unseen target: with datasets identifiable at 91\%, six binary tasks are easy to memorise.
+It reached 0.97 AUC on validation episodes from the meta-training datasets but fell to 0.66--0.76 on the unseen IoT-23 target: with datasets identifiable at 91\%, six binary tasks are easy to memorise.
 In FLARE-2, one source dataset (rotating, never the target) is excluded from training and used only to select the checkpoint with the lowest validation loss.
 The unlabelled-context variant is not part of FLARE-2.
 
 \paragraph{Training.}
-AdamW (learning rate $3\times10^{-4}$, weight decay 0.01, cosine schedule, 2k warm-up steps), 20k steps, 8 episodes per step, 256 query rows, gradient clipping at 1.0, fp16 autocast on a T4 GPU.
+AdamW (learning rate $3\times10^{-4}$, weight decay 0.01, cosine schedule, 1k warm-up steps), 20k steps, 8 episodes per step, 256 query rows, gradient clipping at 1.0, mixed-precision autocast (fp16 on a Colab T4 for the main runs, bf16 on a local RTX GPU for the ablation runs and extra seeds).
 One model is trained per target (LODO), about 1 hour each.
 The label-slot readout computes in float32 to avoid half-precision overflow.
 
@@ -172,13 +172,13 @@ Baselines use fixed standard settings and no tuning (RF: 300 trees; CatBoost: 30
 For $N$-way, baselines are the multi-class versions trained on the labelled $k$ per class.
 \paragraph{Metrics and statistics.}
 ROC-AUC (binary and per class), recall and false-positive rate at threshold 0.5, and macro-F1 for $N$-way classification.
-Draws of one target are not independent, so the unit of analysis is the \emph{target}: the mean difference of FLARE-2 minus baseline over draws, then an exact two-sided Wilcoxon signed-rank test over the 8 targets (smallest attainable $p=0.0078$), Holm-adjusted over the five baselines, and a 95\% bootstrap interval over targets.
+Draws of one target are not independent, so the unit of analysis is the \emph{target}: the mean difference of FLARE-2 minus baseline over draws, then an exact two-sided Wilcoxon signed-rank test over the 8 targets (smallest attainable $p=0.0078$), Holm-adjusted over the five baselines (four at class level, where we report uncorrected $p$), and a 95\% bootstrap interval over targets. Only the mean over $k$ is a primary endpoint; the $k\le16$ and $k\ge32$ splits are exploratory.
 For class-level results we also report units of (target, class), with a warning that classes of one target are correlated; the target-level test is the conservative one.
 
 \section{Results}
 \subsection{Binary detection}
 Table~\ref{tab:binary} and Fig.~\ref{fig:curves} show ROC-AUC versus $k$.
-With $k=4$ labelled flows, FLARE-2 already beats the zero-shot pooled CatBoost on five of eight targets (CTU-13, IoT-23, ToN-IoT, UNSW-NB15, USB-IDS-1; Tables~\ref{tab:zero},~\ref{tab:binary}); on the other three (CIC-IDS2017, CIC-IDS2018, InSDN), where pooled sources transfer well, 16 to 32 labelled flows are needed to catch up.
+With $k=4$ labelled flows, FLARE-2 already beats the zero-shot pooled CatBoost on five of eight targets (CTU-13, IoT-23, ToN-IoT, UNSW-NB15, USB-IDS-1; Tables~\ref{tab:zero},~\ref{tab:binary}); on the other three (CIC-IDS2017, CIC-IDS2018, InSDN), where pooled sources transfer well, 8 to 16 labelled flows are needed to catch up.
 Table~\ref{tab:stats} gives the paired statistics.
 Against the strongest baselines the difference is small and not significant: mean over $k$, FLARE-2 minus target-only CatBoost is $-0.001$ and minus RF is $+0.004$; both intervals contain zero and the win/loss counts over targets are 4/4 and 5/3.
 Against LR and $k$NN the gain is large: FLARE-2 is higher on all 8 targets for the mean over $k$ ($+0.075$ and $+0.110$, $p_{\text{Holm}}=0.039$ for both).
@@ -215,7 +215,7 @@ Targets whose attacks are easy (USB-IDS-1, where pooled zero-shot CatBoost alrea
 \subsection{Attack-class level}
 Table~\ref{tab:class} summarises per-class detection (class $c$ against benign, $k$ labelled flows of each) and $N$-way attack-type classification over 57 (target, class) detection tasks.
 FLARE-2 has higher per-class ROC-AUC than RF and CatBoost on 7 of 8 targets (mean $+0.014$ and $+0.015$ over targets, $p=0.016$ before correction; the unit-level $p<0.001$ is optimistic because classes within a target are correlated).
-It has a lower false-positive rate (by $0.05$) and a lower recall (by $0.03$ to $0.04$) at the default threshold of 0.5, so part of the ROC-AUC gain is a different operating point and not a free gain in detection.
+It has a lower false-positive rate (by $0.05$; lower on 7 of 8 targets, $p=0.078$ at target level) and a lower recall (by $0.03$ to $0.04$; $p\le0.016$) at the default threshold of 0.5, so part of the ROC-AUC gain is a different operating point and not a free gain in detection.
 On $N$-way macro-F1 FLARE-2 is higher than RF and CatBoost on average ($+0.026$, $+0.022$) but on only 3 of 8 targets, so the difference is not significant; it is significantly higher than LR and $k$NN.
 Per-target values are in Table~\ref{tab:classtarget}.
 
@@ -238,16 +238,17 @@ Per-target values are in Table~\ref{tab:classtarget}.
 \begin{itemize}
 \item One meta-training seed and one set of 10 support draws per target; the confidence intervals bound the target-to-target spread, not the training variance.
 \item FLARE-2 is not better than fixed-setting tree ensembles on binary ROC-AUC; its gains are class-level and conditional on the operating point.
-\item Eight datasets from six laboratories, with the CIC pair counted separately; results on other networks may differ.
+\item Eight datasets from five laboratories (UNB, Sannio, UCD, UNSW, CTU), so datasets are not independent units; results on other networks may differ.
+\item FLARE-2 normalises features by rank over the unlabelled target rows it scores, which is transductive in the target features, and the baselines get no such information; one meta-trained model per target is needed (leave-one-dataset-out), and each model sees only five or six training datasets. All eight targets were used while choosing the architecture and the task mix, so there is no untouched test set. Source-pretrained CatBoost is better than FLARE-2 at $k=4$ on four targets.
 \item Queries whose class has no support row (label noise at $k=1$) receive a target logit of $-10^{9}$. This produced training losses of order $10^{6}$ and, in one binary-only ablation run, made validation loss pick a collapsed checkpoint (AUC about 0.50); checkpoint selection now scores supported queries only. The main FLARE-2 runs are unaffected (their validation episodes contained no unsupported queries), and the loss-masked variant is within 0.01 ROC-AUC of FLARE-2 on CTU-13, but not on CIC-IDS2017 (Sect.~\ref{sec:ablation}).
 \item Flows only; payload features and temporal context are not used.
 \item The datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}.
 \end{itemize}
 
 \section{Conclusion}
-Concept shift, not tuning, limits cross-dataset flow classification, so a model that carries a decision function across networks is the wrong target.
+Concept shift, rather than tuning, appears to limit cross-dataset flow classification, so a model that carries a fixed decision function across networks is a poor target.
 FLARE-2 carries the skill of inferring a rule from a few labelled flows instead.
-It matches fixed-setting tree ensembles on binary detection without fitting the network to the target, improves per-class ranking, and outputs attack types through one readout.
+It matches fixed-setting tree ensembles on binary detection without fitting the network to the target, modestly improves per-class ranking, and outputs attack types through one readout.
 The open problem is the remaining gap to full-label training (0.95--1.00 ROC-AUC) at small $k$, where better label-efficient queries and multi-seed meta-training are the next step.
 
 \paragraph{Reproducibility.}
