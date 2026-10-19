@@ -24,7 +24,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from .data import LABEL_UNKNOWN, gauss_rank
+from .data import LABEL_UNKNOWN, gauss_rank, gauss_rank_ref
 
 MIXINGS = ("attention", "rowmlp")
 SCORE_BUDGET = 2 ** 24  # elements of one attention-score tensor per query chunk (about 64 MB in fp32)
@@ -234,6 +234,20 @@ class EpisodeModel(nn.Module):
     cached = False  # True when predictions reuse a support cache (FlareModel)
     context_max = 0  # context rows the model was meta-trained with (0 = no context, §13)
     slot_perm = True  # FLARE-2 only: classes get random label slots per ensemble member (False = --no-slot-perm)
+    # Control for transductive normalisation: None ranks each feature over support, context and all query rows (the
+    # default). An integer n ranks over support, context and n random query rows only (0 = support and context only)
+    # and maps every query row through that reference.
+    rank_query_cap: int | None = None
+
+    def _normalise(self, S: np.ndarray, C: np.ndarray, Q: np.ndarray, seed: int) -> np.ndarray:
+        """Gaussian-rank features of the stacked [support, context, query] rows, see ``rank_query_cap``."""
+        stacked = np.vstack([S, C, Q])
+        cap = self.rank_query_cap
+        if cap is None or cap >= len(Q):
+            return gauss_rank(stacked)
+        rng = np.random.default_rng([int(seed), 2718])
+        ref = np.vstack([S, C, Q[rng.choice(len(Q), size=cap, replace=False)] if cap else Q[:0]])
+        return gauss_rank_ref(ref, stacked)
 
     def forward_episode(self, x, feat_pad, row_valid, is_query, label, return_embedding: bool = False):
         raise NotImplementedError
@@ -269,7 +283,7 @@ class EpisodeModel(nn.Module):
         ns, nc, nq = S.shape[0], C.shape[0], Q.shape[0]
         if len(support_y) != ns:
             raise ValueError("support_X and support_y disagree")
-        Z = gauss_rank(np.vstack([S, C, Q]))
+        Z = self._normalise(S, C, Q, seed)
         E = 1 if embed else (ensemble or getattr(self, "ensemble", 1))
         signs = self._sign_members(d, E, seed)
         dev = next(self.parameters()).device
@@ -595,7 +609,7 @@ class Flare2Model(FlareModel):
         if N > self.cfg.slots:
             raise ValueError(f"{N} classes exceed the {self.cfg.slots} label slots of this model")
         ns, nc, nq = S.shape[0], Cx.shape[0], Q.shape[0]
-        Z = gauss_rank(np.vstack([S, Cx, Q]))
+        Z = self._normalise(S, Cx, Q, seed)
         E = ensemble or self.ensemble
         signs = self._sign_members(d, E, seed)
         slots_of = self._slot_assignments(N, E, seed)

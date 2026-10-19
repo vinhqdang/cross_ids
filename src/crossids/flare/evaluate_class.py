@@ -66,11 +66,12 @@ CHECKPOINT_SUFFIX = {
     "flare2-ctx": "_f2_ctx",
     "flare2-m": "_f2m",
     "flare2-m-binary": "_f2m_binary",
+    "flare2-rank0": "_f2",  # same checkpoint, ranks over the support only (no query rows in the reference)
     "flare": "",
     "protonet": "_protonet",
 }
 METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "flare2-m", "flare2-m-binary",
-           "catboost", "rf", "lr", "knn", "protonet", "flare")
+           "flare2-rank0", "catboost", "rf", "lr", "knn", "protonet", "flare")
 NEURAL = tuple(m for m in METHODS if m in CHECKPOINT_SUFFIX)
 RESULT_COLUMNS = ["task", "method", "target", "seed", "k", "draw", "metric", "cls", "pred", "value", "n"]
 
@@ -192,6 +193,8 @@ class Ctx:
                     self.missing.add(name)
                 return None
             self.models[name] = load_model(path, device=self.device)
+            if name == "flare2-rank0":
+                self.models[name].rank_query_cap = 0
         return self.models[name]
 
 

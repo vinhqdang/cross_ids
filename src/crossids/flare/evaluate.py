@@ -66,7 +66,10 @@ FLARE_VARIANTS = {
     "flare2-ctx": ("_f2_ctx", None),  # FLARE-2 with context rows (needs the context checkpoint)
     "flare2-m": ("_f2m", None),  # FLARE-2 trained with the unsupported-query loss mask (same model kind as flare2)
     "flare2-m-binary": ("_f2m_binary", None),  # ablation: binary episodes only, with the loss mask
+    "flare2-rank256": ("_f2", None),  # same checkpoint, ranks over support + 256 random query rows
+    "flare2-rank0": ("_f2", None),  # same checkpoint, ranks over the support only
 }
+RANK_QUERY_CAP = {"flare2-rank256": 256, "flare2-rank0": 0}  # normalisation controls (transductive vs not)
 CONTEXT_ROWS = 512  # unlabelled target rows given to flare-u and flare2-ctx (sections 20.1, 21)
 CONTEXT_METHODS = ("flare-u", "flare2-ctx")
 COMBOS = {"flare+cb": "flare", "flare-u+cb": "flare-u"}  # section 20.2: mean of the two P(attack)
@@ -187,6 +190,8 @@ class SeedState:
                 return None
             ens = FLARE_VARIANTS[name][1] if name in FLARE_VARIANTS else None
             self.models[name] = load_model(path, device=self.ctx.device, ensemble=ens)
+            if name in RANK_QUERY_CAP:
+                self.models[name].rank_query_cap = RANK_QUERY_CAP[name]
         return self.models[name]
 
     def source_model(self) -> CatBoostBaseline:

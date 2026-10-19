@@ -93,6 +93,27 @@ def gauss_rank(X: np.ndarray, clip: float = CLIP) -> np.ndarray:
     return out
 
 
+def gauss_rank_ref(ref: np.ndarray, X: np.ndarray, clip: float = CLIP) -> np.ndarray:
+    """Gaussian rank of every row of ``X`` against the rows of ``ref`` only, clipped to [-clip, clip].
+
+    With ``ref`` equal to ``X`` this is :func:`gauss_rank`. NaN entries of ``X`` stay NaN and a column with no
+    finite reference value is NaN.
+    """
+    ref = np.asarray(ref, dtype=np.float64)
+    X = np.asarray(X, dtype=np.float64)
+    out = np.full(X.shape, np.nan)
+    for j in range(X.shape[1]):
+        r = np.sort(ref[:, j][np.isfinite(ref[:, j])])
+        c = len(r)
+        if c == 0:
+            continue
+        m = np.isfinite(X[:, j])
+        x = X[m, j]
+        rank = (np.searchsorted(r, x, side="left") + np.searchsorted(r, x, side="right") + 1) / 2.0
+        out[m, j] = np.clip(norm.ppf(rank / (c + 1.0)), -clip, clip)
+    return out
+
+
 def piecewise_warp(x: np.ndarray, xs: np.ndarray, ys: np.ndarray) -> np.ndarray:
     """Monotone piecewise-linear warp of one column, mapped through its own min/max (CDF-style knots on [0, 1])."""
     x = np.asarray(x, dtype=np.float64)
