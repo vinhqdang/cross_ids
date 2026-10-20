@@ -241,6 +241,7 @@ def main() -> None:
     os.makedirs(FIG, exist_ok=True)
     d = pd.concat([pd.read_csv(f) for f in sorted(glob.glob(f"{sf.RAW}/eval_*.csv"))], ignore_index=True)
     d = d.drop_duplicates(["method", "target", "k", "draw", "seed"])
+    d = d[d.seed == 0]  # main tables and figures: meta-training seed 0; other seeds are in tables/seeds.tex
     binary_table(d)
     stats_table()
     class_table()
