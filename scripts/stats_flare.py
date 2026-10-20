@@ -28,16 +28,18 @@ CKS = [2, 4, 8, 16]
 RNG = np.random.default_rng(0)
 
 
-def load_eval() -> pd.DataFrame:
+def load_eval(seeds: tuple[int, ...] = (0,)) -> pd.DataFrame:
+    """Binary results of FLARE-2 and the baselines for the given meta-training seeds (default: seed 0 only)."""
     frames = [pd.read_csv(f) for f in sorted(glob.glob(f"{RAW}/eval_*.csv"))]
     d = pd.concat(frames, ignore_index=True)
     d = d.drop_duplicates(["method", "target", "k", "draw", "seed"])
-    return d[d.method.isin(["flare2"] + BASELINES)]
+    return d[d.method.isin(["flare2"] + BASELINES) & d.seed.isin(seeds)]
 
 
 def load_class() -> pd.DataFrame:
+    variant = re.compile(r"_(f2m|f2mbinary|f2noperm|f2insrc)_s\d+\.csv$")  # ablation files repeat the baselines
     frames = [pd.read_csv(f) for f in sorted(glob.glob(f"{RAW}/class_*_s0.csv"))
-              if not os.path.basename(f).startswith("class_supports")]
+              if not os.path.basename(f).startswith("class_supports") and not variant.search(os.path.basename(f))]
     d = pd.concat(frames, ignore_index=True)
     d = d[d.metric != "confusion"]
     return d.drop_duplicates(["task", "method", "target", "seed", "k", "draw", "metric", "cls"])
