@@ -19,8 +19,10 @@ import stats_flare as sf  # noqa: E402
 SEEDS = (0, 1, 2)
 
 
-def seed_table(d: pd.DataFrame) -> pd.DataFrame:
-    """One row per (baseline, seed) plus a pooled row per baseline."""
+def seed_table(d: pd.DataFrame, scope: str = "mean over k", ks: tuple[int, ...] | None = None) -> pd.DataFrame:
+    """One row per (baseline, seed) plus a pooled row per baseline, over the given values of k (default: all)."""
+    if ks is not None:
+        d = d[d.k.isin(ks)]
     per = d.groupby(["method", "target", "seed", "k"]).roc_auc.mean().reset_index()
     wide = per.pivot_table(index=["target", "seed", "k"], columns="method", values="roc_auc")
     rows = []
@@ -29,14 +31,14 @@ def seed_table(d: pd.DataFrame) -> pd.DataFrame:
         ps = diff.groupby(["seed", "target"])["diff"].mean().reset_index()
         for seed in SEEDS:
             x = ps[ps.seed == seed]["diff"].to_numpy()
-            rows.append({"baseline": b, "seed": str(seed), "n_targets": len(x), "mean_diff": x.mean(),
+            rows.append({"scope": scope, "baseline": b, "seed": str(seed), "n_targets": len(x), "mean_diff": x.mean(),
                          "wins": int((x > 0).sum()), "p": sf.wil(x)})
         # seed-averaged difference per target, then the target-level test
         full = ps.groupby("target").filter(lambda g: set(g.seed) == set(SEEDS))
         avg = full.groupby("target")["diff"].mean().to_numpy()
         means = [ps[ps.seed == s]["diff"].mean() for s in SEEDS]
         lo, hi = sf.boot_ci(avg) if len(avg) else (np.nan, np.nan)
-        rows.append({"baseline": b, "seed": "mean of seeds", "n_targets": len(avg), "mean_diff": avg.mean(),
+        rows.append({"scope": scope, "baseline": b, "seed": "mean of seeds", "n_targets": len(avg), "mean_diff": avg.mean(),
                      "wins": int((avg > 0).sum()), "p": sf.wil(avg), "ci_lo": lo, "ci_hi": hi,
                      "sd_across_seeds": float(np.std(means, ddof=1))})
     out = pd.DataFrame(rows)
@@ -49,7 +51,8 @@ def seed_table(d: pd.DataFrame) -> pd.DataFrame:
 def main() -> None:
     d = sf.load_eval(SEEDS)
     os.makedirs(sf.OUT, exist_ok=True)
-    t = seed_table(d)
+    t = pd.concat([seed_table(d), seed_table(d, "k<=16", (4, 8, 16)), seed_table(d, "k>=32", (32, 64, 128))],
+                  ignore_index=True)
     t.to_csv(f"{sf.OUT}/seeds.csv", index=False)
     with open(f"{sf.OUT}/seeds.md", "w", encoding="utf8") as fh:
         fh.write(sf.md(t))

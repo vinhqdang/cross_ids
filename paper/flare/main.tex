@@ -29,7 +29,7 @@ FLARE-2 is a transformer meta-trained on episodes drawn from the other datasets.
 It reads the detection rule from the labelled flows given at test time instead of storing a rule, so no model is trained or tuned on the target; its per-episode rank normalisation does use the unlabelled target flows.
 Each episode uses a random label space (binary, one class against benign, class against class, or $N$-way), random class-to-slot assignments, per-episode rank normalisation, and random feature sign flips; the model has no feature identity and a class-equivariant matching readout.
 Checkpoints are selected on a held-out source dataset.
-Over the eight targets, FLARE-2 shows no significant difference from random forest and CatBoost on binary ROC-AUC (mean difference to target-only CatBoost $-0.001$, 95\% interval $[-0.004,+0.003]$; to random forest $+0.004$, $[-0.003,+0.010]$), and is better than logistic regression and $k$NN.
+Over the eight targets, FLARE-2 shows no significant difference from random forest and CatBoost on binary ROC-AUC (mean over three meta-training seeds: $-0.001$ to target-only CatBoost, 95\% interval $[-0.004,+0.002]$; $+0.001$ to random forest, $[-0.004,+0.006]$), and is better than logistic regression and $k$NN on every target.
 At attack-class level it has higher per-class ROC-AUC than random forest and CatBoost on 7 of 8 targets (mean $+0.014$, not significant after correction), and a lower false-positive rate on 7 of 8 targets (not significant at target level) with lower recall at the default threshold.
 We report where it does not help: it does not outperform tree ensembles fitted on the target labels at $k\ge 32$ or on easy targets, and source-pretrained CatBoost is better at $k=4$ on four targets.
 Code, configurations and all raw per-run results are public.
@@ -182,7 +182,21 @@ With $k=4$ labelled flows, FLARE-2 already beats the zero-shot pooled CatBoost o
 Table~\ref{tab:stats} gives the paired statistics.
 Against the strongest baselines the difference is small and not significant: mean over $k$, FLARE-2 minus target-only CatBoost is $-0.001$ and minus RF is $+0.004$; both intervals contain zero and the win/loss counts over targets are 4/4 and 5/3.
 Against LR and $k$NN the gain is large: FLARE-2 is higher on all 8 targets for the mean over $k$ ($+0.075$ and $+0.110$, $p_{\text{Holm}}=0.039$ for both).
-Against source-pretrained CatBoost fine-tuned on the labels, FLARE-2 is better for $k\ge 32$ (7 of 8 targets, $p_{\text{Holm}}=0.047$) and not different below.
+Against source-pretrained CatBoost fine-tuned on the labels, seed 0 shows FLARE-2 better for $k\ge 32$ (7 of 8 targets, $p_{\text{Holm}}=0.047$) and not different below; the repeat over seeds below shows that this advantage is not robust.
+
+\paragraph{Three meta-training seeds.}
+We repeated the benchmark (meta-training, the split of the target and the support draws) with seeds 1 and 2 on all eight targets, for FLARE-2 and every baseline.
+Table~\ref{tab:seeds} gives the paired differences with the target as unit, after averaging each target over the three seeds.
+The differences to RF and to target-only CatBoost stay within $\pm0.002$ for the mean over $k$, and the standard deviation over seeds of the mean difference is 0.001 to 0.005, so training variance is small next to the spread between targets.
+FLARE-2 stays above LR and $k$NN on all 8 targets in every scope ($p_{\text{Holm}}=0.039$).
+The seed-0 advantage over fine-tuned CatBoost at $k\ge 32$ shrinks to $+0.007$ (5 of 8 targets, $p_{\text{Holm}}=0.33$), and the mean difference over $k$ is $+0.002$ (CI $[-0.015,+0.020]$).
+We therefore claim neither superiority nor inferiority to the tree ensembles on binary ROC-AUC.
+
+\begin{table}[t]
+\centering\small
+\caption{FLARE-2 minus baseline in binary ROC-AUC, mean over meta-training seeds 0--2, unit = target (8). W/L: targets where FLARE-2 is higher / lower. SD: standard deviation over seeds of the mean difference. $p_{\text{Holm}}$: exact Wilcoxon over targets, Holm-adjusted over the five baselines within each scope. Only the mean over $k$ is a primary endpoint.}\label{tab:seeds}
+\resizebox{\linewidth}{!}{\input{tables/seeds}}
+\end{table}
 
 \begin{table}[t]
 \centering\scriptsize
@@ -236,11 +250,11 @@ Per-target values are in Table~\ref{tab:classtarget}.
 
 \section{Limitations}
 \begin{itemize}
-\item One meta-training seed and one set of 10 support draws per target; the confidence intervals bound the target-to-target spread, not the training variance.
+\item The main tables and the class-level results use meta-training seed 0 with 10 support draws per target; seeds 1 and 2 were run for all targets, but only the binary comparison is summarised across seeds (Table~\ref{tab:seeds}), and the ablations use one seed and two targets.
 \item FLARE-2 is not better than fixed-setting tree ensembles on binary ROC-AUC; its gains are class-level and conditional on the operating point.
 \item Eight datasets from five laboratories (UNB, Sannio, UCD, UNSW, CTU), so datasets are not independent units; results on other networks may differ.
 \item FLARE-2 normalises features by rank over the unlabelled target rows it scores, which is transductive in the target features, and the baselines get no such information; one meta-trained model per target is needed (leave-one-dataset-out), and each model sees only five or six training datasets. All eight targets were used while choosing the architecture and the task mix, so there is no untouched test set. Source-pretrained CatBoost is better than FLARE-2 at $k=4$ on four targets.
-\item Queries whose class has no support row (label noise at $k=1$) receive a target logit of $-10^{9}$. This produced training losses of order $10^{6}$ and, in one binary-only ablation run, made validation loss pick a collapsed checkpoint (AUC about 0.50); checkpoint selection now scores supported queries only. The main FLARE-2 runs are unaffected (their validation episodes contained no unsupported queries), and the loss-masked variant is within 0.01 ROC-AUC of FLARE-2 on CTU-13, but not on CIC-IDS2017 (Sect.~\ref{sec:ablation}).
+\item Queries whose class has no support row (label noise at $k=1$) receive a target logit of $-10^{9}$. This produced training losses of order $10^{6}$ and, in one binary-only ablation run, made validation loss pick a collapsed checkpoint (AUC about 0.50); checkpoint selection now scores supported queries only. The checkpoint selection of the main FLARE-2 runs is unaffected (their validation episodes contained no unsupported queries), but their training loss includes these queries (logged loss of order $10^{6}$ to $10^{7}$). The loss-masked variant, trained on all eight targets with seed 0, has mean binary ROC-AUC 0.851 against 0.850 for FLARE-2, with per-target differences between $-0.010$ and $+0.019$ and a gain on 4 of 8 targets (Sect.~\ref{sec:ablation}).
 \item Flows only; payload features and temporal context are not used.
 \item The datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}.
 \end{itemize}
@@ -249,7 +263,7 @@ Per-target values are in Table~\ref{tab:classtarget}.
 Concept shift, rather than tuning, appears to limit cross-dataset flow classification, so a model that carries a fixed decision function across networks is a poor target.
 FLARE-2 carries the skill of inferring a rule from a few labelled flows instead.
 It matches fixed-setting tree ensembles on binary detection without fitting the network to the target, modestly improves per-class ranking, and outputs attack types through one readout.
-The open problem is the remaining gap to full-label training (0.95--1.00 ROC-AUC) at small $k$, where better label-efficient queries and multi-seed meta-training are the next step.
+The open problem is the remaining gap to full-label training (0.95--1.00 ROC-AUC) at small $k$, where better label-efficient queries are the next step.
 
 \paragraph{Reproducibility.}
 The package, configurations, sampled-row hashes and every raw per-run CSV are in \url{https://github.com/vinhqdang/cross_ids}; tables and figures are generated by \texttt{scripts/make\_paper\_tables.py} and statistics by \texttt{scripts/stats\_flare.py}.

@@ -211,6 +211,31 @@ def ablation_table() -> None:
     write("ablation", chr(10).join(lines))
 
 
+def seeds_table() -> None:
+    """FLARE-2 minus baseline, mean over three meta-training seeds (unit = target), from stats_seeds.py."""
+    path = "results/flare/stats/seeds.csv"
+    if not os.path.exists(path):
+        return
+    t = pd.read_csv(path)
+    names = {"rf": "RF", "catboost-target": "CatBoost (target only)", "catboost-ft": "CatBoost (source + fine-tune)",
+             "lr": "LR", "knn": "kNN"}
+    lines = [r"\begin{tabular}{llrrrrr}", r"\toprule",
+             r"Scope & Baseline & Mean diff. & 95\% CI & W/L & SD over seeds & $p_{\text{Holm}}$ \\", r"\midrule"]
+    for scope in ["mean over k", "k<=16", "k>=32"]:
+        sub = t[(t.scope == scope) & (t.seed == "mean of seeds")].set_index("baseline")
+        label = scope.replace("<=", r"$\leq$").replace(">=", r"$\geq$")
+        for b, name in names.items():
+            r = sub.loc[b]
+            wins = int(r.wins)
+            lines.append(f"{label} & {name} & {r.mean_diff:+.3f} & [{r.ci_lo:+.3f}, {r.ci_hi:+.3f}] & {wins}/{int(r.n_targets) - wins} "
+                         f"& {r.sd_across_seeds:.3f} & {r.p_holm:.3f} \\\\")
+            label = ""
+        lines.append(r"\midrule")
+    lines[-1] = r"\bottomrule"
+    lines += [r"\end{tabular}", ""]
+    write("seeds", chr(10).join(lines))
+
+
 def main() -> None:
     os.makedirs(TAB, exist_ok=True)
     os.makedirs(FIG, exist_ok=True)
@@ -220,6 +245,7 @@ def main() -> None:
     stats_table()
     class_table()
     ablation_table()
+    seeds_table()
     class_by_target()
     curve_figure(d)
     pertarget_figure(d)
