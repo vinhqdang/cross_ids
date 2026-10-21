@@ -78,7 +78,16 @@ ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best"
 PAIRWISE_METHOD = "catboost"
 PROTONET = "protonet"
 PROTONET_SUFFIX = "_protonet"
-BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn")
+BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn-v2", "tabpfn-v3", "tabpfn-v3.5")
+# TabPFN baselines. Local: weights run on this machine. API: the labelled support rows and the query rows of the
+# (public) benchmark data are sent to the Prior Labs service; the access token is read from TABPFN_TOKEN or the
+# git-ignored token file and is never logged.
+TABPFN_LOCAL = {"tabpfn-v2": "v2"}  # method name -> tabpfn.constants.ModelVersion value
+TABPFN_API = {"tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}  # method name -> tabpfn_client model_path
+TABPFN_VERSIONS = {**TABPFN_LOCAL, **TABPFN_API}
+TABPFN_API_RETRIES = 3
+TABPFN_TOKEN_FILE = Path("runs/tabpfn_token.txt")  # git-ignored; the token is never logged or committed
+TABPFN_CHUNK = 30000  # query rows per predict call
 ACTIVE = ("flare-al", "flare-kcenter-raw")
 FULLLABEL = "catboost-fulllabel"  # upper reference: trained on the whole target train split (k = 0 in the CSV)
 ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE + (FULLLABEL,) + tuple(COMBOS) + ZERO_SHOT
@@ -132,19 +141,73 @@ def load_or_draw_supports(path: Path, target: str, seed: int, y_train: np.ndarra
     return drawn
 
 
-def tabpfn_status() -> tuple[bool, str]:
-    """Whether TabPFN can be used here (package installed and weights downloadable). Reason otherwise."""
-    try:
-        from tabpfn import TabPFNClassifier
-    except Exception as exc:  # pragma: no cover - depends on environment
-        return False, f"tabpfn not importable: {type(exc).__name__}"
+def load_tabpfn_token(path: Path = TABPFN_TOKEN_FILE) -> bool:
+    """Make TABPFN_TOKEN available (needed for TabPFN versions whose weights require a license acceptance).
+
+    An existing environment variable wins. Otherwise the first line of ``path`` is used when the file exists.
+    Returns whether a token is set afterwards.
+    """
+    import os
+
+    if os.environ.get("TABPFN_TOKEN"):
+        return True
+    path = Path(path)
+    if path.exists():
+        token = path.read_text(encoding="utf8").strip()
+        if token:
+            os.environ["TABPFN_TOKEN"] = token.splitlines()[0].strip()
+            return True
+    return False
+
+
+def _tabpfn(name: str, device: str, seed: int):
+    try:  # use the Windows certificate store when available (weights and the API are reached over HTTPS)
+        import truststore
+
+        truststore.inject_into_ssl()
+    except ImportError:
+        pass
+    if name in TABPFN_API:
+        import os
+
+        import tabpfn_client
+
+        load_tabpfn_token()
+        tabpfn_client.set_access_token(os.environ["TABPFN_TOKEN"])
+        return tabpfn_client.TabPFNClassifier(model_path=TABPFN_API[name], random_state=seed)
+    from tabpfn import TabPFNClassifier
+    from tabpfn.constants import ModelVersion
+
+    return TabPFNClassifier.create_default_for_version(ModelVersion(TABPFN_LOCAL[name]), device=device,
+                                                       random_state=seed)
+
+
+def _tabpfn_proba(name: str, device: str, seed: int, Xs, ys, Xt) -> np.ndarray:
+    """P(attack) of a TabPFN baseline on the query rows. API calls are retried on transient errors."""
+    last = None
+    for attempt in range(TABPFN_API_RETRIES if name in TABPFN_API else 1):
+        try:
+            est = _tabpfn(name, device, seed).fit(Xs, ys)
+            return np.concatenate([est.predict_proba(Xt[i:i + TABPFN_CHUNK])[:, 1]
+                                   for i in range(0, len(Xt), TABPFN_CHUNK)])
+        except Exception as exc:  # network or service error: wait and retry
+            last = exc
+            log.warning("%s attempt %d failed: %s", name, attempt + 1, type(exc).__name__)
+            time.sleep(30 * (attempt + 1))
+    raise last
+
+
+def tabpfn_status(name: str) -> tuple[bool, str]:
+    """Whether the TabPFN version of method ``name`` can be used here (package, weights, license). Reason otherwise."""
+    TABPFN_VERSIONS[name]  # KeyError for an unknown method
+    load_tabpfn_token()
     try:
         X = np.random.default_rng(0).standard_normal((20, 3))
         y = (X[:, 0] > 0).astype(int)
-        TabPFNClassifier(device="cpu", n_estimators=1).fit(X, y).predict_proba(X[:2])
-    except Exception as exc:  # pragma: no cover - needs Prior Labs weights or token
+        _tabpfn(name, "cpu", 0).fit(X, y).predict_proba(X[:2])
+    except Exception as exc:  # depends on environment: package, weights download or license acceptance
         first = str(exc).strip().splitlines()[0] if str(exc).strip() else ""
-        return False, f"weights unavailable ({type(exc).__name__}: {first[:160]})"
+        return False, f"{type(exc).__name__}: {first[:160]}"
     return True, ""
 
 
@@ -267,11 +330,8 @@ def _compute(name: str, st: SeedState, idx: np.ndarray, k: int, draw: int) -> tu
                                  verbose=0, random_seed=draw, allow_writing_files=False, thread_count=ctx.threads)
         est.fit(base.scaler.transform(Xs.astype(np.float64)), ys, init_model=base.model)
         return est.predict_proba(base.scaler.transform(Xt.astype(np.float64)))[:, 1], ys
-    if name == "tabpfn":
-        from tabpfn import TabPFNClassifier
-
-        est = TabPFNClassifier(device=ctx.device if ctx.device == "cuda" else "cpu", random_state=draw)
-        return _sklearn_predict(est, Xs, ys, Xt), ys
+    if name in TABPFN_VERSIONS:
+        return _tabpfn_proba(name, "cuda" if ctx.device == "cuda" else "cpu", draw, Xs, ys, Xt), ys
     if name in CONTEXT_METHODS:
         model = st.model(name)
         if model is None:
@@ -507,11 +567,11 @@ def main(argv: list[str] | None = None) -> None:
     torch.set_num_threads(args.threads)
     out = Path(args.out or f"{args.runs_dir}/eval_{args.target}.csv")
     methods = list(args.methods)
-    if "tabpfn" in methods:
-        ok, reason = tabpfn_status()
+    for name in [m for m in methods if m in TABPFN_VERSIONS]:
+        ok, reason = tabpfn_status(name)
         if not ok:
-            log.warning("skipping tabpfn: %s", reason)
-            methods.remove("tabpfn")
+            log.warning("skipping %s: %s", name, reason)
+            methods.remove(name)
     ctx = EvalContext(runs_dir=Path(args.runs_dir), supports_dir=Path(args.supports_dir or out.parent),
                       device=args.device, threads=args.threads, al_pool=args.al_pool,
                       ks=tuple(args.ks), n_draws=args.draws, benchmark_dir=Path(args.benchmark))
