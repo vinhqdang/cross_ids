@@ -59,5 +59,47 @@ def main() -> None:
     print(sf.md(t))
 
 
+
+def load_class_seeds() -> pd.DataFrame:
+    """Class-level rows of the main result files for every seed (ablation files repeat the baselines: skipped)."""
+    import glob
+    import re
+
+    variant = re.compile(r"_(f2m|f2mbinary|f2noperm|f2insrc)_s\d+\.csv$")
+    files = [f for f in sorted(glob.glob(f"{sf.RAW}/class_*_s[0-9].csv")) if not variant.search(os.path.basename(f))]
+    c = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
+    c = c[(c.metric != "confusion") & c.method.isin(["flare2", "catboost", "rf", "lr", "knn"])]
+    return c.drop_duplicates(["task", "method", "target", "seed", "k", "draw", "metric", "cls"])
+
+
+def class_seed_table(c: pd.DataFrame) -> pd.DataFrame:
+    """FLARE-2 minus baseline per class-level metric: per-target means, averaged over seeds, tested over targets."""
+    base = ["catboost", "rf", "lr", "knn"]
+    rows = []
+    for (task, metric), g in c.groupby(["task", "metric"]):
+        per = g.groupby(["method", "target", "seed"]).value.mean().reset_index()
+        wide = per.pivot_table(index=["target", "seed"], columns="method", values="value")
+        for b in base:
+            diff = (wide["flare2"] - wide[b]).dropna().rename("diff").reset_index()
+            full = diff.groupby("target").filter(lambda x: set(x.seed) == set(SEEDS))
+            avg = full.groupby("target")["diff"].mean().to_numpy()
+            means = [diff[diff.seed == s]["diff"].mean() for s in SEEDS]
+            lo, hi = sf.boot_ci(avg) if len(avg) else (np.nan, np.nan)
+            rows.append({"metric": f"{task}:{metric}", "baseline": b, "n_targets": len(avg), "mean_diff": avg.mean(),
+                         "ci_lo": lo, "ci_hi": hi, "wins": int((avg > 0).sum()), "p": sf.wil(avg),
+                         "sd_across_seeds": float(np.std(means, ddof=1))})
+    out = pd.DataFrame(rows)
+    out["p_holm"] = out.groupby("metric")["p"].transform(lambda p: sf.holm(p.tolist()))
+    return out
+
+
+def main_class() -> None:
+    t = class_seed_table(load_class_seeds())
+    t.to_csv(f"{sf.OUT}/seeds_class.csv", index=False)
+    with open(f"{sf.OUT}/seeds_class.md", "w", encoding="utf8") as fh:
+        fh.write(sf.md(t))
+    print(sf.md(t))
+
+
 if __name__ == "__main__":
-    main()
+    main_class()

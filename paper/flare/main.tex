@@ -30,7 +30,7 @@ It reads the detection rule from the labelled flows given at test time instead o
 Each episode uses a random label space (binary, one class against benign, class against class, or $N$-way), random class-to-slot assignments, per-episode rank normalisation, and random feature sign flips; the model has no feature identity and a class-equivariant matching readout.
 Checkpoints are selected on a held-out source dataset.
 Over the eight targets, FLARE-2 shows no significant difference from random forest and CatBoost on binary ROC-AUC (mean over three meta-training seeds: $-0.001$ to target-only CatBoost, 95\% interval $[-0.004,+0.002]$; $+0.001$ to random forest, $[-0.004,+0.006]$), and is better than logistic regression and $k$NN on every target.
-At attack-class level it has higher per-class ROC-AUC than random forest and CatBoost on 7 of 8 targets (mean $+0.014$, not significant after correction), and a lower false-positive rate on 7 of 8 targets (not significant at target level) with lower recall at the default threshold.
+At attack-class level, averaged over three meta-training seeds, it has higher per-class ROC-AUC than random forest and CatBoost on 7 of 8 targets (mean $+0.011$, $p_{\text{Holm}}=0.047$) and a lower false-positive rate on 7 of 8 targets ($p_{\text{Holm}}=0.047$), at lower recall on all 8 targets at the default threshold ($p_{\text{Holm}}=0.031$); $N$-way macro-F1 is not significantly different.
 We report where it does not help: it does not outperform tree ensembles fitted on the target labels at $k\ge 32$ or on easy targets, and source-pretrained CatBoost is better at $k=4$ on four targets.
 Code, configurations and all raw per-run results are public.
 \end{abstract}
@@ -230,6 +230,8 @@ Targets whose attacks are easy (USB-IDS-1, where pooled zero-shot CatBoost alrea
 Table~\ref{tab:class} summarises per-class detection (class $c$ against benign, $k$ labelled flows of each) and $N$-way attack-type classification over 57 (target, class) detection tasks.
 FLARE-2 has higher per-class ROC-AUC than RF and CatBoost on 7 of 8 targets (mean $+0.014$ and $+0.015$ over targets, $p=0.016$ before correction; the unit-level $p<0.001$ is optimistic because classes within a target are correlated).
 It has a lower false-positive rate (by $0.05$; lower on 7 of 8 targets, $p=0.078$ at target level) and a lower recall (by $0.03$ to $0.04$; $p\le0.016$) at the default threshold of 0.5, so part of the ROC-AUC gain is a different operating point and not a free gain in detection.
+Repeating the class-level evaluation with meta-training seeds 1 and 2 and averaging each target over the three seeds (Holm-adjusted over the four baselines, unit = target) gives the same picture with firmer tests: per-class ROC-AUC is higher than RF and CatBoost by $+0.011$ on 7 of 8 targets ($p_{\text{Holm}}=0.047$ for both), the false-positive rate is lower on 7 of 8 targets ($p_{\text{Holm}}=0.047$) and recall is lower on all 8 targets ($p_{\text{Holm}}=0.031$), so the operating-point caveat stands.
+The $N$-way macro-F1 differences to CatBoost and RF ($+0.018$ and $+0.021$, higher on 3 of 8 targets) are not significant.
 On $N$-way macro-F1 FLARE-2 is higher than RF and CatBoost on average ($+0.026$, $+0.022$) but on only 3 of 8 targets, so the difference is not significant; it is significantly higher than LR and $k$NN.
 Per-target values are in Table~\ref{tab:classtarget}.
 
@@ -250,7 +252,7 @@ Per-target values are in Table~\ref{tab:classtarget}.
 
 \section{Limitations}
 \begin{itemize}
-\item The main tables and the class-level results use meta-training seed 0 with 10 support draws per target; seeds 1 and 2 were run for all targets, but only the binary comparison is summarised across seeds (Table~\ref{tab:seeds}), and the ablations use one seed and two targets.
+\item The main tables and figures use meta-training seed 0 with 10 support draws per target; seeds 1 and 2 were run for all targets and are summarised in Table~\ref{tab:seeds} and in the text for the class level (the class-level tables themselves are seed 0), and the ablations use one seed and two targets.
 \item FLARE-2 is not better than fixed-setting tree ensembles on binary ROC-AUC; its gains are class-level and conditional on the operating point.
 \item Eight datasets from five laboratories (UNB, Sannio, UCD, UNSW, CTU), so datasets are not independent units; results on other networks may differ.
 \item FLARE-2 normalises features by rank over the unlabelled target rows it scores, which is transductive in the target features, and the baselines get no such information; one meta-trained model per target is needed (leave-one-dataset-out), and each model sees only five or six training datasets. All eight targets were used while choosing the architecture and the task mix, so there is no untouched test set. Source-pretrained CatBoost is better than FLARE-2 at $k=4$ on four targets.
