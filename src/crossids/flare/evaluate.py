@@ -79,12 +79,13 @@ PAIRWISE_METHOD = "catboost"
 PROTONET = "protonet"
 PROTONET_SUFFIX = "_protonet"
 BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn-v2", "tabpfn-v3", "tabpfn-v3.5")
-# TabPFN baselines. Local: weights run on this machine. API: the labelled support rows and the query rows of the
-# (public) benchmark data are sent to the Prior Labs service; the access token is read from TABPFN_TOKEN or the
-# git-ignored token file and is never logged.
-TABPFN_LOCAL = {"tabpfn-v2": "v2"}  # method name -> tabpfn.constants.ModelVersion value
-TABPFN_API = {"tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}  # method name -> tabpfn_client model_path
-TABPFN_VERSIONS = {**TABPFN_LOCAL, **TABPFN_API}
+# TabPFN baselines. The default backend runs the weights on this machine (versions other than v2 need the Prior Labs
+# license accepted for the token in TABPFN_TOKEN or the git-ignored token file). Setting TABPFN_BACKEND=api sends the
+# support and query rows of the (public) benchmark data to the Prior Labs service instead, which has a daily quota
+# and whose models can change over time. The token is never logged.
+TABPFN_LOCAL = {"tabpfn-v2": "v2", "tabpfn-v3": "v3", "tabpfn-v3.5": "v3.5"}  # method -> tabpfn ModelVersion value
+TABPFN_API = {"tabpfn-v2": "v2_default", "tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}  # tabpfn_client
+TABPFN_VERSIONS = TABPFN_LOCAL
 TABPFN_API_RETRIES = 3
 TABPFN_TOKEN_FILE = Path("runs/tabpfn_token.txt")  # git-ignored; the token is never logged or committed
 TABPFN_CHUNK = 30000  # query rows per predict call
@@ -160,6 +161,16 @@ def load_tabpfn_token(path: Path = TABPFN_TOKEN_FILE) -> bool:
     return False
 
 
+def tabpfn_backend() -> str:
+    """'local' (default) or 'api', from the TABPFN_BACKEND environment variable."""
+    import os
+
+    backend = os.environ.get("TABPFN_BACKEND", "local")
+    if backend not in ("local", "api"):
+        raise ValueError(f"TABPFN_BACKEND must be 'local' or 'api', got {backend!r}")
+    return backend
+
+
 def _tabpfn(name: str, device: str, seed: int):
     try:  # use the Windows certificate store when available (weights and the API are reached over HTTPS)
         import truststore
@@ -167,12 +178,12 @@ def _tabpfn(name: str, device: str, seed: int):
         truststore.inject_into_ssl()
     except ImportError:
         pass
-    if name in TABPFN_API:
+    load_tabpfn_token()
+    if tabpfn_backend() == "api":
         import os
 
         import tabpfn_client
 
-        load_tabpfn_token()
         tabpfn_client.set_access_token(os.environ["TABPFN_TOKEN"])
         return tabpfn_client.TabPFNClassifier(model_path=TABPFN_API[name], random_state=seed)
     from tabpfn import TabPFNClassifier
@@ -185,7 +196,7 @@ def _tabpfn(name: str, device: str, seed: int):
 def _tabpfn_proba(name: str, device: str, seed: int, Xs, ys, Xt) -> np.ndarray:
     """P(attack) of a TabPFN baseline on the query rows. API calls are retried on transient errors."""
     last = None
-    for attempt in range(TABPFN_API_RETRIES if name in TABPFN_API else 1):
+    for attempt in range(TABPFN_API_RETRIES if tabpfn_backend() == "api" else 1):
         try:
             est = _tabpfn(name, device, seed).fit(Xs, ys)
             return np.concatenate([est.predict_proba(Xt[i:i + TABPFN_CHUNK])[:, 1]

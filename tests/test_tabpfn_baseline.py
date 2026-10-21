@@ -10,8 +10,18 @@ def test_versioned_tabpfn_methods_are_registered_and_the_unversioned_name_is_gon
     for name in ("tabpfn-v2", "tabpfn-v3", "tabpfn-v3.5"):
         assert name in ev.ALL_METHODS
     assert "tabpfn" not in ev.ALL_METHODS
-    assert ev.TABPFN_LOCAL == {"tabpfn-v2": "v2"}  # run on this machine
-    assert ev.TABPFN_API == {"tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}  # run through the Prior Labs API
+    assert ev.TABPFN_LOCAL == {"tabpfn-v2": "v2", "tabpfn-v3": "v3", "tabpfn-v3.5": "v3.5"}
+    assert ev.TABPFN_API == {"tabpfn-v2": "v2_default", "tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}
+
+
+def test_backend_defaults_to_local_and_reads_the_environment(monkeypatch):
+    monkeypatch.delenv("TABPFN_BACKEND", raising=False)
+    assert ev.tabpfn_backend() == "local"
+    monkeypatch.setenv("TABPFN_BACKEND", "api")
+    assert ev.tabpfn_backend() == "api"
+    monkeypatch.setenv("TABPFN_BACKEND", "bogus")
+    with pytest.raises(ValueError):
+        ev.tabpfn_backend()
 
 
 def test_token_is_read_from_the_environment_and_never_overrides_an_existing_one(monkeypatch, tmp_path):
