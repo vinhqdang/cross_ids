@@ -1,8 +1,8 @@
 attack_type,family,defence,datasets,rows,in_per_attack
 BENIGN,benign,,"cicids2017, usbids1",91727,False
 Benign,benign,,"cicids2018, iot23",105346,False
-Normal,benign,,"insdn, unswnb15",83286,False
 normal,benign,,"ctu13, toniot",65915,False
+Normal,benign,,"insdn, unswnb15",83286,False
 Bot,botnet,,"cicids2017, cicids2018",2908,True
 BOTNET,botnet,,insdn,101,True
 botnet-s42,botnet,,ctu13,8228,False
@@ -32,12 +32,12 @@ FTP-Patator,bruteforce,,cicids2017,183,True
 password,bruteforce,,toniot,14618,True
 SSH-Bruteforce,bruteforce,,cicids2018,1955,True
 SSH-Patator,bruteforce,,cicids2017,142,True
-ddos,ddos,,toniot,11578,True
 DDoS,ddos,,"cicids2017, insdn, iot23",6990,True
+ddos,ddos,,toniot,11578,True
 DDOS attack-HOIC,ddos,,cicids2018,4210,True
 DDOS attack-LOIC-UDP,ddos,,cicids2018,42,True
-dos,dos,,toniot,5097,True
 DoS,dos,,"insdn, unswnb15",32224,True
+dos,dos,,toniot,5097,True
 DoS attacks-GoldenEye,dos,,cicids2018,826,True
 DoS attacks-Hulk,dos,,cicids2018,2522,True
 DoS attacks-SlowHTTPTest,dos,,cicids2018,2,True

@@ -42,7 +42,8 @@ LABELS = {"lr": "LR", "rf": "RF", "hgb": "HGB", "catboost": "CatBoost", "xgboost
           "rift-noDN": "RIFT $-$ domain norm.", "rift-noAnchor": "RIFT $-$ benign anchor",
           "rift-noIFS": "RIFT $-$ invariant selection", "rift-noLSC": "RIFT $-$ prior correction",
           "rift-poolInit": "RIFT, pooled init.", "rift-robust": "RIFT, robust scaling",
-          "rift-standard": "RIFT, z-score scaling"}
+          "rift-standard": "RIFT, z-score scaling", "rift-oraclePrior": "RIFT, true prior (diagnostic)",
+          "rift-oracleAnchor": "RIFT, true prior and benign anchor (diagnostic)"}
 
 
 def main_table(r: pd.DataFrame) -> None:
@@ -65,7 +66,7 @@ def main_table(r: pd.DataFrame) -> None:
 
 def rift_table(r: pd.DataFrame) -> None:
     methods = ["hgb", "rift", "rift-noDN", "rift-noAnchor", "rift-noIFS", "rift-noLSC", "rift-poolInit",
-               "rift-robust", "rift-standard", "rift-st"]
+               "rift-robust", "rift-standard", "rift-st", "rift-oraclePrior", "rift-oracleAnchor"]
     pw = scenario_means(r, "pairwise", "transductive")
     lo = scenario_means(r, "lodo", "transductive")
     pwb = scenario_means(r, "pairwise", "transductive", "balanced_accuracy")
@@ -133,6 +134,28 @@ def datasets_table() -> None:
     write("datasets", lines)
 
 
+def family_table() -> None:
+    """Same-attack-family transfer between datasets (scripts/family_transfer.py)."""
+    path = "results/controls/family_transfer.csv"
+    if not os.path.exists(path):
+        return
+    f = pd.read_csv(path)
+    names = {"dos": "DoS", "ddos": "DDoS", "scan": "Scan", "bruteforce": "Brute force",
+             "exploit_malware": "Exploit / malware", "botnet": "Botnet"}
+    lines = [BS + r"begin{tabular}{lrrrrr}", BS + "toprule",
+             r"Family & Cells & Median cross-dataset AUC & Min & Max & Median in-domain AUC " + BS + BS, BS + "midrule"]
+    for fam in ["dos", "ddos", "scan", "bruteforce", "exploit_malware", "botnet"]:
+        g = f[f.family == fam]
+        if len(g):
+            lines.append(f"{names[fam]} & {len(g)} & {g.auc_cross.median():.3f} & {g.auc_cross.min():.3f} & "
+                         f"{g.auc_cross.max():.3f} & {g.auc_in_source.median():.3f} " + BS + BS)
+    lines.append(BS + "midrule")
+    lines.append(f"All & {len(f)} & {f.auc_cross.median():.3f} & {f.auc_cross.min():.3f} & {f.auc_cross.max():.3f} & "
+                 f"{f.auc_in_source.median():.3f} " + BS + BS)
+    lines += [BS + "bottomrule", BS + "end{tabular}"]
+    write("family", lines)
+
+
 def copy_figures() -> None:
     pairs = {"results/analysis/fig02_feature_sign_heatmap.pdf": "feature_sign.pdf",
              "results/analysis/fig03_pairwise_matrix_transductive.pdf": "pairwise_matrix.pdf",
@@ -154,6 +177,7 @@ def main() -> None:
     target_table(r)
     fewshot_table()
     datasets_table()
+    family_table()
     copy_figures()
 
 

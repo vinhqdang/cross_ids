@@ -1,5 +1,5 @@
 experiment,mode,blocks,n_blocks,n_methods,methods,chi2,p_value
-lodo,transductive,targets,7,17,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",25.25545390570022,0.06544678834148664
+lodo,transductive,targets,7,19,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-oracleAnchor, rift-oraclePrior, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",25.71428571428573,0.10647242732581932
 lodo,inductive,targets,7,14,"catboost, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-standard, xgboost",12.69117174959876,0.4719394330731601
-pairwise,transductive,pairs,42,17,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",33.90732191900924,0.005591355826859035
+pairwise,transductive,pairs,42,19,"catboost, coral, dann, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-oracleAnchor, rift-oraclePrior, rift-poolInit, rift-robust, rift-st, rift-standard, xgboost",38.1494334573736,0.0037007797020170412
 pairwise,inductive,pairs,42,14,"catboost, hgb, lr, mlp, rf, rift, rift-noAnchor, rift-noDN, rift-noIFS, rift-noLSC, rift-poolInit, rift-robust, rift-standard, xgboost",9.393186325982757,0.7426421518167702
