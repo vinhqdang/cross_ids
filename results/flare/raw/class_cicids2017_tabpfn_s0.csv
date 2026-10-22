@@ -1,0 +1,1673 @@
+task,method,target,seed,k,draw,metric,cls,pred,value,n
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,DDoS,,0.9656615064429233,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,DDoS,,0.6286848072562359,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,DDoS,,0.006606370428627605,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,DoS GoldenEye,,0.9020226025406487,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS GoldenEye,,0.782608695652174,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,DoS GoldenEye,,0.23094769956744002,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,DoS Hulk,,0.9267204501509932,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS Hulk,,0.9493087557603687,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,DoS Hulk,,0.752968934329532,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,DoS Slowhttptest,,0.9575721588674794,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS Slowhttptest,,0.86,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,DoS Slowhttptest,,0.03826189539913488,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,DoS slowloris,,0.923498467862204,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS slowloris,,0.9245283018867925,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,DoS slowloris,,0.30731419583169484,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,0,roc_auc,FTP-Patator,,0.9645953746503535,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,0,recall,FTP-Patator,,0.9622641509433962,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,0,fpr,FTP-Patator,,0.43688556822650415,25483
+nway,tabpfn-v3.5,cicids2017,0,2,0,macro_f1,,,0.20219402746512388,29875
+nway,tabpfn-v3.5,cicids2017,0,2,0,balanced_accuracy,,,0.6045257121023984,29875
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,benign,,0.11576877703499804,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,benign,2944.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,DDoS,4761.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,DoS GoldenEye,4099.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,DoS Hulk,1493.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,DoS Slowhttptest,10355.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,DoS slowloris,1043.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,benign,FTP-Patator,735.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,DDoS,,0.8180272108843537,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,benign,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,DDoS,1443.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,DoS GoldenEye,11.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,DoS Hulk,307.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,DoS Slowhttptest,2.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS GoldenEye,,0.7753623188405797,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,benign,28.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,DoS GoldenEye,107.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS Hulk,,0.8428990364474236,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,benign,24.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,DDoS,203.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,DoS GoldenEye,71.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,DoS Hulk,2012.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,DoS Slowhttptest,77.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,DoS slowloris,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS Slowhttptest,,0.34,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,benign,9.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,DoS Hulk,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,DoS Slowhttptest,17.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,DoS slowloris,17.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,DoS slowloris,,0.4339622641509434,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,benign,19.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,DoS Slowhttptest,10.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,DoS slowloris,23.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,DoS Slowhttptest,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,0,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,DDoS,,0.8649106457368634,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,DDoS,,0.6326530612244898,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,DDoS,,0.2887534408179316,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,DoS GoldenEye,,0.9293114944690455,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS GoldenEye,,0.782608695652174,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,DoS GoldenEye,,0.2665355878883209,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,DoS Hulk,,0.9569197980738833,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS Hulk,,0.9271051529116046,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,DoS Hulk,,0.026582776248525362,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,DoS Slowhttptest,,0.8781392056626032,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS Slowhttptest,,0.74,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,DoS Slowhttptest,,0.21612268973653165,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,DoS slowloris,,0.9387100364300077,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS slowloris,,0.49056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,DoS slowloris,,0.00739284309870232,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,1,roc_auc,FTP-Patator,,0.9994546628183916,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,1,recall,FTP-Patator,,1.0,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,1,fpr,FTP-Patator,,0.4129374754227291,25483
+nway,tabpfn-v3.5,cicids2017,0,2,1,macro_f1,,,0.31752213976541327,29875
+nway,tabpfn-v3.5,cicids2017,0,2,1,balanced_accuracy,,,0.7189809410566878,29875
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,benign,,0.5530869052300432,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,benign,14065.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,DDoS,449.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,DoS GoldenEye,4350.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,DoS Hulk,2110.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,DoS Slowhttptest,662.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,DoS slowloris,2891.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,benign,FTP-Patator,903.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,DDoS,,0.6326530612244898,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,benign,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,DDoS,1116.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,DoS GoldenEye,2.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,DoS slowloris,645.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS GoldenEye,,0.7681159420289855,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,DoS GoldenEye,106.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,DoS Hulk,29.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS Hulk,,0.8797653958944281,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,benign,22.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,DDoS,99.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,DoS GoldenEye,17.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,DoS Hulk,2100.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,DoS Slowhttptest,73.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,DoS slowloris,76.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS Slowhttptest,,0.52,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,benign,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,DDoS,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,DoS Slowhttptest,26.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,DoS slowloris,21.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,DoS slowloris,,0.7735849056603774,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,benign,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,DoS Slowhttptest,9.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,DoS slowloris,41.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,DoS GoldenEye,3.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,DoS Slowhttptest,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,1,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,DDoS,,0.6260397355953785,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,DDoS,,0.7488662131519275,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,DDoS,,0.724852536374361,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,DoS GoldenEye,,0.9348615409165255,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS GoldenEye,,0.9565217391304348,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,DoS GoldenEye,,0.39421942587495085,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,DoS Hulk,,0.9567561198331307,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS Hulk,,0.922496857980729,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,DoS Hulk,,0.2394809280377507,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,DoS Slowhttptest,,0.6184058198977586,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS Slowhttptest,,0.96,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,DoS Slowhttptest,,0.7587888320880849,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,DoS slowloris,,0.9038110536507913,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS slowloris,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,DoS slowloris,,0.25151395988989383,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,2,roc_auc,FTP-Patator,,0.9253392590833884,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,2,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,2,fpr,FTP-Patator,,0.07412504915454188,25483
+nway,tabpfn-v3.5,cicids2017,0,2,2,macro_f1,,,0.18662216242867163,29875
+nway,tabpfn-v3.5,cicids2017,0,2,2,balanced_accuracy,,,0.557117040761908,29875
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,benign,,0.08462445930003933,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,benign,2152.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,DDoS,941.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,DoS GoldenEye,3130.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,DoS Hulk,2896.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,DoS Slowhttptest,14558.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,DoS slowloris,682.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,benign,FTP-Patator,1071.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,DDoS,,0.3667800453514739,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,DDoS,647.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,DoS GoldenEye,33.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,DoS Hulk,304.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,DoS Slowhttptest,780.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS GoldenEye,,0.7753623188405797,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,benign,4.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,DoS GoldenEye,107.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,DoS Hulk,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,DoS slowloris,26.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS Hulk,,0.834939254294093,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,benign,64.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,DDoS,35.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,DoS GoldenEye,33.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,DoS Hulk,1993.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,DoS Slowhttptest,256.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,DoS slowloris,6.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS Slowhttptest,,0.14,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,benign,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,DDoS,11.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,DoS Slowhttptest,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,DoS slowloris,32.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,DoS slowloris,,0.7924528301886793,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,DDoS,7.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,DoS Slowhttptest,4.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,DoS slowloris,42.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,DoS Slowhttptest,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,2,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,DDoS,,0.8825421012552354,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,DDoS,,0.6139455782312925,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,DDoS,,0.22457727093983484,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,DoS GoldenEye,,0.8733494047313739,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS GoldenEye,,0.8840579710144928,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,DoS GoldenEye,,0.28804561541486434,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,DoS Hulk,,0.9434408525271488,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS Hulk,,0.922496857980729,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,DoS Hulk,,0.2674400314589068,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,DoS Slowhttptest,,0.865031852143138,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS Slowhttptest,,0.34,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,DoS Slowhttptest,,0.10892646480534801,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,DoS slowloris,,0.6427484993953064,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS slowloris,,0.49056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,DoS slowloris,,0.17329925285096343,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,3,roc_auc,FTP-Patator,,0.9979455256382671,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,3,recall,FTP-Patator,,1.0,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,3,fpr,FTP-Patator,,0.8907196224931183,25483
+nway,tabpfn-v3.5,cicids2017,0,2,3,macro_f1,,,0.4299744209779982,29875
+nway,tabpfn-v3.5,cicids2017,0,2,3,balanced_accuracy,,,0.7414488617796957,29875
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,benign,,0.7360990955564294,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,benign,18719.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,DDoS,951.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,DoS GoldenEye,1687.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,DoS Hulk,50.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,DoS Slowhttptest,80.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,DoS slowloris,3648.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,benign,FTP-Patator,295.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,DDoS,,0.7936507936507936,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,benign,364.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,DDoS,1400.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,DoS GoldenEye,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS GoldenEye,,0.7391304347826086,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,DoS GoldenEye,102.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,DoS Hulk,4.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,DoS slowloris,30.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS Hulk,,0.8454126518642647,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,benign,251.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,DDoS,21.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,DoS GoldenEye,12.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,DoS Hulk,2018.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,DoS Slowhttptest,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,DoS slowloris,82.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Hulk,FTP-Patator,3.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS Slowhttptest,,0.34,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,benign,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,DDoS,2.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,DoS Slowhttptest,17.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,DoS slowloris,24.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,DoS slowloris,,0.8301886792452831,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,DoS Slowhttptest,3.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,DoS slowloris,44.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,3,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,DDoS,,0.9076199682914193,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,DDoS,,0.8973922902494331,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,DDoS,,0.24451435312622885,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,DoS GoldenEye,,0.691035921284344,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS GoldenEye,,0.2028985507246377,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,DoS GoldenEye,,0.15088478175383405,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,DoS Hulk,,0.9761607267442388,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS Hulk,,0.9229157938835358,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,DoS Hulk,,0.16350766810853323,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,DoS Slowhttptest,,0.42813212740857254,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS Slowhttptest,,0.06,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,DoS Slowhttptest,,0.05705859221392057,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,DoS slowloris,,0.9400040065588853,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS slowloris,,0.5094339622641509,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,DoS slowloris,,0.018088871411718443,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,4,roc_auc,FTP-Patator,,0.9303600709309312,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,4,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,4,fpr,FTP-Patator,,0.23393629571372396,25483
+nway,tabpfn-v3.5,cicids2017,0,2,4,macro_f1,,,0.26535655646178646,29875
+nway,tabpfn-v3.5,cicids2017,0,2,4,balanced_accuracy,,,0.5992166846745469,29875
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,benign,,0.39917420369642154,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,benign,10151.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,DDoS,738.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,DoS GoldenEye,3743.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,DoS Hulk,3051.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,DoS Slowhttptest,345.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,DoS slowloris,6950.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,benign,FTP-Patator,452.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,DDoS,,0.36507936507936506,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,benign,395.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,DDoS,644.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,DoS GoldenEye,507.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,DoS Hulk,208.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,DoS Slowhttptest,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,DoS slowloris,9.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS GoldenEye,,0.8985507246376812,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,DoS GoldenEye,124.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,DoS Hulk,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,DoS Slowhttptest,12.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,DoS slowloris,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS Hulk,,0.8328445747800587,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,benign,247.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,DDoS,28.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,DoS GoldenEye,76.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,DoS Hulk,1988.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,DoS Slowhttptest,28.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,DoS slowloris,20.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS Slowhttptest,,0.68,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,benign,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,DoS Hulk,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,DoS Slowhttptest,34.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,DoS slowloris,12.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,DoS slowloris,,0.11320754716981132,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,benign,3.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,DoS GoldenEye,19.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,DoS Hulk,19.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,DoS Slowhttptest,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,DoS slowloris,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,DoS slowloris,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,4,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,DDoS,,0.7464480771991586,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,DDoS,,0.5736961451247166,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,DDoS,,0.3740464018875344,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,DoS GoldenEye,,0.8220200949466283,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS GoldenEye,,0.7753623188405797,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,DoS GoldenEye,,0.1550137632717263,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,DoS Hulk,,0.9865915388126899,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS Hulk,,0.9237536656891495,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,DoS Hulk,,0.040503342508847816,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,DoS Slowhttptest,,0.9336547384978371,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS Slowhttptest,,0.88,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,DoS Slowhttptest,,0.21207235548564687,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,DoS slowloris,,0.8981120946141462,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS slowloris,,0.9245283018867925,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,DoS slowloris,,0.25198584349193864,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,5,roc_auc,FTP-Patator,,0.9175012427752097,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,5,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,5,fpr,FTP-Patator,,0.17845064883995282,25483
+nway,tabpfn-v3.5,cicids2017,0,2,5,macro_f1,,,0.33294608276934523,29875
+nway,tabpfn-v3.5,cicids2017,0,2,5,balanced_accuracy,,,0.6487570258895923,29875
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,benign,,0.5238694455367676,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,benign,13322.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,DDoS,174.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,DoS GoldenEye,3085.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,DoS Hulk,537.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,DoS Slowhttptest,866.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,DoS slowloris,3201.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,benign,FTP-Patator,4245.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,DDoS,,0.6224489795918368,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,DDoS,1098.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,DoS GoldenEye,18.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,DoS slowloris,627.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DDoS,FTP-Patator,21.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS GoldenEye,,0.7391304347826086,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,benign,6.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,DoS GoldenEye,102.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,DoS slowloris,28.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS Hulk,,0.7984918307498953,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,benign,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,DDoS,38.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,DoS GoldenEye,259.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,DoS Hulk,1906.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,DoS Slowhttptest,1.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,DoS slowloris,76.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Hulk,FTP-Patator,107.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS Slowhttptest,,0.48,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,benign,2.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,DoS Slowhttptest,24.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,DoS slowloris,20.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS Slowhttptest,FTP-Patator,4.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,DoS slowloris,,0.37735849056603776,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,benign,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,DoS Slowhttptest,28.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,DoS slowloris,20.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,DoS slowloris,FTP-Patator,3.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,recall,FTP-Patator,,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,5,confusion,FTP-Patator,FTP-Patator,53.0,53
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,DDoS,,0.8708543438347944,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,DDoS,,0.6326530612244898,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,DDoS,,0.11470703893039717,27194
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,DoS GoldenEye,,0.9430779006878787,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS GoldenEye,,0.7318840579710145,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,DoS GoldenEye,,0.09598898938261895,25568
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,DoS Hulk,,0.9696791063008257,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS Hulk,,0.9229157938835358,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,DoS Hulk,,0.06763664962642549,27817
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,DoS Slowhttptest,,0.9417019268580415,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS Slowhttptest,,0.9,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,DoS Slowhttptest,,0.12996460872984664,25480
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,DoS slowloris,,0.937988855830656,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS slowloris,,0.9245283018867925,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,DoS slowloris,,0.23444750294927252,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,6,roc_auc,FTP-Patator,,0.9217541308364063,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,6,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,2,6,fpr,FTP-Patator,,0.21533621706645695,25483
+nway,tabpfn-v3.5,cicids2017,0,2,6,macro_f1,,,0.30223852553823927,29875
+nway,tabpfn-v3.5,cicids2017,0,2,6,balanced_accuracy,,,0.6548624852021396,29875
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,benign,,0.19386551317341721,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,benign,4930.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,DDoS,780.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,DoS GoldenEye,1161.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,DoS Hulk,107.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,DoS Slowhttptest,1343.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,DoS slowloris,326.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,benign,FTP-Patator,16783.0,25430
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,DDoS,,0.6150793650793651,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,DDoS,1085.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,DoS GoldenEye,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,DoS Slowhttptest,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DDoS,FTP-Patator,678.0,1764
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS GoldenEye,,0.7608695652173914,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,benign,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,DoS GoldenEye,105.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,DoS Slowhttptest,26.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS GoldenEye,FTP-Patator,4.0,138
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS Hulk,,0.8391286133221617,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,benign,4.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,DDoS,3.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,DoS GoldenEye,88.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,DoS Hulk,2003.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,DoS Slowhttptest,11.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,DoS slowloris,2.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Hulk,FTP-Patator,276.0,2387
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS Slowhttptest,,0.76,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,benign,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,DoS Slowhttptest,38.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,DoS slowloris,5.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS Slowhttptest,FTP-Patator,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,DoS slowloris,,0.41509433962264153,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,DDoS,19.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,DoS Slowhttptest,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,DoS slowloris,22.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,DoS slowloris,FTP-Patator,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,recall,FTP-Patator,,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,2,6,confusion,FTP-Patator,FTP-Patator,53.0,53
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,DDoS,,0.912206833841152,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,DDoS,,0.576530612244898,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,DDoS,,0.11616201337003539,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,DoS GoldenEye,,0.9485227991588163,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS GoldenEye,,0.9637681159420289,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,DoS GoldenEye,,0.24132913881242626,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,DoS Hulk,,0.9474278109849508,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS Hulk,,0.922496857980729,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,DoS Hulk,,0.08120330318521432,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,DoS Slowhttptest,,0.9446126622099882,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS Slowhttptest,,0.9,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,DoS Slowhttptest,,0.19618560755013764,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,DoS slowloris,,0.9511207235548564,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS slowloris,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,DoS slowloris,,0.25155328352339756,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,0,roc_auc,FTP-Patator,,0.9996720557356858,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,0,recall,FTP-Patator,,1.0,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,0,fpr,FTP-Patator,,0.21470703893039716,25483
+nway,tabpfn-v3.5,cicids2017,0,4,0,macro_f1,,,0.4131713140848596,29875
+nway,tabpfn-v3.5,cicids2017,0,4,0,balanced_accuracy,,,0.7916945990842363,29875
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,benign,,0.6652772316162013,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,benign,16918.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,DDoS,70.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,DoS GoldenEye,1925.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,DoS Hulk,4.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,DoS Slowhttptest,784.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,DoS slowloris,5395.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,benign,FTP-Patator,334.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,DDoS,,0.6326530612244898,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,DDoS,1116.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,DoS GoldenEye,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,DoS Slowhttptest,645.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,DoS slowloris,3.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS GoldenEye,,0.782608695652174,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,DoS GoldenEye,108.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,DoS slowloris,30.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS Hulk,,0.922077922077922,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,benign,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,DDoS,1.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,DoS GoldenEye,1.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,DoS Hulk,2201.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,DoS Slowhttptest,84.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,DoS slowloris,80.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Hulk,FTP-Patator,20.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS Slowhttptest,,0.86,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,benign,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,DoS Slowhttptest,43.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,DoS slowloris,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,DoS slowloris,,0.7735849056603774,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,benign,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,DoS Slowhttptest,10.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,DoS slowloris,41.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,DoS slowloris,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,0,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,DDoS,,0.9959491307336934,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,DDoS,,0.9994331065759637,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,DDoS,,0.08914667715296894,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,DoS GoldenEye,,0.969448101352391,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS GoldenEye,,0.9710144927536232,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,DoS GoldenEye,,0.273063311049941,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,DoS Hulk,,0.9430789993181377,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS Hulk,,0.8759949727691663,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,DoS Hulk,,0.2823043649233189,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,DoS Slowhttptest,,0.8962084152575699,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS Slowhttptest,,0.76,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,DoS Slowhttptest,,0.15756979944946914,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,DoS slowloris,,0.9640719251515443,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS slowloris,,0.9811320754716981,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,DoS slowloris,,0.4609516319307904,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,1,roc_auc,FTP-Patator,,0.9897261442806371,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,1,recall,FTP-Patator,,1.0,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,1,fpr,FTP-Patator,,0.2414864333464412,25483
+nway,tabpfn-v3.5,cicids2017,0,4,1,macro_f1,,,0.3400694524207884,29875
+nway,tabpfn-v3.5,cicids2017,0,4,1,balanced_accuracy,,,0.7793860488738771,29875
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,benign,,0.6284703106567047,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,benign,15982.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,DDoS,944.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,DoS GoldenEye,3935.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,DoS Hulk,2852.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,DoS Slowhttptest,350.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,DoS slowloris,716.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,benign,FTP-Patator,651.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,DDoS,,0.814625850340136,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,benign,6.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,DDoS,1437.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,DoS GoldenEye,15.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,DoS Hulk,304.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,DoS Slowhttptest,2.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS GoldenEye,,0.8188405797101449,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,DoS GoldenEye,113.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,DoS Slowhttptest,24.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS Hulk,,0.8345203183912862,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,benign,147.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,DDoS,202.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,DoS GoldenEye,28.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,DoS Hulk,1992.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,DoS Slowhttptest,13.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,DoS slowloris,5.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS Slowhttptest,,0.68,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,benign,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,DDoS,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,DoS GoldenEye,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,DoS Slowhttptest,34.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,DoS slowloris,9.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,DoS slowloris,,0.7735849056603774,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,DoS Slowhttptest,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,DoS slowloris,41.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,1,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,DDoS,,0.8469619818041256,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,DDoS,,0.6326530612244898,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,DDoS,,0.18092803775068816,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,DoS GoldenEye,,0.9773555711330336,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS GoldenEye,,1.0,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,DoS GoldenEye,,0.3507274872198191,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,DoS Hulk,,0.983470227462591,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS Hulk,,0.922496857980729,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,DoS Hulk,,0.0012583562721195439,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,DoS Slowhttptest,,0.9422674007078254,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS Slowhttptest,,0.88,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,DoS Slowhttptest,,0.18029885961462838,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,DoS slowloris,,0.9670831509359765,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS slowloris,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,DoS slowloris,,0.21018482107746755,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,2,roc_auc,FTP-Patator,,0.9699389370747669,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,2,recall,FTP-Patator,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,2,fpr,FTP-Patator,,0.07243413291388125,25483
+nway,tabpfn-v3.5,cicids2017,0,4,2,macro_f1,,,0.39471247719600083,29875
+nway,tabpfn-v3.5,cicids2017,0,4,2,balanced_accuracy,,,0.7661863251798712,29875
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,benign,,0.6236728273692489,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,benign,15860.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,DDoS,975.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,DoS GoldenEye,2709.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,DoS Hulk,918.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,DoS Slowhttptest,114.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,DoS slowloris,780.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,benign,FTP-Patator,4074.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,DDoS,,0.9977324263038548,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,DDoS,1760.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,DoS GoldenEye,2.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DDoS,FTP-Patator,2.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS GoldenEye,,0.4855072463768116,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,benign,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,DDoS,21.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,DoS GoldenEye,67.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,DoS Hulk,50.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,DoS slowloris,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS Hulk,,0.902806870548806,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,benign,16.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,DDoS,34.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,DoS GoldenEye,53.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,DoS Hulk,2155.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,DoS Slowhttptest,10.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,DoS slowloris,30.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Hulk,FTP-Patator,89.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS Slowhttptest,,0.58,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,benign,2.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,DDoS,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,DoS GoldenEye,6.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,DoS Slowhttptest,29.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,DoS slowloris,5.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS Slowhttptest,FTP-Patator,7.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,DoS slowloris,,0.7735849056603774,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,benign,4.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,DoS GoldenEye,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,DoS Slowhttptest,4.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,DoS slowloris,41.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,DoS slowloris,FTP-Patator,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,recall,FTP-Patator,,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,2,confusion,FTP-Patator,FTP-Patator,53.0,53
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,DDoS,,0.9998203239875056,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,DDoS,,1.0,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,DDoS,,0.2372788045615415,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,DoS GoldenEye,,0.9923588196071056,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS GoldenEye,,1.0,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,DoS GoldenEye,,0.33625639009044433,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,DoS Hulk,,0.9361452394598411,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS Hulk,,0.9229157938835358,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,DoS Hulk,,0.2583169484860401,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,DoS Slowhttptest,,0.9257483287455761,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS Slowhttptest,,0.88,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,DoS Slowhttptest,,0.22646480534801416,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,DoS slowloris,,0.9106433494832281,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS slowloris,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,DoS slowloris,,0.19024773889107355,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,3,roc_auc,FTP-Patator,,0.909147567499388,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,3,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,3,fpr,FTP-Patator,,0.6928037750688164,25483
+nway,tabpfn-v3.5,cicids2017,0,4,3,macro_f1,,,0.356083483556975,29875
+nway,tabpfn-v3.5,cicids2017,0,4,3,balanced_accuracy,,,0.7952863283699877,29875
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,benign,,0.6326386158081007,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,benign,16088.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,DDoS,854.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,DoS GoldenEye,1935.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,DoS Hulk,2304.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,DoS Slowhttptest,234.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,DoS slowloris,3347.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,benign,FTP-Patator,668.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,DDoS,,0.826530612244898,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,benign,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,DDoS,1458.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,DoS GoldenEye,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,DoS Hulk,304.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,DoS slowloris,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS GoldenEye,,0.9347826086956522,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,benign,4.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,DoS GoldenEye,129.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,DoS slowloris,3.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS Hulk,,0.834939254294093,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,benign,164.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,DDoS,119.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,DoS GoldenEye,23.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,DoS Hulk,1993.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,DoS Slowhttptest,11.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,DoS slowloris,77.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS Slowhttptest,,0.64,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,benign,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,DDoS,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,DoS GoldenEye,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,DoS Slowhttptest,32.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,DoS slowloris,14.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,DoS slowloris,,0.7924528301886793,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,benign,3.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,DoS GoldenEye,2.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,DoS Slowhttptest,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,DoS slowloris,42.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,benign,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,DoS slowloris,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,3,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,DDoS,,0.9985049885729622,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,DDoS,,0.9988662131519275,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,DDoS,,0.2739284309870232,27194
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,DoS GoldenEye,,0.9155596208973767,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS GoldenEye,,0.7971014492753623,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,DoS GoldenEye,,0.30090444357058593,25568
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,DoS Hulk,,0.9513897535493822,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS Hulk,,0.8722245496439045,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,DoS Hulk,,0.1881242626818718,27817
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,DoS Slowhttptest,,0.947209594966575,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS Slowhttptest,,0.88,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,DoS Slowhttptest,,0.12198191112858828,25480
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,DoS slowloris,,0.9565054645011462,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS slowloris,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,DoS slowloris,,0.23106567046795123,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,4,roc_auc,FTP-Patator,,0.9784892305181074,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,4,recall,FTP-Patator,,0.9056603773584906,25483
+perclass,tabpfn-v3.5,cicids2017,0,4,4,fpr,FTP-Patator,,0.0013763271726307512,25483
+nway,tabpfn-v3.5,cicids2017,0,4,4,macro_f1,,,0.38037563549858733,29875
+nway,tabpfn-v3.5,cicids2017,0,4,4,balanced_accuracy,,,0.7196347338615708,29875
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,benign,,0.7576091230829729,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,benign,19266.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,DDoS,488.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,DoS GoldenEye,804.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,DoS Hulk,3051.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,DoS Slowhttptest,1236.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,DoS slowloris,424.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,benign,FTP-Patator,161.0,25430
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,DDoS,,0.518140589569161,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,benign,64.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,DDoS,914.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,DoS GoldenEye,23.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,DoS Hulk,304.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,DoS Slowhttptest,459.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS GoldenEye,,0.7463768115942029,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,benign,9.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,DoS GoldenEye,103.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,DoS Slowhttptest,25.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS Hulk,,0.834939254294093,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,benign,253.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,DDoS,123.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,DoS GoldenEye,4.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,DoS Hulk,1993.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,DoS Slowhttptest,14.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,DoS slowloris,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS Slowhttptest,,0.52,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,benign,4.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,DDoS,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,DoS Hulk,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,DoS Slowhttptest,26.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,DoS slowloris,19.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,DoS slowloris,,0.7547169811320755,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,DDoS,1.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,DoS Slowhttptest,7.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,DoS slowloris,40.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,4,4,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,DDoS,,0.9995878374944158,27194
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,DDoS,,0.9982993197278912,27194
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,DDoS,,0.028981517892253245,27194
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,DoS GoldenEye,,0.980569565787299,25568
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS GoldenEye,,0.9492753623188406,25568
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,DoS GoldenEye,,0.0794337396775462,25568
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,DoS Hulk,,0.9801502798699404,27817
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS Hulk,,0.9627147046501885,27817
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,DoS Hulk,,0.33834054266614233,27817
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,DoS Slowhttptest,,0.9549186000786474,25480
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS Slowhttptest,,0.84,25480
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,DoS Slowhttptest,,0.10074714903657098,25480
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,DoS slowloris,,0.9555205187751801,25483
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS slowloris,,0.8867924528301887,25483
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,DoS slowloris,,0.05690129767990562,25483
+perclass,tabpfn-v3.5,cicids2017,0,8,0,roc_auc,FTP-Patator,,0.9905823607535298,25483
+perclass,tabpfn-v3.5,cicids2017,0,8,0,recall,FTP-Patator,,0.9433962264150944,25483
+perclass,tabpfn-v3.5,cicids2017,0,8,0,fpr,FTP-Patator,,0.0017302398741643728,25483
+nway,tabpfn-v3.5,cicids2017,0,8,0,macro_f1,,,0.6243360466067173,29875
+nway,tabpfn-v3.5,cicids2017,0,8,0,balanced_accuracy,,,0.9070469688584145,29875
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,benign,,0.8956350766810853,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,benign,22776.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,DDoS,213.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,DoS GoldenEye,852.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,DoS Hulk,2.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,DoS Slowhttptest,191.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,DoS slowloris,1396.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,benign,FTP-Patator,0.0,25430
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,DDoS,,0.9994331065759637,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,benign,1.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,DDoS,1763.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,DoS GoldenEye,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,DoS Hulk,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,DoS Slowhttptest,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,DoS slowloris,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DDoS,FTP-Patator,0.0,1764
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS GoldenEye,,0.9347826086956522,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,benign,6.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,DDoS,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,DoS GoldenEye,129.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,DoS Hulk,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,DoS slowloris,1.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS GoldenEye,FTP-Patator,0.0,138
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS Hulk,,0.922496857980729,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,benign,173.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,DDoS,1.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,DoS GoldenEye,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,DoS Hulk,2202.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,DoS Slowhttptest,11.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,DoS slowloris,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Hulk,FTP-Patator,0.0,2387
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS Slowhttptest,,0.88,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,benign,2.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,DDoS,3.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,DoS Hulk,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,DoS Slowhttptest,44.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,DoS slowloris,1.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS Slowhttptest,FTP-Patator,0.0,50
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,DoS slowloris,,0.8113207547169812,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,benign,4.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,DoS Slowhttptest,6.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,DoS slowloris,43.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,DoS slowloris,FTP-Patator,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,recall,FTP-Patator,,0.9056603773584906,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,benign,5.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,DDoS,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,DoS GoldenEye,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,DoS Hulk,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,DoS Slowhttptest,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,DoS slowloris,0.0,53
+nway,tabpfn-v3.5,cicids2017,0,8,0,confusion,FTP-Patator,FTP-Patator,48.0,53
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,DDoS,,0.8674021005607833,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,DDoS,,0.6327160493827161,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,DDoS,,0.01924721984602224,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,DoS GoldenEye,,0.9402626032426957,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS GoldenEye,,0.9259259259259259,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,DoS GoldenEye,,0.21737381862055097,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,DoS Hulk,,0.9543075607394138,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS Hulk,,0.9254079254079254,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,DoS Hulk,,0.21636403412819952,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,DoS Slowhttptest,,0.9521242484969941,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS Slowhttptest,,0.9,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,DoS Slowhttptest,,0.14889779559118235,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,DoS slowloris,,0.996432865731463,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,DoS slowloris,,0.07655310621242485,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,1,fpr,FTP-Patator,,0.0,5000
+nway,tabpfn-v3.5,cicids2017,0,8,1,macro_f1,,,0.405188618051719,4999
+nway,tabpfn-v3.5,cicids2017,0,8,1,balanced_accuracy,,,0.8988886553858768,4999
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,benign,,0.6729323308270677,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,benign,2864.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,DDoS,123.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,DoS GoldenEye,189.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,DoS Hulk,345.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,DoS Slowhttptest,49.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,DoS slowloris,127.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,benign,FTP-Patator,559.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,benign,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,DoS Hulk,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS Hulk,,0.9423558897243107,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,benign,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,DDoS,4.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,DoS GoldenEye,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,DoS Hulk,376.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Hulk,FTP-Patator,18.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS Slowhttptest,,0.875,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,DoS Slowhttptest,7.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,DoS slowloris,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,DoS slowloris,,0.8888888888888888,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,DoS slowloris,8.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,1,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,DDoS,,0.9840537179609036,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,DDoS,,0.9969135802469136,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,DDoS,,0.07869974337040206,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,DoS GoldenEye,,0.9872198762204794,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS GoldenEye,,0.9629629629629629,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,DoS GoldenEye,,0.2298411421677056,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,DoS Hulk,,0.9728484889281215,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS Hulk,,0.9254079254079254,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,DoS Hulk,,0.10435353314373222,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,DoS Slowhttptest,,0.9938877755511022,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,DoS Slowhttptest,,0.10581162324649299,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,DoS slowloris,,0.9991382765531063,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,DoS slowloris,,0.12865731462925853,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,2,fpr,FTP-Patator,,0.042685370741482966,5000
+nway,tabpfn-v3.5,cicids2017,0,8,2,macro_f1,,,0.4577209850199508,4999
+nway,tabpfn-v3.5,cicids2017,0,8,2,balanced_accuracy,,,0.9053258793982887,4999
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,benign,,0.8040413533834586,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,benign,3422.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,DDoS,61.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,DoS GoldenEye,276.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,DoS Hulk,162.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,DoS Slowhttptest,61.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,DoS slowloris,217.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,benign,FTP-Patator,57.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,benign,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS Hulk,,0.9674185463659147,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,benign,2.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,DDoS,5.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,DoS Hulk,386.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,DoS Slowhttptest,5.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Hulk,FTP-Patator,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS Slowhttptest,,0.875,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,DoS Slowhttptest,7.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,DoS slowloris,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,DoS slowloris,,0.7777777777777778,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,DoS Slowhttptest,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,DoS slowloris,7.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,2,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,DDoS,,0.9998580880566909,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,DDoS,,0.08661248930710008,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,DoS GoldenEye,,0.9891786014850562,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS GoldenEye,,0.9629629629629629,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,DoS GoldenEye,,0.09712447214960788,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,DoS Hulk,,0.9740484120269725,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS Hulk,,0.9254079254079254,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,DoS Hulk,,0.022970903522205207,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,DoS Slowhttptest,,0.9925651302605211,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,DoS Slowhttptest,,0.06472945891783567,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,DoS slowloris,,0.9996593186372744,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,DoS slowloris,,0.12965931863727456,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,3,fpr,FTP-Patator,,0.06232464929859719,5000
+nway,tabpfn-v3.5,cicids2017,0,8,3,macro_f1,,,0.44203608385310916,4999
+nway,tabpfn-v3.5,cicids2017,0,8,3,balanced_accuracy,,,0.911704889812523,4999
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,benign,,0.7102913533834586,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,benign,3023.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,DDoS,79.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,DoS GoldenEye,133.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,DoS Hulk,32.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,DoS Slowhttptest,90.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,DoS slowloris,484.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,benign,FTP-Patator,415.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS GoldenEye,,0.9565217391304348,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,benign,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,DoS GoldenEye,22.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,DoS Slowhttptest,1.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS Hulk,,0.9373433583959899,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,benign,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,DDoS,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,DoS GoldenEye,7.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,DoS Hulk,374.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Hulk,FTP-Patator,18.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS Slowhttptest,,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,DoS Slowhttptest,8.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,DoS slowloris,,0.7777777777777778,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,DoS Slowhttptest,2.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,DoS slowloris,7.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,3,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,DDoS,,0.9962951081963058,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,DDoS,,0.22070145423438836,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,DoS GoldenEye,,0.9568931489301488,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS GoldenEye,,0.8518518518518519,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,DoS GoldenEye,,0.1795696762517595,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,DoS Hulk,,0.985747789729413,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS Hulk,,0.8881118881118881,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,DoS Hulk,,0.009844672938087946,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,DoS Slowhttptest,,0.9093787575150301,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS Slowhttptest,,0.8,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,DoS Slowhttptest,,0.17374749498997996,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,DoS slowloris,,0.9913627254509018,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,DoS slowloris,,0.1721442885771543,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,8,4,fpr,FTP-Patator,,0.0,5000
+nway,tabpfn-v3.5,cicids2017,0,8,4,macro_f1,,,0.4190751797042431,4999
+nway,tabpfn-v3.5,cicids2017,0,8,4,balanced_accuracy,,,0.8758548804724026,4999
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,benign,,0.7453007518796992,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,benign,3172.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,DDoS,58.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,DoS GoldenEye,179.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,DoS Hulk,306.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,DoS Slowhttptest,81.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,DoS slowloris,343.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,benign,FTP-Patator,117.0,4256
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,benign,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,DoS Hulk,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS Hulk,,0.9448621553884712,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,benign,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,DDoS,6.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,DoS Hulk,377.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,DoS Slowhttptest,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,DoS slowloris,15.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Hulk,FTP-Patator,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS Slowhttptest,,0.75,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,benign,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,DoS GoldenEye,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,DoS Slowhttptest,6.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,DoS slowloris,,0.7777777777777778,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,DoS Slowhttptest,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,DoS slowloris,7.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,8,4,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,DDoS,,0.9998237651680766,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,DDoS,,0.15697177074422583,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,DoS GoldenEye,,0.9782976219734715,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS GoldenEye,,0.9259259259259259,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,DoS GoldenEye,,0.11220591192439172,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,DoS Hulk,,0.9990555641397908,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS Hulk,,0.993006993006993,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,DoS Hulk,,0.040253773791292934,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,DoS Slowhttptest,,0.9920440881763526,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,DoS Slowhttptest,,0.08036072144288577,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,DoS slowloris,,0.9998396793587174,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,DoS slowloris,,0.3064128256513026,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,0,fpr,FTP-Patator,,0.0,5000
+nway,tabpfn-v3.5,cicids2017,0,16,0,macro_f1,,,0.5733822788466314,4999
+nway,tabpfn-v3.5,cicids2017,0,16,0,balanced_accuracy,,,0.9180660631911041,4999
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,benign,,0.9346804511278195,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,benign,3978.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,DDoS,8.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,DoS GoldenEye,93.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,DoS Hulk,6.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,DoS Slowhttptest,19.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,DoS slowloris,132.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,benign,FTP-Patator,20.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,benign,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS Hulk,,0.9398496240601504,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,benign,7.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,DDoS,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,DoS Hulk,375.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Hulk,FTP-Patator,17.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS Slowhttptest,,0.75,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,DoS GoldenEye,2.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,DoS Slowhttptest,6.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,DoS slowloris,,0.8888888888888888,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,DoS slowloris,8.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,0,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,DDoS,,0.9998534676678389,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,DDoS,,0.05752780153977759,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,DoS GoldenEye,,0.9988977515621393,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,DoS GoldenEye,,0.13915141765533884,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,DoS Hulk,,0.9911324000144828,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS Hulk,,0.9533799533799534,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,DoS Hulk,,0.04812951214176329,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,DoS Slowhttptest,,0.9970140280561123,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,DoS Slowhttptest,,0.11503006012024049,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,DoS slowloris,,0.9996593186372745,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,DoS slowloris,,0.06853707414829659,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,1,fpr,FTP-Patator,,0.0,5000
+nway,tabpfn-v3.5,cicids2017,0,16,1,macro_f1,,,0.5454360727872876,4999
+nway,tabpfn-v3.5,cicids2017,0,16,1,balanced_accuracy,,,0.9503342336171693,4999
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,benign,,0.8905075187969925,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,benign,3790.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,DDoS,14.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,DoS GoldenEye,24.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,DoS Hulk,9.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,DoS Slowhttptest,143.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,DoS slowloris,124.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,benign,FTP-Patator,152.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,benign,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS Hulk,,0.9598997493734336,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,benign,10.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,DDoS,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,DoS Hulk,383.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,DoS slowloris,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Hulk,FTP-Patator,4.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS Slowhttptest,,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,DoS Slowhttptest,8.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,DoS slowloris,,0.8888888888888888,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,DoS Slowhttptest,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,DoS slowloris,8.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,1,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,DDoS,,0.9999273938894697,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,DDoS,,0.04213002566295979,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,DoS GoldenEye,,0.9982125701007662,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,DoS GoldenEye,,0.15785240297607078,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,DoS Hulk,,0.9911374995601642,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS Hulk,,0.8834498834498834,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,DoS Hulk,,0.017282870269087727,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,DoS Slowhttptest,,0.9928857715430862,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,DoS Slowhttptest,,0.07174348697394789,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,DoS slowloris,,0.9979959919839678,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,DoS slowloris,,0.10380761523046092,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,2,fpr,FTP-Patator,,0.010420841683366733,5000
+nway,tabpfn-v3.5,cicids2017,0,16,2,macro_f1,,,0.5790153450848284,4999
+nway,tabpfn-v3.5,cicids2017,0,16,2,balanced_accuracy,,,0.9258571182096026,4999
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,benign,,0.850328947368421,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,benign,3619.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,DDoS,37.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,DoS GoldenEye,288.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,DoS Hulk,3.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,DoS Slowhttptest,227.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,DoS slowloris,80.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,benign,FTP-Patator,2.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS GoldenEye,,0.9130434782608695,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,benign,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,DoS GoldenEye,21.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS Hulk,,0.9398496240601504,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,benign,19.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,DDoS,5.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,DoS Hulk,375.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Hulk,FTP-Patator,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS Slowhttptest,,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,DoS Slowhttptest,8.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,DoS slowloris,,0.7777777777777778,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,DoS Slowhttptest,2.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,DoS slowloris,7.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,2,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,DDoS,,0.996912260135813,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,DDoS,,0.8209876543209876,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,DDoS,,0.001924721984602224,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,DoS GoldenEye,,0.9955761109993968,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,DoS GoldenEye,,0.05831490046249749,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,DoS Hulk,,0.9959723788207708,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS Hulk,,0.993006993006993,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,DoS Hulk,,0.1365127980748195,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,DoS Slowhttptest,,0.9976152304609218,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,DoS Slowhttptest,,0.05571142284569138,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,DoS slowloris,,0.06813627254509018,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,3,fpr,FTP-Patator,,0.0,5000
+nway,tabpfn-v3.5,cicids2017,0,16,3,macro_f1,,,0.48044821531296067,4999
+nway,tabpfn-v3.5,cicids2017,0,16,3,balanced_accuracy,,,0.9224213808330349,4999
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,benign,,0.8531484962406015,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,benign,3631.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,DDoS,48.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,DoS GoldenEye,250.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,DoS Hulk,80.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,DoS Slowhttptest,62.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,DoS slowloris,69.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,benign,FTP-Patator,116.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS GoldenEye,,1.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,benign,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,DoS GoldenEye,23.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,DoS Slowhttptest,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,DoS slowloris,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS Hulk,,0.9649122807017544,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,benign,12.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,DDoS,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,DoS GoldenEye,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,DoS Hulk,385.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,DoS Slowhttptest,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,DoS slowloris,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Hulk,FTP-Patator,1.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS Slowhttptest,,0.75,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,DoS GoldenEye,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,DoS Hulk,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,DoS Slowhttptest,6.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,DoS slowloris,2.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,DoS slowloris,,0.8888888888888888,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,DoS slowloris,8.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,3,confusion,FTP-Patator,FTP-Patator,9.0,9
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,DDoS,,0.9998514875011881,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,DDoS,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,DDoS,,0.07249786142001712,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,DoS GoldenEye,,0.9991658660470243,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,DoS GoldenEye,,0.11441785642469335,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,DoS Hulk,,0.9769194562456429,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS Hulk,,0.9254079254079254,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,DoS Hulk,,0.03762852767446948,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,DoS Slowhttptest,,0.9901002004008016,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS Slowhttptest,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,DoS Slowhttptest,,0.08837675350701403,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,DoS slowloris,,0.9998797595190381,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS slowloris,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,DoS slowloris,,0.12264529058116233,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,roc_auc,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,recall,FTP-Patator,,1.0,5000
+perclass,tabpfn-v3.5,cicids2017,0,16,4,fpr,FTP-Patator,,0.013827655310621242,5000
+nway,tabpfn-v3.5,cicids2017,0,16,4,macro_f1,,,0.4649021697054749,4999
+nway,tabpfn-v3.5,cicids2017,0,16,4,balanced_accuracy,,,0.8549962509794155,4999
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,benign,,0.793703007518797,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,benign,3378.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,DDoS,39.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,DoS GoldenEye,115.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,DoS Hulk,65.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,DoS Slowhttptest,141.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,DoS slowloris,448.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,benign,FTP-Patator,70.0,4256
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,DDoS,,1.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,benign,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,DDoS,295.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,DoS GoldenEye,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,DoS Hulk,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,DoS Slowhttptest,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,DoS slowloris,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DDoS,FTP-Patator,0.0,295
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS GoldenEye,,0.8260869565217391,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,benign,1.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,DDoS,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,DoS GoldenEye,19.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,DoS Hulk,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,DoS Slowhttptest,2.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,DoS slowloris,1.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS GoldenEye,FTP-Patator,0.0,23
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS Hulk,,0.9624060150375939,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,benign,2.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,DDoS,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,DoS GoldenEye,0.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,DoS Hulk,384.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,DoS Slowhttptest,2.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,DoS slowloris,7.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Hulk,FTP-Patator,4.0,399
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS Slowhttptest,,0.625,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,benign,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,DDoS,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,DoS GoldenEye,2.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,DoS Hulk,1.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,DoS Slowhttptest,5.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,DoS slowloris,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS Slowhttptest,FTP-Patator,0.0,8
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,DoS slowloris,,0.7777777777777778,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,benign,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,DoS Slowhttptest,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,DoS slowloris,7.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,DoS slowloris,FTP-Patator,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,recall,FTP-Patator,,1.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,benign,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,DDoS,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,DoS GoldenEye,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,DoS Hulk,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,DoS Slowhttptest,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,DoS slowloris,0.0,9
+nway,tabpfn-v3.5,cicids2017,0,16,4,confusion,FTP-Patator,FTP-Patator,9.0,9

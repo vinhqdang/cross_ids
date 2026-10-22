@@ -44,7 +44,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from .data import Split, load_split, target_features, target_keys
-from .evaluate import TABPFN_CHUNK, TABPFN_VERSIONS, _tabpfn, context_rows
+from .evaluate import TABPFN_CHUNK, TABPFN_VERSIONS, _tabpfn, context_rows, stratified_subsample
 from .model import EpisodeModel, load_model
 
 log = logging.getLogger("crossids.flare.evaluate_class")
@@ -180,8 +180,16 @@ class Ctx:
     nway: list[str]
     device: str = "cpu"
     threads: int = 2
+    max_query: int | None = None  # cap on the query rows of one task (fixed stratified subsample)
     models: dict = field(default_factory=dict)
     missing: set = field(default_factory=set)
+
+    def query_rows(self, mask: np.ndarray, labels: np.ndarray, salt: int) -> np.ndarray:
+        """Indices of the query rows of a task, capped at ``max_query`` by a stratified subsample."""
+        rows = np.flatnonzero(mask)
+        if self.max_query and len(rows) > self.max_query:
+            rows = rows[stratified_subsample(labels[rows], self.max_query, self.seed * 1000 + salt)]
+        return rows
 
     def model(self, name: str) -> EpisodeModel | None:
         """Checkpoint of a neural method, or None (logged once) when it is not trained."""
@@ -263,8 +271,9 @@ def perclass_rows(ctx: Ctx, method: str, supports: dict, k: int, draw: int) -> l
         idx = np.asarray(draw_rec["idx"], dtype=np.int64)
         ys = (np.asarray(draw_rec["cls"], dtype=object) == c).astype(np.int64)
         qmask = (cls_test == c) | (cls_test == BENIGN)
-        Xq = ctx.split.X_test[qmask]
-        yq = (cls_test[qmask] == c).astype(np.int64)
+        qrows = ctx.query_rows(qmask, (cls_test == c).astype(np.int64), zlib.crc32(str(c).encode()) % 1000)
+        Xq = ctx.split.X_test[qrows]
+        yq = (cls_test[qrows] == c).astype(np.int64)
         Xs = ctx.split.X_train[idx]
         if method in NEURAL:
             score = _neural_binary(ctx, method, idx, ys, Xq, k, draw)
@@ -290,8 +299,10 @@ def nway_rows(ctx: Ctx, method: str, supports: dict, k: int, draw: int) -> list[
     index = {c: i for i, c in enumerate(classes)}
     ys = np.asarray([index[c] for c in draw_rec["cls"]], dtype=np.int64)
     qmask = np.isin(ctx.cls_test, classes)
-    Xq = ctx.split.X_test[qmask]
-    yq = np.asarray([index[c] for c in ctx.cls_test[qmask]], dtype=np.int64)
+    all_y = np.asarray([index.get(c, -1) for c in ctx.cls_test], dtype=np.int64)
+    qrows = ctx.query_rows(qmask, all_y, 999)
+    Xq = ctx.split.X_test[qrows]
+    yq = all_y[qrows]
     Xs = ctx.split.X_train[idx]
     if method.startswith("flare2"):
         model = ctx.model(method)
@@ -341,7 +352,8 @@ def _append(path: Path, rows: list[dict]) -> None:
 
 
 def evaluate_class_seed(target: str, seed: int, out: Path, runs_dir: Path, data_dir: str | Path, methods, tasks,
-                        device: str = "cpu", threads: int = 2, ks=KS, n_draws: int = N_DRAWS) -> Path:
+                        device: str = "cpu", threads: int = 2, ks=KS, n_draws: int = N_DRAWS,
+                        max_query: int | None = None) -> Path:
     """Run both tasks for one (target, seed) and append rows to ``out`` (resumable)."""
     out = Path(out)
     split = load_split(target, seed, data_dir, features=target_features(target))
@@ -351,7 +363,8 @@ def evaluate_class_seed(target: str, seed: int, out: Path, runs_dir: Path, data_
     log.info("%s seed %d: per-class targets %s; N-way classes %s", target, seed, perclass, nway)
     supports = load_or_draw_class_supports(out.parent / f"class_supports_{target}_s{seed}.json", target, seed,
                                            cls_train, perclass, nway, ks, n_draws)
-    ctx = Ctx(target, seed, split, Path(runs_dir), cls_train, cls_test, perclass, nway, device=device, threads=threads)
+    ctx = Ctx(target, seed, split, Path(runs_dir), cls_train, cls_test, perclass, nway, device=device, threads=threads,
+              max_query=max_query)
     done = _done_keys(out)
     for k in ks:
         for draw in range(n_draws):
@@ -383,6 +396,8 @@ def _parse(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--tasks", nargs="+", default=list(TASKS), choices=list(TASKS))
     p.add_argument("--ks", nargs="+", type=int, default=list(KS))
     p.add_argument("--draws", type=int, default=N_DRAWS)
+    p.add_argument("--max-query", type=int, default=None,
+                   help="cap the query rows of every task by a fixed stratified subsample (default: all)")
     p.add_argument("--out", default=None, help="long-format CSV to append to (default runs/flare/class_<target>.csv)")
     p.add_argument("--runs-dir", default="runs/flare")
     p.add_argument("--data-dir", default="data")
@@ -398,7 +413,8 @@ def main(argv: list[str] | None = None) -> None:
     out = Path(args.out or f"{args.runs_dir}/class_{args.target}.csv")
     for seed in args.seeds:
         path = evaluate_class_seed(args.target, seed, out, args.runs_dir, args.data_dir, args.methods, args.tasks,
-                                   device=args.device, threads=args.threads, ks=tuple(args.ks), n_draws=args.draws)
+                                   device=args.device, threads=args.threads, ks=tuple(args.ks), n_draws=args.draws,
+                                   max_query=args.max_query)
         log.info("results in %s", path)
 
 

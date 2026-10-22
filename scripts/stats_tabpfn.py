@@ -52,7 +52,7 @@ def class_vs_tabpfn() -> pd.DataFrame | None:
                      ignore_index=True)
     base = base[base.method == "flare2"]
     d = pd.concat([base, tab], ignore_index=True)
-    d = d[(d.metric != "confusion") & d.target.isin(tab.target.unique())]
+    d = d[(d.metric != "confusion") & d.target.isin(tab.target.unique()) & (d.k <= 16) & (d.draw < 5)]  # the FLARE-2 grid and its five draws
     rows = []
     for (task, metric), g in d.groupby(["task", "metric"]):
         per = g.groupby(["method", "target"]).value.mean().unstack(0).dropna()

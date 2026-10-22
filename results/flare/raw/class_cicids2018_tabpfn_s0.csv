@@ -1,0 +1,1521 @@
+task,method,target,seed,k,draw,metric,cls,pred,value,n
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,Bot,,0.9481438981155955,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,Bot,,0.03781773093614383,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,DDOS attack-HOIC,,0.9433842932052182,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,DDOS attack-HOIC,,0.28903793753929996,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,DoS attacks-GoldenEye,,0.8431656565656567,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,DoS attacks-GoldenEye,,0.72,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,DoS attacks-GoldenEye,,0.2686868686868687,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,DoS attacks-Hulk,,0.8828098272632916,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,DoS attacks-Hulk,,0.15067929188966653,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,Infilteration,,0.5235196064951777,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,Infilteration,,0.7218045112781954,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,Infilteration,,0.7735771522498459,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,0,fpr,SSH-Bruteforce,,0.3073770491803279,5000
+nway,tabpfn-v3.5,cicids2018,0,2,0,macro_f1,,,0.27634528332013836,5001
+nway,tabpfn-v3.5,cicids2018,0,2,0,balanced_accuracy,,,0.6815277516137446,5001
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,benign,,0.16651031894934334,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,benign,710.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,Bot,718.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,DDOS attack-HOIC,135.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,DoS attacks-GoldenEye,1387.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,DoS attacks-Hulk,343.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,Infilteration,574.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,benign,SSH-Bruteforce,397.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,benign,2.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,DoS attacks-Hulk,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,DoS attacks-Hulk,45.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,DoS attacks-GoldenEye,,0.9069767441860465,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,Bot,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,39.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,DoS attacks-Hulk,,0.784,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,DoS attacks-Hulk,98.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,Infilteration,,0.15384615384615385,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,benign,40.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,Bot,9.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,DoS attacks-GoldenEye,19.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,DoS attacks-Hulk,18.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,Infilteration,18.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,Infilteration,SSH-Bruteforce,12.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,0,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,0,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,Bot,,0.9808401972072153,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,Bot,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,Bot,,0.30750154990700557,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,DDOS attack-HOIC,,0.6170961934321167,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,DDOS attack-HOIC,,0.7685589519650655,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,DDOS attack-HOIC,,0.8025571159086146,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,DoS attacks-GoldenEye,,0.9188040404040404,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,DoS attacks-GoldenEye,,0.6705050505050505,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,DoS attacks-Hulk,,0.8754022695249306,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,DoS attacks-Hulk,,0.12515438452037875,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,Infilteration,,0.504871692277746,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,Infilteration,,0.556390977443609,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,Infilteration,,0.5917402917608383,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,1,fpr,SSH-Bruteforce,,0.021926229508196723,5000
+nway,tabpfn-v3.5,cicids2018,0,2,1,macro_f1,,,0.3214724805564246,5001
+nway,tabpfn-v3.5,cicids2018,0,2,1,balanced_accuracy,,,0.6862459725117728,5001
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,benign,,0.20192307692307693,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,benign,861.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,Bot,776.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,DDOS attack-HOIC,989.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,DoS attacks-GoldenEye,928.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,DoS attacks-Hulk,233.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,Infilteration,461.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,benign,SSH-Bruteforce,16.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,DoS attacks-Hulk,45.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,DoS attacks-GoldenEye,,0.9302325581395349,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,40.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,DoS attacks-Hulk,,0.784,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,benign,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,15.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,DoS attacks-Hulk,98.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,Infilteration,,0.1282051282051282,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,benign,16.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,Bot,10.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,DDOS attack-HOIC,43.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,DoS attacks-GoldenEye,16.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,DoS attacks-Hulk,15.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,Infilteration,15.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,Infilteration,SSH-Bruteforce,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,1,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,1,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,Bot,,0.9404784367182275,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,Bot,,0.11799958669146518,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,DDOS attack-HOIC,,0.8360962657394246,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,DDOS attack-HOIC,,0.4917208132466988,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,DoS attacks-GoldenEye,,0.8119313131313132,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,DoS attacks-GoldenEye,,0.64,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,DoS attacks-GoldenEye,,0.34383838383838383,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,DoS attacks-Hulk,,0.8495033602189505,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,DoS attacks-Hulk,,0.13132976533552904,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,Infilteration,,0.6754936962294785,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,Infilteration,,0.556390977443609,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,Infilteration,,0.24902403944935278,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,2,fpr,SSH-Bruteforce,,0.3086065573770492,5000
+nway,tabpfn-v3.5,cicids2018,0,2,2,macro_f1,,,0.4117669289963529,5001
+nway,tabpfn-v3.5,cicids2018,0,2,2,balanced_accuracy,,,0.709469257604862,5001
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,benign,,0.1224202626641651,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,benign,522.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,Bot,87.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,DDOS attack-HOIC,11.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,DoS attacks-GoldenEye,2333.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,DoS attacks-Hulk,205.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,Infilteration,966.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,benign,SSH-Bruteforce,140.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,Bot,,0.9859154929577465,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,Bot,140.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,DDOS attack-HOIC,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,DoS attacks-Hulk,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,DDOS attack-HOIC,,0.7121951219512195,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,DDOS attack-HOIC,146.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,DoS attacks-Hulk,59.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,DoS attacks-GoldenEye,,0.9302325581395349,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,40.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,DoS attacks-Hulk,,0.848,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,DDOS attack-HOIC,2.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,DoS attacks-Hulk,106.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,Infilteration,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,Infilteration,,0.36752136752136755,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,benign,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,Bot,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,DoS attacks-GoldenEye,50.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,DoS attacks-Hulk,10.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,Infilteration,43.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,Infilteration,SSH-Bruteforce,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,2,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,2,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,Bot,,0.9623863561975101,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,Bot,,0.10642694771647035,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,DDOS attack-HOIC,,0.8634892943996617,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,DDOS attack-HOIC,,0.4120729406832949,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,DoS attacks-GoldenEye,,0.6959313131313131,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,DoS attacks-GoldenEye,,0.68,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,DoS attacks-GoldenEye,,0.39535353535353535,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,DoS attacks-Hulk,,0.8494410265628353,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,DoS attacks-Hulk,,0.13132976533552904,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,Infilteration,,0.3126039878821772,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,Infilteration,,0.2781954887218045,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,Infilteration,,0.6194781179371276,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,3,fpr,SSH-Bruteforce,,0.33668032786885244,5000
+nway,tabpfn-v3.5,cicids2018,0,2,3,macro_f1,,,0.2747383864971835,5001
+nway,tabpfn-v3.5,cicids2018,0,2,3,balanced_accuracy,,,0.5720071722372378,5001
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,benign,,0.41322701688555347,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,benign,1762.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,Bot,237.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,DDOS attack-HOIC,121.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,DoS attacks-GoldenEye,887.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,DoS attacks-Hulk,709.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,Infilteration,257.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,benign,SSH-Bruteforce,291.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,DoS attacks-Hulk,2.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Bot,SSH-Bruteforce,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,DDOS attack-HOIC,,0.1073170731707317,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,DDOS attack-HOIC,22.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,DoS attacks-Hulk,183.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,DoS attacks-GoldenEye,,0.6511627906976745,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,28.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,14.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,DoS attacks-Hulk,,0.768,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,DDOS attack-HOIC,13.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,DoS attacks-Hulk,96.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,Infilteration,,0.08547008547008547,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,benign,67.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,DDOS attack-HOIC,11.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,DoS attacks-GoldenEye,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,DoS attacks-Hulk,19.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,Infilteration,10.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,Infilteration,SSH-Bruteforce,6.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,3,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,3,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,Bot,,0.9968578282818559,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,Bot,,0.9937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,Bot,,0.15375077495350278,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,DDOS attack-HOIC,,0.8401257964100795,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,DDOS attack-HOIC,,0.49381680989310417,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,DoS attacks-GoldenEye,,0.9328444444444444,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,DoS attacks-GoldenEye,,0.96,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,DoS attacks-GoldenEye,,0.6240404040404041,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,DoS attacks-Hulk,,0.8706576635606145,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,DoS attacks-Hulk,,0.2505146150679292,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,Infilteration,,0.6118936647144881,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,Infilteration,,0.42105263157894735,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,Infilteration,,0.1910828025477707,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,2,4,fpr,SSH-Bruteforce,,0.3530737704918033,5000
+nway,tabpfn-v3.5,cicids2018,0,2,4,macro_f1,,,0.3550512218801844,5001
+nway,tabpfn-v3.5,cicids2018,0,2,4,balanced_accuracy,,,0.6580810821851861,5001
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,benign,,0.3674953095684803,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,benign,1567.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,Bot,599.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,DDOS attack-HOIC,192.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,DoS attacks-GoldenEye,977.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,DoS attacks-Hulk,537.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,Infilteration,316.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,benign,SSH-Bruteforce,76.0,4264
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,Bot,,0.9929577464788732,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,benign,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,Bot,141.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,DoS attacks-Hulk,40.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,Infilteration,5.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,DoS attacks-GoldenEye,,0.5581395348837209,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,benign,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,24.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,15.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,DoS attacks-Hulk,,0.728,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,DoS attacks-Hulk,91.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,Infilteration,7.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,Infilteration,,0.1794871794871795,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,benign,49.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,Bot,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,DDOS attack-HOIC,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,DoS attacks-GoldenEye,17.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,DoS attacks-Hulk,16.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,Infilteration,21.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,Infilteration,SSH-Bruteforce,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,2,4,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,2,4,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,Bot,,0.978506672622417,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,Bot,,0.937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,Bot,,0.21864021492043811,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,DDOS attack-HOIC,,0.8804082891633312,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,DDOS attack-HOIC,,0.04024313561098302,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,DoS attacks-GoldenEye,,0.936309090909091,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,DoS attacks-GoldenEye,,0.94,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,DoS attacks-GoldenEye,,0.4301010101010101,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,DoS attacks-Hulk,,0.8780594228193368,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,DoS attacks-Hulk,,0.15273775216138327,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,Infilteration,,0.6701037059466006,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,Infilteration,,0.518796992481203,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,Infilteration,,0.29525374974316826,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,0,fpr,SSH-Bruteforce,,0.009016393442622951,5000
+nway,tabpfn-v3.5,cicids2018,0,4,0,macro_f1,,,0.47518540055505987,5001
+nway,tabpfn-v3.5,cicids2018,0,4,0,balanced_accuracy,,,0.704272604605336,5001
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,benign,,0.3595215759849906,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,benign,1533.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,Bot,3.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,DDOS attack-HOIC,670.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,DoS attacks-GoldenEye,1092.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,DoS attacks-Hulk,98.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,Infilteration,868.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,benign,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,DDOS attack-HOIC,2.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,DDOS attack-HOIC,,1.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,DDOS attack-HOIC,205.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,DoS attacks-Hulk,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,DoS attacks-Hulk,,0.384,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,DDOS attack-HOIC,61.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,DoS attacks-Hulk,48.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,Infilteration,,0.23076923076923078,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,benign,38.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,DDOS attack-HOIC,37.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,DoS attacks-GoldenEye,13.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,DoS attacks-Hulk,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,Infilteration,27.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,0,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,0,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,Bot,,0.9505890930188081,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,Bot,,0.014672452986154164,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,DDOS attack-HOIC,,0.8933137706979668,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,DDOS attack-HOIC,,0.2269964368057011,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,DoS attacks-GoldenEye,,0.9195191919191918,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,DoS attacks-GoldenEye,,0.94,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,DoS attacks-GoldenEye,,0.23353535353535354,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,DoS attacks-Hulk,,0.865407140247827,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,DoS attacks-Hulk,,0.05475504322766571,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,Infilteration,,0.6759556071192981,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,Infilteration,,0.7518796992481203,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,Infilteration,,0.5266077665913294,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,1,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,4,1,macro_f1,,,0.37063177836873834,5001
+nway,tabpfn-v3.5,cicids2018,0,4,1,balanced_accuracy,,,0.7209725645250319,5001
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,benign,,0.29573170731707316,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,benign,1261.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,Bot,93.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,DDOS attack-HOIC,133.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,DoS attacks-GoldenEye,924.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,DoS attacks-Hulk,703.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,Infilteration,816.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,benign,SSH-Bruteforce,334.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,Bot,,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,Bot,142.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,DDOS attack-HOIC,,0.9219512195121952,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,benign,11.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,DDOS attack-HOIC,189.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,DoS attacks-Hulk,5.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,DoS attacks-GoldenEye,,0.7906976744186046,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,benign,6.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,34.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,3.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,DoS attacks-Hulk,,0.688,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,benign,9.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,DDOS attack-HOIC,30.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,DoS attacks-Hulk,86.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,Infilteration,,0.3504273504273504,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,benign,23.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,Bot,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,DoS attacks-GoldenEye,22.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,DoS attacks-Hulk,22.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,Infilteration,41.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,Infilteration,SSH-Bruteforce,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,1,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,1,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,Bot,,0.9917428142717234,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,Bot,,0.9937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,Bot,,0.3845835916511676,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,DDOS attack-HOIC,,0.8844254635218786,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,DDOS attack-HOIC,,0.06560469503248795,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,DoS attacks-GoldenEye,,0.9114626262626263,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,DoS attacks-GoldenEye,,0.84,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,DoS attacks-GoldenEye,,0.21393939393939393,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,DoS attacks-Hulk,,0.9668486422859925,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,DoS attacks-Hulk,,0.9014084507042254,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,DoS attacks-Hulk,,0.10724578015644298,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,Infilteration,,0.5483894140529051,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,Infilteration,,0.7744360902255639,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,Infilteration,,0.7127594000410931,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,2,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,4,2,macro_f1,,,0.5697604590144004,5001
+nway,tabpfn-v3.5,cicids2018,0,4,2,balanced_accuracy,,,0.7866212070333486,5001
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,benign,,0.5199343339587242,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,benign,2217.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,Bot,15.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,DDOS attack-HOIC,126.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,DoS attacks-GoldenEye,388.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,DoS attacks-Hulk,92.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,Infilteration,1420.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,benign,SSH-Bruteforce,6.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,DoS attacks-Hulk,45.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,DoS attacks-GoldenEye,,0.9302325581395349,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,benign,3.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,40.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,DoS attacks-Hulk,,0.784,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,DoS attacks-Hulk,98.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,Infilteration,,0.5128205128205128,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,benign,33.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,DoS attacks-GoldenEye,9.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,DoS attacks-Hulk,14.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,Infilteration,60.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,2,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,2,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,Bot,,0.9644528988716163,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,Bot,,0.9254658385093167,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,Bot,,0.24054556726596404,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,DDOS attack-HOIC,,0.9805950982967511,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,DDOS attack-HOIC,,0.9781659388646288,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,DDOS attack-HOIC,,0.1850765038775938,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,DoS attacks-GoldenEye,,0.9097333333333334,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,DoS attacks-GoldenEye,,0.98,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,DoS attacks-GoldenEye,,0.46646464646464647,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,DoS attacks-Hulk,,0.8858801222319508,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,DoS attacks-Hulk,,0.06875257307533965,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,Infilteration,,0.6615761202883931,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,Infilteration,,0.45112781954887216,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,Infilteration,,0.20217793301828643,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,3,fpr,SSH-Bruteforce,,0.010245901639344262,5000
+nway,tabpfn-v3.5,cicids2018,0,4,3,macro_f1,,,0.41361709449542516,5001
+nway,tabpfn-v3.5,cicids2018,0,4,3,balanced_accuracy,,,0.7123801593685913,5001
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,benign,,0.23334896810506567,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,benign,995.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,Bot,503.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,DDOS attack-HOIC,139.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,DoS attacks-GoldenEye,967.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,DoS attacks-Hulk,160.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,Infilteration,1500.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,benign,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,benign,4.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,DoS attacks-Hulk,41.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,DoS attacks-GoldenEye,,0.9069767441860465,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,39.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,Infilteration,3.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,DoS attacks-Hulk,,0.728,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,benign,7.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,15.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,DoS attacks-Hulk,91.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,Infilteration,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,Infilteration,,0.358974358974359,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,benign,53.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,Bot,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,DDOS attack-HOIC,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,DoS attacks-GoldenEye,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,DoS attacks-Hulk,8.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,Infilteration,42.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,3,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,3,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,Bot,,0.9986779261153234,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,Bot,,0.9875776397515528,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,Bot,,0.016945649927671006,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,DDOS attack-HOIC,,0.9974134119988027,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,DDOS attack-HOIC,,0.29029553552714316,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,DoS attacks-GoldenEye,,0.9244929292929294,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,DoS attacks-GoldenEye,,0.96,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,DoS attacks-GoldenEye,,0.18808080808080807,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,DoS attacks-Hulk,,0.9503171768362335,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,DoS attacks-Hulk,,0.9014084507042254,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,DoS attacks-Hulk,,0.1778509674763277,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,Infilteration,,0.6589854026889702,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,Infilteration,,0.45112781954887216,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,Infilteration,,0.20217793301828643,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,4,4,fpr,SSH-Bruteforce,,0.0020491803278688526,5000
+nway,tabpfn-v3.5,cicids2018,0,4,4,macro_f1,,,0.44893142311023987,5001
+nway,tabpfn-v3.5,cicids2018,0,4,4,balanced_accuracy,,,0.7477128416859589,5001
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,benign,,0.29666979362101314,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,benign,1265.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,Bot,43.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,DDOS attack-HOIC,119.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,DoS attacks-GoldenEye,1283.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,DoS attacks-Hulk,43.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,Infilteration,1252.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,benign,SSH-Bruteforce,259.0,4264
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,benign,2.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,DoS attacks-Hulk,43.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,DoS attacks-GoldenEye,,0.9302325581395349,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,benign,3.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,40.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,DoS attacks-Hulk,,0.752,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,benign,4.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,DoS attacks-Hulk,94.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,Infilteration,,0.49572649572649574,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,benign,12.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,DoS attacks-GoldenEye,32.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,DoS attacks-Hulk,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,Infilteration,58.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,Infilteration,SSH-Bruteforce,9.0,117
+nway,tabpfn-v3.5,cicids2018,0,4,4,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,4,4,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,Bot,,0.9878921136367429,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,Bot,,0.9937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,Bot,,0.30088861334986566,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,DDOS attack-HOIC,,0.8951836925969215,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,DDOS attack-HOIC,,0.8165938864628821,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,DDOS attack-HOIC,,0.043177530915950536,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,DoS attacks-GoldenEye,,0.9856363636363636,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,DoS attacks-GoldenEye,,0.1321212121212121,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,DoS attacks-Hulk,,0.8783884865388295,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,DoS attacks-Hulk,,0.7816901408450704,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,DoS attacks-Hulk,,0.09098394400988061,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,Infilteration,,0.6203378283390827,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,Infilteration,,0.6466165413533834,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,Infilteration,,0.49537702897061847,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,0,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,8,0,macro_f1,,,0.6312456224594134,5001
+nway,tabpfn-v3.5,cicids2018,0,8,0,balanced_accuracy,,,0.818961285327139,5001
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,benign,,0.4899155722326454,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,benign,2089.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,DDOS attack-HOIC,70.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,DoS attacks-GoldenEye,387.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,DoS attacks-Hulk,11.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,Infilteration,1707.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,Bot,,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,Bot,142.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,DDOS attack-HOIC,,0.8878048780487805,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,DDOS attack-HOIC,182.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,DoS attacks-Hulk,23.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,DoS attacks-GoldenEye,,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,43.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,DoS attacks-Hulk,,0.808,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,DDOS attack-HOIC,24.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,DoS attacks-Hulk,101.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,Infilteration,,0.5470085470085471,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,benign,30.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,DDOS attack-HOIC,9.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,DoS attacks-GoldenEye,14.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,DoS attacks-Hulk,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,Infilteration,64.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,0,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,0,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,Bot,,0.9964843103202627,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,Bot,,0.9875776397515528,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,Bot,,0.026865054763380865,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,DDOS attack-HOIC,,0.9964587724781911,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,DDOS attack-HOIC,,0.0538671138126179,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,DoS attacks-GoldenEye,,0.9816,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,DoS attacks-GoldenEye,,0.1315151515151515,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,DoS attacks-Hulk,,0.9273291043088503,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,DoS attacks-Hulk,,0.8732394366197183,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,DoS attacks-Hulk,,0.10868670234664471,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,Infilteration,,0.4418007727352077,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,Infilteration,,0.3308270676691729,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,Infilteration,,0.3675775631806041,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,roc_auc,SSH-Bruteforce,,0.9999999999999999,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,1,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,8,1,macro_f1,,,0.5673424408474905,5001
+nway,tabpfn-v3.5,cicids2018,0,8,1,balanced_accuracy,,,0.7906021855934536,5001
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,benign,,0.40103189493433394,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,benign,1710.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,DDOS attack-HOIC,25.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,DoS attacks-GoldenEye,928.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,DoS attacks-Hulk,186.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,Infilteration,1415.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,benign,2.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,Infilteration,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,DDOS attack-HOIC,,0.7414634146341463,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,DDOS attack-HOIC,152.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,DoS attacks-Hulk,45.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,Infilteration,8.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,benign,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,DoS attacks-Hulk,,0.872,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,DDOS attack-HOIC,3.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,5.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,DoS attacks-Hulk,109.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,Infilteration,8.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,Infilteration,,0.5641025641025641,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,benign,35.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,DoS attacks-GoldenEye,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,DoS attacks-Hulk,9.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,Infilteration,66.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,1,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,1,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,Bot,,0.9942226654806507,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,Bot,,0.9937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,Bot,,0.12626575738789006,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,DDOS attack-HOIC,,0.9987954883901007,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,DDOS attack-HOIC,,0.12575979878432195,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,DoS attacks-GoldenEye,,0.9608404040404039,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,DoS attacks-GoldenEye,,0.98,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,DoS attacks-GoldenEye,,0.16424242424242425,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,DoS attacks-Hulk,,0.9379055311697272,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,DoS attacks-Hulk,,0.9014084507042254,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,DoS attacks-Hulk,,0.09118979003705228,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,Infilteration,,0.5220071959228253,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,Infilteration,,0.3308270676691729,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,Infilteration,,0.2975138689130881,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,2,fpr,SSH-Bruteforce,,0.01331967213114754,5000
+nway,tabpfn-v3.5,cicids2018,0,8,2,macro_f1,,,0.5863629639200963,5001
+nway,tabpfn-v3.5,cicids2018,0,8,2,balanced_accuracy,,,0.7710315659439911,5001
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,benign,,0.5283771106941839,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,benign,2253.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,DDOS attack-HOIC,122.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,DoS attacks-GoldenEye,195.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,DoS attacks-Hulk,133.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,Infilteration,1561.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,DDOS attack-HOIC,,0.7804878048780488,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,DDOS attack-HOIC,160.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,DoS attacks-Hulk,45.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,DoS attacks-GoldenEye,,0.8372093023255814,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,benign,6.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,36.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,DoS attacks-Hulk,,0.768,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,DDOS attack-HOIC,11.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,DoS attacks-Hulk,96.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,Infilteration,2.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,Infilteration,,0.5042735042735043,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,benign,48.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,DoS attacks-GoldenEye,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,DoS attacks-Hulk,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,Infilteration,59.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,2,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,2,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,Bot,,0.9966922481545517,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,Bot,,0.9937888198757764,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,Bot,,0.1351518908865468,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,DDOS attack-HOIC,,0.9966445748009947,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,DDOS attack-HOIC,,0.07901907356948229,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,DoS attacks-GoldenEye,,0.9940969696969697,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,DoS attacks-GoldenEye,,0.4634343434343434,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,DoS attacks-Hulk,,0.8879603268023125,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,DoS attacks-Hulk,,0.8169014084507042,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,DoS attacks-Hulk,,0.20625771922601893,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,Infilteration,,0.6542674232324184,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,Infilteration,,0.7293233082706767,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,Infilteration,,0.5372919663036778,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,3,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,8,3,macro_f1,,,0.637159761281576,5001
+nway,tabpfn-v3.5,cicids2018,0,8,3,balanced_accuracy,,,0.7880925689102691,5001
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,benign,,0.7190431519699813,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,benign,3066.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,DDOS attack-HOIC,86.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,DoS attacks-GoldenEye,238.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,DoS attacks-Hulk,32.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,Infilteration,842.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,DDOS attack-HOIC,,0.848780487804878,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,DDOS attack-HOIC,174.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,DoS attacks-Hulk,31.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,DoS attacks-GoldenEye,,0.9069767441860465,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,benign,4.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,39.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,DoS attacks-Hulk,,0.704,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,DDOS attack-HOIC,21.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,DoS attacks-Hulk,88.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,Infilteration,,0.358974358974359,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,benign,56.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,DDOS attack-HOIC,10.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,DoS attacks-GoldenEye,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,DoS attacks-Hulk,5.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,Infilteration,42.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,3,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,3,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,Bot,,0.9944216183467915,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,Bot,,0.9130434782608695,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,Bot,,0.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,DDOS attack-HOIC,,0.9892143124536066,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,DDOS attack-HOIC,,0.982532751091703,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,DDOS attack-HOIC,,0.14713896457765668,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,DoS attacks-GoldenEye,,0.9323313131313131,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,DoS attacks-GoldenEye,,0.9,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,DoS attacks-GoldenEye,,0.15373737373737373,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,DoS attacks-Hulk,,0.9518813167187563,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,DoS attacks-Hulk,,0.9014084507042254,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,DoS attacks-Hulk,,0.3491148620831618,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,Infilteration,,0.6452871957992371,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,Infilteration,,0.6466165413533834,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,Infilteration,,0.4668173412779947,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,8,4,fpr,SSH-Bruteforce,,0.004918032786885246,5000
+nway,tabpfn-v3.5,cicids2018,0,8,4,macro_f1,,,0.6230069341635868,5001
+nway,tabpfn-v3.5,cicids2018,0,8,4,balanced_accuracy,,,0.8122446704798411,5001
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,benign,,0.5532363977485929,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,benign,2359.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,DDOS attack-HOIC,8.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,DoS attacks-GoldenEye,259.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,DoS attacks-Hulk,111.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,Infilteration,1525.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,benign,SSH-Bruteforce,2.0,4264
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,DDOS attack-HOIC,,0.7365853658536585,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,DDOS attack-HOIC,151.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,DoS attacks-Hulk,54.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,DoS attacks-Hulk,,0.936,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,DDOS attack-HOIC,8.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,DoS attacks-Hulk,117.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,Infilteration,,0.5042735042735043,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,benign,39.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,DoS attacks-GoldenEye,3.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,DoS attacks-Hulk,15.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,Infilteration,59.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,Infilteration,SSH-Bruteforce,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,8,4,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,8,4,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,Bot,,0.9938144912133429,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,Bot,,0.01425914445133292,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,DDOS attack-HOIC,,0.9992897408744058,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,DDOS attack-HOIC,,0.01781597149444561,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,DoS attacks-GoldenEye,,0.997519191919192,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,DoS attacks-GoldenEye,,0.10626262626262627,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,DoS attacks-Hulk,,0.9450637542836269,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,DoS attacks-Hulk,,0.9014084507042254,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,DoS attacks-Hulk,,0.19411280362289007,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,Infilteration,,0.7040580184795252,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,Infilteration,,0.6240601503759399,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,Infilteration,,0.29155537291966305,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,0,fpr,SSH-Bruteforce,,0.005532786885245901,5000
+nway,tabpfn-v3.5,cicids2018,0,16,0,macro_f1,,,0.6033082140595274,5001
+nway,tabpfn-v3.5,cicids2018,0,16,0,balanced_accuracy,,,0.8253828818619547,5001
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,benign,,0.5157129455909943,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,benign,2199.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,Bot,41.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,DDOS attack-HOIC,88.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,DoS attacks-GoldenEye,211.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,DoS attacks-Hulk,86.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,Infilteration,1639.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,DDOS attack-HOIC,,0.8195121951219512,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,DDOS attack-HOIC,168.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,DoS attacks-Hulk,35.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,Infilteration,2.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,benign,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,DoS attacks-Hulk,,0.88,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,DDOS attack-HOIC,10.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,DoS attacks-Hulk,110.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,Infilteration,4.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,Infilteration,,0.6068376068376068,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,benign,41.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,DoS attacks-GoldenEye,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,DoS attacks-Hulk,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,Infilteration,71.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,0,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,0,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,Bot,,0.999006519236175,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,Bot,,0.9875776397515528,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,Bot,,0.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,DDOS attack-HOIC,,0.9992970631334326,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,DDOS attack-HOIC,,0.04904632152588556,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,DoS attacks-GoldenEye,,0.9969575757575757,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,DoS attacks-GoldenEye,,0.11373737373737373,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,DoS attacks-Hulk,,0.9958671336375602,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,DoS attacks-Hulk,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,DoS attacks-Hulk,,0.08666117743927543,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,Infilteration,,0.7164848117828987,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,Infilteration,,0.6541353383458647,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,Infilteration,,0.3199095952332032,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,1,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,16,1,macro_f1,,,0.7358215067970969,5001
+nway,tabpfn-v3.5,cicids2018,0,16,1,balanced_accuracy,,,0.8482949718712621,5001
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,benign,,0.674249530956848,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,benign,2875.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,DDOS attack-HOIC,43.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,DoS attacks-GoldenEye,27.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,DoS attacks-Hulk,26.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,Infilteration,1293.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,Bot,,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,Bot,142.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,DDOS attack-HOIC,,0.848780487804878,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,DDOS attack-HOIC,174.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,DoS attacks-Hulk,31.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,DoS attacks-Hulk,,0.84,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,DDOS attack-HOIC,19.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,DoS attacks-Hulk,105.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,Infilteration,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,Infilteration,,0.5982905982905983,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,benign,42.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,DDOS attack-HOIC,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,DoS attacks-GoldenEye,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,DoS attacks-Hulk,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,Infilteration,70.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,1,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,1,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,Bot,,0.9879935154201307,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,Bot,,0.9254658385093167,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,Bot,,0.12027278363298202,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,DDOS attack-HOIC,,0.9995011711038032,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,DDOS attack-HOIC,,0.048627122196604484,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,DoS attacks-GoldenEye,,0.9928686868686869,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,DoS attacks-GoldenEye,,0.05171717171717172,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,DoS attacks-Hulk,,0.9879203172928058,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,DoS attacks-Hulk,,0.9929577464788732,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,DoS attacks-Hulk,,0.07266364759160149,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,Infilteration,,0.6177293449362053,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,Infilteration,,0.5037593984962406,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,Infilteration,,0.34394904458598724,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,2,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,16,2,macro_f1,,,0.6325301086435473,5001
+nway,tabpfn-v3.5,cicids2018,0,16,2,balanced_accuracy,,,0.8448132761547396,5001
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,benign,,0.5133677298311444,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,benign,2189.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,DDOS attack-HOIC,23.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,DoS attacks-GoldenEye,278.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,DoS attacks-Hulk,104.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,Infilteration,1670.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,Bot,,1.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,Bot,142.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,Infilteration,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,DDOS attack-HOIC,,0.8536585365853658,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,DDOS attack-HOIC,175.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,DoS attacks-Hulk,30.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,DoS attacks-GoldenEye,,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,benign,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,43.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,DoS attacks-Hulk,,0.88,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,DDOS attack-HOIC,12.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,DoS attacks-Hulk,110.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,Infilteration,3.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,Infilteration,,0.6666666666666666,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,benign,34.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,DoS attacks-GoldenEye,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,DoS attacks-Hulk,2.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,Infilteration,78.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,2,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,2,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,Bot,,0.9870449594970471,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,Bot,,0.9130434782608695,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,Bot,,0.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,DDOS attack-HOIC,,0.9989556628063107,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,DDOS attack-HOIC,,0.06392789771536365,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,DoS attacks-GoldenEye,,0.9992727272727273,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,DoS attacks-GoldenEye,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,DoS attacks-GoldenEye,,0.09757575757575758,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,DoS attacks-Hulk,,0.9921879983068439,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,DoS attacks-Hulk,,0.9788732394366197,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,DoS attacks-Hulk,,0.06113627006998765,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,Infilteration,,0.6514588814341175,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,Infilteration,,0.6992481203007519,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,Infilteration,,0.4655845490034929,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,roc_auc,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,3,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,16,3,macro_f1,,,0.6167265121549528,5001
+nway,tabpfn-v3.5,cicids2018,0,16,3,balanced_accuracy,,,0.7940161437913028,5001
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,benign,,0.623358348968105,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,benign,2658.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,Bot,54.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,DDOS attack-HOIC,119.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,DoS attacks-GoldenEye,53.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,DoS attacks-Hulk,100.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,Infilteration,1280.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,DDOS attack-HOIC,,0.8780487804878049,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,Bot,3.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,DDOS attack-HOIC,180.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,DoS attacks-Hulk,22.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,DoS attacks-GoldenEye,,0.8604651162790697,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,benign,3.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,37.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,2.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,Infilteration,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,DoS attacks-Hulk,,0.696,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,Bot,5.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,DDOS attack-HOIC,17.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,16.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,DoS attacks-Hulk,87.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,Infilteration,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,Infilteration,,0.5213675213675214,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,benign,37.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,Bot,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,DDOS attack-HOIC,1.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,DoS attacks-GoldenEye,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,DoS attacks-Hulk,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,Infilteration,61.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,3,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,3,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,Bot,,0.9947912856077497,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,Bot,,0.9192546583850931,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,Bot,,0.0347179169249845,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,DDOS attack-HOIC,,0.9985437857360563,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,DDOS attack-HOIC,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,DDOS attack-HOIC,,0.0326975476839237,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,DoS attacks-GoldenEye,,0.98349898989899,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,DoS attacks-GoldenEye,,0.94,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,DoS attacks-GoldenEye,,0.09454545454545454,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,DoS attacks-Hulk,,0.9838990716634098,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,DoS attacks-Hulk,,0.9929577464788732,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,DoS attacks-Hulk,,0.1467682173734047,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,Infilteration,,0.664784006451304,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,Infilteration,,0.5714285714285714,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,Infilteration,,0.32710088350113004,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,roc_auc,SSH-Bruteforce,,0.9999999999999999,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,recall,SSH-Bruteforce,,1.0,5000
+perclass,tabpfn-v3.5,cicids2018,0,16,4,fpr,SSH-Bruteforce,,0.0,5000
+nway,tabpfn-v3.5,cicids2018,0,16,4,macro_f1,,,0.6464076062230248,5001
+nway,tabpfn-v3.5,cicids2018,0,16,4,balanced_accuracy,,,0.8162574463218851,5001
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,benign,,0.5712945590994372,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,benign,2436.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,Bot,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,DDOS attack-HOIC,1.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,DoS attacks-GoldenEye,234.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,DoS attacks-Hulk,57.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,Infilteration,1536.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,benign,SSH-Bruteforce,0.0,4264
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,Bot,,0.9788732394366197,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,benign,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,Bot,139.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,DDOS attack-HOIC,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,DoS attacks-GoldenEye,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,DoS attacks-Hulk,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,Infilteration,3.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Bot,SSH-Bruteforce,0.0,142
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,DDOS attack-HOIC,,0.7609756097560976,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,benign,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,Bot,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,DDOS attack-HOIC,156.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,DoS attacks-GoldenEye,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,DoS attacks-Hulk,49.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,Infilteration,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DDOS attack-HOIC,SSH-Bruteforce,0.0,205
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,DoS attacks-GoldenEye,,0.9767441860465116,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,benign,1.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,Bot,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,DDOS attack-HOIC,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,DoS attacks-GoldenEye,42.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,DoS attacks-Hulk,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,Infilteration,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-GoldenEye,SSH-Bruteforce,0.0,43
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,DoS attacks-Hulk,,0.896,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,benign,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,Bot,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,DDOS attack-HOIC,10.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,DoS attacks-GoldenEye,1.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,DoS attacks-Hulk,112.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,Infilteration,2.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,DoS attacks-Hulk,SSH-Bruteforce,0.0,125
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,Infilteration,,0.5299145299145299,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,benign,44.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,Bot,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,DDOS attack-HOIC,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,DoS attacks-GoldenEye,7.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,DoS attacks-Hulk,4.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,Infilteration,62.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,Infilteration,SSH-Bruteforce,0.0,117
+nway,tabpfn-v3.5,cicids2018,0,16,4,recall,SSH-Bruteforce,,1.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,benign,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,Bot,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,DDOS attack-HOIC,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,DoS attacks-GoldenEye,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,DoS attacks-Hulk,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,Infilteration,0.0,105
+nway,tabpfn-v3.5,cicids2018,0,16,4,confusion,SSH-Bruteforce,SSH-Bruteforce,105.0,105

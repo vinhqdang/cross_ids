@@ -22,8 +22,9 @@ from __future__ import annotations
 import argparse
 import json
 import logging
+import os
 import time
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 
 import numpy as np
@@ -94,7 +95,7 @@ SRC_CONTEXT_ROWS = 1000
 SRC_POOL_PER_DOMAIN = 5000
 TABPFN_API_RETRIES = 3
 TABPFN_TOKEN_FILE = Path("runs/tabpfn_token.txt")  # git-ignored; the token is never logged or committed
-TABPFN_CHUNK = 30000  # query rows per predict call
+TABPFN_CHUNK = int(os.environ.get("TABPFN_CHUNK", 30000))  # query rows per predict call (lower it to save GPU memory)
 ACTIVE = ("flare-al", "flare-kcenter-raw")
 FULLLABEL = "catboost-fulllabel"  # upper reference: trained on the whole target train split (k = 0 in the CSV)
 ALL_METHODS = BASELINES + (PROTONET,) + tuple(FLARE_VARIANTS) + ACTIVE + (FULLLABEL,) + tuple(COMBOS) + ZERO_SHOT
@@ -146,6 +147,24 @@ def load_or_draw_supports(path: Path, target: str, seed: int, y_train: np.ndarra
                "supports": {str(k): [d.tolist() for d in drawn[k]] for k in ks}}
     path.write_text(json.dumps(payload), encoding="utf-8")
     return drawn
+
+
+def stratified_subsample(y: np.ndarray, n: int, seed: int) -> np.ndarray:
+    """Sorted row indices of a random subsample of about ``n`` rows that keeps the label proportions.
+
+    Every label keeps at least one row. All rows are returned when there are at most ``n``. Deterministic in
+    (y, n, seed), so every method scored on the subsample sees the same rows.
+    """
+    y = np.asarray(y)
+    if len(y) <= n:
+        return np.arange(len(y))
+    rng = np.random.default_rng(seed)
+    parts = []
+    for lab in np.unique(y):
+        members = np.flatnonzero(y == lab)
+        take = max(1, int(round(n * len(members) / len(y))))
+        parts.append(rng.choice(members, size=min(take, len(members)), replace=False))
+    return np.sort(np.concatenate(parts))
 
 
 def rank_support_query(Xs: np.ndarray, Xq: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -244,6 +263,7 @@ class EvalContext:
     ks: tuple[int, ...] = FEW_SHOT_KS
     n_draws: int = N_DRAWS
     benchmark_dir: Path = Path("results")  # folder with the Part I runs.csv (read only)
+    max_query: int | None = None  # score every method on a fixed stratified subsample of this many test rows
 
 
 @dataclass
@@ -500,6 +520,10 @@ def evaluate_seed(target: str, split: Split, ctx: EvalContext, methods: list[str
     """
     done = done or set()
     rows: list[dict] = []
+    if ctx.max_query:
+        sel = stratified_subsample(split.y_test, ctx.max_query, split.seed)
+        split = replace(split, X_test=split.X_test[sel], y_test=split.y_test[sel],
+                        attack_test=np.asarray(split.attack_test)[sel])
     st = SeedState(target, split.seed, split, ctx, sources_fn=sources_fn)
     sup = load_or_draw_supports(ctx.supports_dir / f"supports_{target}_s{split.seed}.json", target, split.seed,
                                 split.y_train, ctx.ks, ctx.n_draws)
@@ -597,6 +621,8 @@ def _parse(argv: list[str] | None) -> argparse.Namespace:
     p.add_argument("--methods", nargs="+", default=list(ALL_METHODS), choices=list(ALL_METHODS))
     p.add_argument("--ks", nargs="+", type=int, default=list(FEW_SHOT_KS))
     p.add_argument("--draws", type=int, default=N_DRAWS)
+    p.add_argument("--max-query", type=int, default=None,
+                   help="score on a fixed stratified subsample of this many test rows (default: all)")
     p.add_argument("--out", default=None, help="CSV to append to (default runs/flare/eval_<target>.csv)")
     p.add_argument("--runs-dir", default="runs/flare")
     p.add_argument("--supports-dir", default=None, help="where supports_<target>_s<seed>.json lives (default: the CSV's folder)")
@@ -623,7 +649,8 @@ def main(argv: list[str] | None = None) -> None:
             methods.remove(name)
     ctx = EvalContext(runs_dir=Path(args.runs_dir), supports_dir=Path(args.supports_dir or out.parent),
                       device=args.device, threads=args.threads, al_pool=args.al_pool,
-                      ks=tuple(args.ks), n_draws=args.draws, benchmark_dir=Path(args.benchmark))
+                      ks=tuple(args.ks), n_draws=args.draws, benchmark_dir=Path(args.benchmark),
+                      max_query=args.max_query)
     path = evaluate_target(args.target, args.seeds, out, ctx, methods, args.data_dir, per_attack=args.per_attack)
     log.info("results in %s", path)
 

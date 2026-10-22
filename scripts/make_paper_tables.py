@@ -263,6 +263,27 @@ def tabpfn_table() -> None:
     write("tabpfn", chr(10).join(lines))
 
 
+def tabpfn_class_table() -> None:
+    """Class-level FLARE-2 minus TabPFN-3.5 (seed 0, k <= 16), unit = target (stats_tabpfn.py)."""
+    path = "results/flare/stats/tabpfn_class.csv"
+    if not os.path.exists(path):
+        return
+    t = pd.read_csv(path).set_index("metric")
+    names = [("perclass:roc_auc", "Per-class ROC-AUC"), ("perclass:fpr", "Per-class FPR"),
+             ("perclass:recall", "Per-class recall"), ("nway:macro_f1", "$N$-way macro-F1"),
+             ("nway:balanced_accuracy", "$N$-way balanced accuracy")]
+    lines = [chr(92) + "begin{tabular}{lrrrr}", chr(92) + "toprule",
+             "Metric & Mean diff. & 95" + chr(92) + "% CI & W/L & $p$ (Holm) " + chr(92) * 2, chr(92) + "midrule"]
+    for key, label in names:
+        if key in t.index:
+            r = t.loc[key]
+            wins = int(r.wins)
+            lines.append(f"{label} & {r.mean_diff:+.3f} & [{r.ci_lo:+.3f}, {r.ci_hi:+.3f}] & "
+                         f"{wins}/{int(r.n_targets) - wins} & {r.p_holm:.3f} " + chr(92) * 2)
+    lines += [chr(92) + "bottomrule", chr(92) + "end{tabular}", ""]
+    write("tabpfnclass", chr(10).join(lines))
+
+
 def main() -> None:
     os.makedirs(TAB, exist_ok=True)
     os.makedirs(FIG, exist_ok=True)
@@ -275,6 +296,7 @@ def main() -> None:
     ablation_table()
     seeds_table()
     tabpfn_table()
+    tabpfn_class_table()
     class_by_target()
     curve_figure(d)
     pertarget_figure(d)
