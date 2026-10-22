@@ -25,6 +25,7 @@ from scipy import stats  # noqa: E402
 from sklearn.metrics import roc_auc_score  # noqa: E402
 
 from .schema import CORE_FEATURES, MINIMAL_FEATURES, SOURCES, features_for, supports  # noqa: E402
+from .methods import ORACLE_VARIANTS  # noqa: E402
 
 log = logging.getLogger("crossids.analysis")
 
@@ -226,6 +227,8 @@ def load_runs(results_dir: Path) -> pd.DataFrame:
     if runs.empty:
         return runs
     runs = runs.drop_duplicates(RUN_KEYS, keep="last").reset_index(drop=True)
+    # Oracle diagnostics read target-pool labels; they are not label-free methods and stay out of the analysis.
+    runs = runs[~runs["method"].isin(ORACLE_VARIANTS)].reset_index(drop=True)
     if "prior_abs_error" not in runs and {"est_prior", "true_prior"} <= set(runs.columns):
         runs["prior_abs_error"] = (runs["est_prior"] - runs["true_prior"]).abs()
     elif "prior_abs_error" not in runs:

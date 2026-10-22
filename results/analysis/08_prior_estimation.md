@@ -10,10 +10,6 @@
 | rift-noDN | pairwise | transductive | 126 | 0.509 | 0.386 | -0.123 | 0.385 | 0.031 |
 | rift-noIFS | lodo | transductive | 21 | 0.509 | 0.003 | -0.507 | 0.507 | 0.578 |
 | rift-noIFS | pairwise | transductive | 126 | 0.509 | 0.132 | -0.378 | 0.429 | 0.040 |
-| rift-oracleAnchor | lodo | transductive | 21 | 0.509 | 0.509 | -0.000 | 0.000 | 1.000 |
-| rift-oracleAnchor | pairwise | transductive | 126 | 0.509 | 0.509 | -0.000 | 0.000 | 1.000 |
-| rift-oraclePrior | lodo | transductive | 21 | 0.509 | 0.509 | -0.000 | 0.000 | 1.000 |
-| rift-oraclePrior | pairwise | transductive | 126 | 0.509 | 0.509 | -0.000 | 0.000 | 1.000 |
 | rift-poolInit | lodo | transductive | 21 | 0.509 | 0.005 | -0.504 | 0.504 | 0.386 |
 | rift-poolInit | pairwise | transductive | 126 | 0.509 | 0.170 | -0.339 | 0.421 | -0.050 |
 | rift-robust | lodo | transductive | 21 | 0.509 | 0.038 | -0.471 | 0.471 | 0.636 |
