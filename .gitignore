@@ -230,3 +230,12 @@ results/smoke/
 
 # FLARE run folders (checkpoints, logs, evaluation CSVs)
 runs/
+
+# LaTeX build files
+*.aux
+*.out
+*.blg
+*.bbl
+*.toc
+*.fls
+*.fdb_latexmk
