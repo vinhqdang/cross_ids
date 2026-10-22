@@ -495,7 +495,12 @@ applies, in order:
 **Test-time ensemble.** Average logits over E = 8 random feature
 permutations and per-feature sign flips (the same transforms as training).
 
-## 14. Meta-training episodes (the key ingredient)
+## 14. Meta-training episodes
+
+Note (added after the ablations reported in the manuscript): task diversity was designed as the response to concept
+shift, but the measured effect of the class-level tasks is modest (binary-only training lowers binary ROC-AUC by 0.01 to
+0.05 and N-way macro-F1 at k=16 by 0.02 to 0.04 on the two ablation targets, and leaves per-class AUC unchanged). It
+is not established as the key ingredient.
 
 Each episode draws a source dataset (weighted by sqrt of its size), then:
 

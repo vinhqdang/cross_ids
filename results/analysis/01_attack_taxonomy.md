@@ -6,8 +6,8 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 |---|---|---|---|---|---|
 | BENIGN | benign |  | cicids2017, usbids1 | 91727 | False |
 | Benign | benign |  | cicids2018, iot23 | 105346 | False |
-| normal | benign |  | ctu13, toniot | 65915 | False |
 | Normal | benign |  | insdn, unswnb15 | 83286 | False |
+| normal | benign |  | ctu13, toniot | 65915 | False |
 | Bot | botnet |  | cicids2017, cicids2018 | 2908 | True |
 | BOTNET | botnet |  | insdn | 101 | True |
 | botnet-s42 | botnet |  | ctu13 | 8228 | False |
@@ -27,7 +27,7 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | C&C-FileDownload | botnet |  | iot23 | 46 | True |
 | C&C-HeartBeat | botnet |  | iot23 | 556 | True |
 | C&C-HeartBeat-FileDownload | botnet |  | iot23 | 8 | True |
-| C&C-Mirai | botnet |  | iot23 | 1 | False |
+| C&C-Mirai | botnet |  | iot23 | 1 | True |
 | C&C-Torii | botnet |  | iot23 | 17 | True |
 | FileDownload | botnet |  | iot23 | 13 | True |
 | Okiru | botnet |  | iot23 | 813 | True |
@@ -37,8 +37,8 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | password | bruteforce |  | toniot | 14618 | True |
 | SSH-Bruteforce | bruteforce |  | cicids2018 | 1955 | True |
 | SSH-Patator | bruteforce |  | cicids2017 | 142 | True |
-| DDoS | ddos |  | cicids2017, insdn, iot23 | 6990 | True |
 | ddos | ddos |  | toniot | 11578 | True |
+| DDoS | ddos |  | cicids2017, insdn, iot23 | 6990 | True |
 | DDOS attack-HOIC | ddos |  | cicids2018 | 4210 | True |
 | DDOS attack-LOIC-UDP | ddos |  | cicids2018 | 42 | True |
 | dos | dos |  | toniot | 5097 | True |
@@ -67,11 +67,11 @@ Attack types mapped to `other` (5): `Analysis`, `Attack`, `Fuzzers`, `Generic`, 
 | TCPFlood-NoDefense | dos | NoDefense | usbids1 | 4080 | True |
 | TCPFlood-Reqtimeout | dos | Reqtimeout | usbids1 | 4374 | True |
 | TCPFlood-Security2 | dos | Security2 | usbids1 | 4221 | True |
-| Backdoor | exploit_malware |  | unswnb15 | 323 | True |
 | backdoor | exploit_malware |  | toniot | 1812 | True |
+| Backdoor | exploit_malware |  | unswnb15 | 323 | True |
 | Exploits | exploit_malware |  | unswnb15 | 18400 | True |
 | Infilteration | exploit_malware |  | cicids2018 | 2317 | True |
-| Infiltration | exploit_malware |  | cicids2017 | 2 | False |
+| Infiltration | exploit_malware |  | cicids2017 | 2 | True |
 | Shellcode | exploit_malware |  | unswnb15 | 877 | True |
 | U2R | exploit_malware |  | insdn | 8 | True |
 | Worms | exploit_malware |  | unswnb15 | 116 | True |

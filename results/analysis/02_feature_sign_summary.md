@@ -17,4 +17,4 @@ ROC-AUC is computed on the cached 100k-row samples; `sign` is `+` when every ava
 | bwd_bytes_per_pkt | 7 | 8 | 2 | 5 | 0.068 | 0.778 | mixed | False |
 | fwd_bwd_pkt_ratio | 7 | 8 | 4 | 3 | 0.333 | 0.791 | mixed | False |
 | fwd_bwd_byte_ratio | 8 | 8 | 3 | 5 | 0.288 | 0.979 | mixed | False |
-| bytes_per_pkt | 8 | 8 | 2 | 6 | 0.063 | 0.788 | mixed | False |
+| bytes_per_pkt | 8 | 8 | 2 | 6 | 0.063 | 0.789 | mixed | False |

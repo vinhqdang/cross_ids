@@ -44,7 +44,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
 
 from .data import Split, load_split, target_features, target_keys
-from .evaluate import context_rows
+from .evaluate import TABPFN_CHUNK, TABPFN_VERSIONS, _tabpfn, context_rows
 from .model import EpisodeModel, load_model
 
 log = logging.getLogger("crossids.flare.evaluate_class")
@@ -71,7 +71,7 @@ CHECKPOINT_SUFFIX = {
     "protonet": "_protonet",
 }
 METHODS = ("flare2", "flare2-binary", "flare2-noperm", "flare2-insrc", "flare2-ctx", "flare2-m", "flare2-m-binary",
-           "flare2-rank0", "catboost", "rf", "lr", "knn", "protonet", "flare")
+           "flare2-rank0", "catboost", "rf", "lr", "knn", "tabpfn-v3", "tabpfn-v3.5", "protonet", "flare")
 NEURAL = tuple(m for m in METHODS if m in CHECKPOINT_SUFFIX)
 RESULT_COLUMNS = ["task", "method", "target", "seed", "k", "draw", "metric", "cls", "pred", "value", "n"]
 
@@ -198,7 +198,15 @@ class Ctx:
         return self.models[name]
 
 
+def _tabpfn_proba(name: str, Xs, ys, Xq, draw: int) -> np.ndarray:
+    """(Q, N) class probabilities of a TabPFN baseline (same backend and chunking as the binary evaluation)."""
+    est = _tabpfn(name, "cuda" if torch.cuda.is_available() else "cpu", draw).fit(Xs, ys)
+    return np.concatenate([est.predict_proba(Xq[i:i + TABPFN_CHUNK]) for i in range(0, len(Xq), TABPFN_CHUNK)])
+
+
 def _sk_binary(name: str, Xs, ys, Xq, draw: int, threads: int) -> np.ndarray:
+    if name in TABPFN_VERSIONS:
+        return _tabpfn_proba(name, Xs, ys, Xq, draw)[:, 1]
     if name == "catboost":
         from catboost import CatBoostClassifier
 
@@ -214,6 +222,8 @@ def _sk_binary(name: str, Xs, ys, Xq, draw: int, threads: int) -> np.ndarray:
 
 
 def _sk_multiclass(name: str, Xs, ys, Xq, draw: int, threads: int) -> np.ndarray:
+    if name in TABPFN_VERSIONS:
+        return _tabpfn_proba(name, Xs, ys, Xq, draw)
     if name == "catboost":
         from catboost import CatBoostClassifier
 

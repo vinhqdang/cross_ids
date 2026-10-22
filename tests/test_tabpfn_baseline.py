@@ -44,3 +44,10 @@ def test_missing_token_file_is_not_an_error(monkeypatch, tmp_path):
 def test_unknown_version_is_rejected():
     with pytest.raises(KeyError):
         ev.tabpfn_status("tabpfn-v9")
+
+
+def test_class_level_evaluation_offers_the_tabpfn_baselines():
+    from crossids.flare import evaluate_class as ec
+
+    assert "tabpfn-v3" in ec.METHODS and "tabpfn-v3.5" in ec.METHODS
+    assert "tabpfn-v3.5" not in ec.NEURAL  # no checkpoint needed

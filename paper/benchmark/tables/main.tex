@@ -1,0 +1,17 @@
+\begin{tabular}{lrrrrr}
+\toprule
+Method & In-domain & Same family & Same extractor & Cross-extractor & LODO \\
+ & (7) & (4 pairs) & (12 pairs) & (26 pairs) & (7) \\
+\midrule
+LR & 0.923 & 0.341 & 0.472 & 0.503 & 0.480 \\
+RF & 0.981 & 0.478 & 0.597 & 0.521 & 0.574 \\
+HGB & 0.985 & 0.480 & 0.643 & 0.529 & 0.630 \\
+CatBoost & 0.985 & 0.440 & 0.637 & 0.541 & 0.652 \\
+XGBoost & 0.985 & 0.397 & 0.642 & 0.532 & 0.612 \\
+MLP & 0.981 & 0.453 & 0.621 & 0.539 & 0.503 \\
+CORAL & 0.985 & 0.494 & 0.494 & 0.542 & 0.631 \\
+DANN & 0.980 & 0.516 & 0.678 & 0.521 & 0.613 \\
+RIFT & 0.985 & 0.501 & 0.465 & 0.491 & 0.519 \\
+RIFT + self-training & 0.985 & 0.519 & 0.448 & 0.486 & 0.500 \\
+\bottomrule
+\end{tabular}

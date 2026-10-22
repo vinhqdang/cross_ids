@@ -11,9 +11,9 @@
 | cicids2017 | total_bytes | 0.760 | 100000 |
 | cicids2017 | bytes_per_s | 0.355 | 100000 |
 | cicids2017 | pkts_per_s | 0.183 | 100000 |
-| cicids2017 | bytes_per_pkt | 0.788 | 100000 |
+| cicids2017 | bytes_per_pkt | 0.789 | 100000 |
 | cicids2017 | fwd_bwd_byte_ratio | 0.288 | 100000 |
-| cicids2017 | fwd_bytes_per_pkt | 0.467 | 100000 |
+| cicids2017 | fwd_bytes_per_pkt | 0.469 | 100000 |
 | cicids2017 | bwd_bytes_per_pkt | 0.778 | 100000 |
 | cicids2017 | fwd_bwd_pkt_ratio | 0.597 | 100000 |
 | cicids2018 | duration | 0.335 | 100000 |
@@ -52,7 +52,7 @@
 | insdn | fwd_bwd_byte_ratio | 0.487 | 100000 |
 | insdn | fwd_bytes_per_pkt | 0.291 | 100000 |
 | insdn | bwd_bytes_per_pkt | 0.280 | 100000 |
-| insdn | fwd_bwd_pkt_ratio | 0.466 | 100000 |
+| insdn | fwd_bwd_pkt_ratio | 0.467 | 100000 |
 | iot23 | duration | 0.539 | 39379 |
 | iot23 | fwd_pkts | 0.808 | 39379 |
 | iot23 | bwd_pkts | 0.434 | 39379 |
@@ -108,4 +108,4 @@
 | usbids1 | fwd_bwd_byte_ratio | 0.979 | 100000 |
 | usbids1 | fwd_bytes_per_pkt | 0.955 | 100000 |
 | usbids1 | bwd_bytes_per_pkt | 0.068 | 100000 |
-| usbids1 | fwd_bwd_pkt_ratio | 0.520 | 100000 |
+| usbids1 | fwd_bwd_pkt_ratio | 0.519 | 100000 |

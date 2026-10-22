@@ -2,21 +2,21 @@
 
 | method | mode | n_points | spearman_rho |
 |---|---|---|---|
-| all methods | transductive | 714 | -0.048 |
-| catboost | transductive | 42 | 0.006 |
-| coral | transductive | 42 | -0.036 |
-| dann | transductive | 42 | -0.357 |
-| hgb | transductive | 42 | 0.005 |
-| lr | transductive | 42 | 0.196 |
-| mlp | transductive | 42 | -0.203 |
-| rf | transductive | 42 | 0.020 |
-| rift | transductive | 42 | 0.130 |
-| rift-noAnchor | transductive | 42 | -0.050 |
-| rift-noDN | transductive | 42 | -0.085 |
-| rift-noIFS | transductive | 42 | -0.037 |
-| rift-noLSC | transductive | 42 | 0.130 |
-| rift-poolInit | transductive | 42 | -0.127 |
-| rift-robust | transductive | 42 | -0.285 |
-| rift-st | transductive | 42 | 0.109 |
-| rift-standard | transductive | 42 | -0.154 |
-| xgboost | transductive | 42 | 0.005 |
+| all methods | transductive | 2142 | -0.055 |
+| catboost | transductive | 126 | -0.023 |
+| coral | transductive | 126 | -0.018 |
+| dann | transductive | 126 | -0.271 |
+| hgb | transductive | 126 | 0.011 |
+| lr | transductive | 126 | 0.230 |
+| mlp | transductive | 126 | -0.159 |
+| rf | transductive | 126 | -0.020 |
+| rift | transductive | 126 | -0.041 |
+| rift-noAnchor | transductive | 126 | -0.012 |
+| rift-noDN | transductive | 126 | -0.073 |
+| rift-noIFS | transductive | 126 | -0.084 |
+| rift-noLSC | transductive | 126 | -0.041 |
+| rift-poolInit | transductive | 126 | -0.081 |
+| rift-robust | transductive | 126 | -0.213 |
+| rift-st | transductive | 126 | -0.026 |
+| rift-standard | transductive | 126 | -0.131 |
+| xgboost | transductive | 126 | -0.006 |

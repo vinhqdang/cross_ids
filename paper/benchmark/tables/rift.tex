@@ -1,0 +1,16 @@
+\begin{tabular}{lrrrr}
+\toprule
+Method & Pairwise AUC & Pairwise bal. acc. & LODO AUC & Prior error \\
+\midrule
+HGB & 0.557 & 0.533 & 0.630 & -- \\
+RIFT & 0.484 & 0.510 & 0.519 & 0.413 \\
+RIFT $-$ domain norm. & 0.558 & 0.536 & 0.620 & 0.385 \\
+RIFT $-$ benign anchor & 0.538 & 0.521 & 0.543 & 0.381 \\
+RIFT $-$ invariant selection & 0.483 & 0.495 & 0.519 & 0.429 \\
+RIFT $-$ prior correction & 0.484 & 0.509 & 0.519 & -- \\
+RIFT, pooled init. & 0.487 & 0.500 & 0.498 & 0.421 \\
+RIFT, robust scaling & 0.479 & 0.504 & 0.487 & 0.425 \\
+RIFT, z-score scaling & 0.485 & 0.498 & 0.510 & 0.414 \\
+RIFT + self-training & 0.478 & 0.507 & 0.500 & 0.409 \\
+\bottomrule
+\end{tabular}
