@@ -40,6 +40,7 @@ class RiftConfig:
     st_conf: float = 0.9
     st_rounds: int = 2
     st_weight: float = 1.0
+    oracle: str = ""  # diagnostic only: "prior" uses the true pool prior, "anchor" also a truly benign anchor
 
 
 class Rift(Method):
@@ -65,11 +66,14 @@ class Rift(Method):
         self._train: tuple[np.ndarray, np.ndarray] | None = None
         self._cal: tuple[np.ndarray, np.ndarray] | None = None
         self._reference: np.ndarray | None = None
+        self.oracle_pool_labels: np.ndarray | None = None  # set by the experiment for the oracle diagnostics
         if self.config.prior_init not in ("source", "pool"):
             raise ValueError(f"unknown prior_init {self.config.prior_init!r}")
 
     def fit(self, sources: Sequence[Domain], target_pool: np.ndarray | None = None) -> "Rift":
         cfg = self.config
+        if cfg.oracle and self.oracle_pool_labels is None and target_pool is not None:
+            raise ValueError("oracle diagnostics need the labels of the target pool")
         srcs = list(sources)
         X_all, y_all = pool_sources(srcs)
         d = X_all.shape[1]
@@ -100,6 +104,8 @@ class Rift(Method):
         if transductive and cfg.lsc:
             p_pool, _ = self._probabilities(pool, adjust=False)
             self.pi_t = estimate_prior(p_pool, self.pi_s)
+            if cfg.oracle:
+                self.pi_t = float(np.mean(self.oracle_pool_labels))
             self.info["pi_t"] = self.pi_t
         self.info["pi_s"] = self.pi_s
         self.info["transductive"] = float(transductive)
@@ -192,9 +198,14 @@ class Rift(Method):
             pi = estimate_prior(scores, self.pi_s)
             if it == 0:
                 self.info["pi_init"] = pi
+            if cfg.oracle:
+                pi = float(np.mean(self.oracle_pool_labels))
             frac = max(cfg.anchor_min_frac, cfg.gamma * (1.0 - pi))
             m = max(2, int(round(frac * n)))
             idx = np.argsort(scores, kind="stable")[:m]
+            if cfg.oracle == "anchor":
+                benign = np.flatnonzero(self.oracle_pool_labels == 0)
+                idx = benign[np.argsort(scores[benign], kind="stable")][: max(2, int(round(cfg.gamma * benign.size)))]
             self.anchor_idx_ = idx
             self.info["pi_anchor"] = pi
             norm = QuantileTransport(cfg.n_quantiles).fit(pool[idx], self._reference)

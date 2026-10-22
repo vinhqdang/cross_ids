@@ -40,6 +40,32 @@ def summary(rows: list[dict]) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def class_vs_tabpfn() -> pd.DataFrame | None:
+    """Class-level FLARE-2 minus TabPFN-3.5 (seed 0; same supports), unit = target."""
+    files = sorted(glob.glob(f"{sf.RAW}/class_*_tabpfn_s0.csv"))
+    if len(files) < 2:
+        return None
+    tab = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
+    tab = tab[tab.method == "tabpfn-v3.5"]
+    base = pd.concat([pd.read_csv(f) for f in sorted(glob.glob(f"{sf.RAW}/class_*_s0.csv"))
+                      if "tabpfn" not in f and not any(v in f for v in ("f2m", "f2noperm", "f2insrc", "f2mbinary"))],
+                     ignore_index=True)
+    base = base[base.method == "flare2"]
+    d = pd.concat([base, tab], ignore_index=True)
+    d = d[(d.metric != "confusion") & d.target.isin(tab.target.unique())]
+    rows = []
+    for (task, metric), g in d.groupby(["task", "metric"]):
+        per = g.groupby(["method", "target"]).value.mean().unstack(0).dropna()
+        x = (per["flare2"] - per["tabpfn-v3.5"]).to_numpy()
+        lo, hi = sf.boot_ci(x)
+        rows.append({"metric": f"{task}:{metric}", "n_targets": len(x), "mean_diff": x.mean(), "ci_lo": lo,
+                     "ci_hi": hi, "wins": int((x > 0).sum()), "p": sf.wil(x)})
+    out = pd.DataFrame(rows)
+    out["p_holm"] = sf.holm(out["p"].tolist())
+    out.to_csv(f"{sf.OUT}/tabpfn_class.csv", index=False)
+    return out
+
+
 def main() -> None:
     os.makedirs(sf.OUT, exist_ok=True)
     seed0 = load(["flare2", *VERSIONS, "rf", "catboost-target"], (0,))
@@ -72,6 +98,9 @@ def main() -> None:
     ts.to_csv(f"{sf.OUT}/tabpfn_seeds.csv", index=False)
     print(sf.md(t))
     print(sf.md(ts))
+    tc = class_vs_tabpfn()
+    if tc is not None:
+        print(sf.md(tc))
     per_t = seed0.groupby(["target", "method"]).roc_auc.mean().unstack()[["flare2", "rf", "catboost-target", *VERSIONS]]
     print(per_t.round(3).to_string())
     print(per_t.mean().round(3).to_string())

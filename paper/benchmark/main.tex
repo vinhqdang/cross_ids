@@ -11,7 +11,7 @@
 \usepackage{caption}
 \captionsetup{font=small}
 
-\title{Why Cross-Dataset Flow-Based Intrusion Detection Fails: An Eight-Dataset Benchmark and Negative Results for Domain-Invariant Transfer}
+\title{Cross-Dataset Flow-Based Intrusion Detection: A Seven-Dataset Benchmark and Negative Results for Label-Free Transfer}
 \author{Quang-Vinh Dang\\
 British University Vietnam, Hung Yen, Vietnam\\
 \texttt{vinh.dq4@buv.edu.vn}\quad ORCID 0000-0002-3877-8024}
@@ -44,7 +44,7 @@ The second is that the datasets define attacks differently, so that the same flo
 This paper separates the two as far as a benchmark allows, and it reports a negative result in full.
 We make four contributions.
 \begin{enumerate}
-\item \textbf{A benchmark} of eight public datasets (Table~\ref{tab:datasets}) with a common flow schema, a bottom-$k$ hash sampler that gives a reproducible uniform sample of distinct rows, and a protocol with in-domain, pairwise (42 ordered pairs, labelled by whether the pair shares a laboratory or an extractor) and LODO settings, in inductive and transductive modes, over three seeds.
+\item \textbf{A benchmark} of seven public datasets (an eighth, CTU-13, supports only a minimal feature tier; Table~\ref{tab:datasets}) with a common flow schema, a bottom-$k$ hash sampler that gives a reproducible uniform sample of distinct rows, and a protocol with in-domain, pairwise (42 ordered pairs, labelled by whether the pair shares a laboratory or an extractor) and LODO settings, in inductive and transductive modes, over three seeds.
 \item \textbf{A method designed to work, and its failure.} RIFT combines per-domain rank normalisation anchored on benign traffic, invariance-driven feature selection, and test-time label-shift correction. We evaluate it with a full ablation and show that it is below its own baseline.
 \item \textbf{Controls} that answer the objection that a negative result may be an implementation failure: positive controls, an oracle search over model family, normalisation and feature subsets, a nearest-neighbour test of whether the same flow statistics carry the same labels across datasets, a dataset-identity classifier, and a fair few-label comparison.
 \item \textbf{An honest account of what the controls do and do not show}, including that the oracle search covers only two pairs and that the concept-shift evidence is correlational.
@@ -58,7 +58,7 @@ A companion study builds a few-label meta-learner on the diagnosis made here; th
 \citet{catillo2022transferability} study transfer from CIC-IDS2017 to USB-IDS-1 \citep{catillo2021usbids1}, which share an extractor, and \citet{apruzzese2022cross} cross-evaluate per-attack detectors across several networks.
 \citet{engelen2021troubleshooting} document labelling errors in CIC-IDS2017, and \citet{arp2022dos,apruzzese2023sok} discuss pitfalls of machine-learning evaluation in security.
 \citet{sarhan2022standard} propose standard NetFlow feature sets to ease cross-dataset use.
-Our benchmark differs in covering eight datasets and three extractors with one schema, in labelling each pair by how much infrastructure the two datasets share, in running label-free transfer methods against tuned baselines over three seeds, and in reporting the controls that decide whether the negative result is a finding.
+Our benchmark differs in covering seven datasets and three extractors with one schema, in labelling each pair by how much infrastructure the two datasets share, in running label-free transfer methods against default-setting baselines over three seeds, and in reporting the controls that decide whether the negative result is a finding.
 On the method side, we compare against domain-adversarial training \citep{ganin2016dann} and correlation alignment \citep{sun2016coral}, and RIFT uses the expectation-maximisation correction of the output prior of \citet{saerens2002adjusting}.
 
 \section{Benchmark}
@@ -78,13 +78,13 @@ CTU-13 supports only a minimal feature tier and is therefore used only in the co
 
 \paragraph{Common flow schema.}
 Extractors export different features, so only features with the same physical meaning and units are used.
-The core tier has five base features (duration, forward and backward packets, forward and backward bytes) and nine derived rates and ratios, all computed after harmonisation and passed through $\log(1+x)$.
+The core tier has five base features (duration, forward and backward packets, forward and backward bytes) and eight derived rates and ratios (13 features), all computed after harmonisation and passed through $\log(1+x)$.
 Ports and protocol are excluded because two of the datasets do not export them.
 Window-size and inter-arrival features exist only for some extractors and are excluded from the core tier.
 Alias tables resolve the different spellings of CICFlowMeter columns, repeated header rows of CIC-IDS2018 are removed, and negative sentinel values are clipped to zero.
 
 \paragraph{Sampling.}
-Each cleaned row receives a seeded 64-bit hash of its rounded base features and label.
+Each cleaned row receives a seeded 64-bit hash of all harmonised features the dataset provides (rounded to $10^{-6}$) and its label, so distinctness is with respect to the full feature set of the dataset.
 Per label we keep the 100\,000-row budget of rows with the smallest hash (a bottom-$k$ sketch), so that duplicated flows occupy one slot and the sample is uniform over \emph{distinct} rows.
 The attack prior is defined on distinct rows, and a class that is short shrinks the sample instead of being back-filled.
 This makes the benchmark a distinct-row benchmark, so absolute numbers are not comparable with studies that keep duplicates.
@@ -97,7 +97,7 @@ The in-domain setting is the upper reference.
 The pairwise setting uses all 42 ordered pairs of the seven core datasets, each labelled \emph{same family} (same laboratory, 4 pairs), \emph{same extractor} (different laboratory, 12 pairs) or \emph{cross-extractor} (26 pairs).
 In LODO a method trains on the other six datasets pooled.
 Target labels are never used for training, model selection or threshold tuning; threshold-dependent metrics use the decision rule of the method.
-We run seeds 0, 1 and 2 and average seeds within a scenario before computing statistics over scenarios.
+The sample is drawn once; seeds 0, 1 and 2 change the 70/30 split and the model randomness, and we average seeds within a scenario before computing statistics over scenarios.
 Metrics are ROC-AUC (headline), PR-AUC, F1, balanced accuracy, MCC, recall and false-positive rate.
 
 \paragraph{Methods.}
@@ -110,7 +110,7 @@ RIFT targets three sources of failure separately.
 \emph{Covariate shift} is addressed by domain-wise normalisation: each domain is mapped to Gaussian ranks computed on its own features.
 On source domains the normaliser is fitted on benign rows only, because benign traffic is the stable background of a network.
 On the target, where labels are unknown, the anchor set is the $\gamma=0.8$ fraction of the $(1-\hat\pi_t)$ lowest-scoring rows under the current estimate $\hat\pi_t$ of the target attack prior, and the target is transported into the source representation by quantile matching against an equally truncated reference of source benign rows.
-\emph{Spurious dataset-specific cues} are addressed by invariance-driven feature selection: a feature is kept only if the sign of its univariate association with the label is identical in every source and its minimum strength is at least 0.05; with a single source, the 25\% of features with the largest Kolmogorov--Smirnov distance between source and target are dropped.
+\emph{Spurious dataset-specific cues} are addressed by invariance-driven feature selection: a feature is kept only if the sign of its univariate association with the label is identical in every source and its minimum strength is at least 0.05; with a single source and a target pool (transductive mode), the 25\% of features with the largest Kolmogorov--Smirnov distance between source and target are dropped, and without a target pool all features are kept; at least six features are always retained.
 \emph{Label shift} is addressed by the expectation-maximisation correction of the output prior of \citet{saerens2002adjusting}, applied after isotonic calibration.
 The classifier is HGB.
 Ablations remove one component at a time (domain normalisation, anchor, selection, prior correction), replace the rank transform by robust or z-score scaling, start the anchor from the pooled rather than the source normaliser, and add uncertainty-gated self-training.
@@ -118,16 +118,16 @@ Ablations remove one component at a time (domain normalisation, anchor, selectio
 \section{Results}
 \subsection{In-domain skill does not transfer}
 Table~\ref{tab:main} gives ROC-AUC by setting.
-In-domain, the tree ensembles reach 0.985 averaged over the seven datasets (CatBoost between 0.950 on IoT-23 and 1.000 on ToN-IoT and USB-IDS-1), logistic regression 0.923.
-Across the 42 pairs the same methods reach 0.54 to 0.57: CatBoost 0.559, HGB 0.557, XGBoost 0.550, DANN 0.565, random forest 0.538.
-Between 36\% (HGB) and 48\% (random forest) of the pairs are below 0.5, which means that the learned rule ranks attacks as \emph{less} suspicious than benign flows on the target.
-Only 3 of 42 pairs reach 0.9 for CatBoost, and all three involve USB-IDS-1 (the pairs with ToN-IoT, InSDN and USB-IDS-1); the extreme pair is CIC-IDS2018$\rightarrow$CIC-IDS2017 at 0.228.
-Pairs from the same laboratory, which are the easiest on paper, are the worst: CatBoost scores 0.44 on the four same-family pairs, 0.64 on same-extractor pairs and 0.54 on cross-extractor pairs.
+In-domain, the boosted ensembles reach 0.985 (random forest 0.981) averaged over the seven datasets (CatBoost between 0.950 on IoT-23 and 1.000 on ToN-IoT and USB-IDS-1), logistic regression 0.923.
+Across the 42 pairs the tree ensembles reach 0.54 to 0.56 (CatBoost 0.559, HGB 0.557, XGBoost 0.550, random forest 0.538) and DANN 0.565.
+Between 36\% (HGB) and 48\% (random forest) of the pairs are below 0.5 for the tree ensembles (21 to 29\% are below 0.40), so on those pairs the learned rule ranks attacks as \emph{less} suspicious than benign flows on the target.
+Only 3 of 42 pairs reach 0.9 for CatBoost, and all three involve USB-IDS-1 (USB-IDS-1$\rightarrow$ToN-IoT 0.920, ToN-IoT$\rightarrow$USB-IDS-1 0.948, InSDN$\rightarrow$USB-IDS-1 0.959); the extreme pair is CIC-IDS2018$\rightarrow$CIC-IDS2017 at 0.232.
+Pairs from the same laboratory, which are the easiest on paper, are on average the worst and are strongly asymmetric: CatBoost scores 0.44 on the four same-family pairs (CIC-IDS2017$\rightarrow$CIC-IDS2018 0.75 but the reverse 0.23, ToN-IoT$\rightarrow$UNSW-NB15 0.44, UNSW-NB15$\rightarrow$ToN-IoT 0.34), 0.64 on same-extractor pairs and 0.54 on cross-extractor pairs; with four pairs and one favourable direction we do not test this ordering.
 LODO is better because six sources are pooled, but still 0.65 for CatBoost, and it varies from 0.968 on USB-IDS-1 to 0.333 on IoT-23 (Table~\ref{tab:targets}).
 
 \begin{table}[t]
 \centering\small
-\caption{ROC-AUC, mean over scenarios (seeds averaged within a scenario). Pairwise columns split the 42 ordered pairs by what the two datasets share. LODO: train on the other six datasets pooled. Transductive mode; the non-adaptive methods are unaffected by the mode.}\label{tab:main}
+\caption{ROC-AUC, mean over scenarios (seeds averaged within a scenario). Pairwise columns split the 42 ordered pairs by what the two datasets share. LODO: train on the other six datasets pooled. Transductive mode; the non-adaptive methods are unaffected by the mode up to run-to-run noise (at most 0.003).}\label{tab:main}
 \input{tables/main}
 \end{table}
 
@@ -145,28 +145,31 @@ LODO is better because six sources are pooled, but still 0.65 for CatBoost, and 
 
 No method is consistently best.
 A Friedman test over the 42 pairs finds a difference among the 17 transductive variants ($p=0.006$), but that is driven by the weak methods (logistic regression and the RIFT variants); among the inductive methods ($p=0.74$) and in LODO ($p=0.065$ transductive, $0.47$ inductive) it finds none.
-The differences among CatBoost, HGB, XGBoost and DANN are of the order of 0.01, far below the spread between pairs.
-CORAL and DANN do not repair transfer: pairwise they are at 0.524 and 0.565, in LODO at 0.631 and 0.613, against 0.630 for HGB.
+The pairwise differences among CatBoost, HGB, XGBoost and DANN are of the order of 0.01 (in LODO up to 0.04, with CatBoost best on mean rank), far below the spread between pairs; with 7 LODO targets and pairs that share sources and targets, the Friedman tests have little power, so the data neither show nor exclude a best method.
+On average CORAL and DANN do not repair transfer: pairwise they are at 0.524 and 0.565, in LODO at 0.631 and 0.613, against 0.630 for HGB, although both differ strongly by target (on LODO IoT-23 CORAL reaches 0.72 and DANN 0.76 against 0.31 for HGB).
 
 \subsection{RIFT fails}
 Table~\ref{tab:rift} shows RIFT and its ablations.
 RIFT is below its own HGB baseline in both settings (pairwise 0.484 against 0.557, LODO 0.519 against 0.630).
-Removing domain normalisation recovers the baseline (0.558 pairwise, 0.620 LODO), and removing the benign anchor recovers part of it (0.538, 0.543), so the transductive normalisation is what hurts.
+Removing domain normalisation recovers the baseline (0.558 pairwise, 0.620 LODO), and removing the benign anchor recovers part of it (0.538, 0.543), so the target-side normalisation and the benign anchor are what hurt.
+Removing the label-shift correction changes nothing (0.484 against 0.484 pairwise), as it must for ROC-AUC, because a prior-ratio adjustment is a monotone transform of the posterior.
+In LODO the invariant selection has no effect either, for a mechanical reason: no feature has the same sign in all six sources (consistent with Sect.~\ref{sec:controls}), so the selection falls back to keeping all 13 features in every LODO scenario; in the pairwise setting the Kolmogorov--Smirnov rule keeps 10 of 13.
 Replacing the rank transform by robust or z-score scaling does not help (0.479 and 0.485 pairwise).
 Self-training does not help (0.478).
-In the inductive mode, where there is no target pool and the transductive components are inactive, RIFT reduces to feature selection with HGB and all its ablations give the same numbers; it is also below HGB in LODO (0.586 against 0.630).
+In the inductive pairwise setting there is no target pool and a single source, so RIFT keeps all features and reduces to HGB on a monotone rank transform; all variants score the same (0.551 against 0.554 for HGB).
+In inductive LODO the per-domain source normalisation and the multi-source selection remain active and the variants differ (RIFT 0.586, without domain normalisation 0.620, robust scaling 0.502); RIFT is below HGB there too (0.630), and removing domain normalisation raises the score without any target data.
 
 \begin{table}[t]
 \centering\small
-\caption{RIFT and its ablations, transductive mode. Pairwise: 42 pairs; LODO: 7 targets. Prior error: mean absolute error of the estimated target attack prior.}\label{tab:rift}
+\caption{RIFT and its ablations, transductive mode. Pairwise: 42 pairs; LODO: 7 targets. Prior error (pairwise only): mean absolute error of the estimated target attack prior.}\label{tab:rift}
 \input{tables/rift}
 \end{table}
 
-The label-shift correction fails because its input fails.
-Across the 42 pairs RIFT estimates the target attack prior with a mean absolute error of 0.41 (bias $-0.35$, Pearson correlation with the true prior 0.07); in LODO it estimates an average prior of 0.003 where the true average is 0.51.
+The target-prior estimate is poor, although removing the correction does not matter for ROC-AUC and the prior error is similar for the variants that recover the baseline (0.39 and 0.38 for the variants without domain normalisation and without anchor against 0.41 for RIFT), so the error alone does not explain the loss.
+Across the 42 pairs RIFT estimates the target attack prior with a mean absolute error of 0.41 (bias $-0.35$, Pearson correlation with the true prior 0.05); in LODO it estimates an average prior of 0.003 where the true average is 0.51.
 The anchor is meant to be benign traffic, but its purity (the fraction of truly benign rows, logged as a diagnostic and never used by the method) is 0.50 in pairwise and 0.47 in LODO transfer, so the anchor is as contaminated with attacks as the pool.
 Estimating the prior with a normaliser fitted on the pool (``pooled init.'') does not help (0.487).
-Because the correction expects pure label shift, a source classifier that is inverted on the target gives the EM nothing to correct.
+We hypothesise, without having tested it, that a source classifier that is inverted on the target gives the EM nothing to correct.
 
 \begin{figure}[t]
 \centering
@@ -178,7 +181,7 @@ Because the correction expects pure label shift, a source classifier that is inv
 As a reference outside the label-free benchmark, we continue a source-pretrained CatBoost on a labelled budget of 0.1\%, 1\% and 5\% of the target training split (on average 62, 617 and 3\,083 rows), and compare it with CatBoost trained on those rows alone.
 At 0.1\%, the source-pretrained model reaches 0.835 and the target-only model 0.928 (Table~\ref{tab:fewshot}).
 Giving the continued model 300 or 500 extra trees narrows the gap to 0.911 and 0.914 against 0.932, so the effect is not only a capacity artefact, but it does not reverse: at 1\% and 5\% the two are within 0.001 to 0.002 once the trees are matched.
-Source pre-training thus gives no average benefit over target labels, and a harm at the smallest budget (0.09 AUC with 100 trees, 0.02 with 500).
+Source pre-training thus gives no average benefit over target labels for this model family, and a harm at the smallest budget (0.09 AUC with 100 trees, 0.02 with 500); continuing a boosted model by adding trees is a weak way to use source data, and stronger few-label baselines (pooled training with target weighting, source scores as a feature, an in-context model given the source rows) are not part of this study.
 
 \begin{table}[t]
 \centering\small
@@ -187,25 +190,25 @@ Source pre-training thus gives no average benefit over target labels, and a harm
 \end{table}
 
 \subsection{Shift and family explanations}
-An unsupervised shift score (an isolation forest fitted on the source and applied to the target pool) does not predict transfer skill: the Spearman correlation with zero-shot ROC-AUC over 2\,142 (scenario, method, seed) points is $-0.055$.
-Neither does sharing attack types: for every family we compared the informedness of a method on a target family when the source contains that family and when it does not.
-Pooled over families (transductive mode), the paired difference for CatBoost is $+0.012$ (95\% half-width 0.088, $p=0.82$) and for HGB $-0.046$ ($p=0.14$); none of the 248 (method, mode, family) tests has $p<0.05$.
-The benchmark thus shows no evidence that the failure is due to missing attack types in the source.
+An unsupervised shift score (an isolation forest fitted on the source and applied to the target pool) does not predict transfer skill: the Spearman correlation with zero-shot ROC-AUC over 2\,142 (scenario, method, seed) points is $-0.055$ (nominal $p=0.01$, but the points are not independent; per method $|\rho|\le0.27$ with mixed signs).
+Sharing attack types does not obviously predict it either: for every family we compared the informedness of a method on a target family when the source contains that family and when it does not.
+Pooled over families (transductive mode), the paired difference for CatBoost is $+0.012$ (95\% half-width 0.088, $p=0.82$) and for HGB $-0.046$ ($p=0.14$); none of the 248 (method, mode, family) tests has $p<0.05$, but each test uses only 3 to 6 paired cells and cannot reach 0.05 with fewer than 6, so the benchmark has too little power to show whether missing attack types matter.
 
 \section{Controls}
 A negative result is a finding only if competing explanations are ruled out.
 \paragraph{The pipeline works.}
 The same pipeline reaches 0.985 in-domain, and a target-only CatBoost with 0.1\% of target labels reaches 0.93, so the features carry the signal and the code can learn it.
 
-\paragraph{Tuning is not the explanation (two pairs).}
-For two pairs we searched over model family (HGB, CatBoost, XGBoost, random forest, logistic regression), main hyperparameters, normalisation (none, global, per-domain rank) and feature subsets (all, or dropping one feature group), and selected the best configuration on the target test split, which is an optimistic oracle.
-For CIC-IDS2017$\rightarrow$CIC-IDS2018 the oracle reaches 0.799 (benchmark HGB 0.683), still far from the in-domain 0.97 to 1.00; for CIC-IDS2017$\rightarrow$USB-IDS-1 it reaches 0.862 (benchmark HGB 0.972).
-Two pairs and a reduced grid are not an exhaustive search, and we do not claim that no configuration exists that does better.
+\paragraph{Tuning as an explanation (one informative pair).}
+For CIC-IDS2017$\rightarrow$CIC-IDS2018 we searched all five model families (HGB, CatBoost, XGBoost, random forest, logistic regression) with two settings of the main hyperparameters, three normalisations (none, global, per-domain rank) and the full feature set or the set without one feature group (264 configurations, seed 0, 30\,000 source rows), and selected the best on the target test split, an optimistic oracle.
+It reaches 0.799 against 0.683 for the benchmark HGB, still far from the in-domain 0.97 to 1.00.
+For CIC-IDS2017$\rightarrow$USB-IDS-1 only 33 HGB configurations were run and the oracle (0.862) is below the full-data benchmark HGB (0.972), so that pair says nothing about tuning.
+The grid is reduced and the source is subsampled, so the result is not an upper bound over all configurations.
 
 \paragraph{The same statistics do not carry the same labels.}
 We standardise source and target with source statistics, find for each target row its 10 nearest source rows, and restrict to the \emph{overlap region} (rows whose mean neighbour distance is at most the 90th percentile of source-to-source distances).
 There the majority label of the neighbours should agree with the true target label if $P(y\mid x)$ were shared.
-Over the 19 pairs with at least 100 overlapping rows the median Cohen's $\kappa$ is 0.03, 84\% of the pairs have $\kappa\le0.1$ and the maximum is 0.25 (Fig.~\ref{fig:kappa}); the in-domain reference has $\kappa$ of 0.91 on average.
+Over the 19 pairs with at least 100 overlapping rows (seed 0; 23 of the 42 pairs have fewer) the median Cohen's $\kappa$ is 0.03, 84\% of the pairs have $\kappa\le0.1$ and the maximum is 0.25 (Fig.~\ref{fig:kappa}); three of the 19 values are exactly 0, which a single-class overlap region also produces, and only five are negative, so the pattern is closer to independence than to inversion. The in-domain reference, source-test rows against the same source-train index, has $\kappa$ of 0.91 on average and is not matched in region or difficulty.
 The pair CIC-IDS2017$\rightarrow$CIC-IDS2018, from one laboratory, has $\kappa=-0.07$ with 40\% of the target rows in the overlap region.
 
 \begin{figure}[t]
@@ -215,13 +218,13 @@ The pair CIC-IDS2017$\rightarrow$CIC-IDS2018, from one laboratory, has $\kappa=-
 \end{figure}
 
 \paragraph{No flow feature keeps its meaning.}
-For each of the 14 core features we computed the univariate ROC-AUC with the label in every dataset.
-The sign of the association (above or below 0.5) is mixed for all 14 features, with per-dataset AUC ranges such as 0.025 to 0.760 for total bytes and 0.057 to 0.808 for forward packets (Fig.~\ref{fig:sign}).
+For each feature we computed the univariate ROC-AUC with the label in every dataset.
+The sign of the association (above or below 0.5) is mixed for all 14 features of the eight datasets (13 core features and the minimal-tier \texttt{bytes\_per\_pkt}) and also for all 13 core features of the seven core datasets, with per-dataset AUC ranges such as 0.025 to 0.760 for total bytes and 0.057 to 0.808 for forward packets (Fig.~\ref{fig:sign}).
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.9\textwidth]{figures/feature_sign.pdf}
-\caption{Univariate ROC-AUC of each core feature with the attack label, per dataset (centred at 0.5).}\label{fig:sign}
+\caption{Univariate ROC-AUC of each core feature with the attack label, per dataset (centred at 0.5); the figure includes CTU-13 and the minimal-tier feature \texttt{bytes\_per\_pkt}.}\label{fig:sign}
 \end{figure}
 
 \paragraph{Datasets are easy to tell apart.}
@@ -243,7 +246,7 @@ Datasets differ in attack mix and benign background, and a per-feature sign flip
 The nearest-neighbour test conditions on flow statistics but is restricted to the overlap region, which is small for most pairs (a median overlap fraction below 0.01), and a $\kappa$ near zero there means only that the neighbours' labels are uninformative, whichever way the shift is decomposed.
 A per-attack-type comparison of the same attack in two laboratories, which would separate attack-mix shift from labelling disagreement, is not part of this study.
 Second, the oracle control covers two pairs.
-Third, the seven datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}, with only 14 harmonised flow features and no ports or payload, and the distinct-row sampling changes attack priors relative to natural traffic.
+Third, the seven datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}, with only 13 harmonised flow features and no ports or payload, and the distinct-row sampling changes attack priors relative to natural traffic.
 Fourth, RIFT is one design; the negative result concerns this design and these ablations.
 
 \paragraph{Implications.}

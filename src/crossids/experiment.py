@@ -20,7 +20,7 @@ from threadpoolctl import threadpool_limits
 
 from .datasets import DatasetInfo, load_processed, real_info, synthetic_info, synthetic_tables
 from .fewshot import FEWSHOT_KINDS, fewshot_scores, shift_score, targetonly_scores
-from .methods import METHOD_NAMES, make_method
+from .methods import ALL_METHOD_NAMES, METHOD_NAMES, make_method
 from .methods.base import Domain, MethodUnavailable
 from .metrics import METRIC_NAMES, evaluate, per_attack_recall
 from .schema import ALL_TIERS, SOURCES, features_for, supports
@@ -98,7 +98,7 @@ def load_config(path: str | Path, overrides: dict | None = None) -> dict:
     for key, value in (overrides or {}).items():
         if value is not None:
             cfg[key] = value
-    unknown = [m for m in cfg["methods"] if m not in METHOD_NAMES]
+    unknown = [m for m in cfg["methods"] if m not in ALL_METHOD_NAMES]
     if unknown:
         raise ValueError(f"unknown methods in config: {unknown}")
     unknown = [e for e in cfg["experiments"] if e not in EXPERIMENT_NAMES]
@@ -364,6 +364,8 @@ def _run_one(name: str, sc: Scenario, seed: int, splits: dict, features: list[st
     target_train, target_test = splits[sc.target]
     use_pool = mode == "transductive" and method.transductive and sc.experiment != "indomain"
     pool = target_train[features].to_numpy(dtype=np.float64) if use_pool else None
+    if getattr(getattr(method, "config", None), "oracle", "") and pool is not None:
+        method.oracle_pool_labels = target_train["label"].to_numpy().astype(int)  # diagnostic variants only
     t0 = time.perf_counter()
     method.fit(sources, pool)
     fit_seconds = time.perf_counter() - t0

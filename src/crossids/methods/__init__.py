@@ -22,6 +22,12 @@ RIFT_VARIANTS: dict[str, RiftConfig] = {
     "rift-poolInit": RiftConfig(prior_init="pool"),
 }
 
+# Diagnostics that read the labels of the target pool. They are not label-free methods and are not run by default.
+ORACLE_VARIANTS: dict[str, RiftConfig] = {
+    "rift-oraclePrior": RiftConfig(oracle="prior"),
+    "rift-oracleAnchor": RiftConfig(oracle="anchor"),
+}
+
 Factory = Callable[[int, int | None, str], Method]
 
 
@@ -33,8 +39,8 @@ def _factory(name: str) -> Factory:
         return lambda seed, threads, device: Coral(seed=seed)
     if name == "dann":
         return lambda seed, threads, device: Dann(seed=seed)
-    if name in RIFT_VARIANTS:
-        config = RIFT_VARIANTS[name]
+    if name in RIFT_VARIANTS or name in ORACLE_VARIANTS:
+        config = RIFT_VARIANTS.get(name) or ORACLE_VARIANTS[name]
         return lambda seed, threads, device: Rift(config=config, seed=seed, name=name)
     raise KeyError(f"unknown method {name!r}")
 
@@ -52,9 +58,12 @@ METHOD_NAMES: tuple[str, ...] = (
 )
 
 
+ALL_METHOD_NAMES: tuple[str, ...] = (*METHOD_NAMES, *ORACLE_VARIANTS)
+
+
 def make_method(name: str, seed: int = 0, threads: int | None = None, device: str = "cpu") -> Method:
     """Instantiate a registered method. Raises MethodUnavailable when it cannot run here."""
     return _factory(name)(seed, threads, device)
 
 
-__all__ = ["Domain", "Method", "MethodUnavailable", "METHOD_NAMES", "make_method"]
+__all__ = ["Domain", "Method", "MethodUnavailable", "METHOD_NAMES", "ALL_METHOD_NAMES", "make_method"]

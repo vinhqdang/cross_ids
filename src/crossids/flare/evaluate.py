@@ -40,7 +40,7 @@ from ..methods.baselines import CatBoostBaseline
 from ..metrics import evaluate as score_predictions
 from ..metrics import per_attack_recall
 from .al import empty_support_embeddings, select_flare_al, select_kcenter_raw
-from .data import Split, load_split, meta_train_keys, target_features, target_keys
+from .data import Split, gauss_rank, load_split, meta_train_keys, target_features, target_keys
 from .model import EpisodeModel, load_model
 
 log = logging.getLogger("crossids.flare.evaluate")
@@ -78,7 +78,8 @@ ZERO_SHOT = ("catboost-lodo", "catboost-pairwise-mean", "catboost-pairwise-best"
 PAIRWISE_METHOD = "catboost"
 PROTONET = "protonet"
 PROTONET_SUFFIX = "_protonet"
-BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn-v2", "tabpfn-v3", "tabpfn-v3.5")
+BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn-v2", "tabpfn-v3", "tabpfn-v3.5",
+             "tabpfn-v3.5-rank", "tabpfn-v3.5-src")
 # TabPFN baselines. The default backend runs the weights on this machine (versions other than v2 need the Prior Labs
 # license accepted for the token in TABPFN_TOKEN or the git-ignored token file). Setting TABPFN_BACKEND=api sends the
 # support and query rows of the (public) benchmark data to the Prior Labs service instead, which has a daily quota
@@ -86,6 +87,11 @@ BASELINES = ("catboost-target", "rf", "lr", "knn", "catboost-ft", "tabpfn-v2", "
 TABPFN_LOCAL = {"tabpfn-v2": "v2", "tabpfn-v3": "v3", "tabpfn-v3.5": "v3.5"}  # method -> tabpfn ModelVersion value
 TABPFN_API = {"tabpfn-v2": "v2_default", "tabpfn-v3": "v3_default", "tabpfn-v3.5": "v3.5_default"}  # tabpfn_client
 TABPFN_VERSIONS = TABPFN_LOCAL
+# Controls: "rank" feeds TabPFN the Gaussian-rank features FLARE-2 sees (ranked over support and query rows);
+# "src" adds source rows from the other datasets (labels as in the source) to the support set as context.
+TABPFN_VARIANTS = {"tabpfn-v3.5-rank": ("tabpfn-v3.5", "rank"), "tabpfn-v3.5-src": ("tabpfn-v3.5", "src")}
+SRC_CONTEXT_ROWS = 1000
+SRC_POOL_PER_DOMAIN = 5000
 TABPFN_API_RETRIES = 3
 TABPFN_TOKEN_FILE = Path("runs/tabpfn_token.txt")  # git-ignored; the token is never logged or committed
 TABPFN_CHUNK = 30000  # query rows per predict call
@@ -140,6 +146,12 @@ def load_or_draw_supports(path: Path, target: str, seed: int, y_train: np.ndarra
                "supports": {str(k): [d.tolist() for d in drawn[k]] for k in ks}}
     path.write_text(json.dumps(payload), encoding="utf-8")
     return drawn
+
+
+def rank_support_query(Xs: np.ndarray, Xq: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Gaussian-rank features of support and query rows, ranked jointly as FLARE-2 does."""
+    Z = gauss_rank(np.vstack([Xs, Xq]))
+    return Z[: len(Xs)], Z[len(Xs):]
 
 
 def load_tabpfn_token(path: Path = TABPFN_TOKEN_FILE) -> bool:
@@ -252,6 +264,24 @@ class SeedState:
     pool: tuple | None = None
     emb0: np.ndarray | None = None
     cache: dict = field(default_factory=dict)
+    source_pool: list | None = None
+
+    def source_context(self, n: int = SRC_CONTEXT_ROWS, draw: int = 0) -> tuple[np.ndarray, np.ndarray]:
+        """``n`` source rows, an equal share from every source dataset (dataset order), seeded by (seed, draw)."""
+        if self.source_pool is None:
+            rng = np.random.default_rng([self.seed, 5150])
+            self.source_pool = []
+            for dom in self.sources_fn():
+                take = rng.permutation(len(dom.y))[:SRC_POOL_PER_DOMAIN]
+                self.source_pool.append((np.asarray(dom.X)[take], np.asarray(dom.y)[take]))
+        rng = np.random.default_rng([self.seed, 5151, int(draw)])
+        per = n // len(self.source_pool)
+        Xs, ys = [], []
+        for X, y in self.source_pool:
+            take = rng.permutation(len(y))[:per]
+            Xs.append(X[take])
+            ys.append(y[take])
+        return np.vstack(Xs), np.concatenate(ys)
 
     def model(self, name: str) -> EpisodeModel | None:
         suffix = PROTONET_SUFFIX if name == PROTONET else FLARE_VARIANTS[name][0]
@@ -341,6 +371,14 @@ def _compute(name: str, st: SeedState, idx: np.ndarray, k: int, draw: int) -> tu
                                  verbose=0, random_seed=draw, allow_writing_files=False, thread_count=ctx.threads)
         est.fit(base.scaler.transform(Xs.astype(np.float64)), ys, init_model=base.model)
         return est.predict_proba(base.scaler.transform(Xt.astype(np.float64)))[:, 1], ys
+    if name in TABPFN_VARIANTS:
+        base, kind = TABPFN_VARIANTS[name]
+        device = "cuda" if ctx.device == "cuda" else "cpu"
+        if kind == "rank":
+            Zs, Zt = rank_support_query(Xs, Xt)
+            return _tabpfn_proba(base, device, draw, Zs, ys, Zt), ys
+        Xc, yc = st.source_context(SRC_CONTEXT_ROWS, draw)
+        return _tabpfn_proba(base, device, draw, np.vstack([Xc, Xs]), np.concatenate([yc, ys]), Xt), ys
     if name in TABPFN_VERSIONS:
         return _tabpfn_proba(name, "cuda" if ctx.device == "cuda" else "cpu", draw, Xs, ys, Xt), ys
     if name in CONTEXT_METHODS:
@@ -578,8 +616,8 @@ def main(argv: list[str] | None = None) -> None:
     torch.set_num_threads(args.threads)
     out = Path(args.out or f"{args.runs_dir}/eval_{args.target}.csv")
     methods = list(args.methods)
-    for name in [m for m in methods if m in TABPFN_VERSIONS]:
-        ok, reason = tabpfn_status(name)
+    for name in [m for m in methods if m in TABPFN_VERSIONS or m in TABPFN_VARIANTS]:
+        ok, reason = tabpfn_status(TABPFN_VARIANTS[name][0] if name in TABPFN_VARIANTS else name)
         if not ok:
             log.warning("skipping %s: %s", name, reason)
             methods.remove(name)

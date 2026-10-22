@@ -1,3 +1,6 @@
+                    auc  auc_swapped_ids  auc_shuffled_rows
+model         k                                            
+flare2-m      16  0.882            0.882              0.882
 flare2-noperm 16  0.443            0.883              0.443
         model  k  draw   auc  auc_swapped_ids  auc_shuffled_rows
 flare2-noperm 16     0 0.240            0.755              0.240

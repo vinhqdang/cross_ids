@@ -9,7 +9,7 @@ from pathlib import Path
 
 from . import datasets
 from .experiment import load_config, run_experiments
-from .methods import METHOD_NAMES
+from .methods import ALL_METHOD_NAMES
 from .report import write_report
 from .schema import SOURCES
 
@@ -35,7 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
     p = sub.add_parser("run", help="run experiments from a config (resumable)")
     p.add_argument("--config", required=True)
     p.add_argument("--datasets", nargs="+", choices=list(SOURCES), default=None)
-    p.add_argument("--methods", nargs="+", choices=list(METHOD_NAMES), default=None)
+    p.add_argument("--methods", nargs="+", choices=list(ALL_METHOD_NAMES), default=None)
     p.add_argument("--experiments", nargs="+", choices=["indomain", "pairwise", "lodo", "fewshot"], default=None)
     p.add_argument("--modes", nargs="+", choices=["transductive", "inductive"], default=None)
     p.add_argument("--results-dir", default=None)
