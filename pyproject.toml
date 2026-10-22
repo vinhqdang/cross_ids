@@ -17,11 +17,21 @@ dependencies = [
     "pyarrow",
     "pyyaml",
     "catboost",
+    "xgboost",
+    "matplotlib",
+    "tabulate",
+    "threadpoolctl",
     "torch",
 ]
 
 [project.optional-dependencies]
 test = ["pytest"]
+# TabPFN baselines of the few-label study (weights need a Prior Labs license for versions other than v2)
+tabpfn = ["tabpfn", "huggingface_hub"]
+# TABPFN_BACKEND=api: send the support and query rows to the Prior Labs service
+tabpfn-api = ["tabpfn-client"]
+# Windows certificate store for the downloads
+windows = ["truststore"]
 
 [project.scripts]
 crossids = "crossids.cli:main"

@@ -1,15 +1,27 @@
 # cross_ids
 
-Cross-dataset flow-based intrusion detection. Models are trained on labelled
-source networks and evaluated on a target network whose labels are never used
-for training, model selection or threshold tuning. The task is binary detection
-(benign = 0, attack = 1).
+Cross-dataset flow-based network intrusion detection: a benchmark of why transfer between datasets fails, and a study of what a few labelled target flows can recover.
+Models are trained on labelled source networks and evaluated on a target network. In the label-free benchmark the target labels are never used for training, model selection or threshold tuning; in the few-label study the target contributes only $k$ labelled flows. The task is binary detection (benign = 0, attack = 1), with attack-class results for the few-label study.
 
-The benchmark covers six producers and three flow-extractor families, reports
-every result by transfer type, and includes **RIFT** (Rank-Invariant Flow
-Transfer), a method that treats covariate shift, spurious cues and label shift
-separately, and **RIFT-ST**, an uncertainty-gated self-training extension. The
-full specification is in `DESIGN.md`.
+The repository holds one manuscript, `paper/main.tex`, built from the results in `results/`:
+
+1. **Benchmark.** Seven public datasets (eight with CTU-13), five laboratories, three flow extractors; in-domain, pairwise (42 ordered pairs) and leave-one-dataset-out (LODO) settings; eight baselines and **RIFT**, a domain-invariant method of our own, with ablations and oracle diagnostics. Result: transfer fails, RIFT does not repair it, and single-attack-family transfer is also near chance.
+2. **Few-label study.** **FLARE-2**, a transformer meta-trained on tasks from the other datasets, against tree ensembles and **TabPFN** (versions 3 and 3.5), with three meta-training seeds, attack-class results, ablations and controls. Result: FLARE-2 matches the trees on binary ROC-AUC and TabPFN is slightly better on every target.
+
+`DESIGN.md` is the specification of both parts, `docs/` holds the related-work notes, and `HANDOFF.md` records the state of the project, the pitfalls found on the development machine and what is open.
+
+## Repository layout
+
+| Path | Contents |
+|---|---|
+| `src/crossids/` | Benchmark package: schema, datasets, sampling, normalisation, selection, label shift, methods (`methods/`), experiment runner, analysis, controls, few-shot reference |
+| `src/crossids/flare/` | Few-label study: episodes and tasks (`data.py`), models (`model.py`), meta-training (`train.py`), evaluation (`evaluate.py`, `evaluate_class.py`), reports (`report.py`, `report_class.py`), active selection (`al.py`) |
+| `configs/` | `default.yaml` (full benchmark), `smoke.yaml` (synthetic domains) |
+| `scripts/` | Statistics (`stats_flare.py`, `stats_seeds.py`, `stats_tabpfn.py`), table and figure generators for the paper (`make_tables_benchmark.py`, `make_tables_fewlabel.py`), controls (`family_transfer.py`, `incontext_controls.py`, `diag_noperm.py`), the early exploratory `quick_catboost.py` |
+| `results/` | Raw per-run results and derived tables, all in git (see Results) |
+| `paper/` | `main.tex`, `refs.bib`, `tables/` and `figures/` generated from `results/` |
+| `tests/` | Unit and integration tests (synthetic data only) |
+| `data/`, `runs/` | Raw and cached datasets, checkpoints and logs; git-ignored |
 
 ## Datasets
 
@@ -58,8 +70,8 @@ cross-extractor shift and are not corrected.
 ### Sampling, distinct rows and the prior
 
 Harmonisation reads raw files in chunks with only the needed columns. Each
-cleaned row gets a seeded 64-bit hash of its rounded base features combined
-with its label, mapped to `u` in `[0, 1)`. Per label, a bottom-k sketch keeps the
+cleaned row gets a seeded 64-bit hash of all harmonised features the dataset provides (rounded to
+1e-6) combined with its label, mapped to `u` in `[0, 1)`. Per label, a bottom-k sketch keeps the
 `max_rows` rows with the smallest `u`. Duplicate rows share a hash and occupy one
 slot, so the sketch is a uniform sample of **distinct** rows.
 
@@ -224,7 +236,8 @@ pip install -e .
 ```
 
 Python 3.11 or newer. Dependencies are listed in `requirements.txt`. The
-`crossids` console script is installed with the package.
+`crossids` console script is installed with the package. Optional extras: `pip install -e .[tabpfn]` for the TabPFN baselines,
+`.[tabpfn-api]` for the API backend, `.[windows]` for the Windows certificate store and `.[test]` for pytest.
 
 ## Usage
 
@@ -253,95 +266,49 @@ cores).
 ## Results
 
 `crossids run` writes `results/runs.csv` and `results/per_attack.csv`.
-`crossids report` writes `results/summary.csv` and `results/summary.md`, with one
-table per mode, experiment and transfer type.
+`crossids report` writes `results/summary.csv` and `results/summary.md`, with one table per mode, experiment and transfer type, and `crossids analyze` writes the tables and figures of `results/analysis/`.
 
-`results/quick_catboost/` contains exploratory CatBoost runs. Their samples are
-water-filled per attack type, so their priors are not natural priors and their
-numbers are not benchmark results; each file says so at the top.
-
-## Part II: FLARE
-
-FLARE (Few-shot Learning of Attack Rules across Environments, DESIGN.md §11–19)
-is an in-context detector meta-trained on the other core-tier datasets (leave one
-dataset out). At test time it receives k labelled target flows (at least one per
-class) and the unlabelled target flows, and it predicts the attack probability of
-every target flow without any gradient step on the target. Code lives in
-`src/crossids/flare/`:
-
-| Module | Contents |
+| Folder | Contents |
 |---|---|
-| `data.py` | Part I 70/30 split per seed (same `split_tables` call, so test rows match the benchmark), per-episode Gaussian-rank normalisation, episode sampler with augmentations A1–A4 (switchable), padded batches, `EpisodeStream` for DataLoader workers with per-worker seeded generators |
-| `model.py` | FLARE encoder (§13), ProtoNet baseline, sign-flip test-time ensemble, checkpoints |
-| `train.py` | Meta-training: AdamW, 1000-step warm-up and cosine schedule, validation every 500 steps on 64 held-out source episodes, `last.pt` every 1000 steps with automatic resume, `--bench` timing |
-| `evaluate.py` | Shared support draws (`supports_<target>_s<seed>.json`), FLARE variants, ProtoNet, active cold start, CatBoost, RF, LR, kNN, source-pretrained CatBoost, TabPFN when available, full-label CatBoost reference, per-attack recall at k = 16 |
-| `al.py` | Active cold start (§15): k-center on label-free embeddings, then entropy times distance; raw-feature k-center |
-| `report.py` | Learning curves, Wilcoxon tests against target-only CatBoost, per-attack-family recall, Part I reference line |
+| `results/runs.csv`, `per_attack.csv`, `summary.*` | Benchmark runs: 3 seeds, 4 experiments, 17 methods and variants, plus the two RIFT oracle diagnostics |
+| `results/analysis/` | Benchmark analysis (method ranking, Friedman tests, feature signs, pairwise matrices, family analysis, few-shot curve, shift score, prior estimation) |
+| `results/controls/` | Oracle search, nearest-neighbour concept test, dataset separability, fair few-label comparison, single-family transfer (`family_transfer.csv`) |
+| `results/flare/raw/` | Few-label evaluation CSVs per target and seed: FLARE-2 and baselines (`eval_*_all_s*.csv`, `class_*_s*.csv`), loss-masked and ablation variants, TabPFN (`*_tabpfn_s*.csv`), normalisation and in-context controls (`rankctl_*`, `incontext_s1.csv`, `noperm_diagnostic_log.txt`) |
+| `results/flare/stats/` | Paired statistics: `stats.md` (seed 0, five baselines), `seeds*.csv` (three seeds), `tabpfn*.csv` |
+| `results/quick_catboost/` | Exploratory CatBoost runs. Their samples are water-filled per attack type, so their priors are not natural priors and their numbers are not benchmark results; each file says so at the top |
 
-**Invariance and augmentation.** The model sees, for every feature, the rank of
-each row within its episode. It is therefore invariant to any strictly monotone
-per-feature transform by construction, and a monotone warp of the raw values
-changes nothing. Augmentation A1 is the per-feature sign flip (p = 0.5). The
-monotone warp exists behind `--warp` but is off by default. The model is
-invariant to feature order, so the test-time ensemble (E = 8) varies only the
-sign flips. With `E = 1` the prediction is the plain forward pass.
+## Few-label study: FLARE-2 and TabPFN
 
-Usage (run from the repository root; the default device is CUDA when available,
-pass `--device cpu` for the tiny configuration):
+FLARE-2 (DESIGN.md Part II) is an in-context detector meta-trained on the other core-tier datasets (leave one dataset out). At test time it receives $k$ labelled target flows (at least one per class) and the unlabelled target flows and predicts without any gradient step on the target. It uses random label slots with a class-equivariant matching readout, so one model serves binary detection and attack-type classification. Checkpoints are selected on a held-out source dataset.
 
 ```bash
-# meta-train FLARE for one target and seed (default: 6 layers, width 128, 4 heads, 20k steps, query 256)
-python -m crossids.flare.train --target usbids1 --seed 0 --out runs/flare/usbids1_s0
-# same command again resumes from runs/flare/usbids1_s0/last.pt
-# timing only: 3 timed steps after a 5-step warm-up, no validation or checkpoints
-python -m crossids.flare.train --target usbids1 --bench 3 --device cpu
+# meta-train FLARE-2 for one target and seed (6 layers, width 128, 4 heads, 20k steps, 256 query rows; resumes from last.pt)
+python -m crossids.flare.train --target usbids1 --seed 0 --steps 20000 --device cuda --model flare2 --out runs/flare/usbids1_s0_f2
+# variants: --loss-mask-unsupported (run suffix _f2m), --no-slot-perm (_f2_noperm), --val-mode insource (_f2_insrc), --tasks binary
 
-# ablations (seed 0): no sign flip (noA1), no composite tasks (noA3), row MLP instead of feature
-# attention (rowmlp), synthetic random-function episodes only (synthetic); and ProtoNet
-python -m crossids.flare.train --target usbids1 --ablation noA1 --out runs/flare/usbids1_s0_noA1
-python -m crossids.flare.train --target usbids1 --model protonet --out runs/flare/usbids1_s0_protonet
-
-# few-shot evaluation: k in {4,...,128}, 10 shared support draws, metrics on the Part I target test split
-python -m crossids.flare.evaluate --target usbids1 --seeds 0 1 2 --runs-dir runs/flare --out runs/flare/eval_usbids1.csv
-
-# summary: learning curves per target and averaged, Wilcoxon tests, per-attack-family recall at k = 16
-python -m crossids.flare.report --runs runs/flare --out results/flare
+# binary evaluation: k in {4,...,128}, 10 shared support draws, metrics on the benchmark target test split
+python -m crossids.flare.evaluate --target usbids1 --seeds 0 --methods flare2 rf catboost-target catboost-ft lr knn \
+    --device cuda --out runs/flare/eval_usbids1_all_s0.csv --supports-dir runs/flare
+# attack-class evaluation (per-class detection and N-way); --ks, --draws and --max-query bound the work
+python -m crossids.flare.evaluate_class --target usbids1 --seeds 0 --methods flare2 catboost rf lr knn --device cuda \
+    --out runs/flare/class_usbids1_s0.csv
 ```
 
-Training options: `--num-workers` (DataLoader workers that generate episodes,
-default 2; the episode sequence is deterministic for a given seed and worker count),
-`--query-size` (256), `--val-every` (500), `--log-every` (50), `--compile`
-(`torch.compile`, off by default). On CUDA, bf16 autocast is used only when the
-device supports it natively (compute capability 8.0 or newer); otherwise fp16
-autocast with a gradient scaler is used. The chosen mode is logged.
+Evaluation CSVs have one row per (method, target, k, draw, seed); rows are appended as they are produced and skipped on restart, support draws are stored in `supports_<target>_s<seed>.json` and shared by every method, and `--max-query N` scores every method on a fixed stratified subsample of the test rows. Normalisation controls are the methods `flare2-rank0` (ranks over the support only) and `flare2-rank256` (support and 256 random query rows). A control on the use of the support labels is `scripts/incontext_controls.py`, and `scripts/diag_noperm.py` explains the no-permutation ablation.
 
-The evaluation CSV has one row per (method, target, k, draw, seed) with ROC-AUC,
-PR-AUC, balanced accuracy and F1. `catboost-fulllabel` is the full-label upper
-reference, stored once per seed with k = 0. `per_attack_<target>.csv` holds
-per-attack-type recall at k = 16. Rows are appended as they are produced, and rows
-already present are skipped on restart. Support draws are stored in
-`supports_<target>_s<seed>.json` and reused by every method. Test-time normalisation
-uses the unlabelled target test features, as the episode normalisation does during
-meta-training.
+**TabPFN.** `tabpfn-v2`, `tabpfn-v3` and `tabpfn-v3.5` run the released weights of the `tabpfn` package on the same support and query rows. Versions other than v2 need a Prior Labs license accepted for your account, and a token in the `TABPFN_TOKEN` environment variable or in the git-ignored file `runs/tabpfn_token.txt` (never commit it). The weights are under a non-commercial research license; state the version in any paper. `TABPFN_BACKEND=api` sends the support and query rows to the Prior Labs service instead (daily quota, models may change over time), and `TABPFN_CHUNK` sets the query rows per predict call to save GPU memory.
 
-The report reads the Part I table `results/runs.csv` read-only for the best
-label-free method per target (LODO, transductive, seed 0), and writes CSVs and
-figures under `results/flare/`.
+**RIFT diagnostics.** `rift-oraclePrior` and `rift-oracleAnchor` read the labels of the target pool and are not label-free methods; they are registered in `ALL_METHOD_NAMES` but not in the default method list, and `crossids analyze` leaves them out. `scripts/family_transfer.py` runs the single-attack-family transfer control.
 
-Meta-training on a GPU is run by `scripts/flare_colab.sh`. It packages `src/`, the
-project metadata and the cached parquet files, creates a Colab session with
-`google-colab-cli`, and runs each job detached on the VM with a log file. The
-local side polls every job with short calls and downloads its outputs when it
-finishes. A relaunched job resumes from its `last.pt`, and a finished job is
-skipped:
+## Reproducing the paper
 
 ```bash
-scripts/flare_colab.sh              # all stages: package setup train eval report stop
-FLARE_DRY_RUN=1 scripts/flare_colab.sh train   # print the colab commands without running them
+python -m pytest -q -p no:warnings tests                       # all tests
+python scripts/stats_flare.py && python scripts/stats_seeds.py && python scripts/stats_tabpfn.py
+python scripts/make_tables_benchmark.py && python scripts/make_tables_fewlabel.py   # tables and figures in paper/
+cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
 
-Tests for FLARE run on CPU with the tiny configuration:
+Training needs a GPU (about 45 minutes per model on an RTX-class GPU with 16 GB; two models at once can exhaust the memory and slow both). The benchmark runs on CPU. Results in `results/` are enough to regenerate all tables, figures and statistics without retraining.
 
-```bash
-pytest tests/test_flare.py
-```
+Notes for Windows: import `pyarrow` before `torch` (the package does it); run downloads through `truststore` if the certificate store is missing; tests use `shutil.which("bash")` because `subprocess` otherwise resolves `bash` to the WSL launcher.

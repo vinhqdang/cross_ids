@@ -1,7 +1,7 @@
-"""Build the LaTeX tables and copy the figures of the benchmark paper (paper/benchmark) from results/.
+"""Build the LaTeX tables and copy the figures of the benchmark paper (paper) from results/.
 
-Every number in paper/benchmark/tables comes from results/runs.csv, results/analysis and results/controls, so the
-tables cannot drift from the data. Usage: python scripts/make_benchmark_tables.py
+Every number in paper/tables comes from results/runs.csv, results/analysis and results/controls, so the
+tables cannot drift from the data. Usage: python scripts/make_tables_benchmark.py
 """
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import shutil
 import numpy as np
 import pandas as pd
 
-OUT = "paper/benchmark"
+OUT = "paper"
 TAB = f"{OUT}/tables"
 FIG = f"{OUT}/figures"
 RUNS = "results/runs.csv"

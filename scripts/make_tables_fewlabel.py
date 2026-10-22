@@ -1,7 +1,7 @@
-"""Build the LaTeX tables and figures of the FLARE-2 paper from results/flare.
+"""Build the LaTeX tables and figures of the few-label study (FLARE-2, TabPFN) from results/flare.
 
-Every number in paper/flare/tables comes from this script, so the manuscript
-cannot drift from the CSVs. Usage: python scripts/make_paper_tables.py
+Every number in paper/tables (few-label study) comes from this script, so the manuscript
+cannot drift from the CSVs. Usage: python scripts/make_tables_fewlabel.py
 """
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ import pandas as pd
 sys.path.insert(0, os.path.dirname(__file__))
 import stats_flare as sf  # noqa: E402
 
-OUT = "paper/flare"
+OUT = "paper"
 TAB = f"{OUT}/tables"
 FIG = f"{OUT}/figures"
 NAMES = {"cicids2017": "CIC-IDS2017", "cicids2018": "CIC-IDS2018", "ctu13": "CTU-13", "insdn": "InSDN",

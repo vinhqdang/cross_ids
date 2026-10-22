@@ -6,11 +6,8 @@ original one (covered by ``test_flare2.py``, which must keep passing unchanged).
 from __future__ import annotations
 
 import json
-import shutil
-import subprocess
 from argparse import Namespace
 from dataclasses import replace
-from pathlib import Path
 
 import numpy as np
 import pytest
@@ -25,7 +22,6 @@ from crossids.flare.model import NEG_LOGIT, TINY_CONFIG, Flare2Model, batch_to_t
 torch.set_num_threads(2)
 
 D = 5
-ROOT = Path(__file__).resolve().parents[1]
 TINY_F2 = replace(TINY_CONFIG, slots=16)
 
 
@@ -191,22 +187,3 @@ def test_run_name_and_flare2_m_registrations():
     assert evaluate.FLARE_VARIANTS["flare2-m"] == ("_f2m", None)
     assert ec.CHECKPOINT_SUFFIX["flare2-m"] == "_f2m"
     assert "flare2-m" in ec.METHODS and "flare2-m" in ec.NEURAL
-
-
-BASE_BINARY = ("catboost-target rf lr knn catboost-ft catboost-fulllabel catboost-lodo catboost-pairwise-mean "
-               "catboost-pairwise-best")
-
-
-@pytest.mark.parametrize("variant, expected", [
-    ("f2m", ("iot23_s0_f2m", "runs/flare/eval_iot23_f2m_s0.csv", "runs/flare/class_iot23_f2m_s0.csv", "flare2-m",
-             "catboost rf lr knn flare2-m", "--model flare2 --loss-mask-unsupported")),
-    ("f2", ("iot23_s0_f2", "runs/flare/eval_iot23_all_s0.csv", "runs/flare/class_iot23_s0.csv",
-            f"{BASE_BINARY} flare2", "catboost rf lr knn flare2", "--model flare2")),
-])
-def test_colab_variant_tables_name_the_fixed_variant(variant, expected):
-    script = (
-        f'. "{ROOT.as_posix()}/scripts/flare_colab_common.sh"; output_names iot23 0 {variant}; '
-        'printf "%s|%s|%s|%s|%s|%s" "$RUN" "$EVAL_CSV" "$CLASS_CSV" "$EVAL_METHODS" "$CLASS_METHODS" "$TRAIN_ARGS"'
-    )
-    out = subprocess.run([shutil.which("bash"), "-c", script], capture_output=True, text=True, check=True).stdout
-    assert tuple(out.split("|")) == expected

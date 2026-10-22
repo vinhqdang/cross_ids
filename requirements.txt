@@ -5,5 +5,10 @@ scikit-learn
 pyarrow
 pyyaml
 catboost
+xgboost
+matplotlib
+tabulate
+threadpoolctl
 torch
 pytest
+# optional: tabpfn huggingface_hub (TabPFN baselines), tabpfn-client (API backend), truststore (Windows downloads)

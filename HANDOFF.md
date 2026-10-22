@@ -1,12 +1,7 @@
 # HANDOFF: state of the project and what is left
 
 Repo: https://github.com/vinhqdang/cross_ids, branch `main` (push there, no other branch).
-Two manuscripts share this repository:
-
-| Paper | Folder | Content |
-|---|---|---|
-| Few-label transfer (FLARE-2 versus tabular foundation models) | `paper/flare` | Part II of `DESIGN.md`, results in `results/flare` |
-| Cross-dataset benchmark and negative results (RIFT) | `paper/benchmark` | Part I of `DESIGN.md`, results in `results/runs.csv`, `results/analysis`, `results/controls` |
+One manuscript, `paper/main.tex` (tables and figures in `paper/tables`, `paper/figures`, generated from `results/` by `scripts/make_tables_benchmark.py` and `scripts/make_tables_fewlabel.py`). It merges the two earlier papers: the cross-dataset benchmark with RIFT and its controls (Part I of `DESIGN.md`) and the few-label study with FLARE-2 and TabPFN (Part II). The earlier separate manuscripts are in the git history only.
 
 ## 0. Rules from the owner (follow exactly)
 
@@ -47,23 +42,23 @@ Pitfalls found on this machine:
 | Statistics | `scripts/stats_flare.py` (seed 0, five-baseline family), `stats_seeds.py` (3 seeds, binary and class), `stats_tabpfn.py` | rerun after new data |
 | Benchmark (Part I), 3 seeds, all experiments | `results/runs.csv`, `results/analysis`, `results/controls` | done |
 
-Headline numbers: see the two manuscripts (they are generated from these files by `scripts/make_paper_tables.py` and `scripts/make_benchmark_tables.py`).
+Headline numbers: see the manuscript (they are generated from these files by `scripts/make_tables_fewlabel.py` and `scripts/make_tables_benchmark.py`).
 Main findings to keep honest: FLARE-2 is on par with RF and CatBoost on binary ROC-AUC (3 seeds: +0.001 and -0.001); TabPFN v3 and v3.5 are higher than FLARE-2 on every target (3.5: -0.014 over three seeds, 95% interval [-0.018, -0.011]); the seed-0 advantage over source-pretrained CatBoost at k>=32 does not hold over three seeds; the class-level gains (per-class AUC +0.011, lower FPR) come with lower recall and lower N-way balanced accuracy.
 
 ## 3. Bugs found and fixed (keep in the papers' limitations)
 
 - Queries whose class has no support row get a target logit of -1e9 (loss about 1e6). In one binary-only run validation picked a collapsed checkpoint. Fixed in `train.py` (validation scores supported queries only); the loss mask `--loss-mask-unsupported` removes the artefact from training (`flare2-m`, mean AUC 0.851 versus 0.850 over 8 targets). The main runs are unmasked.
-- `scripts/stats_flare.py` and `make_paper_tables.py` used to pool all seeds and all result files; they now restrict the main tables to seed 0 and to the main result files.
+- `scripts/stats_flare.py` and the table script used to pool all seeds and all result files; they now restrict the main tables to seed 0 and to the main result files.
 - A queue script once copied partial result files (`&&` after a failing command). Result files are now copied only after the run succeeds.
 
 ## 4. State of the TODO list
 
-Done: class-level TabPFN-3.5 comparison (`results/flare/raw/class_*_tabpfn_s0.csv`, stats in `results/flare/stats/tabpfn_class.csv`; seed 0, five draws, k<=16; five targets scored on a stratified subsample of at most 5000 query rows, checked on IoT-23); RIFT oracle diagnostics (`rift-oraclePrior`, `rift-oracleAnchor`, in `results/runs.csv`); same-family transfer (`results/controls/family_transfer.csv`); both manuscripts audited and reviewed once and corrected.
+Done: class-level TabPFN-3.5 comparison (`results/flare/raw/class_*_tabpfn_s0.csv`, stats in `results/flare/stats/tabpfn_class.csv`; seed 0, five draws, k<=16; five targets scored on a stratified subsample of at most 5000 query rows, checked on IoT-23); RIFT oracle diagnostics (`rift-oraclePrior`, `rift-oracleAnchor`, in `results/runs.csv`); same-family transfer (`results/controls/family_transfer.csv`); both original manuscripts audited and reviewed once and corrected before they were merged.
 
 Dropped on purpose (code and tests exist, not run): the TabPFN control variants `tabpfn-v3.5-rank` and `tabpfn-v3.5-src` (`python -m crossids.flare.evaluate --methods tabpfn-v3.5-rank tabpfn-v3.5-src ...`). The owner decided TabPFN is only an added baseline.
 
 Open, optional:
-1. A final review round of both manuscripts after the last edits (class-level TabPFN paragraph in `paper/flare`, oracle and family paragraphs in `paper/benchmark` were checked by the author only).
+1. A final review round of the merged manuscript after the last edits (the merged manuscript was assembled from the two reviewed papers; its new introduction, Sect. 7 introduction, discussion and conclusion were checked by the author only).
 2. Tuned baselines, TabPFN fine-tuning, leave-laboratory-out evaluation, PR-AUC and TPR at fixed low FPR, per-attack-type cross-laboratory analysis for the FLARE paper, a one-model-for-all-targets variant, feature-semantics audit and dedup/feature-tier sensitivity for the benchmark paper.
 3. TabPFN: version 3 only for seed 0; class level only for version 3.5 and seed 0.
 4. References: IDS entries checked against Crossref (`docs/related_cross_dataset.md`); general ML entries checked against Crossref, DBLP/arXiv or publisher pages (PFN: ICLR 2022 confirmed by the owner); Saerens against Crossref; TabPFN-3 cites its model card. The Layeghy and Cantone summaries were checked against the arXiv versions, not the journal versions.
