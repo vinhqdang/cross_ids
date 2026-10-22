@@ -28,6 +28,8 @@ ORDER = ["cicids2017", "cicids2018", "ctu13", "insdn", "iot23", "toniot", "unswn
 METHODS = [("flare2", "FLARE-2"), ("rf", "RF"), ("catboost-target", "CatBoost (target only)"),
            ("catboost-ft", "CatBoost (source + fine-tune)"), ("lr", "LR"), ("knn", "kNN")]
 TKS = [4, 16, 64]
+TABLE_METHODS = [("flare2", "FLARE-2"), ("rf", "RF"), ("catboost-target", "CatBoost"), ("catboost-ft", "CB-ft"),
+                 ("tabpfn-v3.5", "TabPFN-3.5")]
 
 
 def write(name: str, text: str) -> None:
@@ -50,15 +52,15 @@ def binary_table(d: pd.DataFrame) -> None:
     for t in ORDER:
         line = [NAMES[t]]
         for k in TKS:
-            vals = {m: per.get((m, t, k), np.nan) for m, _ in METHODS}
-            best = max(vals.values())
-            line += [fmt(vals[m], vals[m] >= best - 1e-9) for m, _ in METHODS[:4]]
+            vals = {m: per.get((m, t, k), np.nan) for m, _ in TABLE_METHODS}
+            best = np.nanmax(list(vals.values()))
+            line += [fmt(vals[m], vals[m] >= best - 1e-9) for m, _ in TABLE_METHODS]
         rows.append(line)
-    head = " & ".join(["Target"] + [f"{s}" for _ in TKS for s in ["F2", "RF", "CB", "CB-ft"]])
+    head = " & ".join(["Target"] + [f"{s}" for _ in TKS for s in ["F2", "RF", "CB", "CB-ft", "TP3.5"]])
     body = " \\\\\n".join(" & ".join(r) for r in rows)
-    ks = " & ".join(f"\\multicolumn{{4}}{{c}}{{$k={k}$}}" for k in TKS)
-    write("binary", "\\begin{tabular}{l" + "cccc" * len(TKS) + "}\n\\toprule\n& " + ks + " \\\\\n"
-          + "\\cmidrule(lr){2-5}\\cmidrule(lr){6-9}\\cmidrule(lr){10-13}\n" + head + " \\\\\n\\midrule\n"
+    ks = " & ".join(f"\\multicolumn{{5}}{{c}}{{$k={k}$}}" for k in TKS)
+    write("binary", "\\begin{tabular}{l" + "ccccc" * len(TKS) + "}\n\\toprule\n& " + ks + " \\\\\n"
+          + "\\cmidrule(lr){2-6}\\cmidrule(lr){7-11}\\cmidrule(lr){12-16}\n" + head + " \\\\\n\\midrule\n"
           + body + " \\\\\n\\bottomrule\n\\end{tabular}\n")
     # zero-shot references
     zs = d[d.k == 0].groupby(["method", "target"]).roc_auc.mean().unstack(0)
@@ -236,6 +238,31 @@ def seeds_table() -> None:
     write("seeds", chr(10).join(lines))
 
 
+def tabpfn_table() -> None:
+    """FLARE-2 minus TabPFN v3 and v3.5 (seed 0) and v3.5 over three seeds, unit = target (stats_tabpfn.py)."""
+    a, b = "results/flare/stats/tabpfn.csv", "results/flare/stats/tabpfn_seeds.csv"
+    if not (os.path.exists(a) and os.path.exists(b)):
+        return
+    t0, t3 = pd.read_csv(a), pd.read_csv(b)
+    lines = [chr(92) + "begin{tabular}{llrrrr}", chr(92) + "toprule",
+             r"Seeds & Baseline & Mean diff. & 95BS% CI & W/L & pBSS_{BStext{Holm}}$ BSBS".replace("BSBS", chr(92) * 2).replace("BSS", "$").replace("BS", chr(92)),
+             r"BSmidrule".replace("BS", chr(92))]
+    for scope in ["mean over k", "k<=16", "k>=32"]:
+        label = scope.replace("<=", r"$BSleq$".replace("BS", chr(92))).replace(">=", r"$BSgeq$".replace("BS", chr(92)))
+        for name, v in [("TabPFN-3", "tabpfn-v3"), ("TabPFN-3.5", "tabpfn-v3.5")]:
+            r = t0[(t0.scope == scope) & (t0.baseline == v)].iloc[0]
+            lines.append(f"{label} & seed 0, {name} & {r.mean_diff:+.3f} & [{r.ci_lo:+.3f}, {r.ci_hi:+.3f}] & "
+                         f"{int(r.wins)}/{int(r.n_targets) - int(r.wins)} & {r.p_holm:.3f} " + chr(92) * 2)
+            label = ""
+        r = t3[t3.scope == scope].iloc[0]
+        lines.append(f" & 3 seeds, TabPFN-3.5 & {r.mean_diff:+.3f} & [{r.ci_lo:+.3f}, {r.ci_hi:+.3f}] & "
+                     f"{int(r.wins)}/{int(r.n_targets) - int(r.wins)} & {r.p:.3f} " + chr(92) * 2)
+        lines.append(chr(92) + "midrule")
+    lines[-1] = chr(92) + "bottomrule"
+    lines += [chr(92) + "end{tabular}", ""]
+    write("tabpfn", chr(10).join(lines))
+
+
 def main() -> None:
     os.makedirs(TAB, exist_ok=True)
     os.makedirs(FIG, exist_ok=True)
@@ -247,6 +274,7 @@ def main() -> None:
     class_table()
     ablation_table()
     seeds_table()
+    tabpfn_table()
     class_by_target()
     curve_figure(d)
     pertarget_figure(d)
