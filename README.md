@@ -19,7 +19,7 @@ The repository holds one manuscript, `paper/main.tex`, built from the results in
 | `configs/` | `default.yaml` (full benchmark), `smoke.yaml` (synthetic domains) |
 | `scripts/` | Statistics (`stats_flare.py`, `stats_seeds.py`, `stats_tabpfn.py`), table and figure generators for the paper (`make_tables_benchmark.py`, `make_tables_fewlabel.py`), controls (`family_transfer.py`, `incontext_controls.py`, `diag_noperm.py`), the early exploratory `quick_catboost.py` |
 | `results/` | Raw per-run results and derived tables, all in git (see Results) |
-| `paper/` | `main.tex`, `refs.bib`, `tables/` and `figures/` generated from `results/` |
+| `paper/` | `main.tex`, `refs.bib`, `tables/` and `figures/` generated from `results/`; `springer/` holds the Springer Nature template version |
 | `tests/` | Unit and integration tests (synthetic data only) |
 | `data/`, `runs/` | Raw and cached datasets, checkpoints and logs; git-ignored |
 
@@ -308,6 +308,15 @@ python scripts/stats_flare.py && python scripts/stats_seeds.py && python scripts
 python scripts/make_tables_benchmark.py && python scripts/make_tables_fewlabel.py   # tables and figures in paper/
 cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main
 ```
+
+The Springer Nature journal version (template `sn-jnl`, numbered references, one `.tex` file with the tables inlined) is generated from `paper/main.tex`:
+
+```bash
+python scripts/make_springer.py                                  # writes paper/springer/main.tex, refs.bib, figures/
+cd paper/springer && pdflatex main && bibtex main && pdflatex main && pdflatex main
+```
+
+The class file and bibliography style in `paper/springer/` come from the Springer Nature template package. The Declarations section has placeholders (funding, competing interests, author contribution) to be completed by the author before submission.
 
 Training needs a GPU (about 45 minutes per model on an RTX-class GPU with 16 GB; two models at once can exhaust the memory and slow both). The benchmark runs on CPU. Results in `results/` are enough to regenerate all tables, figures and statistics without retraining.
 

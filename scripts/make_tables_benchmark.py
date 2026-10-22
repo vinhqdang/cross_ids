@@ -42,8 +42,8 @@ LABELS = {"lr": "LR", "rf": "RF", "hgb": "HGB", "catboost": "CatBoost", "xgboost
           "rift-noDN": "RIFT $-$ domain norm.", "rift-noAnchor": "RIFT $-$ benign anchor",
           "rift-noIFS": "RIFT $-$ invariant selection", "rift-noLSC": "RIFT $-$ prior correction",
           "rift-poolInit": "RIFT, pooled init.", "rift-robust": "RIFT, robust scaling",
-          "rift-standard": "RIFT, z-score scaling", "rift-oraclePrior": "RIFT, true prior (diagnostic)",
-          "rift-oracleAnchor": "RIFT, true prior and benign anchor (diagnostic)"}
+          "rift-standard": "RIFT, z-score scaling", "rift-oraclePrior": "RIFT, true prior*",
+          "rift-oracleAnchor": "RIFT, true prior and anchor*"}
 
 
 def main_table(r: pd.DataFrame) -> None:

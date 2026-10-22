@@ -176,9 +176,9 @@ def pertarget_figure(d: pd.DataFrame) -> None:
     plt.close(fig)
 
 
-ABL_ROWS = [("flare2", "FLARE-2 (reference)"), ("flare2-noperm", "no slot permutation"),
-            ("flare2-insrc", "in-source validation"), ("flare2-m", "loss mask (reference)"),
-            ("flare2-m-binary", "loss mask, binary tasks only")]
+ABL_ROWS = [("flare2", "FLARE-2"), ("flare2-noperm", "No slot perm."),
+            ("flare2-insrc", "In-source val."), ("flare2-m", "Loss mask"),
+            ("flare2-m-binary", "Loss mask, binary")]
 ABL_TARGETS = ["ctu13", "cicids2017"]
 
 
