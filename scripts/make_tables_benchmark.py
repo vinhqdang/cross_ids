@@ -156,6 +156,39 @@ def family_table() -> None:
     write("family", lines)
 
 
+def datasummary_table() -> None:
+    """One row of facts per dataset (scripts/dataset_summary.py): flows, capture period, attack classes, features."""
+    path = "results/controls/dataset_summary.csv"
+    if not os.path.exists(path):
+        return
+    d = pd.read_csv(path).set_index("dataset")
+    names = {"cicids2017": "CIC-IDS2017", "cicids2018": "CIC-IDS2018", "usbids1": "USB-IDS-1", "insdn": "InSDN",
+             "unswnb15": "UNSW-NB15", "toniot": "ToN-IoT", "iot23": "IoT-23", "ctu13": "CTU-13"}
+
+    def classes(key: str, r: pd.Series) -> str:
+        raw = [c.replace(chr(0xFFFD), "-") for c in str(r.attack_classes).split("; ")]
+        if key == "usbids1":
+            return "16 labels: Hulk, TCP flood, Slowloris, Slowhttptest, each under four defence settings"
+        if key == "ctu13":
+            return "13 botnet scenarios (one malware family each)"
+        return f"{int(r.n_attack_classes)}: " + ", ".join(raw)
+
+    def period(text: str) -> str:
+        return text.replace("n/a (", "n/a: ").rstrip(")") if text.startswith("n/a") else text
+
+    lines = [BS + "begin{tabular}{p{0.09" + BS + "textwidth}rp{0.15" + BS + "textwidth}p{0.34" + BS + "textwidth}p{0.25" + BS + "textwidth}}",
+             BS + "toprule",
+             "Dataset & Flows & Capture period & Attack classes (in the benchmark sample) & Raw features (examples) " + BS + BS,
+             BS + "midrule"]
+    for key, name in names.items():
+        r = d.loc[key]
+        flows = f"{r.flows_valid / 1e6:.2f}" + BS + ",M" if r.flows_valid >= 1e6 else f"{r.flows_valid / 1e3:.0f}" + BS + ",k"
+        feats = f"{int(r.raw_columns)}: " + ", ".join(BS + "texttt{" + f.replace("_", BS + "_") + "}" for f in str(r.example_features).split("; ")[:4])
+        lines.append(f"{name} & {flows} & {period(str(r.period)).replace('%', BS + '%')} & {classes(key, r).replace('&', BS + '&')} & {feats} " + BS + BS)
+    lines += [BS + "bottomrule", BS + "end{tabular}"]
+    write("datasummary", lines)
+
+
 def copy_figures() -> None:
     pairs = {"results/analysis/fig02_feature_sign_heatmap.pdf": "feature_sign.pdf",
              "results/analysis/fig03_pairwise_matrix_transductive.pdf": "pairwise_matrix.pdf",
@@ -177,6 +210,7 @@ def main() -> None:
     target_table(r)
     fewshot_table()
     datasets_table()
+    datasummary_table()
     family_table()
     copy_figures()
 

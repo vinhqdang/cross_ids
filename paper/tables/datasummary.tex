@@ -1,0 +1,14 @@
+\begin{tabular}{p{0.09\textwidth}rp{0.15\textwidth}p{0.34\textwidth}p{0.25\textwidth}}
+\toprule
+Dataset & Flows & Capture period & Attack classes (in the benchmark sample) & Raw features (examples) \\
+\midrule
+CIC-IDS2017 & 2.83\,M & 5 days, Monday to Friday (from the file names) & 13: DoS Hulk, DDoS, DoS GoldenEye, FTP-Patator, DoS slowloris, DoS Slowhttptest, SSH-Patator, PortScan, Web Attack - Brute Force, Bot, Web Attack - XSS, Infiltration, Web Attack - Sql Injection & 79: \texttt{Flow Duration}, \texttt{Total Fwd Packets}, \texttt{Flow Bytes/s}, \texttt{Fwd IAT Mean} \\
+CIC-IDS2018 & 8.28\,M & 9 daily files, 14-02-2018 to 02-03-2018 (file names; one 4 GB file excluded) & 12: DDOS attack-HOIC, Bot, DoS attacks-Hulk, Infilteration, SSH-Bruteforce, DoS attacks-GoldenEye, DoS attacks-Slowloris, DDOS attack-LOIC-UDP, Brute Force -Web, Brute Force -XSS, DoS attacks-SlowHTTPTest, SQL Injection & 80: \texttt{Flow Duration}, \texttt{Tot Fwd Pkts}, \texttt{Flow Byts/s}, \texttt{Fwd IAT Mean} \\
+USB-IDS-1 & 4.81\,M & n/a: mixed timestamp formats in the released files & 16 labels: Hulk, TCP flood, Slowloris, Slowhttptest, each under four defence settings & 84: \texttt{Flow Duration}, \texttt{Total Fwd Packet}, \texttt{Flow Bytes/s}, \texttt{Fwd IAT Mean} \\
+InSDN & 344\,k & n/a: mixed timestamp formats in the released files & 7: Probe, DoS, DDoS, BFA, Web-Attack, BOTNET, U2R & 84: \texttt{Flow Duration}, \texttt{Tot Fwd Pkts}, \texttt{Flow Byts/s}, \texttt{Fwd IAT Mean} \\
+UNSW-NB15 & 175\,k & n/a: the released training set has no timestamps & 9: Exploits, Fuzzers, Reconnaissance, DoS, Shellcode, Generic, Analysis, Backdoor, Worms & 45: \texttt{dur}, \texttt{spkts}, \texttt{sbytes}, \texttt{rate} \\
+ToN-IoT & 211\,k & n/a: the released file has no timestamps & 8: injection, password, ddos, xss, dos, scanning, backdoor, mitm & 44: \texttt{duration}, \texttt{src\_bytes}, \texttt{conn\_state}, \texttt{src\_pkts} \\
+IoT-23 & 6.05\,M & 2018-07-20 to 2019-09-20 (timestamps of the released file) & 12: PartOfAHorizontalPortScan, C\&C, Okiru, C\&C-HeartBeat, Attack, DDoS, C\&C-FileDownload, C\&C-Torii, FileDownload, C\&C-HeartBeat-FileDownload, Okiru-Attack, C\&C-Mirai & 21: \texttt{duration}, \texttt{orig\_bytes}, \texttt{conn\_state}, \texttt{orig\_pkts} \\
+CTU-13 & 801\,k & 13 scenarios, 2011-08-10 to 2011-08-19 (file names) & 13 botnet scenarios (one malware family each) & 15: \texttt{Dur}, \texttt{TotPkts}, \texttt{TotBytes}, \texttt{SrcBytes} \\
+\bottomrule
+\end{tabular}
