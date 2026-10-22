@@ -62,7 +62,8 @@ Open, optional:
 2. Tuned baselines, TabPFN fine-tuning, leave-laboratory-out evaluation, PR-AUC and TPR at fixed low FPR, per-attack-type cross-laboratory analysis for the FLARE paper, a one-model-for-all-targets variant, feature-semantics audit and dedup/feature-tier sensitivity for the benchmark paper.
 3. TabPFN: version 3 only for seed 0; class level only for version 3.5 and seed 0.
 4. References: IDS entries checked against Crossref (`docs/related_cross_dataset.md`); general ML entries checked against Crossref, DBLP/arXiv or publisher pages (PFN: ICLR 2022 confirmed by the owner); Saerens against Crossref; TabPFN-3 cites its model card. The Layeghy and Cantone summaries were checked against the arXiv versions, not the journal versions.
-5. Before any release: rotate the Hugging Face and Prior Labs keys that were shared in the working session, and delete `runs/tabpfn_token.txt`.
+5. The manuscript has six sections (Introduction; Related work; Benchmark and methods; Why cross-dataset transfer fails; Few-label transfer; Discussion, limitations and conclusion). Related work cites 25 IDS-related papers of the author (taken from the public ORCID record 0000-0002-3877-8024 and checked against Crossref: title, authors, venue, pages, year) and the 2026 survey of IDS datasets by Ashraf and Masoodi (Discover Computing 29:577, DOI 10.1007/s10791-026-10486-2, checked against Crossref). One ORCID item (IoT environment chapter, 2022) was left out because Crossref lists an author without a name. Descriptions of the author's papers follow titles and Crossref abstracts only; the full texts were not read.
+6. Before any release: rotate the Hugging Face and Prior Labs keys that were shared in the working session, and delete `runs/tabpfn_token.txt`.
 
 ## 5. Do not
 

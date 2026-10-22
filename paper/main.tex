@@ -54,22 +54,39 @@ We do not claim that FLARE-2 is the best few-label method: it matches fixed-sett
 What the study supports is that a few labelled flows of the target network, combined with a strong pretrained prior, are the reliable ingredient, and that, in our experiments, meta-training on real network tasks did not improve on that prior at the binary level.
 
 \section{Related work}
-\citet{layeghy2023explainable} train on one NetFlow-v2 dataset and test on another and report attack-class F1 below 1\% for several pairs of CIC-IDS2018, UNSW-NB15 and ToN-IoT, with strongly asymmetric results; a domain-invariance method of the same group \citep{layeghy2023dinids} improves some pairs.
-\citet{cantone2024crossdataset} report MCC between 0.26 and 0.44 when CIC-IDS2017 and CIC-IDS2018 are exchanged, even though both come from the same laboratory.
-\citet{dhooge2020inter,dhooge2023damaged} analyse inter-dataset generalisation per attack class and the effect of data-damaged models on it.
-\citet{catillo2022transferability} study transfer from CIC-IDS2017 to USB-IDS-1 \citep{catillo2021usbids1}, which share an extractor, and \citet{apruzzese2022cross} cross-evaluate per-attack detectors across several networks.
-\citet{engelen2021troubleshooting} document labelling errors in CIC-IDS2017, and \citet{arp2022dos,apruzzese2023sok} discuss pitfalls of machine-learning evaluation in security.
-\citet{sarhan2022standard} propose standard NetFlow feature sets to ease cross-dataset use.
-Our benchmark differs in covering seven datasets and three extractors with one schema, in labelling each pair by how much infrastructure the two datasets share, in running label-free transfer methods against default-setting baselines over three seeds, and in reporting the controls that decide whether the negative result is a finding.
-On the method side, we compare against domain-adversarial training \citep{ganin2016dann} and correlation alignment \citep{sun2016coral}, and RIFT uses the expectation-maximisation correction of the output prior of \citet{saerens2002adjusting}.
-\paragraph{Few-shot and in-context learning.}
-Matching and prototypical networks \citep{vinyals2016matching,snell2017prototypical} and gradient-based meta-learning \citep{finn2017maml} learn from episodes.
-Prior-fitted networks \citep{muller2022pfn} and TabPFN \citep{hollmann2025tabpfn} fit a transformer to synthetic tabular tasks and classify by attention to the labelled rows.
-FLARE-2 follows this in-context recipe but meta-trains on \emph{real} tasks from other networks, adds a task distribution designed for the cross-network case, and uses a matching readout that fits a variable label space.
-We also evaluate TabPFN itself, versions 3 and 3.5, on the same supports, which tests whether meta-training on network tasks adds anything to a model pretrained on synthetic tasks only.
-Set-based architectures \citep{lee2019settransformer} motivate our permutation invariance over rows and features.
+\paragraph{Machine learning for intrusion detection.}
+Learning-based detection of malicious network traffic has been studied for decades, and comparisons of learning algorithms, feature sets and training regimes fill the literature.
+Our earlier work studied machine-learning techniques for intrusion detection systems in general \citep{dang2019studying,dang2022cai,dang2022mlids} and applied them to named datasets and environments: CIDDS-001 \citep{dang2021cidds,dang2022cidds}, USB-IDS-1 \citep{dang2023usbmulti}, software-defined networks \citep{dang2021sdn,dang2024fuzzy}, DNS attacks \citep{dang2022dns,dang2021fuzzydns}, WiFi networks \citep{dang2023wifi} and medical Internet-of-Things traffic \citep{dang2024iomt}.
+The same line of work examined the explanation of detector decisions and its relation to detection performance \citep{dang2020understand,dang2021explain}, active learning \citep{dang2020active} and reinforcement learning \citep{dang2022rl} for the task.
+Newer model families have also been applied to intrusion detection in our own studies: transformers \citep{dang2023transformer}, graph neural networks \citep{dang2023wifi}, embeddings from large language models \citep{dang2025llm}, fuzzy embeddings \citep{dang2024fuzzy}, kernel methods for conformal prediction and uncertainty measures \citep{dang2024conformal,dang2026uncertainty}, parallel optimisation for lightweight detectors \citep{dang2024lightweight} and federated explainable detectors \citep{dang2026stfedxids}.
+Most of these concern a single named dataset or environment; how a detector trained on one network behaves on another is the subject of the cross-dataset work below.
 
-\section{Benchmark}
+\paragraph{Datasets and evaluation practice.}
+The datasets are themselves the subject of surveys: \citet{ashraf2026survey} examine 124 datasets for intrusion detection in communication networks and report critical gaps such as limited real-world traffic representation, inconsistent documentation, dataset bias and evaluation risks.
+The datasets used here come from different laboratories and extractors: CIC-IDS2017 \citep{sharafaldin2018cicids} and CIC-IDS2018, USB-IDS-1 \citep{catillo2021usbids1,catillo2025usbidstc}, InSDN \citep{elsayed2020insdn}, UNSW-NB15 \citep{moustafa2015unsw}, ToN-IoT \citep{alsaedi2020toniot}, IoT-23 \citep{garcia2020iot23} and CTU-13 \citep{garcia2014ctu13}.
+\citet{engelen2021troubleshooting} document flow-construction and labelling errors in CIC-IDS2017, \citet{arp2022dos} discuss pitfalls of machine learning in security, among them sampling bias, spurious correlations and evaluation in the laboratory only, and \citet{apruzzese2023sok} survey assessment practices.
+\citet{sarhan2021netflow,sarhan2022standard,sarhan2022evaluating} build NetFlow versions of several datasets and propose standard NetFlow feature sets to increase the generalisability of detectors, and \citet{alriyami2021cross} show on NSL-KDD and gureKDD that a cross-dataset collapse can be caused by a mismatch of feature definitions between datasets, which is a caution for any study that merges feature schemas, including ours.
+
+\paragraph{Cross-dataset generalisation.}
+\citet{layeghy2023explainable} train on one NetFlow-v2 dataset and test on another and report attack-class F1 below 1\% for several pairs of CIC-IDS2018, UNSW-NB15 and ToN-IoT, with strongly asymmetric results that they attribute with SHAP to features that correlate with the label in only one dataset; a domain-invariance method of the same group \citep{layeghy2023dinids} improves some pairs.
+\citet{cantone2024crossdataset} report MCC between 0.26 and 0.44 when CIC-IDS2017 and CIC-IDS2018 are exchanged, even though both come from the same laboratory, and \citet{kilic2026shap} report a macro-F1 between about 0.12 and 0.21 between the same two datasets, with and without SHAP-based feature reduction.
+\citet{dhooge2020inter,dhooge2023damaged} analyse inter-dataset generalisation per attack class and the effect of data-damaged models on it, \citet{catillo2022transferability} study transfer from CIC-IDS2017 to USB-IDS-1 \citep{catillo2021usbids1}, which share an extractor, \citet{apruzzese2022cross} cross-evaluate per-attack detectors across several networks, and \citet{hossain2026assessing} test UNSW-NB15 and ToN-IoT on seven shared features.
+Our own earlier work addressed the same problem for software-defined networks, where models that perform well within one dataset lose performance when the test data are collected from another source, and applied concept-drift detection techniques to improve the cross-dataset performance \citep{dang2023learning}; another study used several datasets of software-defined networks to detect intrusion \citep{dang2022multisdn}.
+The present benchmark differs in covering seven datasets and three extractors with one schema, in labelling each pair by how much infrastructure the two datasets share, in running label-free transfer methods against default-setting baselines over three seeds, and in reporting the controls that decide whether the negative result is a finding.
+
+\paragraph{Domain adaptation, invariance and label shift.}
+Domain-adversarial training \citep{ganin2016dann} and correlation alignment \citep{sun2016coral} align source and target feature distributions without target labels, and the domain-invariance detector of \citet{layeghy2023dinids} builds on adversarial alignment.
+They assume that the labelling function is shared between the domains, and the expectation-maximisation correction of the output prior of \citet{saerens2002adjusting}, which RIFT uses, assumes pure label shift.
+Our controls probe these assumptions but cannot isolate concept shift from a change of attack mix, and we evaluate the methods against their own baselines in the same setting.
+
+\paragraph{Few-shot, meta-learning and in-context learning.}
+Matching and prototypical networks \citep{vinyals2016matching,snell2017prototypical} and gradient-based meta-learning \citep{finn2017maml} learn from episodes.
+Prior-fitted networks \citep{muller2022pfn} and TabPFN \citep{hollmann2025tabpfn} fit a transformer to synthetic tabular tasks and classify by attention to the labelled rows; later versions of TabPFN are distributed with their own model cards \citep{priorlabs2026tabpfn3}.
+FLARE-2 follows this in-context recipe but meta-trains on \emph{real} tasks from other networks, adds a task distribution designed for the cross-network case, and uses a matching readout that fits a variable label space; set-based architectures \citep{lee2019settransformer} motivate its permutation invariance over rows and features.
+We also evaluate TabPFN itself, versions 3 and 3.5, on the same supports, which tests whether meta-training on network tasks adds anything to a model pretrained on synthetic tasks only, and we compare with gradient-boosted trees \citep{prokhorenkova2018catboost}.
+
+\section{Benchmark and methods}
+\subsection{Benchmark}
 \paragraph{Datasets.}
 Table~\ref{tab:datasets} lists the datasets: CIC-IDS2017 \citep{sharafaldin2018cicids} and CIC-IDS2018, USB-IDS-1 \citep{catillo2021usbids1}, InSDN \citep{elsayed2020insdn}, UNSW-NB15 \citep{moustafa2015unsw}, ToN-IoT \citep{alsaedi2020toniot}, IoT-23 \citep{garcia2020iot23} and CTU-13 \citep{garcia2014ctu13}.
 They come from five laboratories (UNB, Sannio, UCD, UNSW Canberra and the Stratosphere laboratory of CTU) and three extractors (CICFlowMeter, Argus and Zeek).
@@ -113,7 +130,7 @@ Baselines use a global standard scaler fitted on the sources: logistic regressio
 We add CORAL \citep{sun2016coral} followed by HGB, and DANN \citep{ganin2016dann}; both are transductive.
 RIFT is described next.
 
-\section{RIFT: a domain-invariant method designed to work}\label{sec:rift}
+\subsection{RIFT: a domain-invariant method designed to work}\label{sec:rift}
 RIFT targets three sources of failure separately.
 \emph{Covariate shift} is addressed by domain-wise normalisation: each domain is mapped to Gaussian ranks computed on its own features.
 On source domains the normaliser is fitted on benign rows only, because benign traffic is the stable background of a network.
@@ -123,7 +140,7 @@ On the target, where labels are unknown, the anchor set is the $\gamma=0.8$ frac
 The classifier is HGB.
 Ablations remove one component at a time (domain normalisation, anchor, selection, prior correction), replace the rank transform by robust or z-score scaling, start the anchor from the pooled rather than the source normaliser, and add uncertainty-gated self-training.
 
-\section{Results: cross-dataset transfer fails}\label{sec:results}
+\section{Why cross-dataset transfer fails}\label{sec:results}
 \subsection{In-domain skill does not transfer}
 Table~\ref{tab:main} gives ROC-AUC by setting.
 In-domain, the boosted ensembles reach 0.985 (random forest 0.981) averaged over the seven datasets (CatBoost between 0.950 on IoT-23 and 1.000 on ToN-IoT and USB-IDS-1), logistic regression 0.923.
@@ -208,7 +225,7 @@ An unsupervised shift score (an isolation forest fitted on the source and applie
 Sharing attack types does not obviously predict it either: for every family we compared the informedness of a method on a target family when the source contains that family and when it does not.
 Pooled over families (transductive mode), the paired difference for CatBoost is $+0.012$ (95\% half-width 0.088, $p=0.82$) and for HGB $-0.046$ ($p=0.14$); none of the 248 (method, mode, family) tests has $p<0.05$, but each test uses only 3 to 6 paired cells and cannot reach 0.05 with fewer than 6, so the benchmark has too little power to show whether missing attack types matter.
 
-\section{Controls on the diagnosis}\label{sec:diag}
+\subsection{Controls on the diagnosis}\label{sec:diag}
 A negative result is a finding only if competing explanations are ruled out.
 \paragraph{The pipeline works.}
 The same pipeline reaches 0.985 in-domain, and a target-only CatBoost with 0.1\% of target labels reaches 0.93, so the features carry the signal and the code can learn it.
@@ -281,7 +298,7 @@ Few-label comparison & Source pre-training by continuing boosted trees as useful
 \end{table}
 
 \section{Few-label transfer: FLARE-2 and a tabular foundation model}\label{sec:fewlabel}
-The diagnosis of Sects.~\ref{sec:results} and~\ref{sec:diag} leaves a practical question: when a handful of target flows are labelled, what can the other datasets still contribute?
+The diagnosis of Sect.~\ref{sec:results} leaves a practical question: when a handful of target flows are labelled, what can the other datasets still contribute?
 We study it as leave-one-dataset-out few-label transfer on eight targets (the seven benchmark datasets and CTU-13), with the target never seen in meta-training or checkpoint selection.
 We first describe the setting and the baselines, then FLARE-2, and then the results.
 
@@ -490,7 +507,8 @@ The default ranks each feature over the support and all query rows of the target
 \paragraph{Does the model read the rule from the support labels?}
 At $k{=}16$ and $k{=}64$ (5 draws), permuting the support labels among the support rows gives ROC-AUC between 0.41 and 0.69 on the individual targets (mean 0.54 at $k{=}16$, 0.51 at $k{=}64$; three targets fall below 0.5 at each $k$), against 0.82 and 0.91 with the true labels. Using the support rows of another draw of the same target gives 0.81 and 0.91, so the model reads the rule from labelled rows of the target and not from the particular rows. Swapping the two class ids leaves the AUC unchanged, as expected for a class-equivariant readout. We did not test support sets from a different target.
 
-\section{Discussion}
+\section{Discussion, limitations and conclusion}
+\subsection{Discussion}
 The benchmark shows that cross-dataset transfer fails on average with every method we ran, though not on every pair: three to five pairs exceed 0.8 per tree method, mostly with USB-IDS-1 as source or target.
 It is not repaired by the usual remedies: default-setting tuning on the pair we tested, normalisation, feature selection, alignment, adversarial invariance, prior correction and self-training, and RIFT is not rescued by the true prior or a truly benign anchor.
 Below-chance ROC-AUC on 36 to 48\% of the pairs (21 to 29\% below 0.40) for the tree ensembles is what an inverted rule would produce, but also what a different attack mix would produce; the single-family transfer, with the attack mix held fixed up to the family, is also near chance (median 0.545), which excludes attack mix alone.
@@ -515,7 +533,7 @@ FLARE-2 is not distinguishable from fixed-setting tree ensembles on binary ROC-A
 At attack-class level FLARE-2 ranks classes slightly better than the trees (per-class ROC-AUC $+0.011$ over three seeds) but with lower recall at the default threshold, and TabPFN-3.5 ranks them as well as FLARE-2 with higher recall.
 The source datasets therefore help the few-label setting only through a pretrained prior, and meta-training that prior on a handful of real networks did not improve on a prior pretrained on synthetic tasks in our experiments; whether more networks, more steps or a larger model would change this is untested.
 
-\section{Limitations of the few-label study}
+\subsection{Limitations of the few-label study}
 \begin{itemize}
 \item The main tables and figures use meta-training seed 0 with 10 support draws per target; seeds 1 and 2 were run for all targets and are summarised in Table~\ref{tab:seeds} and in the text for the class level (the class-level tables themselves are seed 0), and the ablations use one seed and two targets (the loss-mask comparison uses all eight targets, the controls the seed-1 models).
 \item FLARE-2 is not better than fixed-setting tree ensembles on binary ROC-AUC, and TabPFN is better than FLARE-2 on every target; its remaining gains are class-level and conditional on the operating point.
@@ -528,7 +546,7 @@ The source datasets therefore help the few-label setting only through a pretrain
 \item The datasets are public laboratory captures with their own labelling errors \citep{engelen2021troubleshooting}.
 \end{itemize}
 
-\section{Conclusion}
+\subsection{Conclusion}
 On seven public datasets, flow classifiers that reach 0.985 ROC-AUC in-domain reach 0.54 to 0.57 across datasets, with about 40\% of the transfers below chance for the tree ensembles, and transfer within a laboratory is on average worse than across laboratories.
 A domain-invariant method designed for the covariate and label shifts of this setting (RIFT) is below its own baseline, and neither the true target prior nor a truly benign anchor makes it better than no adaptation.
 Transfer of a single attack family between datasets is also near chance, so a difference of attack mix alone does not explain the failure; the controls are consistent with differences in benign traffic, measurement and the conditional label distribution, which they cannot separate.
