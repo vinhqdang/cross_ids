@@ -1,9 +1,9 @@
-"""Convert paper/main.tex into the Springer Nature journal template (sn-jnl, numbered references).
+"""Convert paper/ids.tex into the Springer Nature journal template (sn-jnl, numbered references).
 
-The Springer template wants one .tex file, so the generated paper/springer/main.tex inlines the tables of
+The Springer template wants one .tex file, so the generated paper/springer/ids_sn.tex inlines the tables of
 paper/tables. The class and bibliography style come from the Springer template package (copied once to
 paper/springer/: sn-jnl.cls and sn-mathphys-num.bst). Run after the table scripts; then build with
-    cd paper/springer && pdflatex main && bibtex main && pdflatex main && pdflatex main
+    cd paper/springer && pdflatex ids_sn && bibtex ids_sn && pdflatex ids_sn && pdflatex ids_sn
 Usage: python scripts/make_springer.py
 """
 from __future__ import annotations
@@ -106,7 +106,7 @@ def fit_tables(body: str) -> str:
 
 
 def main() -> None:
-    src = read(PAPER / "main.tex")
+    src = read(PAPER / "ids.tex")
     title = re.search(re.escape(BS + "title{") + r"(.*?)\}\n", src, re.S).group(1)
     abstract = re.search(re.escape(BS + "begin{abstract}") + r"\n(.*?)\n" + re.escape(BS + "end{abstract}"), src, re.S).group(1)
     abstract = " ".join(line.strip() for line in abstract.splitlines() if line.strip())
@@ -132,10 +132,10 @@ def main() -> None:
             + body
             + BACK)
     OUT.mkdir(exist_ok=True)
-    (OUT / "main.tex").write_text(text, encoding="utf8")
+    (OUT / "ids_sn.tex").write_text(text, encoding="utf8")
     shutil.copyfile(PAPER / "refs.bib", OUT / "refs.bib")
     shutil.copytree(PAPER / "figures", OUT / "figures", dirs_exist_ok=True)
-    print("wrote", OUT / "main.tex", len(text.splitlines()), "lines")
+    print("wrote", OUT / "ids_sn.tex", len(text.splitlines()), "lines")
 
 
 if __name__ == "__main__":

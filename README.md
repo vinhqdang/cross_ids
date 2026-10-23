@@ -3,7 +3,7 @@
 Cross-dataset flow-based network intrusion detection: a benchmark of why transfer between datasets fails, and a study of what a few labelled target flows can recover.
 Models are trained on labelled source networks and evaluated on a target network. In the label-free benchmark the target labels are never used for training, model selection or threshold tuning; in the few-label study the target contributes only $k$ labelled flows. The task is binary detection (benign = 0, attack = 1), with attack-class results for the few-label study.
 
-The repository holds one manuscript, `paper/main.tex`, built from the results in `results/`:
+The repository holds one manuscript, `paper/ids.tex`, built from the results in `results/`:
 
 1. **Benchmark.** Seven public datasets (eight with CTU-13), five laboratories, three flow extractors; in-domain, pairwise (42 ordered pairs) and leave-one-dataset-out (LODO) settings; eight baselines and **RIFT**, a domain-invariant method of our own, with ablations and oracle diagnostics. Result: transfer fails, RIFT does not repair it, and single-attack-family transfer is also near chance.
 2. **Few-label study.** **FLARE-2**, a transformer meta-trained on tasks from the other datasets, against tree ensembles and **TabPFN** (versions 3 and 3.5), with three meta-training seeds, attack-class results, ablations and controls. Result: FLARE-2 matches the trees on binary ROC-AUC and TabPFN is slightly better on every target.
@@ -19,7 +19,7 @@ The repository holds one manuscript, `paper/main.tex`, built from the results in
 | `configs/` | `default.yaml` (full benchmark), `smoke.yaml` (synthetic domains) |
 | `scripts/` | Statistics (`stats_flare.py`, `stats_seeds.py`, `stats_tabpfn.py`), table and figure generators for the paper (`make_tables_benchmark.py`, `make_tables_fewlabel.py`), controls (`family_transfer.py`, `incontext_controls.py`, `diag_noperm.py`), the early exploratory `quick_catboost.py` |
 | `results/` | Raw per-run results and derived tables, all in git (see Results) |
-| `paper/` | `main.tex`, `refs.bib`, `tables/` and `figures/` generated from `results/`; `springer/` holds the Springer Nature template version |
+| `paper/` | `ids.tex`, `refs.bib`, `tables/` and `figures/` generated from `results/`; `springer/` holds the Springer Nature template version |
 | `tests/` | Unit and integration tests (synthetic data only) |
 | `data/`, `runs/` | Raw and cached datasets, checkpoints and logs; git-ignored |
 
@@ -306,14 +306,14 @@ Evaluation CSVs have one row per (method, target, k, draw, seed); rows are appen
 python -m pytest -q -p no:warnings tests                       # all tests
 python scripts/stats_flare.py && python scripts/stats_seeds.py && python scripts/stats_tabpfn.py
 python scripts/make_tables_benchmark.py && python scripts/make_tables_fewlabel.py   # tables and figures in paper/
-cd paper && pdflatex main && bibtex main && pdflatex main && pdflatex main
+cd paper && pdflatex ids && bibtex ids && pdflatex ids && pdflatex ids
 ```
 
-The Springer Nature journal version (template `sn-jnl`, numbered references, one `.tex` file with the tables inlined) is generated from `paper/main.tex`:
+The Springer Nature journal version (template `sn-jnl`, numbered references, one `.tex` file with the tables inlined) is generated from `paper/ids.tex`:
 
 ```bash
-python scripts/make_springer.py                                  # writes paper/springer/main.tex, refs.bib, figures/
-cd paper/springer && pdflatex main && bibtex main && pdflatex main && pdflatex main
+python scripts/make_springer.py                                  # writes paper/springer/ids_sn.tex, refs.bib, figures/
+cd paper/springer && pdflatex ids_sn && bibtex ids_sn && pdflatex ids_sn && pdflatex ids_sn
 ```
 
 The class file and bibliography style in `paper/springer/` come from the Springer Nature template package. The Declarations section has placeholders (funding, competing interests, author contribution) to be completed by the author before submission.

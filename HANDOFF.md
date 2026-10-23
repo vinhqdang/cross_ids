@@ -1,7 +1,7 @@
 # HANDOFF: state of the project and what is left
 
 Repo: https://github.com/vinhqdang/cross_ids, branch `main` (push there, no other branch).
-One manuscript, `paper/main.tex` (tables and figures in `paper/tables`, `paper/figures`, generated from `results/` by `scripts/make_tables_benchmark.py` and `scripts/make_tables_fewlabel.py`). It merges the two earlier papers: the cross-dataset benchmark with RIFT and its controls (Part I of `DESIGN.md`) and the few-label study with FLARE-2 and TabPFN (Part II). The earlier separate manuscripts are in the git history only.
+One manuscript, `paper/ids.tex` (tables and figures in `paper/tables`, `paper/figures`, generated from `results/` by `scripts/make_tables_benchmark.py` and `scripts/make_tables_fewlabel.py`). It merges the two earlier papers: the cross-dataset benchmark with RIFT and its controls (Part I of `DESIGN.md`) and the few-label study with FLARE-2 and TabPFN (Part II). The earlier separate manuscripts are in the git history only.
 
 ## 0. Rules from the owner (follow exactly)
 
@@ -63,7 +63,7 @@ Open, optional:
 3. TabPFN: version 3 only for seed 0; class level only for version 3.5 and seed 0.
 4. References: IDS entries checked against Crossref (`docs/related_cross_dataset.md`); general ML entries checked against Crossref, DBLP/arXiv or publisher pages (PFN: ICLR 2022 confirmed by the owner); Saerens against Crossref; TabPFN-3 cites its model card. The Layeghy and Cantone summaries were checked against the arXiv versions, not the journal versions.
 5. The manuscript has six sections (Introduction; Related work; Benchmark and methods; Why cross-dataset transfer fails; Few-label transfer; Discussion, limitations and conclusion). Related work cites 25 IDS-related papers of the author (taken from the public ORCID record 0000-0002-3877-8024 and checked against Crossref: title, authors, venue, pages, year) and the 2026 survey of IDS datasets by Ashraf and Masoodi (Discover Computing 29:577, DOI 10.1007/s10791-026-10486-2, checked against Crossref). One ORCID item (IoT environment chapter, 2022) was left out because Crossref lists an author without a name. Descriptions of the author's papers follow titles and Crossref abstracts only; the full texts were not read.
-6. Springer version: `python scripts/make_springer.py` converts `paper/main.tex` to the `sn-jnl` template in `paper/springer/` (single file, tables inlined, numbered references). Its Declarations section has placeholders for funding, competing interests and author contribution. Check the abstract length and the reference style against the instructions of the target journal; the abstract has about 310 words. Springer Nature journals have policies on the disclosure of tools used in writing; check the one of the target journal.
+6. Springer version: `python scripts/make_springer.py` converts `paper/ids.tex` to the `sn-jnl` template in `paper/springer/` (single file, tables inlined, numbered references). Its Declarations section has placeholders for funding, competing interests and author contribution. Check the abstract length and the reference style against the instructions of the target journal; the abstract has about 310 words. Springer Nature journals have policies on the disclosure of tools used in writing; check the one of the target journal.
 7. Before any release: rotate the Hugging Face and Prior Labs keys that were shared in the working session, and delete `runs/tabpfn_token.txt`.
 
 ## 5. Do not
