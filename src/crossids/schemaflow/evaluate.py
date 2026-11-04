@@ -10,6 +10,7 @@ import pandas as pd
 import torch
 from sklearn.cluster import KMeans
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import roc_auc_score
 
 from .episodes import rank_ref
@@ -79,6 +80,7 @@ def evaluate(target, ckpt, notext=False, draws=10, pool_n=2000, test_n=6000, see
     model.load_state_dict(torch.load(ckpt))
     model.eval()
     Ep = embed_rows(model, Zp, dom.emb)
+    Et = np.concatenate([embed_rows(model, Zt[i : i + 1000], dom.emb) for i in range(0, len(Zt), 1000)])
     rows = []
     for strat in STRATS:
         for k in KS:
@@ -93,7 +95,17 @@ def evaluate(target, ckpt, notext=False, draws=10, pool_n=2000, test_n=6000, see
                     s_rf = rf.predict_proba(Xt)[:, 1]
                 else:
                     s_rf = np.full(len(yt), 0.5)
+                def lr_scores(A, B):
+                    if len(np.unique(ys)) < 2:
+                        return np.full(len(B), 0.5)
+                    clf = LogisticRegression(C=1.0, class_weight="balanced", max_iter=500).fit(A[sel], ys)
+                    return clf.decision_function(B)
+
+                s_sflr = lr_scores(Ep, Et)
+                s_lrr = lr_scores(Zp, Zt)
                 rows += [
+                    dict(target=target, strategy=strat, k=k, draw=d, method="schemaflow-lr", auc=auc(yt, s_sflr), n_att=int(ys.sum())),
+                    dict(target=target, strategy=strat, k=k, draw=d, method="lr-rank", auc=auc(yt, s_lrr), n_att=int(ys.sum())),
                     dict(target=target, strategy=strat, k=k, draw=d, method="schemaflow", auc=auc(yt, s_sf), n_att=int(ys.sum())),
                     dict(target=target, strategy=strat, k=k, draw=d, method="rf", auc=auc(yt, s_rf), n_att=int(ys.sum())),
                 ]
