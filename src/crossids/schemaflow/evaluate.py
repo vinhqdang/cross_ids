@@ -18,7 +18,7 @@ from .model import SchemaFlow
 from .train import KEYS, load_domains
 
 KS = [4, 8, 16, 32, 64]
-STRATS = ["random", "kmedoid", "rarecluster", "kmedoid-emb"]
+STRATS = ["random", "kmedoid", "kmedoid-emb"]
 
 
 def _medoids(Z, centers, labels):
