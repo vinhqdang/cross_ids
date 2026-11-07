@@ -40,8 +40,8 @@ FRONT = r"""
 \author[3]{\fnm{Minh Ngoc} \sur{Dinh}}
 
 \affil*[1]{\orgname{British University Vietnam}, \orgaddress{\city{Hung Yen}, \country{Vietnam}}}
-\affil[2]{\orgname{[affiliation of Dat Le: to be completed]}}
-\affil[3]{\orgname{[affiliation of Minh Ngoc Dinh: to be completed]}}
+\affil[2]{\orgname{Ho Chi Minh City University of Economics and Finance}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
+\affil[3]{\orgname{Millennia Education}, \orgaddress{\city{Ho Chi Minh City}, \country{Vietnam}}}
 """
 
 BACK = r"""
