@@ -1,0 +1,20 @@
+All data analysed in this study are public datasets obtained from the web, and no new data were collected.
+The datasets are identified by their web locations because the repositories assign no accession numbers.
+Table~\ref{tab:datasets} lists the datasets with their references and Sect.~\ref{sec:benchdata} describes them.
+The original releases are at the following locations:
+CIC-IDS2017 (Canadian Institute for Cybersecurity, University of New Brunswick), \url{https://www.unb.ca/cic/datasets/ids-2017.html};
+CIC-IDS2018 (same institute), \url{https://www.unb.ca/cic/datasets/ids-2018.html}, also in the Registry of Open Data on AWS, \url{https://registry.opendata.aws/cse-cic-ids2018/};
+USB-IDS-1 (University of Sannio), \url{https://idsdata.ding.unisannio.it/};
+InSDN (University College Dublin), \url{https://aseados.ucd.ie/datasets/SDN/};
+UNSW-NB15 (UNSW Canberra), \url{https://research.unsw.edu.au/projects/unsw-nb15-dataset};
+ToN-IoT (UNSW Canberra), \url{https://research.unsw.edu.au/projects/toniot-datasets};
+IoT-23 (Stratosphere Laboratory, CTU Prague), \url{https://www.stratosphereips.org/datasets-iot23};
+CTU-13 (Stratosphere Laboratory, CTU Prague), \url{https://www.stratosphereips.org/datasets-ctu13}, files at \url{https://mcfp.felk.cvut.cz/publicDatasets/}.
+The download script of the code fetches the files from these locations for USB-IDS-1, InSDN and CTU-13, and from copies on the Hugging Face Hub for the other five datasets:
+\url{https://huggingface.co/datasets/bvsam/cic-ids-2017} (CIC-IDS2017),
+\url{https://huggingface.co/datasets/c01dsnap/CIC-IDS2018} (CIC-IDS2018),
+\url{https://huggingface.co/datasets/Mouwiya/UNSW-NB15} (UNSW-NB15),
+\url{https://huggingface.co/datasets/codymlewis/TON_IoT_network} (ToN-IoT) and
+\url{https://huggingface.co/datasets/19kmunz/iot-23-preprocessed-allcolumns} (IoT-23).
+The harmonised samples are regenerated from these files by the commands \texttt{crossids download} and \texttt{crossids prepare}.
+The code, the configuration files and every raw per-run result are in \url{https://github.com/vinhqdang/cross_ids}.

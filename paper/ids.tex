@@ -11,7 +11,7 @@
 \usepackage{caption}
 \captionsetup{font=small}
 
-\title{Cross-Dataset Network Intrusion Detection: Why Transfer Fails and What a Few Target Labels Can Recover}
+\title{Why Transfer Fails in Cross-Dataset Network Intrusion Detection and What a Few Target Labels Can Recover}
 \author{Quang-Vinh Dang\\
 British University Vietnam, Hung Yen, Vietnam\\
 \texttt{vinh.dq4@buv.edu.vn}\quad ORCID 0000-0002-3877-8024}
@@ -136,6 +136,7 @@ TabPFN & A transformer pretrained on a large collection of synthetic tabular tas
 \paragraph{Datasets.}
 Table~\ref{tab:datasets} lists the datasets: CIC-IDS2017 \citep{sharafaldin2018cicids} and CIC-IDS2018, USB-IDS-1 \citep{catillo2021usbids1}, InSDN \citep{elsayed2020insdn}, UNSW-NB15 \citep{moustafa2015unsw}, ToN-IoT \citep{alsaedi2020toniot}, IoT-23 \citep{garcia2020iot23} and CTU-13 \citep{garcia2014ctu13}.
 They come from five laboratories (UNB, Sannio, UCD, UNSW Canberra and the Stratosphere laboratory of CTU) and three extractors (CICFlowMeter, Argus and Zeek).
+The web locations of all datasets are given in the Availability of data and materials section.
 CIC-IDS2017 and CIC-IDS2018 share a laboratory and an extractor, UNSW-NB15 and ToN-IoT share a laboratory, and IoT-23 and CTU-13 share a laboratory.
 The attack prior of the distinct rows ranges from 0.15 (CIC-IDS2017, CIC-IDS2018) to 0.93 (USB-IDS-1).
 Labels are binary, because attack taxonomies differ across datasets; the raw attack type is kept for per-family analysis.
@@ -616,6 +617,9 @@ Open problems are the gap to full-label training (0.95--1.00 ROC-AUC) at small $
 
 \paragraph{Reproducibility.}
 The package, configurations, sampled-row hashes and every raw per-run result are in \url{https://github.com/vinhqdang/cross_ids}. Tables and figures are generated from the result files by the repository scripts.
+
+\section*{Availability of data and materials}
+\input{dataavail}
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
