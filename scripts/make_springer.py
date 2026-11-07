@@ -36,8 +36,12 @@ PREAMBLE = r"""\documentclass[pdflatex,sn-mathphys-num]{sn-jnl}% Math and Physic
 
 FRONT = r"""
 \author*[1]{\fnm{Quang-Vinh} \sur{Dang}}\email{vinh.dq4@buv.edu.vn}
+\author[2]{\fnm{Dat} \sur{Le}}
+\author[3]{\fnm{Minh Ngoc} \sur{Dinh}}
 
 \affil*[1]{\orgname{British University Vietnam}, \orgaddress{\city{Hung Yen}, \country{Vietnam}}}
+\affil[2]{\orgname{[affiliation of Dat Le: to be completed]}}
+\affil[3]{\orgname{[affiliation of Minh Ngoc Dinh: to be completed]}}
 """
 
 BACK = r"""
@@ -46,13 +50,13 @@ BACK = r"""
 \section*{Declarations}
 
 \begin{itemize}
-\item Funding: [to be completed by the author]
-\item Conflict of interest/Competing interests: [to be completed by the author]
+\item Funding: The authors received no funding for this work.
+\item Conflict of interest/Competing interests: The authors declare that they have no competing interests.
 \item Ethics approval and consent to participate: Not applicable (public datasets, no human participants).
 \item Consent for publication: Not applicable.
 \item Availability of data and materials: %%DATAAVAIL%%
 \item Code availability: \url{https://github.com/vinhqdang/cross_ids}.
-\item Author contribution: [to be completed by the author]
+\item Author contribution: Quang-Vinh Dang conceived the study, designed the methods, wrote the software, ran the experiments and wrote the manuscript. Dat Le contributed to the software, the data curation and the validation of the results. Minh Ngoc Dinh contributed to the statistical analysis and reviewed and edited the manuscript. All authors read and approved the final manuscript.
 \end{itemize}
 
 \bibliography{refs}

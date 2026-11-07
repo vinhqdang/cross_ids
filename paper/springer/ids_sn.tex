@@ -17,8 +17,12 @@
 \title[Transfer in cross-dataset intrusion detection]{Why Transfer Fails in Cross-Dataset Network Intrusion Detection and What a Few Target Labels Can Recover}
 
 \author*[1]{\fnm{Quang-Vinh} \sur{Dang}}\email{vinh.dq4@buv.edu.vn}
+\author[2]{\fnm{Dat} \sur{Le}}
+\author[3]{\fnm{Minh Ngoc} \sur{Dinh}}
 
 \affil*[1]{\orgname{British University Vietnam}, \orgaddress{\city{Hung Yen}, \country{Vietnam}}}
+\affil[2]{\orgname{[affiliation of Dat Le: to be completed]}}
+\affil[3]{\orgname{[affiliation of Minh Ngoc Dinh: to be completed]}}
 
 \abstract{Detectors of malicious network flows reach 0.985 ROC-AUC when trained and tested on one dataset, but earlier studies report that they lose most of that skill on another network. We make three contributions. First, we build a benchmark of seven public flow datasets with one feature schema and one protocol, and show that transfer between datasets stays close to chance (ROC-AUC 0.54 to 0.56, where 0.5 is chance) for every method we tried, including RIFT (Rank-Invariant Flow Transfer), a domain-invariant method of our own that is designed to remove differences in feature scale and in the share of attacks. Second, controls point away from feature shift and attack mix as the main cause: giving RIFT the true target information does not help, and neither does restricting transfer to a single attack family. The datasets appear to label attacks differently, which no unlabelled adaptation can repair. Third, for a defender who can label a few flows of the new network, we propose FLARE-2 (Few-shot Learning of Attack Rules across Environments), a small transformer (1.6 million parameters) that we meta-train on tasks from the other benchmark datasets on a single 16\,GB GPU, and compare it with tree ensembles and with TabPFN, a general-purpose tabular foundation model about 130 times larger (219 million parameters) that its authors pretrained on general tabular tasks, at a cost that we could not reproduce, and that we use without any training on network data. FLARE-2 matches the tree ensembles; TabPFN is higher on every target, but only by 0.014 ROC-AUC on average. A few labelled target flows combined with a large pretrained prior are therefore more useful than meta-training a small model on a handful of network datasets; whether more network data would close the gap remains open. Code and all raw results are public.}
 
@@ -854,13 +858,13 @@ The package, configurations, sampled-row hashes and every raw per-run result are
 \section*{Declarations}
 
 \begin{itemize}
-\item Funding: [to be completed by the author]
-\item Conflict of interest/Competing interests: [to be completed by the author]
+\item Funding: The authors received no funding for this work.
+\item Conflict of interest/Competing interests: The authors declare that they have no competing interests.
 \item Ethics approval and consent to participate: Not applicable (public datasets, no human participants).
 \item Consent for publication: Not applicable.
 \item Availability of data and materials: All data analysed in this study are public datasets obtained from the web, and no new data were collected. The datasets are identified by their web locations because the repositories assign no accession numbers. Table~\ref{tab:datasets} lists the datasets with their references and Sect.~\ref{sec:benchdata} describes them. The original releases are at the following locations: CIC-IDS2017 (Canadian Institute for Cybersecurity, University of New Brunswick), \url{https://www.unb.ca/cic/datasets/ids-2017.html}; CIC-IDS2018 (same institute), \url{https://www.unb.ca/cic/datasets/ids-2018.html}, also in the Registry of Open Data on AWS, \url{https://registry.opendata.aws/cse-cic-ids2018/}; USB-IDS-1 (University of Sannio), \url{https://idsdata.ding.unisannio.it/}; InSDN (University College Dublin), \url{https://aseados.ucd.ie/datasets/SDN/}; UNSW-NB15 (UNSW Canberra), \url{https://research.unsw.edu.au/projects/unsw-nb15-dataset}; ToN-IoT (UNSW Canberra), \url{https://research.unsw.edu.au/projects/toniot-datasets}; IoT-23 (Stratosphere Laboratory, CTU Prague), \url{https://www.stratosphereips.org/datasets-iot23}; CTU-13 (Stratosphere Laboratory, CTU Prague), \url{https://www.stratosphereips.org/datasets-ctu13}, files at \url{https://mcfp.felk.cvut.cz/publicDatasets/}. The download script of the code fetches the files from these locations for USB-IDS-1, InSDN and CTU-13, and from copies on the Hugging Face Hub for the other five datasets: \url{https://huggingface.co/datasets/bvsam/cic-ids-2017} (CIC-IDS2017), \url{https://huggingface.co/datasets/c01dsnap/CIC-IDS2018} (CIC-IDS2018), \url{https://huggingface.co/datasets/Mouwiya/UNSW-NB15} (UNSW-NB15), \url{https://huggingface.co/datasets/codymlewis/TON_IoT_network} (ToN-IoT) and \url{https://huggingface.co/datasets/19kmunz/iot-23-preprocessed-allcolumns} (IoT-23). The harmonised samples are regenerated from these files by the commands \texttt{crossids download} and \texttt{crossids prepare}. The code, the configuration files and every raw per-run result are in \url{https://github.com/vinhqdang/cross_ids}.
 \item Code availability: \url{https://github.com/vinhqdang/cross_ids}.
-\item Author contribution: [to be completed by the author]
+\item Author contribution: Quang-Vinh Dang conceived the study, designed the methods, wrote the software, ran the experiments and wrote the manuscript. Dat Le contributed to the software, the data curation and the validation of the results. Minh Ngoc Dinh contributed to the statistical analysis and reviewed and edited the manuscript. All authors read and approved the final manuscript.
 \end{itemize}
 
 \bibliography{refs}
